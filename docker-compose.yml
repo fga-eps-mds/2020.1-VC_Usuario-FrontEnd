@@ -1,13 +1,12 @@
-version: '3'
+version: "3"
+
 services:
-  vc-front:
-    container_name: vc-frontend
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: "npm run serve"
-    ports:
-    - "8080:8080"
-    volumes:
-    - .:/app
-    - /app/node_modules
+    vc_usuario-frontend:
+        container_name: vc_usuario-frontend
+        build: .
+        command: npm run serve
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/app
+            - /app/node_modules
