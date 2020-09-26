@@ -1,13 +1,23 @@
 <template>
-  
+    <nav>
+
+    </nav>
 </template>
 
 <script>
-export default {
 
-}
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 
+    nav{
+        bottom: 0;
+        position: fixed;
+
+        height: 70px;
+        width: 100%;
+
+        background-color: #ffffff;
+        border-top: 1px solid #DADDE0;
+    }
 </style>
