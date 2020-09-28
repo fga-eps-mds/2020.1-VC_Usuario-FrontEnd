@@ -1,16 +1,8 @@
 FROM node:12.18.4-alpine 
 
-RUN npm install -g http-server
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN mkdir -p /app && cp -a /tmp/node_modules /app/
 
-WORKDIR /usr/app
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
-RUN npm run build
-
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+WORKDIR /app
+ADD . /app
