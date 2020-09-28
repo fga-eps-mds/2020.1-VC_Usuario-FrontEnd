@@ -1,8 +1,8 @@
 <template>
     <nav>
         <div class="divMenuOpcoes">
-            <div><img src="../assets/homeIcon.png"> </div>
-            <div><img src="../assets/addIcon.png"> </div>
+            <div><router-link to="/"><img src="../assets/homeIcon.png"></router-link></div>
+            <div><router-link to="/criarpostagem"><img src="../assets/addIcon.png"></router-link></div>
             <div><img src="../assets/newsIcon.png"> </div>
             <div><img src="../assets/userIcon.png"> </div>
         </div>
