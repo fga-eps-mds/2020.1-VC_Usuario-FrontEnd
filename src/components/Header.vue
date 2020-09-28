@@ -1,7 +1,7 @@
 <template>
     <header id="header">
         <div class="divWordmark">
-            <img src="../assets/Wordmark.png"> 
+            <img src="../assets/wordmarkIcon.png"> 
        </div>
     </header>
 </template>
