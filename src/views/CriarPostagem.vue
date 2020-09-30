@@ -135,6 +135,7 @@ export default {
     
     .divFormCriarPostagem{
         margin-top: 45px;
+        max-width: 900px;
 
         & form{
             padding: 30px 20px 120px;
@@ -182,7 +183,7 @@ export default {
         /* border: 1px solid red; */
 
         & select{
-            flex: 1;
+            width: 50%;
 
             border-radius: 10px;
             background-color: #ffffff;
@@ -198,7 +199,8 @@ export default {
         height: 35px;
         justify-items: center;
 
-        /* border: 1px solid black; */
+        /* border-radius: 10px;
+        border: 1px solid #DADDE0; */
 
         /* & input{
             width: 0; height: 0; position: absolute; left: -9999px;
