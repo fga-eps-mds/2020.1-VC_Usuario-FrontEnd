@@ -3,14 +3,14 @@
     <Header/>
 
     <div class="divFormCriarPostagem">
-        <form @submit.prevent="postagemPost"> 
+        <form @submit.prevent="visualizarObjetoFormCriado"> 
             <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post">
             <br><br><br>
-            <input type="radio" name="opcaoAnonimo" value="false" v-model="postagem.canPost"> Não
-            <input type="radio" name="opcaoAnonimo" value="true" v-model="postagem.canPost"> Sim
 
             <div class="baseElemento divSelectFields">
-                <!-- <select v-model="postagem.categoria">
+                
+                <select>
+                    <!-- <select v-model="postagem.categoria"> -->
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
                     <option>Segurança</option>
@@ -25,40 +25,46 @@
                     <option>Outros</option>
                 </select>
 
-                <select v-model="postagem.local">
+                <select>
+                <!-- <select v-model="postagem.local"> -->
                     <option disabled value="">Local</option>
                     <option>FGA</option>
                     <option>DARCY</option>
                     <option>FCE</option>
                     <option>FUP</option>
-                </select> -->
+                </select>
             </div>
-            <br>
+            <br><br>
 
             <div class="baseElemento divImageFields">
-                <input type="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
+                <input type="file" class="baseElemento" accept="image/png, image/jpeg" @change="imagemSelecionada">
 
                 <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
-            <br><br><br>
+            <br><br>
 
-            <h4>Descrição</h4>
+            <legend>Descrição</legend>
             <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.descricao"></textarea>
-            <br><br><br>
+            <br>
 
-            id: {{ postagem.fk_id_usuario }} <br>
-            Titulo: {{ postagem.titulo_post }} <br>
-            Anonimo: {{ postagem.anonimo }} <br>
-            <!-- Local: {{ postagem.local }} <br>
-            Categoria: {{ postagem.categoria }} <br> -->
-            Descricao: {{ postagem.descricao }} <br>
+            <fieldset>
+                <legend>Postagem anônima?</legend>
+                <div class="toggle">
+                    <input type="radio" value="false" id="idPostNaoAnonimo" checked="checked" v-model="postagem.canPost"/>
+                    <label for="idPostNaoAnonimo">Não</label>
+
+                    <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.canPost"/>
+                    <label for="idPostSimAnonimo">Sim</label>   
+                </div>
+            </fieldset>
+            <br><br><br>
 
             <div class="baseElemento divBotoes">
                 <button type="submit">Criar</button>
                 <button onclick='history.go(-1)'>Voltar</button>
             </div>
             <br>
-        </form>     
+        </form>
     </div>
 
     <MenuBar/>
@@ -69,7 +75,7 @@
 
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
-import Postagem from '@/services/postagens.js'
+/* import Postagem from '@/services/postagens.js' */
 /* import HTTP from './services/config.js' */
 /* const axios = require('axios') */
 
@@ -86,10 +92,10 @@ export default {
             postagem: {
                 fk_id_usuario: '5f72b06dd02a450038c286f0',
                 titulo_post: '',
-                /* local: '', */
-                /* categoria: '',  */
+                /* local: '',
+                categoria: '', */ 
                 descricao: '',
-                canPost: '',
+                canPost: 'false',
                 file: null
             }
         }
@@ -107,7 +113,7 @@ export default {
             console.log(this.postagem)
         },
 
-        postagemPost(){
+        /* postagemPost(){
 
             console.log(this.postagem),
 
@@ -115,7 +121,7 @@ export default {
                 alert('Salvo com sucesso!')
                 console.log(resposta)
             })
-        }
+        } */
     }
 }
 </script>
@@ -190,11 +196,18 @@ export default {
 
     .divImageFields{
         height: 35px;
+        justify-items: center;
 
-        & progress::-webkit-progress-value{
+        /* border: 1px solid black; */
+
+        /* & input{
+            width: 0; height: 0; position: absolute; left: -9999px;
+        } */
+        
+        /* & progress::-webkit-progress-value{
             display: block;
             border-radius: 10px;
-        }
+        } */
     }
 
     .divBotoes{
@@ -219,6 +232,74 @@ export default {
         button:last-child{
             background-color: #ffffff;
             border: 1px solid #DADDE0;
+        }
+    }
+
+    //Configuração Radio Postagem Anonima
+    $darkNavy: #213140;
+    $teal2: #090673;
+
+    /* MIXINS */
+    @mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
+    @mixin breakpoint($point) {
+        @if $point == 5000 {
+            @media (max-width: 5000px) { @content ; }
+        }
+    }
+
+    fieldset {
+        display: block;
+
+        border: none;
+        /*  border: solid 1px red; */
+    }
+
+    legend {
+            width: 100%; float: left; display: table;
+            font-size: 20px; line-height: 140%; font-weight: 400; color: #000000;	
+            + * {clear: both;}
+    }
+
+    body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
+
+    /* TOGGLE STYLING */
+    .toggle {
+        width: 180px;
+        height: 40px;
+        margin: 0; box-sizing: border-box;
+        font-size: 0;
+        display: flex; flex-flow: row nowrap;
+        justify-content: flex-start; align-items: stretch;
+        input {@include hideInput;}
+        input + label {
+            margin: 0; padding: .75rem 2rem; box-sizing: border-box;
+            position: relative; display: inline-block;
+            border: solid 1px #DADDE0; background-color: #FFF;
+            font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
+            box-shadow: 0 0 0 rgba(255,255,255,0);
+            transition: 	border-color .15s ease-out, 
+                        color .25s ease-out, 
+                        background-color .15s ease-out,
+                        box-shadow .15s ease-out;
+            
+            &:first-of-type {border-radius: 10px 0 0 10px; border-right: none;}
+            &:last-of-type {border-radius: 0 10px 10px 0; border-left: none;}
+        }
+
+        input:hover + label {border-color: $darkNavy;}
+        input:checked + label {
+            background-color: $teal2;
+            color: #FFF;
+            border-color: $teal2;
+            z-index: 1;
+        }
+
+        @include breakpoint(5000) {
+            input + label {
+                padding: .75rem .25rem;
+                flex: 0 0 50%;
+                display: flex; justify-content: center; align-items: center;
+            }
         }
     }
 </style>
