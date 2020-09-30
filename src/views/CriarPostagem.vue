@@ -3,14 +3,14 @@
     <Header/>
 
     <div class="divFormCriarPostagem">
-        <form @submit.prevent="postPostagem"> 
-            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo">
+        <form @submit.prevent="postagemPost"> 
+            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post">
             <br><br><br>
-            <input type="radio" name="opcaoAnonimo" value="op1" v-model="postagem.canPost"> opção1
-            <input type="radio" name="opcaoAnonimo" value="op2" v-model="postagem.canPost"> opção2
+            <input type="radio" name="opcaoAnonimo" value="false" v-model="postagem.canPost"> Não
+            <input type="radio" name="opcaoAnonimo" value="true" v-model="postagem.canPost"> Sim
 
             <div class="baseElemento divSelectFields">
-                <select v-model="postagem.categoria">
+                <!-- <select v-model="postagem.categoria">
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
                     <option>Segurança</option>
@@ -30,15 +30,15 @@
                     <option>FGA</option>
                     <option>DARCY</option>
                     <option>FCE</option>
-                    <option>F</option>
-                </select>
+                    <option>FUP</option>
+                </select> -->
             </div>
             <br>
 
-            <div class="baseElemento div,,,ImageFields">
-                <!-- <input type="image"> -->
+            <div class="baseElemento divImageFields">
+                <input type="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
 
-                <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress>
+                <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
             <br><br><br>
 
@@ -47,17 +47,17 @@
             <br><br><br>
 
             id: {{ postagem.fk_id_usuario }} <br>
-            Titulo: {{ postagem.titulo }} <br>
+            Titulo: {{ postagem.titulo_post }} <br>
             Anonimo: {{ postagem.anonimo }} <br>
-            Local: {{ postagem.local }} <br>
-            Categoria: {{ postagem.categoria }} <br>
+            <!-- Local: {{ postagem.local }} <br>
+            Categoria: {{ postagem.categoria }} <br> -->
             Descricao: {{ postagem.descricao }} <br>
 
             <div class="baseElemento divBotoes">
                 <button type="submit">Criar</button>
                 <button onclick='history.go(-1)'>Voltar</button>
             </div>
-            <br>,
+            <br>
         </form>     
     </div>
 
@@ -69,7 +69,7 @@
 
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
-/* import Postagem from '@/services/postagens.js' */
+import Postagem from '@/services/postagens.js'
 /* import HTTP from './services/config.js' */
 /* const axios = require('axios') */
 
@@ -85,24 +85,38 @@ export default {
         return{
             postagem: {
                 fk_id_usuario: '5f72b06dd02a450038c286f0',
-                titulo: '',
+                titulo_post: '',
                 /* local: '', */
-                /* opcaoAnonimo: '', */
-                /* categoria: '', */
+                /* categoria: '',  */
                 descricao: '',
-                canPost: '' 
+                canPost: '',
+                file: null
             }
         }
     },
     
-   /*  methods:{
-        criar(){
+    methods:{
+
+        imagemSelecionada(event){
+            console.log(event),
+            console.log(event.target.files[0])
+            this.postagem.file = event.target.files[0];
+        },
+
+        visualizarObjetoFormCriado(){
+            console.log(this.postagem)
+        },
+
+        postagemPost(){
+
+            console.log(this.postagem),
+
             Postagem.criarPostagem(this.postagem).then(resposta => {
                 alert('Salvo com sucesso!')
                 console.log(resposta)
             })
         }
-    } */
+    }
 }
 </script>
 
