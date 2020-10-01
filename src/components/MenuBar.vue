@@ -30,6 +30,7 @@
     .divMenuOpcoes{
         display: flex;
         width: 100%;
+        max-width: 400px;
         margin: 10px 20px;
 
         & div{

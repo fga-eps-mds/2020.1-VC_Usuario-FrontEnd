@@ -1,43 +1,70 @@
 <template>
 
     <Header/>
-    
+
     <div class="divFormCriarPostagem">
-        <form action="" method="post"> 
-            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="tituloField">
+        <form @submit.prevent="visualizarObjetoFormCriado" enctype="multipart/form-data"> 
+            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post">
             <br><br><br>
-            
+
             <div class="baseElemento divSelectFields">
-                <select v-model="selected">
-                    <!-- <option disabled value="">Escolha um item</option>
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option> -->
+                
+                <select>
+                    <!-- <select v-model="postagem.categoria"> -->
+                    <option disabled value="">Categoria</option>
+                    <option>Limpeza</option>
+                    <option>Segurança</option>
+                    <option>Infraestrutura</option>
+                    <option>Transportes</option>
+                    <option>Serviços Terceirizados</option>
+                    <option>Meio Ambiente</option>
+                    <option>Jardinagem</option>
+                    <option>Alimentação nos campi</option>
+                    <option>Saúde e seguridade</option>
+                    <option>Abuso de Assédio</option>
+                    <option>Outros</option>
                 </select>
 
-                <select v-model="selected">
-                    <!-- <option disabled value="">Escolha um item</option>
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option> -->
+                <select>
+                <!-- <select v-model="postagem.local"> -->
+                    <option disabled value="">Local</option>
+                    <option>FGA</option>
+                    <option>DARCY</option>
+                    <option>FCE</option>
+                    <option>FUP</option>
                 </select>
-                <!-- <span>Selecionado: {{ selected }}</span> -->
             </div>
-            <br>
+            <br><br>
 
             <div class="baseElemento divImageFields">
-            </div>
-            <br><br><br>
+                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
 
-            <h4>Descrição</h4>
-            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="descricaoField"></textarea>
+                <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
+            </div>
+            <br><br>
+
+            <legend>Descrição</legend>
+            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.descricao"></textarea>
+            <br>
+
+            <fieldset>
+                <legend>Postagem anônima?</legend>
+                <div class="toggle">
+                    <input type="radio" value="false" id="idPostNaoAnonimo" checked="checked" v-model="postagem.canPost"/>
+                    <label for="idPostNaoAnonimo">Não</label>
+
+                    <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.canPost"/>
+                    <label for="idPostSimAnonimo">Sim</label>   
+                </div>
+            </fieldset>
             <br><br><br>
 
             <div class="baseElemento divBotoes">
-                <input type="submit" value="Criar">
-                <input type='button' value='Voltar' onclick='history.go(-1)'/>  
+                <button type="submit">Criar</button>
+                <button onclick='history.go(-1)'>Voltar</button>
             </div>
-        </form>     
+            <br>
+        </form>
     </div>
 
     <MenuBar/>
@@ -48,12 +75,65 @@
 
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
+import Postagem from '@/services/postagens.js'
+/* import HTTP from './services/config.js' */
+/* const axios = require('axios') */
+
+
 export default {
     name: 'CriarPostagem',
+
     components: {
     Header,
     MenuBar
-  }
+    },
+    data(){
+        return{
+            postagem: {
+                fk_id_usuario: '5f72b06dd02a450038c286f0',
+                titulo_post: '',
+                /* local: '',
+                categoria: '', */ 
+                descricao: '',
+                canPost: 'false',
+                file: ''
+            }
+        }
+    },
+    
+    methods:{
+
+        imagemSelecionada(){
+
+            this.postagem.file = this.$refs.file.files[0];
+        },
+
+        visualizarObjetoFormCriado(){
+            console.log(this.postagem)
+        },
+
+        postagemPost(){
+
+            console.log(this.postagem)
+            const formData = new FormData();  //usei formdata pra enviar o arquivo
+
+            formData.append('fk_id_usuario', this.postagem.fk_id_usuario,)
+            formData.append('titulo_post', this.postagem.titulo_post,)
+            formData.append('descricao', this.postagem.descricao,)
+            formData.append('canPost', this.postagem.canPost,)
+            formData.append('file', this.postagem.file)
+
+            Postagem.criarPostagem(formData).then(resposta => {
+                alert('Salvo com sucesso!')
+                console.log(resposta)
+            }) 
+
+            /* Postagem.criarPostagem(this.postagem).then(resposta => {
+                alert('Salvo com sucesso!')
+                console.log(resposta)
+            }) */
+        }
+    }
 }
 </script>
 
@@ -66,6 +146,7 @@ export default {
     
     .divFormCriarPostagem{
         margin-top: 45px;
+        max-width: 900px;
 
         & form{
             padding: 30px 20px 120px;
@@ -113,7 +194,7 @@ export default {
         /* border: 1px solid red; */
 
         & select{
-            flex: 1;
+            width: 50%;
 
             border-radius: 10px;
             background-color: #ffffff;
@@ -127,8 +208,19 @@ export default {
 
     .divImageFields{
         height: 35px;
+        justify-items: center;
 
-        /* border: 1px solid green; */
+        /* border-radius: 10px;
+        border: 1px solid #DADDE0; */
+
+        /* & input{
+            width: 0; height: 0; position: absolute; left: -9999px;
+        } */
+        
+        /* & progress::-webkit-progress-value{
+            display: block;
+            border-radius: 10px;
+        } */
     }
 
     .divBotoes{
@@ -136,23 +228,92 @@ export default {
         
         /* border: 1px solid blue; */
 
-        & input{
+        & button{
             flex: 1;
         
             font-size: 20px;
+            border: none;
             border-radius: 10px;
         }
 
-        input:first-child{
+        button:first-child{
             margin-right: 20px;
             
             color: #ffffff;
             background-color: #090673;
         }
 
-        input:last-child{
+        button:last-child{
             background-color: #ffffff;
             border: 1px solid #DADDE0;
+        }
+    }
+
+    //Configuração Radio Postagem Anonima
+    $darkNavy: #213140;
+    $teal2: #090673;
+
+    /* MIXINS */
+    @mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
+    @mixin breakpoint($point) {
+        @if $point == 5000 {
+            @media (max-width: 5000px) { @content ; }
+        }
+    }
+
+    fieldset {
+        display: block;
+
+        border: none;
+        /*  border: solid 1px red; */
+    }
+
+    legend {
+            width: 100%; float: left; display: table;
+            font-size: 20px; line-height: 140%; font-weight: 400; color: #000000;	
+            + * {clear: both;}
+    }
+
+    body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
+
+    /* TOGGLE STYLING */
+    .toggle {
+        width: 180px;
+        height: 40px;
+        margin: 0; box-sizing: border-box;
+        font-size: 0;
+        display: flex; flex-flow: row nowrap;
+        justify-content: flex-start; align-items: stretch;
+        input {@include hideInput;}
+        input + label {
+            margin: 0; padding: .75rem 2rem; box-sizing: border-box;
+            position: relative; display: inline-block;
+            border: solid 1px #DADDE0; background-color: #FFF;
+            font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
+            box-shadow: 0 0 0 rgba(255,255,255,0);
+            transition: 	border-color .15s ease-out, 
+                        color .25s ease-out, 
+                        background-color .15s ease-out,
+                        box-shadow .15s ease-out;
+            
+            &:first-of-type {border-radius: 10px 0 0 10px; border-right: none;}
+            &:last-of-type {border-radius: 0 10px 10px 0; border-left: none;}
+        }
+
+        input:hover + label {border-color: $darkNavy;}
+        input:checked + label {
+            background-color: $teal2;
+            color: #FFF;
+            border-color: $teal2;
+            z-index: 1;
+        }
+
+        @include breakpoint(5000) {
+            input + label {
+                padding: .75rem .25rem;
+                flex: 0 0 50%;
+                display: flex; justify-content: center; align-items: center;
+            }
         }
     }
 </style>
