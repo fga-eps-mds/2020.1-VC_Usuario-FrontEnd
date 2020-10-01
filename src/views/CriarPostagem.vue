@@ -3,14 +3,12 @@
     <Header/>
 
     <div class="divFormCriarPostagem">
-        <form @submit.prevent="visualizarObjetoFormCriado" enctype="multipart/form-data"> 
+        <form @submit.prevent="postagemPost" enctype="multipart/form-data"> 
             <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post">
             <br><br><br>
 
             <div class="baseElemento divSelectFields">
-                
-                <select>
-                    <!-- <select v-model="postagem.categoria"> -->
+                <select v-model="postagem.categoria">
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
                     <option>Segurança</option>
@@ -25,8 +23,7 @@
                     <option>Outros</option>
                 </select>
 
-                <select>
-                <!-- <select v-model="postagem.local"> -->
+                <select v-model="postagem.local">
                     <option disabled value="">Local</option>
                     <option>FGA</option>
                     <option>DARCY</option>
@@ -63,7 +60,6 @@
                 <button type="submit">Criar</button>
                 <button onclick='history.go(-1)'>Voltar</button>
             </div>
-            <br>
         </form>
     </div>
 
@@ -76,9 +72,6 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import Postagem from '@/services/postagens.js'
-/* import HTTP from './services/config.js' */
-/* const axios = require('axios') */
-
 
 export default {
     name: 'CriarPostagem',
@@ -87,13 +80,14 @@ export default {
     Header,
     MenuBar
     },
+
     data(){
         return{
             postagem: {
                 fk_id_usuario: '5f72b06dd02a450038c286f0',
                 titulo_post: '',
-                /* local: '',
-                categoria: '', */ 
+                local: '',
+                categoria: '',
                 descricao: '',
                 canPost: 'false',
                 file: ''
@@ -109,13 +103,15 @@ export default {
         },
 
         visualizarObjetoFormCriado(){
+            
             console.log(this.postagem)
+            window.location.href = "http://localhost:8080";
         },
 
         postagemPost(){
 
             console.log(this.postagem)
-            const formData = new FormData();  //usei formdata pra enviar o arquivo
+            const formData = new FormData();
 
             formData.append('fk_id_usuario', this.postagem.fk_id_usuario,)
             formData.append('titulo_post', this.postagem.titulo_post,)
@@ -124,14 +120,11 @@ export default {
             formData.append('file', this.postagem.file)
 
             Postagem.criarPostagem(formData).then(resposta => {
-                alert('Salvo com sucesso!')
+                console.log('Salvo com sucesso!')
                 console.log(resposta)
-            }) 
 
-            /* Postagem.criarPostagem(this.postagem).then(resposta => {
-                alert('Salvo com sucesso!')
-                console.log(resposta)
-            }) */
+                window.location.href = "http://localhost:8080";
+            }) 
         }
     }
 }
@@ -250,8 +243,6 @@ export default {
     }
 
     //Configuração Radio Postagem Anonima
-    $darkNavy: #213140;
-    $teal2: #090673;
 
     /* MIXINS */
     @mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
@@ -276,7 +267,6 @@ export default {
 
     body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
 
-    /* TOGGLE STYLING */
     .toggle {
         width: 180px;
         height: 40px;
@@ -284,14 +274,16 @@ export default {
         font-size: 0;
         display: flex; flex-flow: row nowrap;
         justify-content: flex-start; align-items: stretch;
+
         input {@include hideInput;}
+
         input + label {
             margin: 0; padding: .75rem 2rem; box-sizing: border-box;
             position: relative; display: inline-block;
             border: solid 1px #DADDE0; background-color: #FFF;
             font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
             box-shadow: 0 0 0 rgba(255,255,255,0);
-            transition: 	border-color .15s ease-out, 
+            transition: border-color .15s ease-out, 
                         color .25s ease-out, 
                         background-color .15s ease-out,
                         box-shadow .15s ease-out;
@@ -300,11 +292,12 @@ export default {
             &:last-of-type {border-radius: 0 10px 10px 0; border-left: none;}
         }
 
-        input:hover + label {border-color: $darkNavy;}
+        input:hover + label {border-color:  #213140;}
+
         input:checked + label {
-            background-color: $teal2;
+            background-color:  #090673;
             color: #FFF;
-            border-color: $teal2;
+            border-color:  #090673;
             z-index: 1;
         }
 
