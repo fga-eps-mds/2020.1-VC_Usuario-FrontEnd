@@ -116,6 +116,8 @@ export default {
             formData.append('fk_id_usuario', this.postagem.fk_id_usuario,)
             formData.append('titulo_post', this.postagem.titulo_post,)
             formData.append('descricao', this.postagem.descricao,)
+            formData.append('canPost', this.postagem.categoria,)
+            formData.append('file', this.postagem.local)
             formData.append('canPost', this.postagem.canPost,)
             formData.append('file', this.postagem.file)
 
