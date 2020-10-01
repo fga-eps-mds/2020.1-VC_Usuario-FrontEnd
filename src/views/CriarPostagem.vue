@@ -3,7 +3,7 @@
     <Header/>
 
     <div class="divFormCriarPostagem">
-        <form @submit.prevent="visualizarObjetoFormCriado"> 
+        <form @submit.prevent="visualizarObjetoFormCriado" enctype="multipart/form-data"> 
             <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post">
             <br><br><br>
 
@@ -37,7 +37,7 @@
             <br><br>
 
             <div class="baseElemento divImageFields">
-                <input type="file" class="baseElemento" accept="image/png, image/jpeg" @change="imagemSelecionada">
+                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
 
                 <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
@@ -75,7 +75,7 @@
 
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
-/* import Postagem from '@/services/postagens.js' */
+import Postagem from '@/services/postagens.js'
 /* import HTTP from './services/config.js' */
 /* const axios = require('axios') */
 
@@ -96,32 +96,43 @@ export default {
                 categoria: '', */ 
                 descricao: '',
                 canPost: 'false',
-                file: null
+                file: ''
             }
         }
     },
     
     methods:{
 
-        imagemSelecionada(event){
-            console.log(event),
-            console.log(event.target.files[0])
-            this.postagem.file = event.target.files[0];
+        imagemSelecionada(){
+
+            this.postagem.file = this.$refs.file.files[0];
         },
 
         visualizarObjetoFormCriado(){
             console.log(this.postagem)
         },
 
-        /* postagemPost(){
+        postagemPost(){
 
-            console.log(this.postagem),
+            console.log(this.postagem)
+            const formData = new FormData();  //usei formdata pra enviar o arquivo
 
-            Postagem.criarPostagem(this.postagem).then(resposta => {
+            formData.append('fk_id_usuario', this.postagem.fk_id_usuario,)
+            formData.append('titulo_post', this.postagem.titulo_post,)
+            formData.append('descricao', this.postagem.descricao,)
+            formData.append('canPost', this.postagem.canPost,)
+            formData.append('file', this.postagem.file)
+
+            Postagem.criarPostagem(formData).then(resposta => {
                 alert('Salvo com sucesso!')
                 console.log(resposta)
-            })
-        } */
+            }) 
+
+            /* Postagem.criarPostagem(this.postagem).then(resposta => {
+                alert('Salvo com sucesso!')
+                console.log(resposta)
+            }) */
+        }
     }
 }
 </script>
@@ -221,6 +232,7 @@ export default {
             flex: 1;
         
             font-size: 20px;
+            border: none;
             border-radius: 10px;
         }
 
