@@ -4,11 +4,11 @@
 
     <div class="divFormCriarPostagem">
         <form @submit.prevent="postagemPost" enctype="multipart/form-data"> 
-            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post">
+            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post" required>
             <br><br><br>
 
             <div class="baseElemento divSelectFields">
-                <select v-model="postagem.categoria">
+                <select v-model="postagem.categoria" required>
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
                     <option>Segurança</option>
@@ -23,7 +23,7 @@
                     <option>Outros</option>
                 </select>
 
-                <select v-model="postagem.local">
+                <select v-model="postagem.local" required>
                     <option disabled value="">Local</option>
                     <option>FGA</option>
                     <option>DARCY</option>
@@ -34,14 +34,14 @@
             <br><br>
 
             <div class="baseElemento divImageFields">
-                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
+                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada" required>
 
                 <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
             <br><br>
 
             <legend>Descrição</legend>
-            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.descricao"></textarea>
+            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.descricao" required></textarea>
             <br>
 
             <fieldset>
@@ -115,9 +115,9 @@ export default {
 
             formData.append('fk_id_usuario', this.postagem.fk_id_usuario,)
             formData.append('titulo_post', this.postagem.titulo_post,)
+            formData.append('local', this.postagem.local,)
+            formData.append('categoria', this.postagem.categoria,)
             formData.append('descricao', this.postagem.descricao,)
-            formData.append('canPost', this.postagem.categoria,)
-            formData.append('file', this.postagem.local)
             formData.append('canPost', this.postagem.canPost,)
             formData.append('file', this.postagem.file)
 
