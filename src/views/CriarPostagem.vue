@@ -4,11 +4,11 @@
 
     <div class="divFormCriarPostagem">
         <form @submit.prevent="postagemPost" enctype="multipart/form-data"> 
-            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.titulo_post" required>
+            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.post_title" required>
             <br><br><br>
 
             <div class="baseElemento divSelectFields">
-                <select v-model="postagem.categoria" required>
+                <select v-model="postagem.post_category" required>
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
                     <option>Segurança</option>
@@ -23,7 +23,7 @@
                     <option>Outros</option>
                 </select>
 
-                <select v-model="postagem.local" required>
+                <select v-model="postagem.post_place" required>
                     <option disabled value="">Local</option>
                     <option>FGA</option>
                     <option>DARCY</option>
@@ -41,16 +41,16 @@
             <br><br>
 
             <legend>Descrição</legend>
-            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.descricao" required></textarea>
+            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
             <br>
 
             <fieldset>
                 <legend>Postagem anônima?</legend>
                 <div class="toggle">
-                    <input type="radio" value="false" id="idPostNaoAnonimo" checked="checked" v-model="postagem.canPost"/>
+                    <input type="radio" value="false" id="idPostNaoAnonimo" checked="checked" v-model="postagem.post_permission"/>
                     <label for="idPostNaoAnonimo">Não</label>
 
-                    <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.canPost"/>
+                    <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.post_permission"/>
                     <label for="idPostSimAnonimo">Sim</label>   
                 </div>
             </fieldset>
@@ -77,20 +77,20 @@ export default {
     name: 'CriarPostagem',
 
     components: {
-    Header,
-    MenuBar
+        Header,
+        MenuBar
     },
 
     data(){
         return{
             postagem: {
-                fk_id_usuario: '5f72b06dd02a450038c286f0',
-                titulo_post: '',
-                local: '',
-                categoria: '',
-                descricao: '',
-                canPost: 'false',
-                file: ''
+                fk_user_id: '5f72b06dd02a450038c286f0',
+                post_title: '',
+                post_place: '',
+                post_category: '',
+                post_description: '',
+                post_permission: 'false',
+                post_file: ''
             }
         }
     },
@@ -99,13 +99,12 @@ export default {
 
         imagemSelecionada(){
 
-            this.postagem.file = this.$refs.file.files[0];
+            this.postagem.post_file = this.$refs.file.files[0];
         },
 
         visualizarObjetoFormCriado(){
             
             console.log(this.postagem)
-            window.location.href = "http://localhost:8080";
         },
 
         postagemPost(){
@@ -113,13 +112,13 @@ export default {
             console.log(this.postagem)
             const formData = new FormData();
 
-            formData.append('fk_id_usuario', this.postagem.fk_id_usuario,)
-            formData.append('titulo_post', this.postagem.titulo_post,)
-            formData.append('local', this.postagem.local,)
-            formData.append('categoria', this.postagem.categoria,)
-            formData.append('descricao', this.postagem.descricao,)
-            formData.append('canPost', this.postagem.canPost,)
-            formData.append('file', this.postagem.file)
+            formData.append('fk_id_usuario', this.postagem.fk_user_id,)
+            formData.append('post_title', this.postagem.post_title,)
+            formData.append('post_place', this.postagem.post_place,)
+            formData.append('post_category', this.postagem.post_category,)
+            formData.append('post_description', this.postagem.post_description,)
+            formData.append('post_permission', this.postagem.post_permission,)
+            formData.append('post_file', this.postagem.post_file)
 
             Postagem.criarPostagem(formData).then(resposta => {
                 console.log('Salvo com sucesso!')
@@ -145,8 +144,6 @@ export default {
 
         & form{
             padding: 30px 20px 120px;
-            
-            /* border: 1px solid black; */
         }
     }
 
@@ -185,8 +182,6 @@ export default {
         display: flex;
 
         height: 40px;
-        
-        /* border: 1px solid red; */
 
         & select{
             width: 50%;
@@ -258,7 +253,6 @@ export default {
         display: block;
 
         border: none;
-        /*  border: solid 1px red; */
     }
 
     legend {
@@ -300,7 +294,6 @@ export default {
             background-color:  #090673;
             color: #FFF;
             border-color:  #090673;
-            z-index: 1;
         }
 
         @include breakpoint(5000) {
