@@ -2,7 +2,7 @@ FROM node:12.18.4-alpine
 
 RUN npm install -g http-server
 
-WORKDIR /usr/app
+WORKDIR /app
 
 COPY package*.json ./
 

@@ -1,18 +1,43 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <Header/>
+    <div class="feedPostagens">
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+        <h1>Página: Feed dee Postagens</h1>
+    </div>
+    <MenuBar/>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
+/* Import dos components */
+import Header from '@/components/Header.vue'
+import MenuBar from '@/components/MenuBar.vue'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+    name: 'Home',
+    components: {
+    Header,
+    MenuBar
   }
 }
+
 </script>
+
+<style scoped lang="scss">
+
+    .feedPostagens{
+        margin-top: 60px;
+    }
+</style>
