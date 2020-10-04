@@ -31,7 +31,7 @@
         background-color: #ffffff;
     }
 
-    select, input{
+    select, input, button{
         text-decoration: none;
         box-shadow: 0 0 0 0;
         border: 0 none;
