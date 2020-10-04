@@ -3,7 +3,7 @@
     <Header/>
 
     <div class="divFormCriarPostagem">
-        <form @submit.prevent="postagemPost" enctype="multipart/form-data"> 
+        <form @submit.prevent="criarPostagemAnonima" enctype="multipart/form-data"> 
             <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.post_title" required>
             <br><br><br>
 
@@ -34,7 +34,7 @@
             <br><br>
 
             <div class="baseElemento divImageFields">
-                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada" required>
+                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
 
                 <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
@@ -90,7 +90,7 @@ export default {
                 post_category: '',
                 post_description: '',
                 post_permission: 'false',
-                post_file: ''
+                file: ''
             }
         }
     },
@@ -99,7 +99,7 @@ export default {
 
         imagemSelecionada(){
 
-            this.postagem.post_file = this.$refs.file.files[0];
+            this.postagem.file = this.$refs.file.files[0];
         },
 
         visualizarObjetoFormCriado(){
@@ -107,18 +107,18 @@ export default {
             console.log(this.postagem)
         },
 
-        postagemPost(){
+        criarPostagemAnonima(){
 
             console.log(this.postagem)
             const formData = new FormData();
 
-            formData.append('fk_id_usuario', this.postagem.fk_user_id,)
+            formData.append('fk_user_id', this.postagem.fk_user_id,)
             formData.append('post_title', this.postagem.post_title,)
             formData.append('post_place', this.postagem.post_place,)
             formData.append('post_category', this.postagem.post_category,)
             formData.append('post_description', this.postagem.post_description,)
             formData.append('post_permission', this.postagem.post_permission,)
-            formData.append('post_file', this.postagem.post_file)
+            formData.append('file', this.postagem.file)
 
             Postagem.criarPostagem(formData).then(resposta => {
                 console.log('Salvo com sucesso!')

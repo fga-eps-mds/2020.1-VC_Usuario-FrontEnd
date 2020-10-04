@@ -7,6 +7,6 @@ export default{
     },
 
     criarPostagem:(postagem) => {
-        return http.post('an_post', postagem)
+        return http.post('postage/create_anon', postagem)
     }
 }
