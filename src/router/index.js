@@ -10,6 +10,16 @@ const routes = [
     path: '/criarpostagem',
     name: 'criarPostagem',
     component: () => import(/* webpackChunkName: "about" */ '../views/CriarPostagem.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  },
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Cadastro.vue')
   }
 ]
 
