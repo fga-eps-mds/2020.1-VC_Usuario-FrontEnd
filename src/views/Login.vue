@@ -9,12 +9,13 @@
         </div>  
 
         <form action="">
-            <div class="inputCampos">
+            <div class="divInputs">
                 
             </div>
 
-            <div class="botoesOpcoes">
-
+            <div class="divBotoes">
+                <button>Entrar</button>
+                <button>Cadastrar</button>
             </div>
         </form>
     </div>  
@@ -49,7 +50,7 @@
         justify-content: center;
 
         width: 100%;
-        height: 30%;
+        height: 40%;
         margin-top: 2%;
         
         border: 1px solid blue;
@@ -67,19 +68,43 @@
 
     form{
         width: 100%;
-        height: 50%;
+        height: 40%;
         margin-top: 2%;
         border: 1px solid green;
-        & .inputCampos{
+
+        & .divInputs{
             width: 100%;
             height: 45%;
             border: 1px solid black;
         }
-        & .botoesOpcoes{
+
+        & .divBotoes{
             width: 100%;
             height: 45%;
             margin-top: 5%;
             border: 1px solid black;
+
+            display: flex;
+            flex-direction: column;
+
+            & button{
+                height: 50px;
+                width: 100%;
+                font-size: 20px;
+                border: none;
+                border-radius: 10px;
+            }
+
+            button:first-child{  
+                margin-bottom: 40px;        
+                color: #ffffff;
+                background-color: #090673;
+            }
+
+            button:last-child{
+                background-color: #ffffff;
+                border: 1px solid #DADDE0;
+            }
         }
     }
 </style>
