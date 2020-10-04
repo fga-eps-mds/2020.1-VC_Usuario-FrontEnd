@@ -5,9 +5,7 @@
         </div>
 
         <div class="divLogo">
-            <div class="logo">
-
-            </div>
+            <img src="../assets/vamosCuidarIcon.png"> 
         </div>  
 
         <form action="">
@@ -32,6 +30,7 @@
         /* border: 1px solid red; */
         height: 100%;
         max-width: 600px;
+        min-width: 200px;
         min-height: 600px;
         margin: 0 30px;
         padding: 0;
@@ -46,16 +45,22 @@
     }
 
     .divLogo{
+        display: flex;
+        justify-content: center;
+
         width: 100%;
         height: 30%;
         margin-top: 2%;
-        display: flex;
+        
         border: 1px solid blue;
 
-        & .logo{
-            width: 150px;
-            height: 100px;
+        & img{
+            display: block;
+
+            height: 50%;
             margin: auto;
+            padding: 0 10px;
+
             border: 1px solid red;
         }
     }
