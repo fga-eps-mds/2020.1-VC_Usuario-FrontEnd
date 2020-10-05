@@ -2,20 +2,14 @@
 
     <Header/>
 
-    <section v-for="postagem of postagens" :key="postagem._id">
+    <section class="postagemView" v-for="postagem of postagens" :key="postagem._id">
         <div class="postagemTitulo">
             <h1>{{postagem.post_title}}</h1>
         </div>
 
-        <div class="postagemLugar">
+        <div class="PostagemCaracteristicas">
             <h2>{{postagem.post_place}}</h2>
-        </div>
-
-        <div class="postagemData">
             <h2>{{postagem.post_created_at}}</h2>
-        </div>
-
-        <div class="postagemCategoria">
             <h2>{{postagem.post_category}}</h2>
         </div>
 
@@ -71,54 +65,43 @@ export default {
 <style scoped lang="scss">
 @import "../assets/stylesheets/pallete.scss";
 
+    .postagemView{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
     .postagemTitulo{
         margin-top: 60px;
-        margin-left: 5%;
         max-width: 200px;
         font-size: 15px;
         color: $colorPreta;
     }
 
-    .postagemLugar{
-        font-size: 10px;
-        margin-left: 5%;
-        margin-top: 5%;
-    }
-
-    .postagemData{
-        font-size: 10px;
-        margin-left: 5%;
-    }
-
-    .postagemData{
-        font-size: 10px;
-        margin-left: 5%;
-    }
-
-    .postagemCategoria{
-        font-size: 10px;
-        margin-left: 5%;
-    }
-
     .postagemComentario{
         margin-top: 20%;
-        margin-left: 5%;
         height: 100px;
     }
 
     .postagemDescricao{
         margin-top: 20%;
-        margin-left: 5%;
         height: 100px;
     }
 
     .apoiarButton{
-        margin-right: 20px;
         color: $colorBranca;
         background-color: $colorAzul;
         font-size: 20px;
         border: none;
         border-radius: 10px;
+        margin-top: 15%;
+        width: 100%;
+    }
+
+    .PostagemCaracteristicas{
+        flex: 1;
+        display: flex;
+        font-size: 10px;
+        justify-content: space-between; 
     }
 
     .postagemBotoes{
