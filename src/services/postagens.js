@@ -3,7 +3,7 @@ import { http } from './config'
 export default{
 
     listarPostagem:() => {
-        return http.get('postagens')
+        return http.get('postage/list_common')
     },
 
     criarPostagem:(postagem) => {
