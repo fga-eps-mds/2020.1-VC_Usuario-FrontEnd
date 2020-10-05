@@ -7,16 +7,21 @@
             <h1>{{postagem.post_title}}</h1>
         </div>
 
-        <div class="PostagemCaracteristicas">
+        <div class="postagemCaracteristicas">
             <h2>{{postagem.post_place}}</h2>
             <h2>{{postagem.post_created_at}}</h2>
             <h2>{{postagem.post_category}}</h2>
         </div>
 
+        <div class="postagemImagem">
+            <img v-bind:src="postagem.post_midia" height="200px" width="150px"/>
+        </div>
+
         <div class="postagemDescricao">
             Descrição:
             <p>{{postagem.post_description}}</p>
-            <button type="submit" class="apoiarButton">Apoiar</button>
+            <button type="submit"
+            class="apoiarBotao">Apoiar</button>
         </div>
 
         <div class="postagemComentario">
@@ -53,8 +58,8 @@ export default {
     
     mounted(){
         Postagem.listarUmaPostagem().then(res => {
-            console.log(res.data)
             this.postagens = res.data;
+            console.log(res.data);
         })
     },
 
@@ -68,6 +73,7 @@ export default {
     .postagemView{
         padding-left: 5%;
         padding-right: 5%;
+        margin-bottom: 100px;
     }
 
     .postagemTitulo{
@@ -79,7 +85,7 @@ export default {
 
     .postagemComentario{
         margin-top: 20%;
-        height: 100px;
+        height: 90px;
     }
 
     .postagemDescricao{
@@ -87,7 +93,7 @@ export default {
         height: 100px;
     }
 
-    .apoiarButton{
+    .apoiarBotao{
         color: $colorBranca;
         background-color: $colorAzul;
         font-size: 20px;
@@ -97,11 +103,15 @@ export default {
         width: 100%;
     }
 
-    .PostagemCaracteristicas{
+    .postagemCaracteristicas{
         flex: 1;
         display: flex;
         font-size: 10px;
         justify-content: space-between; 
+    }
+
+    .postagemImagem{
+ 
     }
 
     .postagemBotoes{
