@@ -2,15 +2,29 @@
 
     <Header/>
 
-    <div class="divFormListarPostagem">
-    <tr v-for="postagem of postagens" :key="postagem._id">
-        <h1>{{postagem.post_title}}</h1>
-        <h1>{{postagem.post_category}}</h1>
-        <h1>{{postagem.post_description}}</h1>
-        <h1>{{postagem.post_place}}</h1>
-        <h1>{{postagem.post_status}}</h1>
-    </tr>
-    </div>
+    <section v-for="postagem of postagens" :key="postagem._id">
+        <div class="PostagemTitulo">
+            <h1>{{postagem.post_title}}</h1>
+        </div>
+
+        <div class="PostagemLugar">
+            <h2>{{postagem.post_place}}</h2>
+        </div>
+
+        <div class="PostagemData">
+            <h2>{{postagem.post_created_at}}</h2>
+        </div>
+
+        <div class="PostagemDescricao">
+            Descrição:
+            <p>{{postagem.post_description}}</p>
+        </div>
+
+        <div class="PostagemBotoes">
+                <button type="submit">Comentar</button>
+                <button type="submit">Cancelar</button>
+        </div>
+    </section>
 
     <MenuBar/>
 
@@ -30,11 +44,9 @@ export default {
         MenuBar
     },
 
-    data(){
-        return{
-            postagens: []
-        }
-    },
+    data: () => ({
+        postagens: []
+    }),
     
     mounted(){
         Postagem.listarUmaPostagem().then(res => {
@@ -50,10 +62,53 @@ export default {
 <style scoped lang="scss">
 @import "../assets/stylesheets/pallete.scss";
 
-    .divFormListarPostagem{
-        margin-top: 45px;
-        max-width: 900px;
-        font-size: 10px;
+    .PostagemTitulo{
+        margin-top: 60px;
+        margin-left: 5%;
+        max-width: 200px;
+        font-size: 15px;
         color: $colorPreta;
+    }
+
+    .PostagemLugar{
+        font-size: 10px;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+
+    .PostagemData{
+        font-size: 10px;
+        margin-left: 5%;
+    }
+
+    .PostagemDescricao{
+        margin-top: 20%;
+        margin-left: 5%
+    }
+
+    .PostagemBotoes{
+        display: flex;
+        
+        /* border: 1px solid blue; */
+
+        & button{
+            flex: 1;
+        
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        button:first-child{
+            margin-right: 20px;
+            
+            color: $colorBranca;
+            background-color: $colorAzul;
+        }
+
+        button:last-child{
+            background-color: $colorBranca;
+            border: 1px solid $colorCinza;
+        }
     }
 </style>
