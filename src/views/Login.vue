@@ -12,7 +12,7 @@
             <div class="divInputs">
                     
                 <input type="text" name="" placeholder="Seu Email">
-                <input type="senha" name="" placeholder="Sua Senha">
+                <input type="password" name="" placeholder="Sua Senha">
                 <a href="#">Esqueceu sua senha?</a>
             </div>
             <div class="divBotoes">
@@ -40,7 +40,7 @@
     }
 
     .botaoVoltar{
-        border: 1px solid blue;
+        //border: 1px solid blue;
         display: flex;
         height: 5%;
         top: 0;
@@ -52,7 +52,7 @@
             display: block;
             height: 65%;
             padding: 1px;
-            border: 1px solid red;
+            //border: 1px solid red;
         }
 
     }
@@ -65,7 +65,7 @@
         height: 40%;
         margin-top: 2%;
         
-        border: 1px solid blue;
+        //border: 1px solid blue;
 
         & img{
             display: block;
@@ -74,7 +74,7 @@
             margin-top: 25px;
             padding: 0 10px;
 
-            border: 1px solid red;
+            //border: 1px solid red;
         }
     }
 
