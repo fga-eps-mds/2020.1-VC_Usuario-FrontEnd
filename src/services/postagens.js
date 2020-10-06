@@ -6,7 +6,11 @@ export default{
         return http.get('postage/list_common')
     },
 
-    criarPostagem:(postagem) => {
+    criarPostagemAnonima:(postagem) => {
         return http.post('postage/create_anon', postagem)
+    },
+
+    criarPostagem:(postagem) => {
+        return http.post('postage/create_common', postagem)
     }
 }

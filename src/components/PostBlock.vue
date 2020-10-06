@@ -31,7 +31,7 @@ export default {
         author: String,
         local: String,
         date: String,
-    }
+    },
 }
 </script>
 
@@ -54,7 +54,7 @@ export default {
         
     }
 
-   /*  .moreButton {
+    /*  .moreButton {
         background: #090673;
         color: white;
         border-radius: 8px;

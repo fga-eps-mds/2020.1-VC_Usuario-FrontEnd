@@ -2,7 +2,7 @@
     <header id="header">
         <div class="divWordmark">
             <img src="../assets/wordmarkIcon.png"> 
-       </div>
+        </div>
     </header>
 </template>
 

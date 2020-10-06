@@ -1,8 +1,11 @@
 <template>
   <Header/>
-    <form class="feedPostagens" v-for="post in this.commonPosts" :key="post.id">
+    <form class="feedPostagens">
       <!-- <h1>{{post.post_title}}</h1> -->
-      <PostBlock v-bind:title="post.post_title"  status="Aguardando" author="Daniel Porto" local="Lago Sul" date="28/09/2020" />
+      <div class="col" v-for="post in this.commonPosts" :key="post.id">
+        <PostBlock v-bind:title="post.post_title"  v-bind:status="post.post_status" author="Daniel Porto" v-bind:local="post.post_place" v-bind:date="post.post_created_at" />
+      </div>
+      
     </form>
     
     <MenuBar/>
@@ -55,8 +58,16 @@ export default {
 <style scoped lang="scss">
 
     .feedPostagens{
-        margin-top: 60px;
-        display: flex;
-        justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 60px;
+    }
+
+    .col {
+      margin: 0 auto;
+      margin-bottom: 20px;
     }
 </style>

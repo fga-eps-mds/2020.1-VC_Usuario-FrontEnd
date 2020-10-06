@@ -44,16 +44,29 @@
             <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
             <br>
 
-            <fieldset>
-                <legend>Postagem anônima?</legend>
-                <div class="toggle">
-                    <input type="radio" value="false" id="idPostNaoAnonimo" checked="checked" v-model="postagem.post_permission"/>
-                    <label for="idPostNaoAnonimo">Não</label>
+            <div class="permissao">
+                <fieldset>
+                    <legend>Postagem anônima?</legend>
+                    <div class="toggle">
+                        <input type="radio" value="false" id="idPostNaoAnonimo" v-model="postagem.post_type"/>
+                        <label for="idPostNaoAnonimo">Não</label>
 
-                    <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.post_permission"/>
-                    <label for="idPostSimAnonimo">Sim</label>   
-                </div>
-            </fieldset>
+                        <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.post_type"/>
+                        <label for="idPostSimAnonimo">Sim</label>   
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Apresentar no Feed?</legend>
+                    <div class="toggle">
+                        <input type="radio" value=false id="idPostNaoFeed" v-model="postagem.post_permission"/>
+                        <label for="idPostNaoFeed">Não</label>
+
+                        <input type="radio" value=true id="idPostSimFeed" v-model="postagem.post_permission"/>
+                        <label for="idPostSimFeed">Sim</label>   
+                    </div>
+                </fieldset>
+            </div>
+            
             <br><br><br>
 
             <div class="baseElemento divBotoes">
@@ -89,7 +102,8 @@ export default {
                 post_place: '',
                 post_category: '',
                 post_description: '',
-                post_permission: 'false',
+                post_permission: 'true',
+                post_type: 'false',
                 file: ''
             }
         }
@@ -120,12 +134,19 @@ export default {
             formData.append('post_permission', this.postagem.post_permission,)
             formData.append('file', this.postagem.file)
 
-            Postagem.criarPostagem(formData).then(resposta => {
-                console.log('Salvo com sucesso!')
-                console.log(resposta)
+            if (this.postagem.post_type === "true"){  
+                Postagem.criarPostagemAnonima(formData).then(resposta => {
+                    console.log('Salvo com sucesso!')
+                    console.log(resposta)
+                })
+            }else{
+                Postagem.criarPostagem(formData).then(resposta => {
+                    console.log('Salvo com sucesso!')
+                    console.log(resposta)
+                })
+            }
 
-                window.location.href = "http://localhost:8080";
-            }) 
+            window.location.href = "http://localhost:8080";
         }
     }
 }
@@ -249,6 +270,11 @@ export default {
         }
     }
 
+    .permissao {
+        display: flex;
+        justify-content: space-between;
+    }
+
     fieldset {
         display: block;
 
@@ -257,7 +283,7 @@ export default {
 
     legend {
             width: 100%; float: left; display: table;
-            font-size: 20px; line-height: 140%; font-weight: 400; color: #000000;	
+            font-size: 15px; line-height: 140%; font-weight: 400; color: #000000;	
             + * {clear: both;}
     }
 
