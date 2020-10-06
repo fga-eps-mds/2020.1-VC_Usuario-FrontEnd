@@ -8,6 +8,10 @@
             <h1 id="postagemStatus">{{postagem.post_status}}</h1>
         </div>
 
+        <div class="postagemNome">
+            <h2>Anônimo</h2>
+        </div>
+
         <div class="postagemCaracteristicas">
             <h2>{{postagem.post_place}}</h2>
             <h2>{{postagem.post_created_at}}</h2>
@@ -15,15 +19,20 @@
         </div>
 
         <div class="postagemImagem">
-            <img v-bind:src="postagem.post_midia" style="height: 300px"/>
+            <img v-bind:src="postagem.post_midia"/>
         </div>
 
         <div class="postagemDescricao">
             Descrição:
             <p>{{postagem.post_description}}</p>
-            <button type="submit"
-            class="apoiarBotao">Apoiar</button>
         </div>
+
+        <button class="apoiarBotao">
+            <div class="textoImagemApoiarBotao">
+                <img src="../assets/like.png" class="iconeLike">
+                Apoiar
+            </div>
+        </button>
 
         <div class="postagemComentario">
             Comentários:
@@ -60,7 +69,7 @@ export default {
     },
     
     created: function(){
-        Postagem.listarUmaPostagem("5f7c639d5f1cd80029a3fb3b").then(res => {
+        Postagem.listarUmaPostagem("5f7cbfa2c00868001d821058").then(res => {
             this.postagem = res.data;
             console.log(res.data);
         })
@@ -110,6 +119,22 @@ export default {
         border-radius: 10px;
         margin-top: 15%;
         width: 100%;
+        height: 40px;
+    }
+
+    .textoImagemApoiarBotao{
+        display: inline-flex;
+        height: 40px;
+        align-items: center;
+    }
+
+    .iconeLike{
+        height: 30px;
+        margin: auto;
+    }
+
+    .postagemNome{
+        font-size: 10px;
     }
 
     .postagemCaracteristicas{
@@ -122,15 +147,18 @@ export default {
     .postagemImagem{
         margin-top: 5%;
         text-align: center;
-        width: 100%;
+
+        & img {
+            width: 100%;
+        }
     }
 
     .postagemBotoes{
         display: flex;
+        height: 40px;
 
         & button{
             flex: 1;
-        
             font-size: 20px;
             border: none;
             border-radius: 10px;

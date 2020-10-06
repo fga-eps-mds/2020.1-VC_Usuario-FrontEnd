@@ -1,8 +1,7 @@
 <template>
     <header id="header">
-        <div v-if="$route.path != '/'" class="divArrow">
-            <img v-if="$route.path != '/login' || $route.path != '/cadastro'" src="../assets/whiteArrow.png" @click="$router.go(-1)"/>
-            <img v-else src="../assets/blackArrow.png" @click="$router.go(-1)"/>
+        <div class="divBotaoVoltar">
+            <img v-if="$route.path != '/'" src="../assets/whiteArrow.png" @click="$router.go(-1)"/>
         </div>
 
         <div class="divWordmark">
@@ -60,7 +59,7 @@ window.onscroll = function(){
         }
     }
 
-    .divArrow{
+    .divBotaoVoltar{
         margin-left: 10px;
         margin-top: 7px;
         width: 0; 
