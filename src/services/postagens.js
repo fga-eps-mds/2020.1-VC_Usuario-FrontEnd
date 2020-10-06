@@ -10,7 +10,7 @@ export default{
         return http.post('postage/create_anon', postagem)
     },
 
-    listarUmaPostagem:() => {
-        return http.get('postage/list_all')
+    listarUmaPostagem:(id) => {
+        return http.get(`postage/list_one/${id}`)
     }
 }

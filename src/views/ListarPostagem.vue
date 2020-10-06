@@ -2,7 +2,7 @@
 
     <Header/>
 
-    <section class="postagemView" v-for="postagem of postagens" :key="postagem._id">
+    <section class="postagemView">
         <div class="postagemTitulo">
             <h1>{{postagem.post_title}}</h1>
         </div>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="postagemImagem">
-            <img v-bind:src="postagem.post_midia" height="200px" width="150px"/>
+            <img v-bind:src="postagem.post_midia" style="height: 300px"/>
         </div>
 
         <div class="postagemDescricao">
@@ -52,17 +52,18 @@ export default {
         MenuBar
     },
 
-    data: () => ({
-        postagens: []
-    }),
+    data: function () {
+        return{
+          postagem: {}
+        }
+    },
     
-    mounted(){
-        Postagem.listarUmaPostagem().then(res => {
-            this.postagens = res.data;
+    created: function(){
+        Postagem.listarUmaPostagem("5f7b9e76bf0e080035e75b5d").then(res => {
+            this.postagem = res.data;
             console.log(res.data);
         })
     },
-
   
 }
 </script>
@@ -89,7 +90,7 @@ export default {
     }
 
     .postagemDescricao{
-        margin-top: 20%;
+        margin-top: 10%;
         height: 100px;
     }
 
@@ -111,7 +112,9 @@ export default {
     }
 
     .postagemImagem{
- 
+        margin-top: 5%;
+        text-align: center;
+        width: 100%;
     }
 
     .postagemBotoes{
