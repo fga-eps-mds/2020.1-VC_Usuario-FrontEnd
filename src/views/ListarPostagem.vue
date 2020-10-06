@@ -59,7 +59,7 @@ export default {
     },
     
     created: function(){
-        Postagem.listarUmaPostagem("5f7b9e76bf0e080035e75b5d").then(res => {
+        Postagem.listarUmaPostagem("5f7bea03d1e181002af8270c").then(res => {
             this.postagem = res.data;
             console.log(res.data);
         })

@@ -1,5 +1,10 @@
 <template>
     <header id="header">
+        <div v-if="$route.path != '/'" class="divArrow">
+            <img v-if="$route.path != '/login' || $route.path != '/cadastro'" src="../assets/whiteArrow.png" @click="$router.go(-1)"/>
+            <img v-else src="../assets/blackArrow.png" @click="$router.go(-1)"/>
+        </div>
+
         <div class="divWordmark">
             <img src="../assets/wordmarkIcon.png"> 
        </div>
@@ -55,5 +60,24 @@ window.onscroll = function(){
             padding: 0 10px;
         }
     }
+
+    .divArrow{
+        display: flex;
+        justify-content: center;
+
+        height: 100%;
+        width: 100px;
+        margin: left;
+
+        & img{
+            display: block;
+
+            height: 35px;
+            margin: auto;
+            padding: 0 10px;
+        }
+    }
+
+    
 </style>
 

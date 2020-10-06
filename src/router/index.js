@@ -4,12 +4,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ListarPostagem.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   },
   {
     path: '/criarpostagem',
     name: 'criarPostagem',
     component: () => import(/* webpackChunkName: "about" */ '../views/CriarPostagem.vue')
+  },
+  {
+    path: '/:id',
+    name: 'listarPostagem',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ListarPostagem.vue')
   },
 ]
 
