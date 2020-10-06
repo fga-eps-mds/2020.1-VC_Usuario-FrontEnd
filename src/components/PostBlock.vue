@@ -1,7 +1,7 @@
 <template>
     <div id="postBlock">
         <div class="row">
-            <h3>{{title}}</h3>
+            <h4>{{title}}</h4>
             <p>{{status}}</p>
         </div>
 
@@ -14,13 +14,11 @@
             <p>{{date}}</p>
         </div>
 
-        <div class="row">
-            <button class="moreButton">ver mais</button>
-            <button>Apoiar</button>
+        <div class="btns">
+            <button class="moreButton">Ver mais</button>
+            <button class="supButton">Apoiar</button>
         </div>
-        
     </div>
-    
 </template>
 <script>
 export default {
@@ -40,8 +38,21 @@ export default {
         border: solid 2px  #DADDE0;
         border-radius: 15px;
         width: 80vw;
-        height: 180px;
+        height: 150px;
+        padding-left: 10px;
     }
+
+    button {
+        width: 30%;
+        height: 15%;
+        margin-right: 10%;
+        margin-top: 20px;
+        text-decoration: none;
+        box-shadow: 0 0 0 0;
+        border: 0 none;
+        outline: 0;
+        border-radius: 10px;   
+    } 
     
     .row {
         display: flex;
@@ -54,9 +65,19 @@ export default {
         
     }
 
-    /*  .moreButton {
-        background: #090673;
-        color: white;
-        border-radius: 8px;
-    } */
+    .btns {
+
+        height: 120%;
+    }
+
+    .moreButton {
+        color: #ffffff;
+        background-color: #090673;
+    }
+
+    .supButton {
+        color: #248722;
+        background-color: #ffffff;
+        border: solid 1px;
+    }
 </style>

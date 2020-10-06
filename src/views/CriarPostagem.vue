@@ -241,7 +241,7 @@ export default {
 
         & button{
             flex: 1;
-        
+            height: 100%;
             font-size: 20px;
             border: none;
             border-radius: 10px;
