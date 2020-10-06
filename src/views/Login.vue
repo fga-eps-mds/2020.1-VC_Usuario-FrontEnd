@@ -64,6 +64,7 @@
         width: 100%;
         height: 40%;
         margin-top: 2%;
+        margin-bottom: -5%;
         
         //border: 1px solid blue;
 
@@ -71,7 +72,7 @@
             display: block;
             height: 50%;
             margin: auto;
-            margin-top: 25px;
+            margin-top: 14%;
             padding: 0 10px;
 
             //border: 1px solid red;
@@ -100,16 +101,12 @@
                 border-bottom: 1px solid #DADDE0;
             }
 
-            input:last-child{
-                margin-bottom: 20px;
-            }
-
             .input::placeholder {
                 font-size: 20px;
                 color: #000000;
             }
 
-            a{
+            a{  
                 color: #090673;
                 font-weight: bolder;
                 text-decoration: none;
@@ -121,7 +118,7 @@
         & .divBotoes{
             width: 100%;
             height: 40%;
-            margin-top: 5%;
+            margin-top: 10%;
             //border: 1px solid black;
 
             display: flex;
@@ -136,7 +133,7 @@
             }
 
             button:first-child{  
-                margin-bottom: 40px;        
+                margin-bottom: 25px;        
                 color: #ffffff;
                 background-color: #090673;
             }
