@@ -54,7 +54,6 @@ window.onscroll = function(){
 
         & img{
             display: block;
-
             height: 35px;
             margin: auto;
             padding: 0 10px;
@@ -62,19 +61,14 @@ window.onscroll = function(){
     }
 
     .divArrow{
-        display: flex;
-        justify-content: center;
-
-        height: 100%;
-        width: 100px;
-        margin: left;
+        margin-left: 10px;
+        margin-top: 7px;
+        width: 0; 
+        height: 0; 
 
         & img{
-            display: block;
-
-            height: 35px;
+            height: 30px;
             margin: auto;
-            padding: 0 10px;
         }
     }
 

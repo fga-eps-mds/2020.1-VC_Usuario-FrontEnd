@@ -3,8 +3,9 @@
     <Header/>
 
     <section class="postagemView">
-        <div class="postagemTitulo">
+        <div class="postagemTituloEStatus">
             <h1>{{postagem.post_title}}</h1>
+            <h1 id="postagemStatus">{{postagem.post_status}}</h1>
         </div>
 
         <div class="postagemCaracteristicas">
@@ -59,7 +60,7 @@ export default {
     },
     
     created: function(){
-        Postagem.listarUmaPostagem("5f7bea03d1e181002af8270c").then(res => {
+        Postagem.listarUmaPostagem("5f7c639d5f1cd80029a3fb3b").then(res => {
             this.postagem = res.data;
             console.log(res.data);
         })
@@ -77,11 +78,18 @@ export default {
         margin-bottom: 100px;
     }
 
-    .postagemTitulo{
+    .postagemTituloEStatus{
+        width: 100%;
         margin-top: 60px;
-        max-width: 200px;
         font-size: 15px;
         color: $colorPreta;
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+    }
+
+    #postagemStatus{
+        color: red;
     }
 
     .postagemComentario{
