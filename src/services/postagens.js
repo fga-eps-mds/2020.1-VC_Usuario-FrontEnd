@@ -8,5 +8,9 @@ export default{
 
     criarPostagem:(postagem) => {
         return http.post('postage/create_anon', postagem)
+    },
+
+    listarUmaPostagem:(id) => {
+        return http.get(`postage/list_one/${id}`)
     }
 }

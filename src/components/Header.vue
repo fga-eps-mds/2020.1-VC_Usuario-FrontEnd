@@ -1,5 +1,9 @@
 <template>
     <header id="header">
+        <div class="divBotaoVoltar">
+            <img v-if="$route.path != '/'" src="../assets/whiteArrow.png" @click="$router.go(-1)"/>
+        </div>
+
         <div class="divWordmark">
             <img src="../assets/wordmarkIcon.png"> 
        </div>
@@ -49,11 +53,24 @@ window.onscroll = function(){
 
         & img{
             display: block;
-
             height: 35px;
             margin: auto;
             padding: 0 10px;
         }
     }
+
+    .divBotaoVoltar{
+        margin-left: 10px;
+        margin-top: 7px;
+        width: 0; 
+        height: 0; 
+
+        & img{
+            height: 30px;
+            margin: auto;
+        }
+    }
+
+    
 </style>
 

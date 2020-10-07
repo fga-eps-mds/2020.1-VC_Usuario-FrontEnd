@@ -10,7 +10,12 @@ const routes = [
     path: '/criarpostagem',
     name: 'criarPostagem',
     component: () => import(/* webpackChunkName: "about" */ '../views/CriarPostagem.vue')
-  }
+  },
+  {
+    path: '/:id',
+    name: 'listarUmaPostagem',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ListarUmaPostagem.vue')
+  },
 ]
 
 const router = createRouter({
