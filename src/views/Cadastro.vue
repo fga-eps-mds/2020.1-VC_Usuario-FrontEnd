@@ -1,6 +1,6 @@
 <template> 
     <div class="divCadastro">
-        <div class="botaoVoltar">
+        <div onclick='history.go(-1)' class="botaoVoltar">
             <img src="../assets/botaoVoltar.png">
         </div>
 
@@ -28,30 +28,38 @@
 </script>
 
 <style lang="scss" scoped>
+
     .divCadastro{
-        /* border: 1px solid red; */
         height: 100%;
-        max-width: 600px;
         min-width: 200px;
         min-height: 600px;
         margin: 0 30px;
         padding: 0;
     }
 
+    @media only screen and (min-width:500px){
+        .divCadastro{
+            width: 440px;
+            margin: auto;
+        }
+    }
+
     .botaoVoltar{
-        //border: 1px solid blue;
         display: flex;
+        align-items: flex-end;
+
         height: 5%;
         top: 0;
         left: 0;
         width: 40px;
-        align-items: flex-end;
+        
+        cursor: pointer;
 
         & img{
             display: block;
-            height: 65%;
+
+            height: 50%;
             padding: 1px;
-            //border: 1px solid red;
         }
 
     }
@@ -59,20 +67,19 @@
     .divLogo{
         display: flex;
         justify-content: center;
+
         width: 100%;
         height: 40%;
         margin-top: 2%;
         margin-bottom: -15%;
-        //border: 1px solid blue;
 
         & img{
             display: block;
+
             height: 50%;
             margin: auto;
             margin-top: 14%;
             padding: 0 10px;
-
-            //border: 1px solid red;
         }
     }
 
@@ -80,22 +87,27 @@
         width: 100%;
         height: 40%;
         margin-top: 2%;
-       // border: 1px solid green;
 
         & .divInputs{
             width: 100%;
             height: 45%;
-            //border: 1px solid black;//
             
             input{
                 box-shadow: 0 0 0 0;
                 border: 0 none;
                 outline: 0;
+
                 display: block;
+
                 width: 100%;
                 height: 35%;
+
                 font-size: 14px;
                 border-bottom: 1px solid #DADDE0;
+            }
+
+            input::placeholder {
+                color: #000000;
             }
         }
 
@@ -103,18 +115,18 @@
             width: 100%;
             height: 45%;
             margin-top: 20%;
-            //border: 1px solid black;
 
             display: flex;
             flex-direction: column;
 
             & button{
-                height: 35%;
+                height: 50px;
                 width: 100%;
+
+                cursor: pointer;
                 font-size: 20px;
                 border: none;
-                border-radius: 10px;
-                margin-bottom: 60px;        
+                border-radius: 10px;   
                 color: #ffffff;
                 background-color: #090673;
             }
