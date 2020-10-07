@@ -120,7 +120,7 @@
             flex-direction: column;
 
             & button{
-                height: 50px;
+                height: 35%;
                 width: 100%;
 
                 cursor: pointer;
