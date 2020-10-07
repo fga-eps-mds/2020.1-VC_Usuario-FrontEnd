@@ -3,7 +3,7 @@
     <form class="feedPostagens">
       <!-- <h1>{{post.post_title}}</h1> -->
       <div class="col" v-for="post in this.commonPosts" :key="post.id">
-        <PostBlock v-bind:title="post.post_title"  v-bind:status="post.post_status" author="Daniel Porto" v-bind:local="post.post_place" v-bind:date="post.post_created_at" />
+        <PostBlock v-bind:title="post.post_title"  v-bind:status="post.post_status" author="Daniel Porto" v-bind:local="post.post_place" v-bind:date="post.post_created_at" v-bind:id="post._id" @ver-mais="verMais" />
       </div>
       
     </form>
@@ -17,6 +17,7 @@ import Header from '@/components/Header.vue'
 import PostBlock from '@/components/PostBlock.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import Postage from '@/services/postagens.js'
+//import router from 'vue-router'
 
 export default {
     name: 'Home',
@@ -47,9 +48,9 @@ export default {
         })
       },
 
-      hw(){
-        console.log('ok');
-      },
+      verMais(post_id){
+        this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
+      }
     },
 }
 

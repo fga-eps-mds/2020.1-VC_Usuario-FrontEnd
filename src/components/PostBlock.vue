@@ -15,7 +15,7 @@
         </div>
 
         <div class="btns">
-            <button class="moreButton">Ver mais</button>
+            <button class="moreButton" @click="verMais(id)">Ver mais</button>
             <button class="supButton">Apoiar</button>
         </div>
     </div>
@@ -23,13 +23,19 @@
 <script>
 export default {
     name: 'postBlock',
-    props:{
+    props: {
         title: String,
         status: String,
         author: String,
         local: String,
         date: String,
+        id: String,
     },
+    methods: {
+        verMais(post_id){
+            this.$emit('ver-mais', post_id)
+        }
+    }
 }
 </script>
 
