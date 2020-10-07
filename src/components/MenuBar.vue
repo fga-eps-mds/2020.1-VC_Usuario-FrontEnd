@@ -3,8 +3,8 @@
         <div class="divMenuOpcoes">
             <div><router-link to="/"><img src="../assets/homeIcon.png"></router-link></div>
             <div><router-link to="/criarpostagem"><img src="../assets/addIcon.png"></router-link></div>
-            <div><img src="../assets/newsIcon.png"> </div>
-            <div><img src="../assets/userIcon.png"> </div>
+            <div><img src="../assets/newsIcon.png"></div>
+            <div><router-link to="/login"><img src="../assets/userIcon.png"></router-link></div>
         </div>
     </nav>
 </template>
