@@ -5,7 +5,9 @@
     <section class="postagemView">
         <div class="postagemTituloEStatus">
             <h1>{{postagem.post_title}}</h1>
-            <h1 id="postagemStatus">{{postagem.post_status}}</h1>
+            <h1 id="postagemStatus0" v-if="statusColor(this.postagem.post_status) === 0">{{postagem.post_status}}</h1>
+            <h1 id="postagemStatus1" v-if="statusColor(this.postagem.post_status) === 1">{{postagem.post_status}}</h1>
+            <h1 id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2">{{postagem.post_status}}</h1>            
         </div>
 
         <div class="postagemNome">
@@ -24,7 +26,7 @@
 
         <div class="postagemDescricao">
             Descrição:
-            <p>{{postagem.post_description}}</p>
+            <p align = "justify">{{postagem.post_description}}</p>
         </div>
 
         <button class="apoiarBotao">
@@ -43,7 +45,6 @@
             <button type="submit">Reportar</button>
         </div>
     </section>
-
     <MenuBar/>
 
 </template> 
@@ -55,26 +56,35 @@ import MenuBar from '@/components/MenuBar.vue'
 import Postagem from '@/services/postagens.js'
 
 export default {
-    name: 'CriarPostagem',
+    name: 'listarUmaPostagem',
 
     components: {
         Header,
-        MenuBar
+        MenuBar,
     },
 
     data: function () {
         return{
-          postagem: {}
+            postagem: {}
         }
     },
     
     created: function(){
-        Postagem.listarUmaPostagem("5f7cbfa2c00868001d821058").then(res => {
+        
+        Postagem.listarUmaPostagem(this.$route.params.post_id).then(res => {
             this.postagem = res.data;
             console.log(res.data);
         })
     },
-  
+    methods: {
+
+        statusColor(status){
+            var i = 0
+            if(status === "Em andamento") i = 1
+            else if (status === "Concluido") i = 2
+            return i
+        }
+    }
 }
 </script>
 
@@ -97,8 +107,16 @@ export default {
         justify-content: space-between;
     }
 
-    #postagemStatus{
-        color: red;
+    #postagemStatus0{
+        color: #CE1335;
+    }
+
+    #postagemStatus1{
+        color: #090673;
+    }
+
+    #postagemStatus2{
+        color: #248722;
     }
 
     .postagemComentario{
@@ -108,7 +126,7 @@ export default {
 
     .postagemDescricao{
         margin-top: 10%;
-        height: 100px;
+        height: auto;
     }
 
     .apoiarBotao{
@@ -117,7 +135,7 @@ export default {
         font-size: 20px;
         border: none;
         border-radius: 10px;
-        margin-top: 15%;
+        margin-top: 8%;
         width: 100%;
         height: 40px;
     }
@@ -155,7 +173,7 @@ export default {
 
     .postagemBotoes{
         display: flex;
-        height: 40px;
+        height: 100%;
 
         & button{
             flex: 1;
