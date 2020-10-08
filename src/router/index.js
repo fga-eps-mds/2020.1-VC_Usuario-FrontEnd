@@ -20,7 +20,12 @@ const routes = [
     path: '/cadastro',
     name: 'Cadastro',
     component: () => import(/* webpackChunkName: "about" */ '../views/Cadastro.vue')
-  }
+  },
+  {
+    path: '/post',
+    name: 'listarUmaPostagem',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ListarUmaPostagem.vue'),
+  },
 ]
 
 const router = createRouter({

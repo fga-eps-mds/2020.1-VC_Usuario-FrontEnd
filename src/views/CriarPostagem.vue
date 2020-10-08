@@ -3,7 +3,7 @@
     <Header/>
 
     <div class="divFormCriarPostagem">
-        <form @submit.prevent="postagemPost" enctype="multipart/form-data"> 
+        <form @submit.prevent="criarPostagemAnonima" enctype="multipart/form-data"> 
             <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.post_title" required>
             <br><br><br>
 
@@ -34,7 +34,7 @@
             <br><br>
 
             <div class="baseElemento divImageFields">
-                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada" required>
+                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
 
                 <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
@@ -44,16 +44,29 @@
             <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
             <br>
 
-            <fieldset>
-                <legend>Postagem anônima?</legend>
-                <div class="toggle">
-                    <input type="radio" value="false" id="idPostNaoAnonimo" checked="checked" v-model="postagem.post_permission"/>
-                    <label for="idPostNaoAnonimo">Não</label>
+            <div class="permissao">
+                <fieldset>
+                    <legend>Postagem anônima?</legend>
+                    <div class="toggle">
+                        <input type="radio" value="false" id="idPostNaoAnonimo" v-model="postagem.post_type"/>
+                        <label for="idPostNaoAnonimo">Não</label>
 
-                    <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.post_permission"/>
-                    <label for="idPostSimAnonimo">Sim</label>   
-                </div>
-            </fieldset>
+                        <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.post_type"/>
+                        <label for="idPostSimAnonimo">Sim</label>   
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Apresentar no Feed?</legend>
+                    <div class="toggle">
+                        <input type="radio" value=false id="idPostNaoFeed" v-model="postagem.post_permission"/>
+                        <label for="idPostNaoFeed">Não</label>
+
+                        <input type="radio" value=true id="idPostSimFeed" v-model="postagem.post_permission"/>
+                        <label for="idPostSimFeed">Sim</label>   
+                    </div>
+                </fieldset>
+            </div>
+            
             <br><br><br>
 
             <div class="baseElemento divBotoes">
@@ -89,8 +102,9 @@ export default {
                 post_place: '',
                 post_category: '',
                 post_description: '',
-                post_permission: 'false',
-                post_file: ''
+                post_permission: 'true',
+                post_type: 'false',
+                file: ''
             }
         }
     },
@@ -99,7 +113,7 @@ export default {
 
         imagemSelecionada(){
 
-            this.postagem.post_file = this.$refs.file.files[0];
+            this.postagem.file = this.$refs.file.files[0];
         },
 
         visualizarObjetoFormCriado(){
@@ -107,25 +121,32 @@ export default {
             console.log(this.postagem)
         },
 
-        postagemPost(){
+        criarPostagemAnonima(){
 
             console.log(this.postagem)
             const formData = new FormData();
 
-            formData.append('fk_id_usuario', this.postagem.fk_user_id,)
+            formData.append('fk_user_id', this.postagem.fk_user_id,)
             formData.append('post_title', this.postagem.post_title,)
             formData.append('post_place', this.postagem.post_place,)
             formData.append('post_category', this.postagem.post_category,)
             formData.append('post_description', this.postagem.post_description,)
             formData.append('post_permission', this.postagem.post_permission,)
-            formData.append('post_file', this.postagem.post_file)
+            formData.append('file', this.postagem.file)
 
-            Postagem.criarPostagem(formData).then(resposta => {
-                console.log('Salvo com sucesso!')
-                console.log(resposta)
+            if (this.postagem.post_type === "true"){  
+                Postagem.criarPostagemAnonima(formData).then(resposta => {
+                    console.log('Salvo com sucesso!')
+                    console.log(resposta)
+                })
+            }else{
+                Postagem.criarPostagem(formData).then(resposta => {
+                    console.log('Salvo com sucesso!')
+                    console.log(resposta)
+                })
+            }
 
-                window.location.href = "http://localhost:8080";
-            }) 
+            window.location.href = "http://localhost:8080";
         }
     }
 }
@@ -220,7 +241,7 @@ export default {
 
         & button{
             flex: 1;
-        
+            height: 100%;
             font-size: 20px;
             border: none;
             border-radius: 10px;
@@ -249,6 +270,11 @@ export default {
         }
     }
 
+    .permissao {
+        display: flex;
+        justify-content: space-between;
+    }
+
     fieldset {
         display: block;
 
@@ -257,7 +283,7 @@ export default {
 
     legend {
             width: 100%; float: left; display: table;
-            font-size: 20px; line-height: 140%; font-weight: 400; color: #000000;	
+            font-size: 15px; line-height: 140%; font-weight: 400; color: #000000;	
             + * {clear: both;}
     }
 
