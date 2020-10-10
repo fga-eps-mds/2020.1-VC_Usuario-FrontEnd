@@ -8,15 +8,17 @@
             <img src="../assets/vamosCuidarIcon.png"> 
         </div>  
 
-        <form action="">
+        <form @submit.prevent="registrarUsuario">
             <div class="divInputs">
-                <input type="text" name="" placeholder="Nome">
-                <input type="text" name="" placeholder="Email">
-                <input type="password" name="" placeholder="Senha">
+                <input type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
+                <input type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
+                <input type="password" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                <input type="password" name="" placeholder="Confirmar Senha" v-model="this.confirmarSenha">
             </div>
 
             <div class="divBotoes">
-                <button>Cadastrar</button>
+                <button type="submit">Cadastrar</button>
+
             </div>
         </form>
     </div>  
@@ -24,6 +26,39 @@
 
 <script>
 
+import Registros from '@/services/registros.js'
+
+export default{
+    name: 'Cadastro',
+
+    data(){
+        return{
+            confirmarSenha: '',
+            cadastro: {
+                user_email: '',
+                user_password: '',
+                user_name: ''
+            }
+        }
+    },
+
+    methods:{
+
+        registrarUsuario(){
+            if(this.cadastro.user_password === this.confirmarSenha){
+                console.log(this.cadastro)
+                Registros.Registrar(this.cadastro).then(resposta => {
+                    console.log(resposta)
+                    alert("Cadastro feito com sucesso")
+                    window.location.href='http://localhost:8080/login'
+                })
+            }else{
+                alert("Senhas não batem")
+            }
+        }
+    }
+
+}
 
 </script>
 
@@ -86,7 +121,7 @@
     form{
         width: 100%;
         height: 40%;
-        margin-top: 2%;
+        margin-top: -2%;
 
         & .divInputs{
             width: 100%;
@@ -114,7 +149,7 @@
         & .divBotoes{
             width: 100%;
             height: 45%;
-            margin-top: 20%;
+            margin-top: 30%;
 
             display: flex;
             flex-direction: column;
