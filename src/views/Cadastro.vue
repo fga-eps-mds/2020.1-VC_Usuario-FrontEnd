@@ -10,9 +10,9 @@
 
         <form action="">
             <div class="divInputs">
-                <input type="text" name="" placeholder="Nome">
-                <input type="text" name="" placeholder="Email">
-                <input type="password" name="" placeholder="Senha">
+                <input type="text" name="" placeholder=" Nome">
+                <input type="email" name="" placeholder=" Email">
+                <input type="password" name="" placeholder=" Senha">
             </div>
 
             <div class="divBotoes">
@@ -99,20 +99,22 @@
 
         & .divInputs{
             width: 100%;
-            height: 45%;
+            height: 40%;
             
             input{
-                box-shadow: 0 0 0 0;
-                border: 0 none;
-                outline: 0;
+                // box-shadow: 0 0 0 0;
+                // border: 0 none;
+                // outline: 0;
 
-                display: block;
+                // display: block;
 
                 width: 100%;
                 height: 35%;
 
                 font-size: 14px;
-                border-bottom: 1px solid #DADDE0;
+                border: 1px solid #DADDE0;
+                border-radius: 15px;
+                margin-bottom: 10px;
             }
 
             input::placeholder {
@@ -122,7 +124,7 @@
 
         & .divBotoes{
             width: 100%;
-            height: 45%;
+            height: 40%;
             margin-top: 20%;
 
             display: flex;
@@ -135,7 +137,7 @@
                 cursor: pointer;
                 font-size: 20px;
                 border: none;
-                border-radius: 10px;   
+                border-radius: 35px;   
                 color: #ffffff;
                 background-color: #090673;
             }

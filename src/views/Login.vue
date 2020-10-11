@@ -10,8 +10,8 @@
 
         <form action="">
             <div class="divInputs">
-                <input type="text" name="" placeholder="Seu Email">
-                <input type="password" name="" placeholder="Sua Senha">
+                <input type="email" name="" placeholder=" Seu Email">
+                <input type="password" name="" placeholder=" Sua Senha">
                 <a href="#">Esqueceu sua senha?</a>
             </div>
 
@@ -101,20 +101,22 @@
 
         & .divInputs{
             width: 100%;
-            height: 45%;
+            height: 40%;
             
             input{
-                box-shadow: 0 0 0 0;
-                border: 0 none;
-                outline: 0;
+                // box-shadow: 0 0 0 0;
+                // border: 0 none;
+                // outline: 0;
 
-                display: block;
+                // display: block;
 
                 width: 100%;
                 height: 35%;
 
                 font-size: 14px;
-                border-bottom: 1px solid #DADDE0;
+                border: 1px solid #DADDE0;
+                border-radius: 15px;
+                margin-bottom: 10px;
             }
 
             input::placeholder {
@@ -140,13 +142,13 @@
             flex-direction: column;
 
             & button{
-                height: 40%;
+                height: 35%;
                 width: 100%;
 
                 cursor: pointer;
                 font-size: 20px;
                 border: none;
-                border-radius: 10px;
+                border-radius: 35px;
             }
 
             button:first-child{  
