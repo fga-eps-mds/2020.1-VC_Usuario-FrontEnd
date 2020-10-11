@@ -60,14 +60,13 @@ window.onscroll = function(){
     }
 
     .divBotaoVoltar{
-        margin-left: 10px;
-        margin-top: 7px;
-        width: 0; 
-        height: 0; 
+        display: flex;
+        align-items: flex-end;
 
         & img{
-            height: 30px;
-            margin: auto;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            height: 25px;
         }
     }
 

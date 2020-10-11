@@ -1,7 +1,7 @@
 <template> 
     <div class="divLogin">
         <div onclick='history.go(-1)' class="botaoVoltar">
-            <img src="../assets/botaoVoltar.png"> 
+            <img src="../assets/blackArrow.png"> 
         </div>
 
         <div class="divLogo">
@@ -34,7 +34,7 @@
         height: 100%;
         min-width: 200px;
         min-height: 600px;
-        margin: 0 30px;
+        // margin: 0 30px;
         padding: 0;
     }
 
@@ -46,20 +46,29 @@
     }
 
     .botaoVoltar{
+        // display: flex;
+        // align-items: flex-end;
+
+        // height: 5%;
+        // top: 0;
+        // left: 0;
+        // width: 40px;
+
+        // cursor: pointer;
+        
+        // & img{
+        //     display: block;
+        //     height: 50%;
+        //     padding: 1px;
+        // }
         display: flex;
         align-items: flex-end;
-
-        height: 5%;
-        top: 0;
-        left: 0;
-        width: 40px;
-
-        cursor: pointer;
         
         & img{
-            display: block;
-            height: 50%;
-            padding: 1px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            height: 25px;
         }
 
     }
@@ -84,9 +93,11 @@
     }
 
     form{
-        width: 100%;
+        // width: 100%;
         height: 40%;
         margin-top: 2%;
+        margin-left: 30px;
+        margin-right: 30px;
 
         & .divInputs{
             width: 100%;
