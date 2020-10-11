@@ -45,13 +45,16 @@ export default{
     methods:{
 
         registrarUsuario(){
+            
             if(this.cadastro.user_password === this.confirmarSenha){
-                console.log(this.cadastro)
+                //console.log(this.cadastro)
                 Registros.Registrar(this.cadastro).then(resposta => {
                     console.log(resposta)
-                    alert("Cadastro feito com sucesso")
-                    window.location.href='http://localhost:8080/login'
+                    alert(resposta.data.msg)
+                    if(resposta.data.User)
+                        window.location.href='http://localhost:8080/login'
                 })
+                
             }else{
                 alert("Senhas não batem")
             }
