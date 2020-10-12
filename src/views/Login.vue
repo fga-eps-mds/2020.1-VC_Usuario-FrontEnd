@@ -1,4 +1,5 @@
-<template> 
+<template>
+    <section>
     <div class="divLogin">
         <div onclick='history.go(-1)' class="botaoVoltar">
             <img src="../assets/blackArrow.png"> 
@@ -10,8 +11,8 @@
 
         <form action="">
             <div class="divInputs">
-                <input type="email" name="" placeholder=" Seu Email">
-                <input type="password" name="" placeholder=" Sua Senha">
+                <input type="email" name="" placeholder="Seu Email">
+                <input type="password" name="" placeholder="Sua Senha">
                 <a href="#">Esqueceu sua senha?</a>
             </div>
 
@@ -20,7 +21,8 @@
                 <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
             </div>
         </form>
-    </div>  
+    </div>
+    </section>  
 </template> 
 
 <script>
@@ -30,45 +32,42 @@
 
 <style lang="scss" scoped>
 
-    .divLogin{
+    section{
+        width: 100%;
         height: 100%;
+        display: flex;
+    }
+
+    .divLogin{
+        height: 620px;
+        margin: 0 30px;
         min-width: 200px;
-        min-height: 600px;
-        // margin: 0 30px;
-        padding: 0;
+        width: 100%;
+    }
+
+    @media only screen and (min-height:600px) {
+        section{
+            justify-content: center;
+        }
     }
 
     @media only screen and (min-width:500px){
-        .divLogin{
+        .divCadastro{
             width: 440px;
             margin: auto;
         }
     }
 
     .botaoVoltar{
-        // display: flex;
-        // align-items: flex-end;
-
-        // height: 5%;
-        // top: 0;
-        // left: 0;
-        // width: 40px;
-
-        // cursor: pointer;
-        
-        // & img{
-        //     display: block;
-        //     height: 50%;
-        //     padding: 1px;
-        // }
         display: flex;
         align-items: flex-end;
+        height: 50px;
+        margin-bottom: 20px;
+        // border: 1px solid orange;
         
         & img{
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 5px;
             height: 25px;
+            padding: 10px 10px 0 0;
         }
 
     }
@@ -77,45 +76,33 @@
         display: flex;
         justify-content: center;
 
-        width: 100%;
-        height: 40%;
-        margin-top: 2%;
-        margin-bottom: -5%;
+        height: 200px;
+        margin-bottom: 20px;
+
+        // border: 1px solid blue;
 
         & img{
             display: block;
 
-            height: 50%;
+            height: 65%;
             margin: auto;
-            margin-top: 14%;
-            padding: 0 10px;
         }
     }
 
     form{
-        // width: 100%;
-        height: 40%;
-        margin-top: 2%;
-        margin-left: 30px;
-        margin-right: 30px;
+        height: 310px;
 
         & .divInputs{
             width: 100%;
-            height: 40%;
+            height: 170px;
+            margin-bottom: 20px;
             
             input{
-                // box-shadow: 0 0 0 0;
-                // border: 0 none;
-                // outline: 0;
-
-                // display: block;
-
                 width: 100%;
-                height: 35%;
+                height: 50px;
 
                 font-size: 14px;
-                border: 1px solid #DADDE0;
-                border-radius: 15px;
+                border-bottom: 1px solid #DADDE0;
                 margin-bottom: 10px;
             }
 
@@ -129,30 +116,30 @@
                 font-weight: bolder;
                 text-decoration: none;
                 font-size: 11px;
+                float: right;
             }
 
         }
 
         & .divBotoes{
             width: 100%;
-            height: 40%;
-            margin-top: 10%;
+            height: 120px;
 
             display: flex;
             flex-direction: column;
 
             & button{
-                height: 35%;
+                height: 50px;
                 width: 100%;
 
                 cursor: pointer;
                 font-size: 20px;
                 border: none;
-                border-radius: 35px;
+                border-radius: 25px;
             }
 
             button:first-child{  
-                margin-bottom: 25px;    
+                margin-bottom: 20px;    
 
                 color: #ffffff;
                 background-color: #090673;
