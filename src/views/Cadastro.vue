@@ -1,31 +1,30 @@
 <template>
     <section>
-    <div class="divCadastro">
-        <div class="botaoVoltar">
-            <img src="../assets/blackArrow.png" onclick='history.go(-1)'>
+        <div class="divCadastro">
+            <div class="botaoVoltar">
+                <img src="../assets/blackArrow.png" onclick='history.go(-1)'>
+            </div>
+
+            <div class="divLogo">
+                <img src="../assets/vamosCuidarIcon.png"> 
+            </div>  
+
+            <form action="">
+                <div class="divInputs">
+                    <input type="text" placeholder="Nome">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Senha">
+                </div>
+
+                <div class="divBotoes">
+                    <button>Cadastrar</button>
+                </div>
+            </form>
         </div>
-
-        <div class="divLogo">
-            <img src="../assets/vamosCuidarIcon.png"> 
-        </div>  
-
-        <form action="">
-            <div class="divInputs">
-                <input type="text" name="" placeholder="Nome">
-                <input type="email" name="" placeholder="Email">
-                <input type="password" name="" placeholder="Senha">
-            </div>
-
-            <div class="divBotoes">
-                <button>Cadastrar</button>
-            </div>
-        </form>
-    </div>
     </section>  
 </template> 
 
 <script>
-
 
 </script>
 
@@ -62,12 +61,12 @@
         align-items: flex-end;
         height: 50px;
         margin-bottom: 20px;
-        // border: 1px solid orange;
         
         & img{
             height: 25px;
-            // border: 1px solid green;
             padding: 10px 10px 0 0;
+
+            cursor: pointer;
         }
 
     }
@@ -78,9 +77,7 @@
 
         height: 200px;
         margin-bottom: 20px;
-
-        // border: 1px solid blue;
-
+;
         & img{
             display: block;
 
@@ -91,13 +88,11 @@
 
     form{
         height: 310px;
-        // border: 1px solid purple;
 
         & .divInputs{
             width: 100%;
             height: 240px;
             margin-bottom: 20px;
-            // border: 1px solid black;
             
             input{
                 width: 100%;
@@ -118,7 +113,6 @@
             height: 50px;
 
             display: flex;
-            flex-direction: column;
 
             & button{
                 height: 50px;
