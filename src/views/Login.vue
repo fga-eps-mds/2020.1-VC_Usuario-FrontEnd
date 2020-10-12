@@ -1,32 +1,31 @@
 <template>
     <section>
-    <div class="divLogin">
-        <div onclick='history.go(-1)' class="botaoVoltar">
-            <img src="../assets/blackArrow.png"> 
+        <div class="divLogin">
+            <div class="botaoVoltar">
+                <img src="../assets/blackArrow.png" onclick='history.go(-1)'> 
+            </div>
+
+            <div class="divLogo">
+                <img src="../assets/vamosCuidarIcon.png"> 
+            </div>  
+
+            <form action="">
+                <div class="divInputs">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Senha">
+                    <a href="#">Esqueceu sua senha?</a>
+                </div>
+
+                <div class="divBotoes">
+                    <button>Entrar</button>
+                    <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
+                </div>
+            </form>
         </div>
-
-        <div class="divLogo">
-            <img src="../assets/vamosCuidarIcon.png"> 
-        </div>  
-
-        <form action="">
-            <div class="divInputs">
-                <input type="email" name="" placeholder="Seu Email">
-                <input type="password" name="" placeholder="Sua Senha">
-                <a href="#">Esqueceu sua senha?</a>
-            </div>
-
-            <div class="divBotoes">
-                <button>Entrar</button>
-                <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
-            </div>
-        </form>
-    </div>
     </section>  
 </template> 
 
 <script>
-
 
 </script>
 
@@ -52,7 +51,7 @@
     }
 
     @media only screen and (min-width:500px){
-        .divCadastro{
+        .divLogin{
             width: 440px;
             margin: auto;
         }
@@ -63,11 +62,12 @@
         align-items: flex-end;
         height: 50px;
         margin-bottom: 20px;
-        // border: 1px solid orange;
         
         & img{
-            height: 25px;
+            height: 25px;   
             padding: 10px 10px 0 0;
+            
+            cursor: pointer;
         }
 
     }
@@ -78,8 +78,6 @@
 
         height: 200px;
         margin-bottom: 20px;
-
-        // border: 1px solid blue;
 
         & img{
             display: block;
@@ -111,6 +109,8 @@
             }
 
             a{  
+                height: 15px;
+
                 cursor: pointer;
                 color: #090673;
                 font-weight: bolder;
@@ -118,7 +118,6 @@
                 font-size: 11px;
                 float: right;
             }
-
         }
 
         & .divBotoes{
@@ -129,6 +128,7 @@
             flex-direction: column;
 
             & button{
+                margin-top: 0;
                 height: 50px;
                 width: 100%;
 
