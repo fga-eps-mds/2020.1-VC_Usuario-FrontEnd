@@ -26,6 +26,16 @@ const routes = [
     name: 'listarUmaPostagem',
     component: () => import(/* webpackChunkName: "about" */ '../views/ListarUmaPostagem.vue'),
   },
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Perfil.vue'),
+  },
+  {
+    path: '/editar',
+    name: 'Editar',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Editar.vue'),
+  },
 ]
 
 const router = createRouter({
