@@ -2,12 +2,11 @@
 
     <Header/>
 
-    <div class="divFormCriarPostagem">
-        <form @submit.prevent="criarPostagemAnonima" enctype="multipart/form-data"> 
-            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.post_title" required>
-            <br><br><br>
+    <section>
+        <form @submit.prevent="criarPostagemAnonima" enctype="multipart/form-data">
+            <input class= "inputTitulo" type="text" placeholder="Título" v-model="postagem.post_title" required>
 
-            <div class="baseElemento divSelectFields">
+            <div class="divCategoriaLocal">
                 <select v-model="postagem.post_category" required>
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
@@ -31,20 +30,18 @@
                     <option>FUP</option>
                 </select>
             </div>
-            <br><br>
 
-            <div class="baseElemento divImageFields">
-                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
+            <div class="divImagem">
+                <label for="file">Escolha sua imagem</label>                               
+                <input type="file" ref="file" id="file" accept="image/png, image/jpeg" @change="imagemSelecionada">  
 
                 <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
-            <br><br>
 
             <legend>Descrição</legend>
-            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
-            <br>
+            <textarea class="inputDescricao" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
 
-            <div class="permissao">
+            <div class="divPermissao">
                 <fieldset>
                     <legend>Postagem anônima?</legend>
                     <div class="toggle">
@@ -55,6 +52,8 @@
                         <label for="idPostSimAnonimo">Sim</label>   
                     </div>
                 </fieldset>
+            </div>
+            <div class="divApresentarFeed">
                 <fieldset>
                     <legend>Apresentar no Feed?</legend>
                     <div class="toggle">
@@ -67,14 +66,12 @@
                 </fieldset>
             </div>
             
-            <br><br><br>
-
-            <div class="baseElemento divBotoes">
+            <div class="divBotoes">
                 <button type="submit">Criar</button>
                 <button onclick='history.go(-1)'>Voltar</button>
             </div>
         </form>
-    </div>
+    </section>
 
     <MenuBar/>
 
@@ -154,21 +151,37 @@ export default {
 
 <style scoped lang="scss">
 
-    .baseElemento{
-        height: 50px;
+    section{
         width: 100%;
-    }
-    
-    .divFormCriarPostagem{
-        margin-top: 45px;
-        max-width: 900px;
-
-        & form{
-            padding: 30px 20px 120px;
-        }
+        display: flex;
+        border: 1px solid red;
     }
 
-    .inputText{
+    form{
+        height: auto;
+        margin: 0 30px;
+        min-width: 200px;
+        width: 100%;
+        border: 1px solid green;
+        margin-top: 65px;
+        min-height: 620px;
+    }
+
+    // @media only screen and (min-height:600px) {
+    //     section{
+    //         justify-content: center;
+    //     }
+    // }
+
+    //     @media only screen and (min-width:500px){
+    //     form{
+    //         width: 440px;
+    //         margin: auto;
+    //     }
+    // }
+
+    // TÍTULO
+    .inputTitulo{
         box-shadow: 0 0 0 0;
         border: 0 none;
         outline: 0;
@@ -176,33 +189,25 @@ export default {
 
         padding: 0;
 
+        height: 50px;
+        margin-bottom: 20px;
+        width: 100%;
+
         font-size: 20px;
         border-bottom: 1px solid #DADDE0; 
     }
 
-    .inputText::placeholder {
+    .inputTitulo::placeholder {
         font-size: 20px;
         color: #000000;
     }
 
-    .inputTextArea{
-        height: 150px;
-        margin-top: 5px;
-
-        font-size: 16px;
-        border-radius: 10px;
-        border: 1px solid #DADDE0;
-    }
-
-    .inputTextArea::placeholder {
-        font-size: 16px;
-        color: #000000;
-    }
-
-    .divSelectFields{
+    // CATEGORIA E LOCAL
+    .divCategoriaLocal{
         display: flex;
 
         height: 40px;
+        margin-bottom: 20px;
 
         & select{
             width: 50%;
@@ -217,23 +222,56 @@ export default {
         }
     }
 
-    .divImageFields{
+    // SELECIONAR IMAGEM
+    .divImagem{
         height: 35px;
-        justify-items: center;
+        margin-bottom: 20px;
+        border: 1px solid red;
 
-        /* border-radius: 10px;
-        border: 1px solid #DADDE0; */
+        input[type=file]{
+            display: none;
+        }
 
-        /* & input{
-            width: 0; height: 0; position: absolute; left: -9999px;
-        } */
-        
-        /* & progress::-webkit-progress-value{
-            display: block;
-            border-radius: 10px;
-        } */
+        label{
+            display: flex;
+            background-color: #248722;
+            color: white;
+            border: 1px solid green;
+            height: 35px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 25px;
+            position: absolute;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
     }
 
+    // DESCRIÇÃO
+    .inputDescricao{
+        height: 120px;
+        width: 100%;
+        margin-bottom: 20px;
+
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid #DADDE0;
+    }
+
+    .inputDescricao::placeholder {
+        font-size: 16px;
+        color: #000000;
+    }
+
+    .divPermissao {
+        margin-bottom: 20px;
+    }
+
+    .divApresentarFeed{
+        margin-bottom: 20px;
+    }
+
+    // BOTÕES
     .divBotoes{
         display: flex;
         
@@ -241,15 +279,14 @@ export default {
 
         & button{
             flex: 1;
-            height: 100%;
             font-size: 20px;
             border: none;
-            border-radius: 10px;
+            border-radius: 25px;
+            height: 50px;
         }
 
         button:first-child{
             margin-right: 20px;
-            
             color: #ffffff;
             background-color: #090673;
         }
@@ -260,74 +297,82 @@ export default {
         }
     }
 
-    //Configuração Radio Postagem Anonima
+    // //Configuração Radio Postagem Anonima
 
-    /* MIXINS */
-    @mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
-    @mixin breakpoint($point) {
-        @if $point == 5000 {
-            @media (max-width: 5000px) { @content ; }
-        }
-    }
+    // /* MIXINS */
+    // @mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
+    // @mixin breakpoint($point) {
+    //     @if $point == 5000 {
+    //         @media (max-width: 5000px) { @content ; }
+    //     }
+    // }
 
-    .permissao {
-        display: flex;
-        justify-content: space-between;
-    }
+    // .divPermissao {
+    //     display: flex;
+    //     justify-content: space-between;
+    // }
 
-    fieldset {
-        display: block;
+    // .divApresentarFeed {
+    //     display: flex;
+    //     justify-content: space-between;
+    // }
 
-        border: none;
-    }
+    // fieldset {
+    //     display: block;
 
-    legend {
-            width: 100%; float: left; display: table;
-            font-size: 15px; line-height: 140%; font-weight: 400; color: #000000;	
-            + * {clear: both;}
-    }
+    //     border: none;
+    // }
 
-    body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
+    // legend {
+    //         width: 100%; float: left; display: table;
+    //         font-size: 15px; line-height: 140%; font-weight: 400; color: #000000;	
+    //         + * {clear: both;}
+    // }
 
-    .toggle {
-        width: 180px;
-        height: 40px;
-        margin: 0; box-sizing: border-box;
-        font-size: 0;
-        display: flex; flex-flow: row nowrap;
-        justify-content: flex-start; align-items: stretch;
+    // body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
 
-        input {@include hideInput;}
+    // .toggle {
+    //     // width: 180px;
+    //     // height: 40px;
+    //     width: 100%;
+    //     height: 45px;
+    //     margin: 0; 
+    //     box-sizing: border-box;
+    //     font-size: 0;
+    //     display: flex; flex-flow: row nowrap;
+    //     justify-content: flex-start; align-items: stretch;
 
-        input + label {
-            margin: 0; padding: .75rem 2rem; box-sizing: border-box;
-            position: relative; display: inline-block;
-            border: solid 1px #DADDE0; background-color: #FFF;
-            font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
-            box-shadow: 0 0 0 rgba(255,255,255,0);
-            transition: border-color .15s ease-out, 
-                        color .25s ease-out, 
-                        background-color .15s ease-out,
-                        box-shadow .15s ease-out;
+    //     input {@include hideInput;}
+
+    //     input + label {
+    //         margin: 0; padding: .75rem 2rem; box-sizing: border-box;
+    //         position: relative; display: inline-block;
+    //         border: solid 1px #DADDE0; background-color: #FFF;
+    //         font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
+    //         box-shadow: 0 0 0 rgba(255,255,255,0);
+    //         transition: border-color .15s ease-out, 
+    //                     color .25s ease-out, 
+    //                     background-color .15s ease-out,
+    //                     box-shadow .15s ease-out;
             
-            &:first-of-type {border-radius: 10px 0 0 10px; border-right: none;}
-            &:last-of-type {border-radius: 0 10px 10px 0; border-left: none;}
-        }
+    //         &:first-of-type {border-radius: 10px 0 0 10px; border-right: none;}
+    //         &:last-of-type {border-radius: 0 10px 10px 0; border-left: none;}
+    //     }
 
-        input:hover + label {border-color:  #213140;}
+    //     input:hover + label {border-color:  #213140;}
 
-        input:checked + label {
-            background-color:  #090673;
-            color: #FFF;
-            border-color:  #090673;
-        }
+    //     input:checked + label {
+    //         background-color:  #090673;
+    //         color: #FFF;
+    //         border-color:  #090673;
+    //     }
 
-        @include breakpoint(5000) {
-            input + label {
-                padding: .75rem .25rem;
-                flex: 0 0 50%;
-                display: flex; justify-content: center; align-items: center;
-            }
-        }
-    }
+    //     @include breakpoint(5000) {
+    //         input + label {
+    //             padding: .75rem .25rem;
+    //             flex: 0 0 50%;
+    //             display: flex; justify-content: center; align-items: center;
+    //         }
+    //     }
+    // }
 </style>

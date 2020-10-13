@@ -1,7 +1,7 @@
 <template>
     <header id="header">
         <div class="divBotaoVoltar">
-            <img v-if="$route.path != '/'" src="../assets/whiteArrow.png" @click="$router.go(-1)"/>
+            <img v-if="$route.path != '/'" src="../assets/whiteArrow1.png" @click="$router.go(-1)"/>
         </div>
 
         <div class="divWordmark">
@@ -64,12 +64,11 @@ window.onscroll = function(){
         align-items: flex-end;
 
         & img{
-            margin-bottom: 10px;
-            margin-left: 5px;
             height: 25px;
+            padding: 10px 10px 10px 0;
+            margin-left: 30px;
         }
     }
 
     
 </style>
-
