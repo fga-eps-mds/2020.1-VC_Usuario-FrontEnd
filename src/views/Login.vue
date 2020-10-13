@@ -8,15 +8,15 @@
             <img src="../assets/vamosCuidarIcon.png"> 
         </div>  
 
-        <form action="">
+        <form @submit.prevent="fazerLogin">
             <div class="divInputs">
-                <input type="text" name="" placeholder="Seu Email">
-                <input type="password" name="" placeholder="Sua Senha">
+                <input type="text" name="" placeholder="Seu Email" v-model="this.login.email">
+                <input type="password" name="" placeholder="Sua Senha" v-model="this.login.senha">
                 <a href="#">Esqueceu sua senha?</a>
             </div>
 
             <div class="divBotoes">
-                <button>Entrar</button>
+                <button type="submit">Entrar</button>
                 <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
             </div>
         </form>
@@ -25,6 +25,34 @@
 
 <script>
 
+    import Usuarios from '@/services/usuarios.js'
+
+    export default {
+        name: 'Login',
+
+        data(){
+            return{
+                login: {
+                    email: '',
+                    senha: ''
+                }
+            }
+        },
+        methods: {
+            fazerLogin(){
+                try{
+                    Usuarios.Login(this.login).then(resposta => {
+                    console.log(resposta)
+                    })
+                }
+                catch(err){
+                    alert(err.msg)
+                }
+            }
+        }
+
+
+    }
 
 </script>
 

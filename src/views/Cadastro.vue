@@ -26,7 +26,7 @@
 
 <script>
 
-import Registros from '@/services/registros.js'
+import Usuarios from '@/services/usuarios.js'
 
 export default{
     name: 'Cadastro',
@@ -48,7 +48,7 @@ export default{
             
             if(this.cadastro.user_password === this.confirmarSenha){
                 //console.log(this.cadastro)
-                Registros.Registrar(this.cadastro).then(resposta => {
+                Usuarios.Registrar(this.cadastro).then(resposta => {
                     console.log(resposta)
                     alert(resposta.data.msg)
                     if(resposta.data.User)
