@@ -1,25 +1,26 @@
 <template>
-    <div id="postBlock">
-        <div class="row">
-            <h4>{{title}}</h4>
-            <p>{{status}}</p>
+    <div class="postagem">
+        <div class="tituloEStatus">
+            <span>{{title}}</span>
+            <span>{{status}}</span>
         </div>
 
-        <div class="row">
+        <div class="autor">
             <p>{{author}}</p>
         </div>
 
-        <div class="row">
+        <div class="localEData">
             <p>{{local}}</p>
             <p>{{date}}</p>
         </div>
 
-        <div class="btns">
-            <button class="moreButton" @click="verMais(id)">Ver mais</button>
-            <button class="supButton">Apoiar</button>
+        <div class="divBotoes">
+            <button @click="verMais(id)">Ver mais</button>
+            <button>Apoiar</button>
         </div>
     </div>
 </template>
+
 <script>
 export default {
     name: 'postBlock',
@@ -39,51 +40,72 @@ export default {
 }
 </script>
 
-<style>
-    #postBlock {
-        border: solid 2px  #DADDE0;
+<style scoped lang="scss">
+@import "../assets/stylesheets/pallete.scss";
+
+    .postagem {
+        height: auto;
         border-radius: 15px;
-        width: 80vw;
         height: 150px;
-        padding-left: 10px;
-    }
+        padding: 10px;
 
-    button {
-        width: 30%;
-        height: 15%;
-        margin-right: 10%;
-        margin-top: 20px;
-        text-decoration: none;
-        box-shadow: 0 0 0 0;
-        border: 0 none;
-        outline: 0;
-        border-radius: 10px;   
-    } 
+        border: solid 1px #DADDE0;
+    }
     
-    .row {
+    .autor{
+        margin-bottom: 10px;
+    }
+
+    .tituloEStatus {
+        height: auto;
+        /* border: 1px solid red; */
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        flex-wrap: wrap;
         justify-content: space-between;
-        padding-left: 10px; 
-        padding-top: 10px;
-        padding-right: 10px; 
+        margin-bottom: 20px;  
+
+        & span:first-child{
+            /* width: 70%; */
+            padding-right: 30px;
+            /* border: 1px solid red; */
+            
+            font-size: 20px;
+            font-weight: bold;
+            color: #090673;
+        }
+    }
+
+    .localEData{
+        display: flex;
+        justify-content: space-between;
+
+        margin-bottom: 20px;
+    }
+
+    /* BOTÕES */
+    .divBotoes{
+        display: flex;
+        width: 80%;
+        max-width: 300px;
+        margin-bottom: 10px;
         
-    }
+        & button{
+            flex: 1;
+            height: 30px;
 
-    .btns {
+            border: none;
+            border-radius: 25px; 
+        }
 
-        height: 120%;
-    }
+        & button:first-child{
+            margin-right: 20px;
+            color: #ffffff;
+            background-color: #090673;
+        }
 
-    .moreButton {
-        color: #ffffff;
-        background-color: #090673;
-    }
-
-    .supButton {
-        color: #248722;
-        background-color: #ffffff;
-        border: solid 1px;
+        & button:last-child{
+            background-color: #ffffff;
+            border: 1px solid #248722;
+        }
     }
 </style>

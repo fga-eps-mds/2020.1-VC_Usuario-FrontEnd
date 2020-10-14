@@ -2,13 +2,15 @@
 
     <Header/>
 
-    <form class="feedPostagens">
-        <div class="col" v-for="postagem in this.postagemData" :key="postagem.id">
+    <section>
+        <div class="divHome">
+            <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
+                
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Daniel Porto" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
             
-            <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Daniel Porto" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
-        
+            </div>
         </div>
-    </form>
+    </section>
     
     <MenuBar/>
 
@@ -63,17 +65,28 @@ export default {
 
 <style scoped lang="scss">
 
-    .feedPostagens{
-        align-items: center;
+    section{
+        width: 100%;
+        padding-bottom: 120px;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 60px;
+        /* border: 1px solid red; */
     }
 
-    .col{
-        margin: 0 auto;
-        margin-bottom: 20px;
+    .divHome{
+        height: auto;
+        width: 100%;
+        /* border: 1px solid green; */
+        margin-top: 65px;
+        min-width: 250px;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        .divPostagem{
+            height: auto;
+            margin: 0 30px 20px;
+            flex: 1 1 300px;
+            /* border: 1px solid red; */
+        }
     }
 </style>
