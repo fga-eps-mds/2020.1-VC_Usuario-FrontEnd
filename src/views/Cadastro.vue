@@ -13,7 +13,6 @@
                 <input type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
                 <input type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
                 <input type="password" name="" placeholder="Senha" v-model="this.cadastro.user_password">
-                <input type="password" name="" placeholder="Confirmar Senha" v-model="this.confirmarSenha">
             </div>
 
             <div class="divBotoes">
@@ -33,7 +32,6 @@ export default{
 
     data(){
         return{
-            confirmarSenha: '',
             cadastro: {
                 user_email: '',
                 user_password: '',
@@ -46,18 +44,18 @@ export default{
 
         registrarUsuario(){
             
-            if(this.cadastro.user_password === this.confirmarSenha){
+
                 //console.log(this.cadastro)
                 Registros.Registrar(this.cadastro).then(resposta => {
                     console.log(resposta)
                     alert(resposta.data.msg)
-                    if(resposta.data.User)
+                    if(resposta.data.User){
                         window.location.href='http://localhost:8080/login'
+                    }else{
+                        window.location.href='http://localhost:8080/cadastro'
+                    }
                 })
                 
-            }else{
-                alert("Senhas não batem")
-            }
         }
     }
 
