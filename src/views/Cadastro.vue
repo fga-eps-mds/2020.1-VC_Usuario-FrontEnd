@@ -49,7 +49,6 @@ export default{
             if(this.cadastro.user_password === this.confirmarSenha){
                 //console.log(this.cadastro)
                 Usuarios.Registrar(this.cadastro).then(resposta => {
-                    console.log(resposta)
                     alert(resposta.data.msg)
                     if(resposta.data.User)
                         window.location.href='http://localhost:8080/login'

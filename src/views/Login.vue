@@ -11,7 +11,7 @@
         <form @submit.prevent="fazerLogin">
             <div class="divInputs">
                 <input type="text" name="" placeholder="Seu Email" v-model="this.login.email">
-                <input type="password" name="" placeholder="Sua Senha" v-model="this.login.senha">
+                <input type="password" name="" placeholder="Sua Senha" v-model="this.login.password">
                 <a href="#">Esqueceu sua senha?</a>
             </div>
 
@@ -24,35 +24,31 @@
 </template> 
 
 <script>
+import Usuarios from '@/services/usuarios.js'
 
-    import Usuarios from '@/services/usuarios.js'
-
-    export default {
-        name: 'Login',
-
-        data(){
-            return{
-                login: {
-                    email: '',
-                    senha: ''
-                }
-            }
-        },
-        methods: {
-            fazerLogin(){
-                try{
-                    Usuarios.Login(this.login).then(resposta => {
-                    console.log(resposta)
-                    })
-                }
-                catch(err){
-                    alert(err.msg)
-                }
+export default {
+    name: 'Login',
+    data(){
+        return{
+            login: {
+                email: '',
+                password: ''
             }
         }
+    },
 
+    methods: {
+        fazerLogin(){
 
+            Usuarios.Login(this.login).then(resposta => {
+                    console.log(resposta)
+            }, erro => {
+                console.log(erro.response.data)
+            })
+            
+        }
     }
+}
 
 </script>
 

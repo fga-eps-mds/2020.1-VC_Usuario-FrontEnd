@@ -2,9 +2,9 @@
 
     <Header/>
 
-    <div>
+    <div class="main">
         <h4>
-            {{ user }}
+            {{ nome }}
         </h4>
         <div class="divBotoes">
                 <button type="button" onclick="window.location.href='http://localhost:8080/editar'">Editar</button>
@@ -16,21 +16,34 @@
 </template>
 
 <script>
+import Header from '@/components/Header.vue'
+import MenuBar from '@/components/MenuBar.vue'
+import store from "@/store/index.js";
 
-    export default {
-        
-        computed: {
-            user (){
-                return "O usuário logado é ${this.$store.state.user_name}"
-            },
+export default {
+    name:'Perfil',
+
+    components: {
+        Header,
+        MenuBar
+    },
+
+    data (){
+        return{
+            nome: '',
         }
-        /* mounted(){
-            this.usuarioAtual = this.$store.getters.getUsuarioAtual;
-        } */
+    },
+
+    mounted (){
+        this.nome = store.getNome();
     }
+}
 
 </script>
 
 <style lang="scss" scoped>
+    .main {
+        margin-top: 60px;
+    }
 
 </style>
