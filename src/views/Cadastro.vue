@@ -12,7 +12,9 @@
             <div class="divInputs">
                 <input type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
                 <input type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
-                <input type="password" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                <input type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                <!-- <input type="checkbox" onclick="alterna()">Mostrar Senha -->
+                <button id="eye" onClick="alterna()"><img src="../assets/visibilidade.png" /></button>
             </div>
 
             <div class="divBotoes">
@@ -24,6 +26,16 @@
 </template> 
 
 <script>
+
+    /* function alterna() {
+
+    var x = document.getElementById("senha");
+        if (x.type ==="password"){
+            x.type = "text";
+        }else{
+            x.type = "password";
+        }
+    } */
 
 import Registros from '@/services/registros.js'
 
@@ -48,10 +60,10 @@ export default{
                 //console.log(this.cadastro)
                 Registros.Registrar(this.cadastro).then(resposta => {
                     console.log(resposta)
-                    alert(resposta.data.msg)
                     if(resposta.data.User){
                         window.location.href='http://localhost:8080/login'
                     }else{
+                        alert(resposta.data.msg)
                         window.location.href='http://localhost:8080/cadastro'
                     }
                 })
@@ -140,6 +152,21 @@ export default{
 
                 font-size: 14px;
                 border-bottom: 1px solid #DADDE0;
+            }
+
+            & button{
+                display: flex;
+                float: right;
+                height: 18%;
+                margin-right: 5%;
+                //border: 1px solid red;
+                //margin-top: -12%;
+                background-color: white;
+                & img{
+                    //border: 1px solid purple;
+                    height: 90%;
+                }
+
             }
 
             input::placeholder {
