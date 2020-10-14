@@ -150,6 +150,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
     section{
         width: 100%;
@@ -162,7 +163,6 @@ export default {
         margin: 0 30px;
         min-width: 200px;
         width: 100%;
-        border: 1px solid green;
         margin-top: 65px;
         min-height: 620px;
     }
@@ -224,9 +224,11 @@ export default {
 
     // SELECIONAR IMAGEM
     .divImagem{
-        height: 35px;
+        height: 40px;
         margin-bottom: 20px;
-        border: 1px solid red;
+        justify-items: center;
+        position: relative;
+
 
         input[type=file]{
             display: none;
@@ -234,16 +236,26 @@ export default {
 
         label{
             display: flex;
-            background-color: #248722;
-            color: white;
-            border: 1px solid green;
-            height: 35px;
-            justify-content: center;
+            background-color: #090673;
             align-items: center;
+            justify-content: center;
+            
             border-radius: 25px;
+            height: 100%;
+            width: 70%;
             position: absolute;
-            padding-right: 50px;
-            padding-left: 50px;
+            
+            transform: translate(21.5%, 0%);
+            transition: .2s;
+
+            color:white;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+        }
+        label:hover{
+            color: white;
+            background: #003F80;
         }
     }
 
@@ -294,6 +306,12 @@ export default {
         button:last-child{
             background-color: #ffffff;
             border: 1px solid #DADDE0;
+        }
+        button:first-child:hover{
+            background-color: #003F80;
+        }
+        button:last-child:hover{
+            background-color: #f6f6f6;
         }
     }
 
