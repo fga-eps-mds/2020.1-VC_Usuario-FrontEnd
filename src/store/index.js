@@ -1,27 +1,31 @@
-//import Usuarios from '@/usuarios.js'
-import Vue from "vue";
-import Vuex from "vuex";
+import { reactive } from 'vue';
 
-Vue.use (Vuex);
+export const store = {
+    debug: true,
+    state: reactive({
+        nome: 'Daniel Porto de Souza',
+        token: ''
+    }),
 
-const store = new Vuex.Store({
-
-    state: {
-            user_name: "Pedro"
-    }, 
-    mutations: {
-        setUsuarioAtual(state, payload){
-            state.usuarioAtual = payload;
-            state.token
+    setNomeAction(novoNome) {
+        if(this.debug){
+            console.log('Novo nome: ', novoNome)
         }
-    },
-    actions: {
-       // export const ActionDoLogin =           }
 
-    },
-    getters: {
-        getUsuarioAtual: state => state.usuarioAtual
+        this.state.nome = novoNome;
     },
 
-});
-export {store}
+    clearNomeAction() {
+        if(this.debug){
+            console.log('Nome limpo')
+        }
+
+        this.state.nome = ''
+    },
+
+    getNome() {
+        return this.state.nome;
+    }
+}
+
+export {store as default};
