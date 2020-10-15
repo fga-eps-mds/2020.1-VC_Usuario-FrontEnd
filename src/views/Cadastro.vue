@@ -191,7 +191,10 @@ export default{
                 & img{
                     float: right;
                     height: 19%;
-                    margin-top: -12% ;
+                    position: relative;
+                    top: 90%;
+                    transform: translateY(-150%);
+
                 }
             }
 
