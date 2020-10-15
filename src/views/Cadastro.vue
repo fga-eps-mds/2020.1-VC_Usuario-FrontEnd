@@ -10,11 +10,20 @@
 
         <form @submit.prevent="registrarUsuario">
             <div class="divInputs">
-                <input type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
-                <input type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
-                <input type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
-                <!-- <input type="checkbox" onclick="alterna()">Mostrar Senha -->
-                <button id="eye" onClick="alterna()"><img src="../assets/visibilidade.png" /></button>
+                <div class="divUser">
+                    <input style ="padrao" type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
+                    <input style ="padrao" type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
+                </div>
+                <div class="divSenha">
+                    <span>
+                        <input style="senha" type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                    </span>
+                    <span>
+                        <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
+                    </span>
+                </div>
+                <!-- <input type="checkbox" v-on:click="alterna()">Mostrar Senha -->
+                <!-- <button id="eye" v-on:Click="alterna()"><img src="../assets/visibilidade.png" /></button> -->
             </div>
 
             <div class="divBotoes">
@@ -26,16 +35,6 @@
 </template> 
 
 <script>
-
-    /* function alterna() {
-
-    var x = document.getElementById("senha");
-        if (x.type ==="password"){
-            x.type = "text";
-        }else{
-            x.type = "password";
-        }
-    } */
 
 import Registros from '@/services/registros.js'
 
@@ -68,6 +67,17 @@ export default{
                     }
                 })
                 
+        },
+
+        alterna() {
+
+            var x = document.getElementById("senha");
+            console.log("menino");
+            if (x.type ==="password"){
+                x.type = "text";
+            }else{
+                x.type = "password";
+            }
         }
     }
 
@@ -138,20 +148,51 @@ export default{
 
         & .divInputs{
             width: 100%;
-            height: 45%;
-            
-            input{
-                box-shadow: 0 0 0 0;
-                border: 0 none;
-                outline: 0;
+            height: 40%;
 
-                display: block;
+            & .divUser{
 
-                width: 100%;
-                height: 35%;
+                height: 100%;
+                        
+                input{
+                    box-shadow: 0 0 0 0;
+                    border: 0 none;
+                    outline: 0;
 
-                font-size: 14px;
-                border-bottom: 1px solid #DADDE0;
+                    display: block;
+
+                    width: 100%;
+                    height: 35%;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid #DADDE0;
+                }
+
+            }
+
+            & .divSenha{
+
+                height: 100%;
+                margin-top: -10%;
+
+                input{
+                    box-shadow: 0 0 0 0;
+                    border: 0 none;
+                    outline: 0;
+
+                    display: block;
+
+                    width: 100%;
+                    height: 35%;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid #DADDE0;
+                }
+                & img{
+                    float: right;
+                    height: 19%;
+                    margin-top: -12% ;
+                }
             }
 
             & button{
@@ -159,11 +200,8 @@ export default{
                 float: right;
                 height: 18%;
                 margin-right: 5%;
-                //border: 1px solid red;
-                //margin-top: -12%;
                 background-color: white;
                 & img{
-                    //border: 1px solid purple;
                     height: 90%;
                 }
 
