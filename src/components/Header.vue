@@ -5,7 +5,7 @@
         </div>
 
         <div class="divWordmark">
-            <img src="../assets/wordmarkIcon.png"> 
+            <img src="../assets/WordMark_VC.png"> 
         </div>
     </header>
 </template>
@@ -46,16 +46,17 @@ window.onscroll = function(){
     .divWordmark{
         display: flex;
         justify-content: center;
-
+        
         height: 100%;
-        width: 100px;
+        width: 100%;
         margin: auto;
+        position:absolute;
 
         & img{
             display: block;
-            height: 35px;
+            height: 30px;
             margin: auto;
-            padding: 0 10px;
+            position:relative;
         }
     }
 

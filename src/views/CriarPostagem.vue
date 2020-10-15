@@ -155,7 +155,6 @@ export default {
     section{
         width: 100%;
         display: flex;
-        border: 1px solid red;
     }
 
     form{
@@ -165,6 +164,7 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
+
     }
 
     // @media only screen and (min-height:600px) {
