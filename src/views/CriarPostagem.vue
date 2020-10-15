@@ -1,7 +1,7 @@
 <template>
 
     <Header/>
-
+    
     <section>
         <form @submit.prevent="criarPostagemAnonima" enctype="multipart/form-data">
             <input class= "inputTitulo" type="text" placeholder="Título" v-model="postagem.post_title" required>
@@ -38,32 +38,26 @@
                 <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
 
-            <legend>Descrição</legend>
-            <textarea class="inputDescricao" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
+
+            <div class="divDescricao">
+                <legend>Descrição</legend>
+                <textarea class="inputDescricao" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
+            </div>
 
             <div class="divPermissao">
-                <fieldset>
-                    <legend>Postagem anônima?</legend>
-                    <div class="toggle">
-                        <input type="radio" value="false" id="idPostNaoAnonimo" v-model="postagem.post_type"/>
-                        <label for="idPostNaoAnonimo">Não</label>
-
-                        <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.post_type"/>
-                        <label for="idPostSimAnonimo">Sim</label>   
-                    </div>
-                </fieldset>
+                <legend>Postagem Anônima?</legend>
+                <label class="switch">
+                    <input type="checkbox" id="postagem.post_type">
+                    <span class="slider round"></span>
+                </label>
             </div>
-            <div class="divApresentarFeed">
-                <fieldset>
-                    <legend>Apresentar no Feed?</legend>
-                    <div class="toggle">
-                        <input type="radio" value=false id="idPostNaoFeed" v-model="postagem.post_permission"/>
-                        <label for="idPostNaoFeed">Não</label>
 
-                        <input type="radio" value=true id="idPostSimFeed" v-model="postagem.post_permission"/>
-                        <label for="idPostSimFeed">Sim</label>   
-                    </div>
-                </fieldset>
+            <div class="divApresentarFeed">
+                <legend>Apresentar no Feed?</legend>
+                <label class="switch">
+                    <input type="checkbox" id="postagem.post_permission">
+                    <span class="slider round"></span>
+                </label>
             </div>
             
             <div class="divBotoes">
@@ -130,8 +124,9 @@ export default {
             formData.append('post_description', this.postagem.post_description,)
             formData.append('post_permission', this.postagem.post_permission,)
             formData.append('file', this.postagem.file)
-
-            if (this.postagem.post_type === "true"){  
+            
+            let checkbox = document.getElementById('postagem.post_type');
+            if (checkbox.checked){  
                 Postagem.criarPostagemAnonima(formData).then(resposta => {
                     console.log('Salvo com sucesso!')
                     console.log(resposta)
@@ -157,6 +152,10 @@ export default {
         display: flex;
     }
 
+    header{
+        margin-bottom: 20px;
+    }
+
     form{
         height: auto;
         margin: 0 30px;
@@ -164,21 +163,7 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
-
     }
-
-    // @media only screen and (min-height:600px) {
-    //     section{
-    //         justify-content: center;
-    //     }
-    // }
-
-    //     @media only screen and (min-width:500px){
-    //     form{
-    //         width: 440px;
-    //         margin: auto;
-    //     }
-    // }
 
     // TÍTULO
     .inputTitulo{
@@ -259,27 +244,34 @@ export default {
         }
     }
 
-    // DESCRIÇÃO
-    .inputDescricao{
-        height: 120px;
-        width: 100%;
-        margin-bottom: 20px;
-
+    legend{
+        margin-bottom: 2px;
         font-size: 16px;
-        border-radius: 10px;
-        border: 1px solid #DADDE0;
     }
 
-    .inputDescricao::placeholder {
-        font-size: 16px;
-        color: #000000;
+    // DESCRIÇÃO
+    .divDescricao {
+        margin-bottom: 20px;
+        height: 120px;
+
+        .inputDescricao{
+            width: 100%;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #DADDE0;
+        }
+
+        .inputDescricao::placeholder {
+            font-size: 16px;
+            color: #000000;
+        }
     }
 
     .divPermissao {
         margin-bottom: 20px;
     }
 
-    .divApresentarFeed{
+    .divApresentarFeed {
         margin-bottom: 20px;
     }
 
@@ -317,80 +309,61 @@ export default {
 
     // //Configuração Radio Postagem Anonima
 
-    // /* MIXINS */
-    // @mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
-    // @mixin breakpoint($point) {
-    //     @if $point == 5000 {
-    //         @media (max-width: 5000px) { @content ; }
-    //     }
-    // }
+    .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    }
 
-    // .divPermissao {
-    //     display: flex;
-    //     justify-content: space-between;
-    // }
+    /* Hide default HTML checkbox */
+    .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    }
 
-    // .divApresentarFeed {
-    //     display: flex;
-    //     justify-content: space-between;
-    // }
+    /* The slider */
+    .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #DADDE0;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
 
-    // fieldset {
-    //     display: block;
+    .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ffffff;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
 
-    //     border: none;
-    // }
+    input:checked + .slider {
+    background-color: #090673;
+    }
 
-    // legend {
-    //         width: 100%; float: left; display: table;
-    //         font-size: 15px; line-height: 140%; font-weight: 400; color: #000000;	
-    //         + * {clear: both;}
-    // }
+    input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    }
 
-    // body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
+    /* Rounded sliders */
+    .slider.round {
+    border-radius: 25px;
+    }
 
-    // .toggle {
-    //     // width: 180px;
-    //     // height: 40px;
-    //     width: 100%;
-    //     height: 45px;
-    //     margin: 0; 
-    //     box-sizing: border-box;
-    //     font-size: 0;
-    //     display: flex; flex-flow: row nowrap;
-    //     justify-content: flex-start; align-items: stretch;
-
-    //     input {@include hideInput;}
-
-    //     input + label {
-    //         margin: 0; padding: .75rem 2rem; box-sizing: border-box;
-    //         position: relative; display: inline-block;
-    //         border: solid 1px #DADDE0; background-color: #FFF;
-    //         font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
-    //         box-shadow: 0 0 0 rgba(255,255,255,0);
-    //         transition: border-color .15s ease-out, 
-    //                     color .25s ease-out, 
-    //                     background-color .15s ease-out,
-    //                     box-shadow .15s ease-out;
-            
-    //         &:first-of-type {border-radius: 10px 0 0 10px; border-right: none;}
-    //         &:last-of-type {border-radius: 0 10px 10px 0; border-left: none;}
-    //     }
-
-    //     input:hover + label {border-color:  #213140;}
-
-    //     input:checked + label {
-    //         background-color:  #090673;
-    //         color: #FFF;
-    //         border-color:  #090673;
-    //     }
-
-    //     @include breakpoint(5000) {
-    //         input + label {
-    //             padding: .75rem .25rem;
-    //             flex: 0 0 50%;
-    //             display: flex; justify-content: center; align-items: center;
-    //         }
-    //     }
-    // }
+    .slider.round:before {
+    border-radius: 50%;
+    }
 </style>
