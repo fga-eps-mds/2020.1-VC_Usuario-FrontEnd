@@ -8,15 +8,27 @@
             <img src="../assets/vamosCuidarIcon.png"> 
         </div>  
 
-        <form action="">
+        <form @submit.prevent="registrarUsuario">
             <div class="divInputs">
-                <input type="text" name="" placeholder="Nome">
-                <input type="text" name="" placeholder="Email">
-                <input type="password" name="" placeholder="Senha">
+                <div class="divUser">
+                    <input style ="padrao" type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
+                    <input style ="padrao" type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
+                </div>
+                <div class="divSenha">
+                    <span>
+                        <input style="senha" type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                    </span>
+                    <span>
+                        <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
+                    </span>
+                </div>
+                <!-- <input type="checkbox" v-on:click="alterna()">Mostrar Senha -->
+                <!-- <button id="eye" v-on:Click="alterna()"><img src="../assets/visibilidade.png" /></button> -->
             </div>
 
             <div class="divBotoes">
-                <button>Cadastrar</button>
+                <button type="submit">Cadastrar</button>
+
             </div>
         </form>
     </div>  
@@ -24,6 +36,52 @@
 
 <script>
 
+import Registros from '@/services/registros.js'
+
+export default{
+    name: 'Cadastro',
+
+    data(){
+        return{
+            cadastro: {
+                user_email: '',
+                user_password: '',
+                user_name: ''
+            }
+        }
+    },
+
+    methods:{
+
+        registrarUsuario(){
+            
+
+                //console.log(this.cadastro)
+                Registros.Registrar(this.cadastro).then(resposta => {
+                    console.log(resposta)
+                    if(resposta.data.User){
+                        window.location.href='http://localhost:8080/login'
+                    }else{
+                        alert(resposta.data.msg)
+                        window.location.href='http://localhost:8080/cadastro'
+                    }
+                })
+                
+        },
+
+        alterna() {
+
+            var x = document.getElementById("senha");
+            console.log("menino");
+            if (x.type ==="password"){
+                x.type = "text";
+            }else{
+                x.type = "password";
+            }
+        }
+    }
+
+}
 
 </script>
 
@@ -86,24 +144,70 @@
     form{
         width: 100%;
         height: 40%;
-        margin-top: 2%;
+        margin-top: -2%;
 
         & .divInputs{
             width: 100%;
-            height: 45%;
-            
-            input{
-                box-shadow: 0 0 0 0;
-                border: 0 none;
-                outline: 0;
+            height: 40%;
 
-                display: block;
+            & .divUser{
 
-                width: 100%;
-                height: 35%;
+                height: 100%;
+                        
+                input{
+                    box-shadow: 0 0 0 0;
+                    border: 0 none;
+                    outline: 0;
 
-                font-size: 14px;
-                border-bottom: 1px solid #DADDE0;
+                    display: block;
+
+                    width: 100%;
+                    height: 35%;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid #DADDE0;
+                }
+
+            }
+
+            & .divSenha{
+
+                height: 100%;
+                margin-top: -10%;
+
+                input{
+                    box-shadow: 0 0 0 0;
+                    border: 0 none;
+                    outline: 0;
+
+                    display: block;
+
+                    width: 100%;
+                    height: 35%;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid #DADDE0;
+                }
+                & img{
+                    float: right;
+                    height: 19%;
+                    position: relative;
+                    top: 90%;
+                    transform: translateY(-150%);
+
+                }
+            }
+
+            & button{
+                display: flex;
+                float: right;
+                height: 18%;
+                margin-right: 5%;
+                background-color: white;
+                & img{
+                    height: 90%;
+                }
+
             }
 
             input::placeholder {
@@ -114,7 +218,7 @@
         & .divBotoes{
             width: 100%;
             height: 45%;
-            margin-top: 20%;
+            margin-top: 30%;
 
             display: flex;
             flex-direction: column;
