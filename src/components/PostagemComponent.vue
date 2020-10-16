@@ -16,7 +16,7 @@
 
         <div class="divBotoes">
             <button @click="verMais(id)">Ver mais</button>
-            <button>Apoiar</button>
+            <!-- <button>Apoiar</button> -->
         </div>
     </div>
 </template>
@@ -73,6 +73,10 @@ export default {
             font-weight: bold;
             color: #090673;
         }
+
+        & span:last-child{
+            color: #CE1335;
+        }
     }
 
     .localEData{
@@ -93,6 +97,7 @@ export default {
             flex: 1;
             height: 30px;
 
+            cursor: pointer;
             border: none;
             border-radius: 25px; 
         }
@@ -103,9 +108,18 @@ export default {
             background-color: #090673;
         }
 
-        & button:last-child{
+        & button:first-child:hover{
+            background-color: #060449;
+        }
+
+        /* & button:last-child{
             background-color: #ffffff;
             border: 1px solid #248722;
         }
+
+        & button:last-child:hover{
+            color: #ffffff;
+            background-color: #248722;
+        } */
     }
 </style>

@@ -6,7 +6,7 @@
         <div class="divHome">
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 
-                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Daniel Porto" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
             
             </div>
         </div>

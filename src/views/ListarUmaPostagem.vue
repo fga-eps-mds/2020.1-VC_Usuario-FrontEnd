@@ -26,27 +26,28 @@
             </div>
 
             <div class="divPostagemDescricao">
-                Descrição:
+                <legend>Descrição:</legend>
                 <p align = "justify">{{postagem.post_description}}</p>
             </div>
 
-            <button class="divApoiarBotao">
+            <!-- <button class="divApoiarBotao">
                 <div class="divTextoImagemApoiarBotao">
                     <img src="../assets/like.png" class="iconeLike">
                     Apoiar
                 </div>
-            </button>
+            </button> -->
 
-            <div class="divPostagemComentario">
-                Comentários:
-            </div>
+            <!-- <div class="divPostagemComentario">
+                <legend>Comentários:</legend>
+            </div> -->
 
-            <div class="divPostagemBotoes">
+            <!-- <div class="divPostagemBotoes">
                 <button type="submit">Comentar</button>
                 <button type="submit">Reportar</button>
-            </div>
+            </div> -->
         </div>
     </section>
+
     <MenuBar/>
 
 </template> 
@@ -109,13 +110,16 @@ export default {
     .divPostagemTituloEStatus{
         width: 100%;
         font-size: 15px;
-        color: $colorPreta;
+        color: $colorAzul;
         display: flex;
         flex: 1;
         justify-content: space-between;
     }
 
     .divPostagemNome{
+        margin-top: 20px;
+        margin-bottom: 10px;
+
         font-size: 10px;
     }
 
@@ -124,12 +128,13 @@ export default {
         display: flex;
         font-size: 10px;
         justify-content: space-between;
-        margin-bottom: 20px; 
+        margin-bottom: 40px; 
     }
 
     .divPostagemImagem{
         text-align: center;
-        margin-bottom: 20px; 
+        margin-bottom: 40px;
+
         & img {
             max-width:100%;
             max-height:150px;
@@ -150,6 +155,10 @@ export default {
 
     .divPostagemDescricao{
         margin-bottom: 20px;
+
+        & legend{
+            font-weight: bold;
+        };
     }
 
     .divApoiarBotao{
@@ -176,6 +185,10 @@ export default {
 
     .divPostagemComentario{
         margin-bottom: 20px;
+
+        & legend{
+            font-weight: bold;
+        };
     }
 
     .divPostagemBotoes{
@@ -187,6 +200,8 @@ export default {
             border: none;
             border-radius: 25px;
             height: 50px;
+
+            cursor: pointer;
         }
 
         button:first-child{
@@ -195,9 +210,17 @@ export default {
             background-color: #090673;
         }
 
+        button:first-child:hover{
+            background-color: #060449;
+        }
+
         button:last-child{
             background-color: #ffffff;
-            border: 1px solid #090673;
+            border: 1px solid #DADDE0;
+        }
+
+        button:last-child:hover{
+            background-color: #DADDE0;
         }
     }
 </style>

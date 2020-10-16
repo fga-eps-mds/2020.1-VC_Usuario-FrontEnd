@@ -52,13 +52,13 @@
                 </label>
             </div>
 
-            <div class="divApresentarFeed">
+            <!-- <div class="divApresentarFeed">
                 <legend>Apresentar no Feed?</legend>
                 <label class="switch">
                     <input type="checkbox" id="postagem.post_permission">
                     <span class="slider round"></span>
                 </label>
-            </div>
+            </div> -->
             
             <div class="divBotoes">
                 <button type="submit">Criar</button>
@@ -197,6 +197,7 @@ export default {
         & select{
             width: 50%;
 
+            cursor: pointer;
             border-radius: 10px;
             background-color: #ffffff;
             border: 1px solid #DADDE0;
@@ -240,7 +241,7 @@ export default {
         }
         label:hover{
             color: white;
-            background: #003F80;
+            background: #060449;
         }
     }
 
@@ -287,6 +288,8 @@ export default {
             border: none;
             border-radius: 25px;
             height: 50px;
+
+            cursor: pointer;
         }
 
         button:first-child{
@@ -294,16 +297,18 @@ export default {
             color: #ffffff;
             background-color: #090673;
         }
+        
+        button:first-child:hover{
+            background-color: #060449;
+        }
 
         button:last-child{
             background-color: #ffffff;
             border: 1px solid #DADDE0;
         }
-        button:first-child:hover{
-            background-color: #003F80;
-        }
+        
         button:last-child:hover{
-            background-color: #f6f6f6;
+            background-color: #DADDE0;
         }
     }
 

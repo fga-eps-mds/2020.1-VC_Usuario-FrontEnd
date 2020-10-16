@@ -125,6 +125,10 @@
                 color: #ffffff;
                 background-color: #090673;
             }
+
+            & button:hover{
+                background-color: #060449;
+            }
         }
     }
 </style>

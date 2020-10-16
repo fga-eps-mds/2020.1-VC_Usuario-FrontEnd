@@ -145,9 +145,17 @@
                 background-color: #090673;
             }
 
+            button:first-child:hover{
+                background-color: #060449;
+            }
+
             button:last-child{
                 background-color: #ffffff;
                 border: 1px solid #DADDE0;
+            }
+
+            button:last-child:hover{
+                background-color: #DADDE0;
             }
         }
     }
