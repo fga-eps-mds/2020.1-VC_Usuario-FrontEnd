@@ -9,15 +9,28 @@
                 <img src="../assets/vamosCuidarIcon.png"> 
             </div>  
 
-            <form action="">
+            <form @submit.prevent="registrarUsuario">
                 <div class="divInputs">
-                    <input type="text" placeholder="Nome">
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Senha">
+                    <div class="divUser">
+                        <input style ="padrao" type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
+                        <input style ="padrao" type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
+                    </div>
+
+                    <div class="divSenha">
+                        <span>
+                            <input style="senha" type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                        </span>
+
+                        <span>
+                            <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
+                        </span>
+                    </div>
+                    <!-- <input type="checkbox" v-on:click="alterna()">Mostrar Senha -->
+                    <!-- <button id="eye" v-on:Click="alterna()"><img src="../assets/visibilidade.png" /></button> -->
                 </div>
 
                 <div class="divBotoes">
-                    <button>Cadastrar</button>
+                    <button type="submit">Cadastrar</button>
                 </div>
             </form>
         </div>
@@ -26,6 +39,49 @@
 
 <script>
 
+import Registros from '@/services/registros.js'
+
+export default{
+    name: 'Cadastro',
+
+    data(){
+        return{
+            cadastro: {
+                user_email: '',
+                user_password: '',
+                user_name: ''
+            }
+        }
+    },
+
+    methods:{
+
+        registrarUsuario(){
+            
+            //console.log(this.cadastro)
+            Registros.Registrar(this.cadastro).then(resposta => {
+                console.log(resposta)
+                if(resposta.data.User){
+                    window.location.href='http://localhost:8080/login'
+                }else{
+                    alert(resposta.data.msg)
+                    window.location.href='http://localhost:8080/cadastro'
+                }
+            })
+        },
+
+        alterna() {
+
+            var x = document.getElementById("senha");
+            console.log("menino");
+            if (x.type ==="password"){
+                x.type = "text";
+            }else{
+                x.type = "password";
+            }
+        }
+    }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -93,18 +149,43 @@
             width: 100%;
             height: 240px;
             margin-bottom: 20px;
-            
-            input{
-                width: 100%;
-                height: 50px;
 
-                font-size: 14px;
-                border-bottom: 1px solid #DADDE0;
-                margin-bottom: 10px;
+            & .divUser{
+                input{
+                    width: 100%;
+                    height: 50px;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid #DADDE0;
+                    margin-bottom: 10px;
+                }
             }
+            
+            & .divSenha{
 
-            input::placeholder {
-                color: #000000;
+                height: 100%;
+
+                input{
+                    box-shadow: 0 0 0 0;
+                    border: 0 none;
+                    outline: 0;
+
+                    display: block;
+
+                    width: 100%;
+                    height: 50px;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid #DADDE0;
+                }
+
+                & img{
+                    float: right;
+                    height: 10%;
+                    position: relative;
+                    top: 20%;
+                    transform: translateY(-150%);
+                }
             }
         }
 
