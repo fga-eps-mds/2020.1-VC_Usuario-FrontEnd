@@ -25,6 +25,7 @@
 
 <script>
 import Usuarios from '@/services/usuarios.js'
+import store from "@/store/index.js";
 
 export default {
     name: 'Login',
@@ -42,6 +43,7 @@ export default {
 
             Usuarios.Login(this.login).then(resposta => {
                     console.log(resposta)
+                    store.setUsuarioAction(resposta.data.user)
             }, erro => {
                 console.log(erro.response.data)
             })

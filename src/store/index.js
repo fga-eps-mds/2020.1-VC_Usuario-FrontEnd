@@ -3,16 +3,24 @@ import { reactive } from 'vue';
 export const store = {
     debug: true,
     state: reactive({
-        nome: 'Daniel Porto de Souza',
-        token: ''
+        usuario: {},
+        token: {}
     }),
 
-    setNomeAction(novoNome) {
+    setUsuarioAction(novoUsuario) {
         if(this.debug){
-            console.log('Novo nome: ', novoNome)
+            console.log('Novo nome: ', novoUsuario)
         }
 
-        this.state.nome = novoNome;
+        this.state.usuario = novoUsuario;
+    },
+
+    setTokenAction(token) {
+        if(this.debug){
+            console.log('Token: ', token)
+        }
+
+        this.state.token = token;
     },
 
     clearNomeAction() {
@@ -24,7 +32,7 @@ export const store = {
     },
 
     getNome() {
-        return this.state.nome;
+        return this.state.usuario.user_name;
     }
 }
 
