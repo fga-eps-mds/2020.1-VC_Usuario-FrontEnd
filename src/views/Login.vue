@@ -1,41 +1,53 @@
-<template> 
-    <div class="divLogin">
-        <div onclick='history.go(-1)' class="botaoVoltar">
-            <img src="../assets/botaoVoltar.png"> 
+<template>
+    <section>
+        <div class="divLogin">
+            <div class="botaoVoltar">
+                <img src="../assets/blackArrow.png" onclick='history.go(-1)'> 
+            </div>
+
+            <div class="divLogo">
+                <img src="../assets/vamosCuidarIcon.png"> 
+            </div>  
+
+            <form action="">
+                <div class="divInputs">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Senha">
+                    <a href="#">Esqueceu sua senha?</a>
+                </div>
+
+                <div class="divBotoes">
+                    <button>Entrar</button>
+                    <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
+                </div>
+            </form>
         </div>
-
-        <div class="divLogo">
-            <img src="../assets/vamosCuidarIcon.png"> 
-        </div>  
-
-        <form action="">
-            <div class="divInputs">
-                <input type="text" name="" placeholder="Seu Email">
-                <input type="password" name="" placeholder="Sua Senha">
-                <a href="#">Esqueceu sua senha?</a>
-            </div>
-
-            <div class="divBotoes">
-                <button>Entrar</button>
-                <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
-            </div>
-        </form>
-    </div>  
+    </section>  
 </template> 
 
 <script>
-
 
 </script>
 
 <style lang="scss" scoped>
 
-    .divLogin{
+    section{
+        width: 100%;
         height: 100%;
-        min-width: 200px;
-        min-height: 600px;
+        display: flex;
+    }
+
+    .divLogin{
+        height: 620px;
         margin: 0 30px;
-        padding: 0;
+        min-width: 200px;
+        width: 100%;
+    }
+
+    @media only screen and (min-height:600px) {
+        section{
+            justify-content: center;
+        }
     }
 
     @media only screen and (min-width:500px){
@@ -48,18 +60,14 @@
     .botaoVoltar{
         display: flex;
         align-items: flex-end;
-
-        height: 5%;
-        top: 0;
-        left: 0;
-        width: 40px;
-
-        cursor: pointer;
+        height: 50px;
+        margin-bottom: 20px;
         
         & img{
-            display: block;
-            height: 50%;
-            padding: 1px;
+            height: 25px;   
+            padding: 10px 10px 0 0;
+            
+            cursor: pointer;
         }
 
     }
@@ -68,42 +76,32 @@
         display: flex;
         justify-content: center;
 
-        width: 100%;
-        height: 40%;
-        margin-top: 2%;
-        margin-bottom: -5%;
+        height: 200px;
+        margin-bottom: 20px;
 
         & img{
             display: block;
 
-            height: 50%;
+            height: 65%;
             margin: auto;
-            margin-top: 14%;
-            padding: 0 10px;
         }
     }
 
     form{
-        width: 100%;
-        height: 40%;
-        margin-top: 2%;
+        height: 310px;
 
         & .divInputs{
             width: 100%;
-            height: 45%;
+            height: 170px;
+            margin-bottom: 20px;
             
             input{
-                box-shadow: 0 0 0 0;
-                border: 0 none;
-                outline: 0;
-
-                display: block;
-
                 width: 100%;
-                height: 35%;
+                height: 50px;
 
                 font-size: 14px;
                 border-bottom: 1px solid #DADDE0;
+                margin-bottom: 10px;
             }
 
             input::placeholder {
@@ -111,43 +109,53 @@
             }
 
             a{  
+                height: 15px;
+
                 cursor: pointer;
                 color: #090673;
                 font-weight: bolder;
                 text-decoration: none;
                 font-size: 11px;
+                float: right;
             }
-
         }
 
         & .divBotoes{
             width: 100%;
-            height: 40%;
-            margin-top: 10%;
+            height: 120px;
 
             display: flex;
             flex-direction: column;
 
             & button{
-                height: 40%;
+                margin-top: 0;
+                height: 50px;
                 width: 100%;
 
                 cursor: pointer;
                 font-size: 20px;
                 border: none;
-                border-radius: 10px;
+                border-radius: 25px;
             }
 
             button:first-child{  
-                margin-bottom: 25px;    
+                margin-bottom: 20px;    
 
                 color: #ffffff;
                 background-color: #090673;
             }
 
+            button:first-child:hover{
+                background-color: #060449;
+            }
+
             button:last-child{
                 background-color: #ffffff;
                 border: 1px solid #DADDE0;
+            }
+
+            button:last-child:hover{
+                background-color: #DADDE0;
             }
         }
     }

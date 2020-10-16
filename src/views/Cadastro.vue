@@ -1,37 +1,40 @@
-<template> 
-    <div class="divCadastro">
-        <div onclick='history.go(-1)' class="botaoVoltar">
-            <img src="../assets/botaoVoltar.png">
+<template>
+    <section>
+        <div class="divCadastro">
+            <div class="botaoVoltar">
+                <img src="../assets/blackArrow.png" onclick='history.go(-1)'>
+            </div>
+
+            <div class="divLogo">
+                <img src="../assets/vamosCuidarIcon.png"> 
+            </div>  
+
+            <form @submit.prevent="registrarUsuario">
+                <div class="divInputs">
+                    <div class="divUser">
+                        <input style ="padrao" type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
+                        <input style ="padrao" type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
+                    </div>
+
+                    <div class="divSenha">
+                        <span>
+                            <input style="senha" type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                        </span>
+
+                        <span>
+                            <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
+                        </span>
+                    </div>
+                    <!-- <input type="checkbox" v-on:click="alterna()">Mostrar Senha -->
+                    <!-- <button id="eye" v-on:Click="alterna()"><img src="../assets/visibilidade.png" /></button> -->
+                </div>
+
+                <div class="divBotoes">
+                    <button type="submit">Cadastrar</button>
+                </div>
+            </form>
         </div>
-
-        <div class="divLogo">
-            <img src="../assets/vamosCuidarIcon.png"> 
-        </div>  
-
-        <form @submit.prevent="registrarUsuario">
-            <div class="divInputs">
-                <div class="divUser">
-                    <input style ="padrao" type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
-                    <input style ="padrao" type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
-                </div>
-                <div class="divSenha">
-                    <span>
-                        <input style="senha" type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
-                    </span>
-                    <span>
-                        <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
-                    </span>
-                </div>
-                <!-- <input type="checkbox" v-on:click="alterna()">Mostrar Senha -->
-                <!-- <button id="eye" v-on:Click="alterna()"><img src="../assets/visibilidade.png" /></button> -->
-            </div>
-
-            <div class="divBotoes">
-                <button type="submit">Cadastrar</button>
-
-            </div>
-        </form>
-    </div>  
+    </section>  
 </template> 
 
 <script>
@@ -55,18 +58,16 @@ export default{
 
         registrarUsuario(){
             
-
-                //console.log(this.cadastro)
-                Registros.Registrar(this.cadastro).then(resposta => {
-                    console.log(resposta)
-                    if(resposta.data.User){
-                        window.location.href='http://localhost:8080/login'
-                    }else{
-                        alert(resposta.data.msg)
-                        window.location.href='http://localhost:8080/cadastro'
-                    }
-                })
-                
+            //console.log(this.cadastro)
+            Registros.Registrar(this.cadastro).then(resposta => {
+                console.log(resposta)
+                if(resposta.data.User){
+                    window.location.href='http://localhost:8080/login'
+                }else{
+                    alert(resposta.data.msg)
+                    window.location.href='http://localhost:8080/cadastro'
+                }
+            })
         },
 
         alterna() {
@@ -80,19 +81,28 @@ export default{
             }
         }
     }
-
 }
-
 </script>
 
 <style lang="scss" scoped>
 
-    .divCadastro{
+    section{
+        width: 100%;
         height: 100%;
-        min-width: 200px;
-        min-height: 600px;
+        display: flex;
+    }
+
+    .divCadastro{
+        height: 620px;
         margin: 0 30px;
-        padding: 0;
+        min-width: 200px;
+        width: 100%;
+    }
+
+    @media only screen and (min-height:600px) {
+        section{
+            justify-content: center;
+        }
     }
 
     @media only screen and (min-width:500px){
@@ -105,19 +115,14 @@ export default{
     .botaoVoltar{
         display: flex;
         align-items: flex-end;
-
-        height: 5%;
-        top: 0;
-        left: 0;
-        width: 40px;
+        height: 50px;
+        margin-bottom: 20px;
         
-        cursor: pointer;
-
         & img{
-            display: block;
+            height: 25px;
+            padding: 10px 10px 0 0;
 
-            height: 50%;
-            padding: 1px;
+            cursor: pointer;
         }
 
     }
@@ -126,54 +131,39 @@ export default{
         display: flex;
         justify-content: center;
 
-        width: 100%;
-        height: 40%;
-        margin-top: 2%;
-        margin-bottom: -15%;
-
+        height: 200px;
+        margin-bottom: 20px;
+;
         & img{
             display: block;
 
-            height: 50%;
+            height: 65%;
             margin: auto;
-            margin-top: 14%;
-            padding: 0 10px;
         }
     }
 
     form{
-        width: 100%;
-        height: 40%;
-        margin-top: -2%;
+        height: 310px;
 
         & .divInputs{
             width: 100%;
-            height: 40%;
+            height: 240px;
+            margin-bottom: 20px;
 
             & .divUser{
-
-                height: 100%;
-                        
                 input{
-                    box-shadow: 0 0 0 0;
-                    border: 0 none;
-                    outline: 0;
-
-                    display: block;
-
                     width: 100%;
-                    height: 35%;
+                    height: 50px;
 
                     font-size: 14px;
                     border-bottom: 1px solid #DADDE0;
+                    margin-bottom: 10px;
                 }
-
             }
-
+            
             & .divSenha{
 
                 height: 100%;
-                margin-top: -10%;
 
                 input{
                     box-shadow: 0 0 0 0;
@@ -183,56 +173,42 @@ export default{
                     display: block;
 
                     width: 100%;
-                    height: 35%;
+                    height: 50px;
 
                     font-size: 14px;
                     border-bottom: 1px solid #DADDE0;
                 }
+
                 & img{
                     float: right;
-                    height: 19%;
+                    height: 10%;
                     position: relative;
-                    top: 90%;
+                    top: 20%;
                     transform: translateY(-150%);
-
                 }
-            }
-
-            & button{
-                display: flex;
-                float: right;
-                height: 18%;
-                margin-right: 5%;
-                background-color: white;
-                & img{
-                    height: 90%;
-                }
-
-            }
-
-            input::placeholder {
-                color: #000000;
             }
         }
 
         & .divBotoes{
             width: 100%;
-            height: 45%;
-            margin-top: 30%;
+            height: 50px;
 
             display: flex;
-            flex-direction: column;
 
             & button{
-                height: 35%;
+                height: 50px;
                 width: 100%;
 
                 cursor: pointer;
                 font-size: 20px;
                 border: none;
-                border-radius: 10px;   
+                border-radius: 25px;   
                 color: #ffffff;
                 background-color: #090673;
+            }
+
+            & button:hover{
+                background-color: #060449;
             }
         }
     }

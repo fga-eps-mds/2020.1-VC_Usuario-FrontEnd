@@ -1,11 +1,11 @@
 <template>
     <header id="header">
         <div class="divBotaoVoltar">
-            <img v-if="$route.path != '/'" src="../assets/whiteArrow.png" @click="$router.go(-1)"/>
+            <img v-if="$route.path != '/'" src="../assets/whiteArrow1.png" @click="$router.go(-1)"/>
         </div>
 
         <div class="divWordmark">
-            <img src="../assets/wordmarkIcon.png"> 
+            <img src="../assets/WordMark_VC.png"> 
         </div>
     </header>
 </template>
@@ -46,31 +46,30 @@ window.onscroll = function(){
     .divWordmark{
         display: flex;
         justify-content: center;
-
+        
         height: 100%;
-        width: 100px;
+        width: 100%;
         margin: auto;
+        position:absolute;
 
         & img{
             display: block;
-            height: 35px;
+            height: 30px;
             margin: auto;
-            padding: 0 10px;
+            position:relative;
         }
     }
 
     .divBotaoVoltar{
-        margin-left: 10px;
-        margin-top: 7px;
-        width: 0; 
-        height: 0; 
+        display: flex;
+        align-items: flex-end;
 
         & img{
-            height: 30px;
-            margin: auto;
+            height: 25px;
+            padding: 10px 10px 10px 0;
+            margin-left: 30px;
         }
     }
 
     
 </style>
-
