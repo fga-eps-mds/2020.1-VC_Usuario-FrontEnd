@@ -10,8 +10,8 @@
 
         <form @submit.prevent="fazerLogin">
             <div class="divInputs">
-                <input type="text" name="" placeholder="Seu Email" v-model="this.login.email">
-                <input type="password" name="" placeholder="Sua Senha" v-model="this.login.password">
+                <input type="text" name="" placeholder="Seu Email" v-model="login.email">
+                <input type="password" name="" placeholder="Sua Senha" v-model="login.password">
                 <a href="#">Esqueceu sua senha?</a>
             </div>
 
@@ -25,30 +25,41 @@
 
 <script>
 import Usuarios from '@/services/usuarios.js'
-import store from "@/store/index.js";
+import { useStore } from 'vuex'
+//import { computed } from 'vue'
 
 export default {
     name: 'Login',
-    data(){
+    setup(){
+        const store = useStore()
+        const login = {
+            email: '',
+            password: ''
+        }
+
+        const fazerLogin = () => {
+            Usuarios.Login(login).then(resposta => {
+                    console.log(resposta)
+                    store.commit('SET_USUARIO', resposta.data.user)
+                    window.location.href='http://localhost:8080/perfil'
+                    
+            }, erro => {
+                console.log(erro.response.data)
+            })
+        }
+
+        return { login, fazerLogin }
+    },
+    /* data(){
         return{
             login: {
                 email: '',
                 password: ''
             }
         }
-    },
+    }, */
 
     methods: {
-        fazerLogin(){
-
-            Usuarios.Login(this.login).then(resposta => {
-                    console.log(resposta)
-                    store.setUsuarioAction(resposta.data.user)
-            }, erro => {
-                console.log(erro.response.data)
-            })
-            
-        }
     }
 }
 

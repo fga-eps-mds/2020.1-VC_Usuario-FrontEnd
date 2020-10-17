@@ -12,13 +12,13 @@
     </div>
 
     <MenuBar/>
-    
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
-import store from "@/store/index.js";
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 export default {
     name:'Perfil',
@@ -28,14 +28,14 @@ export default {
         MenuBar
     },
 
-    data (){
-        return{
-            nome: '',
-        }
+    setup(){
+        const store = useStore()
+        const nome = computed(() => store.getters.getNome)
+        return { nome }
     },
 
-    created (){
-        this.nome = store.getNome();
+    created() {
+        console.log('ola')
     }
 }
 
