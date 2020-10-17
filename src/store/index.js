@@ -7,39 +7,48 @@ const store = createStore({
     state(){
         return {
             usuario: {},
-            token: {}
+            token: ''
         }        
     },
 
     mutations: {
         SET_USUARIO(state, payload) {
             if(this.debug){
-                console.log('Novo nome: ', payload)
+                console.log('Novo usuário: ', payload)
             }
     
             state.usuario = payload;
         },
 
+        SET_TOKEN(state, payload) {
+            if(this.debug){
+                console.log('Token: ', payload)
+            }
+    
+            state.token = payload;
+        },
+
+        CLEAR_USUARIO(state){
+            if(this.debug){
+                console.log('Ok usuário')
+            }
+    
+            state.usuario = {}
+        },
+
+        CLEAR_TOKEN(state){
+            if(this.debug){
+                console.log('Ok token')
+            }
+    
+            state.token = ''
+        },
     },
 
     actions: {
-        
-    
-        setTokenAction(token) {
-            if(this.debug){
-                console.log('Token: ', token)
-            }
-    
-            this.state.token = token;
-        },
-    
-        clearNomeAction() {
-            if(this.debug){
-                console.log('Nome limpo')
-            }
-    
-            this.state.nome = ''
-        },
+        loginAction(){},
+        logoutAction(){},
+        validateSessionAction(){}
     },
 
     getters: {
