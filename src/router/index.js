@@ -26,6 +26,11 @@ const routes = [
     name: 'listarUmaPostagem',
     component: () => import(/* webpackChunkName: "about" */ '../views/ListarUmaPostagem.vue'),
   },
+  {
+    path: '/noticias',
+    name: 'FeedDeNoticias',
+    component: () => import(/* webpackChunkName: "about" */ '../views/FeedDeNoticias.vue'),
+  },
 ]
 
 const router = createRouter({
