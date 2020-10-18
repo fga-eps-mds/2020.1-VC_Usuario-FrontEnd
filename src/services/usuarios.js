@@ -1,6 +1,6 @@
-import { http } from './config'
+import http from './config.js'
 
-export default{
+export default {
 
     Registrar:(user) => {
         return http.post('user/register_user', user)
@@ -9,4 +9,8 @@ export default{
     Login:(login) => {
         return http.post('user/login', login)
     },
+
+    Validar:(tk) => {
+        return http.get('user/validate_session', {headers: {'authorization': `Bearer ${tk}`}})
+    }
 }
