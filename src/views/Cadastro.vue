@@ -60,13 +60,13 @@ export default{
             
             //console.log(this.cadastro)
             Usuarios.Registrar(this.cadastro).then(resposta => {
-                console.log(resposta)
                 if(resposta.data.User){
                     window.location.href='http://localhost:8080/login'
                 }else{
                     alert(resposta.data.msg)
-                    window.location.href='http://localhost:8080/cadastro'
                 }
+            }, erro => {
+                alert(erro.response.data.msg)
             })
         },
 
