@@ -8,11 +8,9 @@
         </h1>
         <div class="divBotoes">
                 <button type="button" onclick="window.location.href='http://localhost:8080/Perfil'">Confirmar</button>
+                <button type="button" v-on:click="fazerLogout" >Sair</button>
         </div>
 
-        <div class="divBotoes">
-                <button type="button" onclick="window.location.href='http://localhost:8080/login'">Encerrar Sessão</button>
-        </div>
     </div>
 
     <MenuBar/>
@@ -22,13 +20,24 @@
 <script>
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
-//import store from "@/store/index.js";
+import { useStore } from 'vuex'
 
 export default {
+
     name: 'Editar',
     components:{
         Header,
         MenuBar
+    },
+    setup(){
+        const store = useStore()
+        const fazerLogout = () => {
+            store.commit('CLEAR_USUARIO')
+            store.commit('CLEAR_TOKEN')
+            window.location.href='http://localhost:8080/'  
+        }
+
+        return { fazerLogout }
     }
 }
 </script>
@@ -37,6 +46,10 @@ export default {
 
     .main {
         margin-top: 60px;
+    }
+
+    button {
+        margin-left: 10px;
     }
 
 

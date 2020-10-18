@@ -2,7 +2,7 @@
     <section>
         <div class="divLogin">
             <div class="botaoVoltar">
-                <img src="../assets/blackArrow.png" onclick='history.go(-1)'> 
+                <img src="../assets/blackArrow.png" v-on:click='voltar'> 
             </div>
 
             <div class="divLogo">
@@ -26,7 +26,6 @@
 </template> 
 
 <script>
-import Usuarios from '@/services/usuarios.js'
 import { useStore } from 'vuex'
 
 
@@ -40,28 +39,26 @@ export default {
         }
 
         const fazerLogin = () => {
-            Usuarios.Login(login).then(resposta => {
-                    console.log(resposta)
-                    store.commit('SET_USUARIO', resposta.data.user)
-                    window.location.href='http://localhost:8080/perfil'
-                    
-            }, erro => {
-                console.log(erro.response.data)
-            })
+            store.dispatch('loginAction', login)          
         }
 
-        return { login, fazerLogin }
-    },
-    /* data(){
-        return{
-            login: {
-                email: '',
-                password: ''
+        const voltar = () => {
+            if(document.referrer === "http://localhost:8080/perfil"){
+                window.location.href = "http://localhost:8080/"
+            }else{
+                history.go(-1)
             }
         }
-    }, */
 
-    methods: {
+        return { login, fazerLogin, voltar }
+    },
+
+    created: () => {
+        const token = useStore().getters.getToken
+        if(token){
+            useStore().dispatch('validateSessionAction', token)
+            window.location.href = 'http://localhost:8080/perfil'
+        }
     }
 }
 

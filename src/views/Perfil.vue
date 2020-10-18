@@ -1,8 +1,7 @@
 <template>
-
     <Header/>
 
-    <div class="main">
+    <div class="main" >
         <h4>
             {{ nome }}
         </h4>
@@ -29,14 +28,23 @@ export default {
     },
 
     setup(){
-        const store = useStore()
-        const nome = computed(() => store.getters.getNome)
+        //const store = useStore()
+        const nome = computed(() => useStore().getters.getNome)
         return { nome }
     },
 
-    created() {
-        console.log('ola')
-    }
+    created: () => {
+        if( !useStore().getters.getSwap ){
+            const token = useStore().getters.getToken
+            if(!token){
+                window.location.href='http://localhost:8080/login'
+            }else {
+                useStore().dispatch('validateSessionAction', token)
+            }
+        }else{
+            useStore().commit('SET_SWAP', false)
+        }
+    },
 }
 
 </script>
