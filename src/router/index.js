@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/TelaDePerfil.vue')
   },
   {
     path: '/cadastro',
