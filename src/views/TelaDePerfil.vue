@@ -14,6 +14,13 @@
                     </span>
 
 				</div>
+
+				<div class="PerfilContainer__pontosPerfil">
+					<span>
+                        <img src="../assets/trophy.png" class="PerfilContainer__pontosPerfil__trofeu"> 
+                    </span>
+					<p>800</p>
+				</div>
 			</section>
 		</section>
 	<MenuBar/>
@@ -49,22 +56,39 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
-        background-color: #ffff99;
+        display: block;
 
 		&__infoPerfil{
 			display: flex;
+			width: 100%;
+			align-content: space-between;
 
 			&__nome{
 				font-size: 18px;
 				max-height: 30px;
-				width: 100%;
 				color: $colorPreta;
+				width: 100%;
 				overflow: hidden;
 			}
 
 			&__edit{
 				height: 20px;
-				padding-left: 80px;
+			}
+		}
+
+		&__pontosPerfil{
+			margin-top: 20px;
+			font-size: 13px;
+			height: 30px;
+			border:1px solid $colorPreta;
+			width: 60px; 
+			border-radius: 5px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&__trofeu{
+				height: 15px;
 			}
 		}
     }
