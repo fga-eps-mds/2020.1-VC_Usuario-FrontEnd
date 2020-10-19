@@ -2,22 +2,22 @@
     <section>
         <div class="divLogin">
             <div class="botaoVoltar">
-                <img src="../assets/blackArrow.png" onclick='history.go(-1)'> 
+                <img src="../assets/blackArrow.png" v-on:click='voltar'> 
             </div>
 
             <div class="divLogo">
                 <img src="../assets/vamosCuidarIcon.png"> 
             </div>  
 
-            <form action="">
+            <form @submit.prevent="fazerLogin">
                 <div class="divInputs">
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Senha">
+                    <input type="email" placeholder="Email" v-model="login.email">
+                    <input type="password" placeholder="Senha" v-model="login.password">
                     <a href="#">Esqueceu sua senha?</a>
                 </div>
 
                 <div class="divBotoes">
-                    <button>Entrar</button>
+                    <button type="submit">Entrar</button>
                     <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
                 </div>
             </form>
@@ -26,6 +26,41 @@
 </template> 
 
 <script>
+import { useStore } from 'vuex'
+
+
+export default {
+    name: 'Login',
+    setup(){
+        const store = useStore()
+        const login = {
+            email: '',
+            password: ''
+        }
+
+        const fazerLogin = () => {
+            store.dispatch('loginAction', login)          
+        }
+
+        const voltar = () => {
+            if(document.referrer === "http://localhost:8080/perfil"){
+                window.location.href = "http://localhost:8080/"
+            }else{
+                history.go(-1)
+            }
+        }
+
+        return { login, fazerLogin, voltar }
+    },
+
+    created: () => {
+        const token = useStore().getters.getToken
+        if(token){
+            useStore().dispatch('validateSessionAction', token)
+            window.location.href = 'http://localhost:8080/perfil'
+        }
+    }
+}
 
 </script>
 

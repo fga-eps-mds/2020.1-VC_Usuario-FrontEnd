@@ -4,27 +4,37 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+    component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue')
   },
   {
     path: '/criarpostagem',
     name: 'criarPostagem',
-    component: () => import(/* webpackChunkName: "about" */ '../views/CriarPostagem.vue')
+    component: () => import(/* webpackChunkName: "CriarPostagem" */ '../views/CriarPostagem.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
   },
   {
     path: '/cadastro',
     name: 'Cadastro',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Cadastro.vue')
+    component: () => import(/* webpackChunkName: "Cadastro" */ '../views/Cadastro.vue')
   },
   {
     path: '/post',
     name: 'listarUmaPostagem',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ListarUmaPostagem.vue'),
+    component: () => import(/* webpackChunkName: "ListarUmaPostagem" */ '../views/ListarUmaPostagem.vue'),
+  },
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: () => import(/* webpackChunkName: "Perfil" */ '../views/Perfil.vue'),
+  },
+  {
+    path: '/editar',
+    name: 'Editar',
+    component: () => import(/* webpackChunkName: "Editar" */ '../views/Editar.vue'),
   },
 ]
 
