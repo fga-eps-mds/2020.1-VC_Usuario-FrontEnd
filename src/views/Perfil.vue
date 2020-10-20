@@ -18,7 +18,9 @@
                     <span>
                         <img src="../assets/trophy.png" class="PerfilContainer__pontosPerfil__trofeu"> 
                     </span>
-                    <p>800</p>
+                    <span class="PerfilContainer__pontosPerfil__numero">
+                        800
+                    </span>
                 </div>
             </section>
         </section>
@@ -109,6 +111,14 @@ export default {
 			&__trofeu{
 				height: 15px;
 			}
+
+            &__numero{
+                max-width: 40px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: inline-block;
+            }
 		}
     }
 </style>
