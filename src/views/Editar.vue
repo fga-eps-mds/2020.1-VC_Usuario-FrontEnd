@@ -141,6 +141,8 @@ export default {
         & button{
             height: 50px;
             width: 100%;
+            margin-top: 13px;
+
 
             cursor: pointer;
             font-size: 20px;
