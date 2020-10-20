@@ -22,6 +22,12 @@
                         800
                     </span>
                 </div>
+                
+                <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
+                
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
+            
+                </div>
             </section>
         </section>
     <MenuBar/>
@@ -30,6 +36,9 @@
 <script>
     import Header from '@/components/Header.vue'
     import MenuBar from '@/components/MenuBar.vue'
+    import PostagemComponent from '@/components/PostagemComponent.vue'
+    import PostagemService from '@/services/postagens.js'
+
     import { useStore } from 'vuex'
     import { computed } from 'vue'
 
@@ -38,15 +47,17 @@ export default {
 
     components: {
         Header,
-        MenuBar
+        MenuBar,
+        PostagemComponent
     },
 
     setup(){
         const nome = computed(() => useStore().getters.getNome)
         return { nome }
     },
+    
+    created (){
 
-    created: () => {
         if( !useStore().getters.getSwap ){
             const token = useStore().getters.getToken
             if(!token){
@@ -56,6 +67,31 @@ export default {
             }
         }else{
             useStore().commit('SET_SWAP', false)
+        }
+        this.listarPostagens();
+    },
+
+    data (){
+        return {
+            postagemData: {}
+        }
+    },
+
+
+    methods: {
+
+        listarPostagens(){
+
+            PostagemService.listarPostagem().then(Response => {
+                console.log(Response);
+                this.postagemData = Response.data.posts;
+                console.log(this.postagemData);
+            })
+        },
+
+        verMais(post_id){
+
+            this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
         }
     },
 }
@@ -120,5 +156,10 @@ export default {
                 display: inline-block;
             }
 		}
+         .divPostagem{
+            height: auto;
+            margin-top: 40px;
+            flex: 1 1 300px; 
+        }
     }
 </style>
