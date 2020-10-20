@@ -39,7 +39,7 @@
 
 <script>
 
-import Registros from '@/services/registros.js'
+import Usuarios from '@/services/usuarios.js'
 
 export default{
     name: 'Cadastro',
@@ -59,14 +59,14 @@ export default{
         registrarUsuario(){
             
             //console.log(this.cadastro)
-            Registros.Registrar(this.cadastro).then(resposta => {
-                console.log(resposta)
+            Usuarios.Registrar(this.cadastro).then(resposta => {
                 if(resposta.data.User){
                     window.location.href='http://localhost:8080/login'
                 }else{
                     alert(resposta.data.msg)
-                    window.location.href='http://localhost:8080/cadastro'
                 }
+            }, erro => {
+                alert(erro.response.data.msg)
             })
         },
 

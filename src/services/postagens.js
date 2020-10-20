@@ -1,6 +1,6 @@
-import { http } from './config'
+import http from './config.js'
 
-export default{
+export default {
 
     listarPostagem:() => {
         return http.get('postage/list_common')

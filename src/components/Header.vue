@@ -1,7 +1,7 @@
 <template>
     <header id="header">
-        <div class="divBotaoVoltar">
-            <img v-if="$route.path != '/'" src="../assets/whiteArrow1.png" @click="$router.go(-1)"/>
+        <div v-if="$route.path != '/'" class="divBotaoVoltar">
+            <img src="../assets/whiteArrow1.png" onclick='history.go(-1)'>
         </div>
 
         <div class="divWordmark">

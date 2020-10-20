@@ -4,12 +4,36 @@
             <div><router-link to="/"><img src="../assets/homeIcon.png"></router-link></div>
             <div><router-link to="/criarpostagem"><img src="../assets/addIcon.png"></router-link></div>
             <div><img src="../assets/newsIcon.png"></div>
-            <div><router-link to="/login"><img src="../assets/userIcon.png"></router-link></div>
+            <div><img src="../assets/userIcon.png" v-on:click="redirectPerfilLogin"></div>
         </div>
     </nav>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+
+export default {
+    name: 'MenuBar',
+    setup() {
+
+        const store = useStore()
+        const redirectPerfilLogin = () => {
+
+            const token = store.getters.getToken
+            if(!token){
+                window.location.href='http://localhost:8080/login'
+            }else {
+                store.dispatch('validateSessionAction', token)
+                store.commit('SET_SWAP', true)
+                window.location.href='http://localhost:8080/perfil'
+            }
+        }
+
+        return {redirectPerfilLogin}
+    }
+
+}
+
 
 </script>
 
