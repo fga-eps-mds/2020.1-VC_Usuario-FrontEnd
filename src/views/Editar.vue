@@ -40,6 +40,7 @@
 <script>
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
+
 import { useStore } from 'vuex'
 
 export default {
@@ -49,7 +50,8 @@ export default {
         Header,
         MenuBar
     },
-    setup(){
+
+    setup() {
         const store = useStore()
         const fazerLogout = () => {
             store.commit('CLEAR_USUARIO')
@@ -156,6 +158,4 @@ export default {
         }
     }
 }
-
-
 </style>

@@ -24,9 +24,7 @@
                 </div>
                 
                 <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                
-                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
-            
+                    <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
                 </div>
             </section>
         </section>
@@ -56,7 +54,7 @@ export default {
         return { nome }
     },
     
-    created (){
+    created() {
 
         if( !useStore().getters.getSwap ){
             const token = useStore().getters.getToken
@@ -71,7 +69,7 @@ export default {
         this.listarPostagens();
     },
 
-    data (){
+    data() {
         return {
             postagemData: {}
         }
