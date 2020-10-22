@@ -40,13 +40,13 @@ export default {
         }
     },
 
-    created: function(){
+    created: function() {
         this.listarPostagens();
     },
         
     methods: {
 
-        listarPostagens(){
+        listarPostagens() {
 
             PostagemService.listarPostagem().then(Response => {
                 console.log(Response);
@@ -69,13 +69,11 @@ export default {
         width: 100%;
         padding-bottom: 120px;
         display: flex;
-        /* border: 1px solid red; */
     }
 
     .divHome{
         height: auto;
         width: 100%;
-        /* border: 1px solid green; */
         margin-top: 65px;
         min-width: 250px;
 
@@ -86,7 +84,6 @@ export default {
             height: auto;
             margin: 0 30px 20px;
             flex: 1 1 300px;
-            /* border: 1px solid red; */
         }
     }
 </style>

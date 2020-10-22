@@ -31,7 +31,7 @@ import { useStore } from 'vuex'
 
 export default {
     name: 'Login',
-    setup(){
+    setup() {
         const store = useStore()
         const login = {
             email: '',
@@ -53,7 +53,7 @@ export default {
         return { login, fazerLogin, voltar }
     },
 
-    created: () => {
+    created() {
         const token = useStore().getters.getToken
         if(token){
             useStore().dispatch('validateSessionAction', token)
@@ -65,6 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    @import "../assets/stylesheets/pallete.scss";
 
     section{
         width: 100%;
@@ -135,19 +136,19 @@ export default {
                 height: 50px;
 
                 font-size: 14px;
-                border-bottom: 1px solid #DADDE0;
+                border-bottom: 1px solid $colorCinza;
                 margin-bottom: 10px;
             }
 
             input::placeholder {
-                color: #000000;
+                color: $colorPreta;
             }
 
             a{  
                 height: 15px;
 
                 cursor: pointer;
-                color: #090673;
+                color: $colorAzul;
                 font-weight: bolder;
                 text-decoration: none;
                 font-size: 11px;
@@ -176,21 +177,21 @@ export default {
             button:first-child{  
                 margin-bottom: 20px;    
 
-                color: #ffffff;
-                background-color: #090673;
+                color: $colorBranca;
+                background-color: $colorAzul;
             }
 
             button:first-child:hover{
-                background-color: #060449;
+                background-color: $colorAzul;
             }
 
             button:last-child{
-                background-color: #ffffff;
-                border: 1px solid #DADDE0;
+                background-color: $colorBranca;
+                border: 1px solid $colorCinza;
             }
 
             button:last-child:hover{
-                background-color: #DADDE0;
+                background-color: $colorCinza;
             }
         }
     }
