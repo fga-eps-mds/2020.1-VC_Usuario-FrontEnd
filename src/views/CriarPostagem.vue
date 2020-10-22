@@ -34,8 +34,6 @@
             <div class="divImagem">
                 <label for="file">Escolha sua imagem</label>                               
                 <input type="file" ref="file" id="file" accept="image/png, image/jpeg" @change="imagemSelecionada">  
-
-                <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
 
 
@@ -51,14 +49,6 @@
                     <span class="slider round"></span>
                 </label>
             </div>
-
-            <!-- <div class="divApresentarFeed">
-                <legend>Apresentar no Feed?</legend>
-                <label class="switch">
-                    <input type="checkbox" id="postagem.post_permission">
-                    <span class="slider round"></span>
-                </label>
-            </div> -->
             
             <div class="divBotoes">
                 <button type="submit">Criar</button>
@@ -270,10 +260,6 @@ export default {
     }
 
     .divPermissao {
-        margin-bottom: 20px;
-    }
-
-    .divApresentarFeed {
         margin-bottom: 20px;
     }
 

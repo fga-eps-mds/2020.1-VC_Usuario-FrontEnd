@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../assets/stylesheets/pallete.scss";
+    @import "../assets/stylesheets/pallete.scss";
 
     .postagem {
         height: auto;
