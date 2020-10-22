@@ -30,6 +30,7 @@ window.onscroll = function(){
 </script>
 
 <style lang="scss" scoped>
+    @import "../assets/stylesheets/pallete.scss";
 
     header{
         top: 0;
@@ -40,7 +41,7 @@ window.onscroll = function(){
         width: 100%;
         
         transition: top 0.3s;
-        background-color: #090673;
+        background-color: $colorAzul;
     }
 
     .divWordmark{
