@@ -41,6 +41,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    
     @import "../assets/stylesheets/pallete.scss";
 
     .postagem {
@@ -105,7 +106,7 @@ export default {
         }
 
         & button:first-child:hover{
-            background-color: $colorAzul;
+            background-color: $colorAzulEscuro;
         }
 
         /* & button:last-child{

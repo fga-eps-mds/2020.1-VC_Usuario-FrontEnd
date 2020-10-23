@@ -211,7 +211,7 @@ export default {
         }
 
         button:first-child:hover{
-            background-color: $colorAzul;
+            background-color: $colorAzulEscuro;
         }
 
         button:last-child{

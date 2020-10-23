@@ -232,7 +232,7 @@ export default {
         }
         label:hover{
             color: white;
-            background: $colorAzul;
+            background: $colorAzulEscuro;
         }
     }
 
@@ -284,7 +284,7 @@ export default {
         }
         
         button:first-child:hover{
-            background-color: $colorAzul;
+            background-color: $colorAzulEscuro;
         }
 
         button:last-child{
