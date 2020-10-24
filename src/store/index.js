@@ -66,7 +66,6 @@ const store = createStore({
         },
 
         async validateSessionAction({commit}, payload){
-            
             await Usuarios.Validar(payload).then(response => {
                 commit('SET_TOKEN', response.data.new_token)
             }, erro => {
@@ -74,6 +73,17 @@ const store = createStore({
                 console.log(erro.response.data.msg)
                 window.location.href='http://localhost:8080/login'
             }) 
+        },
+
+        async deletarUsuarioAction({commit}, payload){
+            await Usuarios.DeletarContaUsuario(payload).then(response => {
+                commit('CLEAR_USUARIO')
+                commit('CLEAR_TOKEN')
+                console.log(response.data.msg)
+                window.location.href='http://localhost:8080'
+            }, erro => {
+                console.log(erro.response.data.msg)
+            })
         }
     },
 

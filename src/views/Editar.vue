@@ -27,7 +27,7 @@
 
                 <div class="divBotoes">
                     <button type="button">Mudar senha</button>
-                    <button type=button style=color:red>Excluir perfil</button>
+                    <button type=button style=color:red v-on:click="excluirConta">Excluir perfil</button>
                     <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
                  </div>
             </form>
@@ -59,7 +59,22 @@ export default {
             window.location.href='http://localhost:8080/'  
         }
 
-        return { fazerLogout }
+        const excluirConta = () => {
+            const usuario = store.getters.getId
+            store.dispatch('deletarUsuarioAction', usuario)
+
+        }
+
+        return { fazerLogout, excluirConta }
+    },
+
+    created() {
+        const token = useStore().getters.getToken
+        if(!token){
+            window.location.href='http://localhost:8080/login'
+        }else {
+            useStore().dispatch('validateSessionAction', token)
+        }
     }
 }
 </script>
