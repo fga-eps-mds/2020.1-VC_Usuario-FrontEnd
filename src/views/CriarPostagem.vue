@@ -3,7 +3,7 @@
     <Header/>
     
     <section>
-        <form @submit.prevent="criarPostagemAnonima" enctype="multipart/form-data">
+        <form @submit.prevent="criarPostagem" enctype="multipart/form-data">
             <input class= "inputTitulo" type="text" placeholder="Título" v-model="postagem.post_title" required>
 
             <div class="divCategoriaLocal">
@@ -88,14 +88,15 @@ export default {
     data(){
         return{
             postagem: {
-                fk_user_id: '5f72b06dd02a450038c286f0',
+                fk_user_id: '',
                 post_title: '',
                 post_place: '',
                 post_category: '',
                 post_description: '',
                 post_permission: 'true',
                 post_type: 'false',
-                file: ''
+                file: '',
+                post_author: ''
             }
         }
     },
@@ -112,18 +113,19 @@ export default {
             console.log(this.postagem)
         },
 
-        criarPostagemAnonima(){
+        criarPostagem(){
 
             console.log(this.postagem)
             const formData = new FormData();
 
-            formData.append('fk_user_id', this.postagem.fk_user_id,)
+            formData.append('fk_user_id', this.$store.getters.getId,)
             formData.append('post_title', this.postagem.post_title,)
             formData.append('post_place', this.postagem.post_place,)
             formData.append('post_category', this.postagem.post_category,)
             formData.append('post_description', this.postagem.post_description,)
             formData.append('post_permission', this.postagem.post_permission,)
-            formData.append('file', this.postagem.file)
+            formData.append('file', this.postagem.file,)
+            formData.append('post_author', this.$store.getters.getNome)
             
             let checkbox = document.getElementById('postagem.post_type');
             if (checkbox.checked){  
