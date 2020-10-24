@@ -132,7 +132,7 @@ export default {
         }
 
         & button:hover{
-            background-color: $colorAzul;
+            background-color: $colorAzulEscuro;
         }
     }
 
