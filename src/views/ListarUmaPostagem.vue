@@ -30,7 +30,7 @@
                 <p align = "justify">{{postagem.post_description}}</p>
             </div>
 
-            <button class="divApoiarBotao">
+            <button v-on:click="apoiarPostagemMetodo" class="divApoiarBotao">
                 <div class="divTextoImagemApoiarBotao">
                     <img src="../assets/like.png" class="iconeLike">
                     Apoiar
@@ -68,7 +68,12 @@ export default {
 
     data: function () {
         return{
-            postagem: {}
+            postagem: {},
+            
+            upsAtributos: {
+                fk_user_id: '',
+                fk_postage_id: ''
+            }
         }
     },
     
@@ -80,6 +85,19 @@ export default {
         })
     },
     methods: {
+
+        apoiarPostagemMetodo(){
+            this.upsAtributos.fk_user_id = this.$store.getters.getId
+            this.upsAtributos.fk_postage_id = this.postagem._id
+
+            console.log("deu certo: " + this.upsAtributos.fk_user_id + " " + this.upsAtributos.fk_postage_id)
+            console.log(this.upsAtributos)
+
+            Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                console.log('Apoio feito com sucesso!')
+                console.log(resposta)
+            })
+        },
 
         statusColor(status){
             var i = 0
