@@ -16,7 +16,7 @@
 
         <div class="divBotoes">
             <button @click="verMais(id)">Ver mais</button>
-            <!-- <button>Apoiar</button> -->
+            <button>Apoiar</button>
         </div>
     </div>
 </template>
@@ -112,7 +112,7 @@ export default {
             background-color: #060449;
         }
 
-        /* & button:last-child{
+        & button:last-child{
             background-color: #ffffff;
             border: 1px solid #248722;
         }
@@ -120,6 +120,6 @@ export default {
         & button:last-child:hover{
             color: #ffffff;
             background-color: #248722;
-        } */
+        }
     }
 </style>

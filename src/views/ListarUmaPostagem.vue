@@ -30,21 +30,21 @@
                 <p align = "justify">{{postagem.post_description}}</p>
             </div>
 
-            <!-- <button class="divApoiarBotao">
+            <button class="divApoiarBotao">
                 <div class="divTextoImagemApoiarBotao">
                     <img src="../assets/like.png" class="iconeLike">
                     Apoiar
                 </div>
-            </button> -->
+            </button>
 
-            <!-- <div class="divPostagemComentario">
+            <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
-            </div> -->
+            </div>
 
-            <!-- <div class="divPostagemBotoes">
+            <div class="divPostagemBotoes">
                 <button type="submit">Comentar</button>
                 <button type="submit">Reportar</button>
-            </div> -->
+            </div>
         </div>
     </section>
 
@@ -170,6 +170,12 @@ export default {
         width: 100%;
         height: 50px;
         margin-bottom: 20px;
+
+        cursor: pointer;
+    }
+    
+    .divApoiarBotao:hover{
+        background-color: #060449;
     }
 
     .divTextoImagemApoiarBotao{
