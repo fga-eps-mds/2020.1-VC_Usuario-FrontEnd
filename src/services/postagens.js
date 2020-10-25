@@ -16,5 +16,9 @@ export default {
 
     listarUmaPostagem:(id) => {
         return http.get(`postage/list_one/${id}`)
+    },
+
+    apoiarUmaPostagem:(upsAtributos) => {
+        return http.put(`/ups/support_postage`, upsAtributos)
     }
 }
