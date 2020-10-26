@@ -2,34 +2,34 @@
 
     <Header/>
         <section>           
-            <form @submit.prevent="">
+            <form @submit.prevent="atualizar">
                 <h1>
                     Editar
                 </h1>
                 <div class="divInputs">
                     <div class="divUser">
-                        <input style ="padrao" type="text" name="" placeholder="Nome">
-                        <input style ="padrao" type="text" name="" placeholder="Email">
+                        <input style ="padrao" type="text" placeholder="Nome" required="true" v-model="dados.nome">
+                        <input style ="padrao" type="text" placeholder="Email" required="true" v-model="dados.email">
                     </div>
 
                     <div class="divSenha">
                         <span>
-                            <input style="senha" type="password" id="senha" name="" placeholder="Senha">
-                            <input style ="senha" type="password" id="novaSenha" name="" placeholder="Nova Senha">
+                            <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                            <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha">
                         </span>
                     </div>
                 
                 </div>
 
                 <div class="divBotaoSalvar">
-                    <button type="button" onclick="window.location.href='http://localhost:8080/Perfil'">Salvar</button>
+                    <button type="submit">Salvar</button>
                 </div>
 
                 <div class="divBotoes">
                     <button type="button">Mudar senha</button>
-                    <button type=button style=color:red v-on:click="excluirConta">Excluir perfil</button>
+                    <button type="button" style=color:red v-on:click="excluirConta">Excluir perfil</button>
                     <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
-                 </div>
+                </div>
             </form>
         </section>
 
@@ -40,8 +40,8 @@
 <script>
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
-
 import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 export default {
 
@@ -53,19 +53,32 @@ export default {
 
     setup() {
         const store = useStore()
+        const dados = {
+            nome: store.getters.getNome,
+            email: store.getters.getEmail,
+            password: '',
+            novaSenha: ''
+        }
         const fazerLogout = () => {
             store.commit('CLEAR_USUARIO')
             store.commit('CLEAR_TOKEN')
             window.location.href='http://localhost:8080/'  
         }
-
         const excluirConta = () => {
-            const usuario = store.getters.getId
+            const usuario = {
+                id: store.getters.getId,
+                password: dados.password
+            }
             store.dispatch('deletarUsuarioAction', usuario)
-
+        }
+        const atualizar = () => {
+            
+            const id = computed(() => store.getters.getId)
+            store.dispatch('atualizarUsuarioAction', {id, dados})
+            
         }
 
-        return { fazerLogout, excluirConta }
+        return { fazerLogout, excluirConta, dados, atualizar }
     },
 
     created() {
@@ -75,7 +88,7 @@ export default {
         }else {
             useStore().dispatch('validateSessionAction', token)
         }
-    }
+    } 
 }
 </script>
 
@@ -87,7 +100,7 @@ export default {
         width: 100%;
     }
 
-   form{
+    form{
     height: auto;
     margin: 0 30px;
     margin-top: 60px;

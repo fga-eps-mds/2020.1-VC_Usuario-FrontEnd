@@ -21,6 +21,7 @@ const store = createStore({
     
             state.swapPerfilLogin = payload;
         },
+
         SET_USUARIO(state, payload) {
             if(this.debug){
                 console.log('Novo usuário: ', payload)
@@ -71,6 +72,8 @@ const store = createStore({
             }, erro => {
                 console.log('com err')
                 console.log(erro.response.data.msg)
+                commit('CLEAR_USUARIO')
+                commit('CLEAR_TOKEN')
                 window.location.href='http://localhost:8080/login'
             }) 
         },
@@ -84,12 +87,26 @@ const store = createStore({
             }, erro => {
                 console.log(erro.response.data.msg)
             })
+        },
+
+        async atualizarUsuarioAction(context){
+            console.log(context)
+            await Usuarios.AtualizarUsuario(context).then(response => {
+                alert(response.data.msg)
+                window.location.href='http://localhost:8080/perfil'
+            }, erro => {
+                console.log(erro.response.data.msg)
+            })
         }
     },
 
     getters: {
+        getEmail(state){
+            return state.usuario.user_email
+        },
+
         getNome(state) {
-            return state.usuario.user_name;
+            return state.usuario.user_name
         },
 
         getId(state) {
