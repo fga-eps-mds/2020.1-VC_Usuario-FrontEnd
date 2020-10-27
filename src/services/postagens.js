@@ -20,5 +20,9 @@ export default {
 
     apoiarUmaPostagem:(upsAtributos) => {
         return http.put(`/ups/support_postage`, upsAtributos)
-    }
+    },
+
+    listarPostagensApoiadasPorUsuario:(idDoUsuario) => {
+        return http.get(`postage/UPS_list_for_user/${idDoUsuario}`)
+    },
 }
