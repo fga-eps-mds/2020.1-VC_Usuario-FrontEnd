@@ -46,8 +46,12 @@
 
             <div class="divPermissao">
                 <legend>Postagem Anônima?</legend>
-                <label class="switch">
+                <label v-if='$store.getters.getId != null' class="switch">
                     <input type="checkbox" id="postagem.post_type">
+                    <span class="slider round"></span>
+                </label>
+                <label v-else class="switch" onclick="window.location.href='http://localhost:8080/Login'">
+                    <input type="checkbox" id="postagem.post_type" checked>
                     <span class="slider round"></span>
                 </label>
             </div>
