@@ -34,7 +34,7 @@ window.onscroll = function(){
 
     header{
         top: 0;
-        position: absolute;
+        position: fixed;
         display: flex;
 
 
