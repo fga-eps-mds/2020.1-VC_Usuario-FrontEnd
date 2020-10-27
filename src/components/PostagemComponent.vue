@@ -16,7 +16,8 @@
 
         <div class="divBotoes">
             <button @click="verMais(id)">Ver mais</button>
-            <button>Apoiar</button>
+            <button id="MudarEstadoDeApoio" v-if="statusColor(supporting) === 0">{{supporting}}</button>
+            <button id="MudarEstadoDeApoio" v-if="statusColor(supporting) === 1">{{supporting}}</button>
         </div>
     </div>
 </template>
@@ -31,10 +32,21 @@ export default {
         local: String,
         date: String,
         id: String,
+        supporting: Boolean
     },
+
     methods: {
         verMais(post_id){
             this.$emit('ver-mais', post_id)
+        },
+
+        statusColor(supporting){
+            var i = 0
+        
+            if(supporting == true){
+                i = 1
+            }
+            return i
         }
     }
 }
@@ -108,7 +120,7 @@ export default {
             background-color: #090673;
         }
 
-        & button:first-child:hover{
+        & button:first#manipula-child:hover{
             background-color: #060449;
         }
 
