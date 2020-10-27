@@ -6,7 +6,7 @@
         <div class="divHome">
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 
-                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/>
             
             </div>
         </div>
@@ -36,7 +36,11 @@ export default {
     
     data (){
         return {
-            postagemData: {}
+            postagemData: {},
+
+            user: {
+                fk_user_id: '',
+            }
         }
     },
 
@@ -48,11 +52,39 @@ export default {
 
         listarPostagens(){
 
-            PostagemService.listarPostagem().then(Response => {
-                console.log(Response);
-                this.postagemData = Response.data.posts;
-                console.log(this.postagemData);
-            })
+            try{
+                if( !this.$store.getters.getSwap ){
+                console.log("sim fora")
+                const token = this.$store.getters.getToken
+                if(!token){
+                    console.log("sim dentro ")
+                    
+                    PostagemService.listarPostagem().then(Response => {
+                        console.log(Response);
+                        this.postagemData = Response.data.posts;
+                        console.log("Aqui");
+                        console.log(this.postagemData);
+                    })
+                }else {
+                    console.log("nao dentro ")
+                    
+                    this.user.fk_user_id = this.$store.getters.getId
+                    console.log(this.user)
+
+                    PostagemService.listarPostagensApoiadasPorUsuario(this.user.fk_user_id).then(Response => {
+                        console.log("Aqui1:");
+                        console.log(Response);
+                        this.postagemData = Response.data;
+                        console.log("Aqui:");
+                        console.log(this.postagemData);
+                    })
+                }
+            }else{
+                console.log("nao fora")
+            }
+            }catch(err){
+                console.log({error: err.message});
+            }
         },
 
         verMais(post_id){
