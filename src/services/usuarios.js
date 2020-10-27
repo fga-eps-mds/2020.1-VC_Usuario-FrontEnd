@@ -15,8 +15,6 @@ export default {
     },
 
     DeletarContaUsuario:(usuario) => {
-        console.log(usuario.id)
-        console.log(usuario.password)
         return http.delete(`user/delete/${usuario.id}`, {params: {password: usuario.password}})
     },
 
