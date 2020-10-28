@@ -6,11 +6,9 @@
         <div class="divHome">
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 
-                <div id="postagemStatus0" v-if="statusColor(postagem.post_supporting) == 0"><PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
+                <div v-if="statusColor(postagem.post_supporting) == 0"><PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
 
-                <div id="postagemStatus1" v-if="statusColor(postagem.post_supporting) == 1"><PostagemComponentNao v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
-
-            
+                <div v-if="statusColor(postagem.post_supporting) == 1"><PostagemApoiadaComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
             </div>
         </div>
     </section>
@@ -24,7 +22,7 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import PostagemComponent from '@/components/PostagemComponent.vue'
-import PostagemComponentNao from '@/components/PostagemComponentNao.vue'
+import PostagemApoiadaComponent from '@/components/PostagemApoiadaComponent.vue'
 
 /* Import dos services */
 import PostagemService from '@/services/postagens.js'
@@ -36,7 +34,7 @@ export default {
         Header,
         MenuBar,
         PostagemComponent,
-        PostagemComponentNao
+        PostagemApoiadaComponent
     },
     
     data (){
@@ -59,39 +57,31 @@ export default {
 
             try{
                 if( !this.$store.getters.getSwap ){
-                    console.log("sim fora")
+
                     const token = this.$store.getters.getToken
                     if(!token){
-                        console.log("sim dentro ")
-                        
                         PostagemService.listarPostagem().then(Response => {
-                            console.log(Response);
+                            
                             this.postagemData = Response.data.posts;
-                            console.log("Aqui");
-                            console.log(this.postagemData);
+
+                            console.log(Response);
                         })
                     }else {
-                        console.log("nao dentro ")
-                        
                         this.user.fk_user_id = this.$store.getters.getId
-                        console.log(this.user)
 
-                        PostagemService.listarPostagensApoiadasPorUsuario(this.user.fk_user_id).then(Response => {
-                            console.log("Aqui1:");
-                            console.log(Response);
+                        PostagemService.listarPostagensUsuarioLogado(this.user.fk_user_id).then(Response => {
+
                             this.postagemData = Response.data;
-                            console.log("Aqui:");
-                            console.log(this.postagemData);
+
+                            console.log(Response);
                         })
                     }
                 }else{
-                    console.log("nao fora")
-
                     PostagemService.listarPostagem().then(Response => {
-                        console.log(Response);
+                        
                         this.postagemData = Response.data.posts;
-                        console.log("Aqui");
-                        console.log(this.postagemData);
+
+                        console.log(Response);
                     })
                 }
             }catch(err){
@@ -105,18 +95,13 @@ export default {
         },
 
         statusColor(post_supporting){
-            console.log("+++++++++++++++++")
-            console.log(post_supporting)
-            var i = 0
+            var auxApoio = 0
+
             if(post_supporting == true){
-                i = 1
-                console.log("true: " + post_supporting)
+                auxApoio = 1
             } 
-            else if (post_supporting == false){
-                console.log("false: " + post_supporting)
-            }
             
-            return i
+            return auxApoio
         }
     },
 }
