@@ -16,7 +16,7 @@
 
         <div class="divBotoes">
             <button @click="verMais(id)">Ver mais</button>
-            <button v-on:click="apoiarPostagemMetodo(id)">Apoiado</button>
+            <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagemApoiada">Apoiado</button>
         </div>
     </div>
 </template>
@@ -52,17 +52,44 @@ export default {
         },
 
         apoiarPostagemMetodo(post_id){
-            this.upsAtributos.fk_user_id = this.$store.getters.getId
-            this.upsAtributos.fk_postage_id = post_id
 
-            console.log("deu certo: " + this.upsAtributos.fk_user_id + " " + this.upsAtributos.fk_postage_id)
-            console.log(this.upsAtributos)
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        console.log("Usuário não logado")
+                    }
+                    else{
+                        this.upsAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsAtributos.fk_postage_id = post_id
 
-            Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
-                console.log('Apoio feito com sucesso!')
-                console.log(resposta)
-            })
+                        Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                            console.log(resposta)
+                        })
+
+                        mudarStyleApoio()
+                    }
+                }
+            }catch(err){
+                console.log({err})
+            }
         },
+    }
+}
+
+function mudarStyleApoio(){
+
+    var buttonPostagemApoiada = document.getElementById("buttonPostagemApoiada");
+
+    if(buttonPostagemApoiada.innerHTML == "Apoiado"){
+        buttonPostagemApoiada.innerHTML = "Apoiar"
+        buttonPostagemApoiada.style.backgroundColor = "#ffffff";
+        buttonPostagemApoiada.style.color = "#000000";
+    }
+    else{
+        buttonPostagemApoiada.innerHTML = "Apoiado"
+        buttonPostagemApoiada.style.backgroundColor = "#248722";
+        buttonPostagemApoiada.style.color = "#ffffff";
     }
 }
 </script>
@@ -146,7 +173,7 @@ export default {
         }
 
         & button:last-child:hover{
-            color: #248722;
+            color: #000000;
             background-color: #ffffff;
         }
     }
