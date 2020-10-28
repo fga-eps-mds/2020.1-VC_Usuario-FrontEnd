@@ -16,16 +16,19 @@
 
         <div class="divBotoes">
             <button @click="verMais(id)">Ver mais</button>
-            <button id="MudarEstadoDeApoio" v-if="statusColor(supporting) === 0">{{supporting}}</button>
-            <button id="MudarEstadoDeApoio" v-if="statusColor(supporting) === 1">{{supporting}}</button>
+            <button v-on:click="apoiarPostagemMetodo(id)">Apoiar</button>
         </div>
     </div>
 </template>
 
 <script>
+
+import Postagem from '@/services/postagens.js'
+
 export default {
     name: 'postBlock',
     props: {
+        _id: String,
         title: String,
         status: String,
         author: String,
@@ -34,20 +37,33 @@ export default {
         id: String,
         supporting: Boolean
     },
+    
+    data: function () {
+        return{
+            upsAtributos: {
+                fk_user_id: '',
+                fk_postage_id: ''
+            }
+        }
+    },
 
     methods: {
         verMais(post_id){
             this.$emit('ver-mais', post_id)
         },
 
-        statusColor(supporting){
-            var i = 0
-        
-            if(supporting == true){
-                i = 1
-            }
-            return i
-        }
+        apoiarPostagemMetodo(post_id){
+            this.upsAtributos.fk_user_id = this.$store.getters.getId
+            this.upsAtributos.fk_postage_id = post_id
+
+            console.log("deu certo: " + this.upsAtributos.fk_user_id + " " + this.upsAtributos.fk_postage_id)
+            console.log(this.upsAtributos)
+
+            Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                console.log('Apoio feito com sucesso!')
+                console.log(resposta)
+            })
+        },
     }
 }
 </script>
@@ -120,7 +136,7 @@ export default {
             background-color: #090673;
         }
 
-        & button:first#manipula-child:hover{
+        & button:first-child:hover{
             background-color: #060449;
         }
 
