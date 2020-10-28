@@ -22,7 +22,7 @@ export default {
         return http.put(`/ups/support_postage`, upsAtributos)
     },
 
-    listarPostagensApoiadasPorUsuario:(idDoUsuario) => {
+    listarPostagensUsuarioLogado:(idDoUsuario) => {
         return http.get(`postage/UPS_list_for_user/${idDoUsuario}`)
     },
 }
