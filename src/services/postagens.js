@@ -23,6 +23,6 @@ export default {
     },
 
     listarPostagensUsuarioLogado:(idDoUsuario) => {
-        return http.get(`postage/UPS_list_for_user/${idDoUsuario}`)
+        return http.get(`postage/list_all_with_UPS/${idDoUsuario}`)
     },
 }
