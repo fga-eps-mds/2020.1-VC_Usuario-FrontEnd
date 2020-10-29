@@ -87,16 +87,26 @@ export default {
     methods: {
 
         apoiarPostagemMetodo(){
-            this.upsAtributos.fk_user_id = this.$store.getters.getId
-            this.upsAtributos.fk_postage_id = this.postagem._id
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        console.log("Usuário não logado")
+                    }
+                    else{
+                        this.upsAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsAtributos.fk_postage_id = this.postagem._id
 
-            console.log("deu certo: " + this.upsAtributos.fk_user_id + " " + this.upsAtributos.fk_postage_id)
-            console.log(this.upsAtributos)
-
-            Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
-                console.log('Apoio feito com sucesso!')
-                console.log(resposta)
-            })
+                        Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                            console.log('Apoio feito com sucesso!')
+                            console.log(resposta)
+                        })
+                    }
+                }
+            }
+            catch(err){
+                console.log({err})
+            }
         },
 
         statusColor(status){
