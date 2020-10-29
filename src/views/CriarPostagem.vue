@@ -34,8 +34,6 @@
             <div class="divImagem">
                 <label for="file">Escolha sua imagem</label>                               
                 <input type="file" ref="file" id="file" accept="image/png, image/jpeg" @change="imagemSelecionada">  
-
-                <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
             </div>
 
 
@@ -55,14 +53,6 @@
                     <span class="slider round"></span>
                 </label>
             </div>
-
-            <!-- <div class="divApresentarFeed">
-                <legend>Apresentar no Feed?</legend>
-                <label class="switch">
-                    <input type="checkbox" id="postagem.post_permission">
-                    <span class="slider round"></span>
-                </label>
-            </div> -->
             
             <div class="divBotoes">
                 <button type="submit">Criar</button>
@@ -151,7 +141,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    @import "../assets/stylesheets/pallete.scss";
+    @import "../assets/stylesheets/font.scss";
 
     section{
         width: 100%;
@@ -185,12 +176,12 @@ export default {
         width: 100%;
 
         font-size: 20px;
-        border-bottom: 1px solid #DADDE0; 
+        border-bottom: 1px solid $colorCinza; 
     }
 
     .inputTitulo::placeholder {
         font-size: 20px;
-        color: #000000;
+        color: $colorPreta;
     }
 
     // CATEGORIA E LOCAL
@@ -205,8 +196,8 @@ export default {
 
             cursor: pointer;
             border-radius: 10px;
-            background-color: #ffffff;
-            border: 1px solid #DADDE0;
+            background-color: $colorBranca;
+            border: 1px solid $colorCinza;
         }
 
         select:first-child{
@@ -228,7 +219,7 @@ export default {
 
         label{
             display: flex;
-            background-color: #090673;
+            background-color: $colorAzul;
             align-items: center;
             justify-content: center;
             
@@ -242,12 +233,12 @@ export default {
 
             color:white;
             text-align: center;
-            font-family: 'Montserrat', sans-serif;
+            font-family: $font-pattern;
             cursor: pointer;
         }
         label:hover{
             color: white;
-            background: #060449;
+            background: $colorAzulEscuro;
         }
     }
 
@@ -265,12 +256,12 @@ export default {
             width: 100%;
             font-size: 16px;
             border-radius: 10px;
-            border: 1px solid #DADDE0;
+            border: 1px solid $colorCinza;
         }
 
         .inputDescricao::placeholder {
             font-size: 16px;
-            color: #000000;
+            color: $colorPreta;
         }
     }
 
@@ -278,15 +269,9 @@ export default {
         margin-bottom: 20px;
     }
 
-    .divApresentarFeed {
-        margin-bottom: 20px;
-    }
-
     // BOTÕES
     .divBotoes{
         display: flex;
-        
-        /* border: 1px solid blue; */
 
         & button{
             flex: 1;
@@ -300,81 +285,81 @@ export default {
 
         button:first-child{
             margin-right: 20px;
-            color: #ffffff;
-            background-color: #090673;
+            color: $colorBranca;
+            background-color: $colorAzul;
         }
         
         button:first-child:hover{
-            background-color: #060449;
+            background-color: $colorAzulEscuro;
         }
 
         button:last-child{
-            background-color: #ffffff;
-            border: 1px solid #DADDE0;
+            background-color: $colorBranca;
+            border: 1px solid $colorCinza;
         }
         
         button:last-child:hover{
-            background-color: #DADDE0;
+            background-color: $colorCinza;
         }
     }
 
     // //Configuração Radio Postagem Anonima
 
     .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
     }
 
     /* Hide default HTML checkbox */
     .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+        opacity: 0;
+        width: 0;
+        height: 0;
     }
 
     /* The slider */
     .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #DADDE0;
-    -webkit-transition: .4s;
-    transition: .4s;
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $colorCinza;
+        -webkit-transition: .4s;
+        transition: .4s;
     }
 
     .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: #ffffff;
-    -webkit-transition: .4s;
-    transition: .4s;
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: $colorBranca;
+        -webkit-transition: .4s;
+        transition: .4s;
     }
 
     input:checked + .slider {
-    background-color: #090673;
+        background-color: $colorAzul;
     }
 
     input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
     }
 
     /* Rounded sliders */
     .slider.round {
-    border-radius: 25px;
+        border-radius: 25px;
     }
 
     .slider.round:before {
-    border-radius: 50%;
+        border-radius: 50%;
     }
 </style>
