@@ -27,6 +27,20 @@
             </div>
         </div>
 
+        <div class="modal" v-if="modalSenhaNovaSenha">
+            <div class="conteudoModal">
+                <div class="textoDeSenha">
+                    <p>Preencha os campos</p>
+                    <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                    <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha">
+                </div>
+                    <div class="divBotoesModal">
+                        <button type="button" @click="modalSenhaNovaSenha = false">Cancelar</button>
+                        <button type="button">Continuar</button>
+                    </div>
+            </div>
+        </div>
+
         <section>           
             <form @submit.prevent="">
                 <h1>
@@ -52,7 +66,7 @@
                 </div>
 
                 <div class="divBotoes">
-                    <button type="button">Mudar senha</button>
+                    <button type="button" @click="modalSenhaNovaSenha = !modalSenhaNovaSenha">Mudar senha</button>
                     <button type="button" style=color:red @click="modalAlerta = !modalAlerta">Excluir perfil</button>
                     <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
                 </div>
@@ -106,10 +120,11 @@ export default {
             }
             store.dispatch('atualizarUsuarioAction', usuario)
         } */
-        const modalAlerta = ref(false);
+        const modalAlerta = ref(false)
         const modalSenha = ref(false)
+        const modalSenhaNovaSenha = ref(false)
 
-        return { fazerLogout, /* excluirConta, */ dados, /* atualizarDados, */ modalAlerta, modalSenha }
+        return { fazerLogout, /* excluirConta, */ dados, /* atualizarDados, */ modalAlerta, modalSenha, modalSenhaNovaSenha }
     },
 
     created() {
@@ -144,23 +159,19 @@ export default {
         justify-content: center;
         align-items: center;
 
-        & .fechar{
-            size: 15px;
-        }
-
         & .conteudoModal{
             position: absolute;
             background: $colorBranca;
             border-radius: 15px;
             width: 80%;
-            height: 20%;
+            height: 150px;
             text-align: center;
 
             & .textoDeSenha{
                 margin: 0 30px;
                 input{
                     width: 100%;
-                    height: 50px;
+                    height: 35px;
                     font-size: 14px;
                     border-bottom: 1px solid $colorCinza;
                 }
@@ -170,7 +181,7 @@ export default {
         & .divBotoesModal{
         width: 100%;
         height: 50px;
-        padding-top: 45px;
+        padding-top: 20px;
         display: flex;
         justify-content: space-evenly;
 
