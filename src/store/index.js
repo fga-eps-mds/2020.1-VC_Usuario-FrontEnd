@@ -89,9 +89,9 @@ const store = createStore({
             })
         },
 
-        async atualizarUsuarioAction(context){
-            console.log(context)
-            await Usuarios.AtualizarUsuario(context).then(response => {
+        async atualizarUsuarioAction(payload){
+            console.log(payload.id)
+            await Usuarios.AtualizarUsuario(payload).then(response => {
                 alert(response.data.msg)
                 window.location.href='http://localhost:8080/perfil'
             }, erro => {

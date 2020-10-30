@@ -1,8 +1,18 @@
 <template>
 
     <Header/>
+
+        <div class="modal" v-if="modalAlerta" @click="modalAlerta = false">
+            <div class="conteudoModal">
+                <p>Modal</p>
+                <div>
+                    <button>Continuar</button>
+                    <button>Cancelar</button>
+                </div>
+            </div>
+        </div>
         <section>           
-            <form @submit.prevent="atualizar">
+            <form @submit.prevent="">
                 <h1>
                     Editar
                 </h1>
@@ -12,22 +22,22 @@
                         <input style ="padrao" type="text" placeholder="Email" required="true" v-model="dados.email">
                     </div>
 
-                    <div class="divSenha">
+                    <!-- <div class="divSenha">
                         <span>
                             <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
                             <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha">
                         </span>
-                    </div>
+                    </div> -->
                 
                 </div>
 
                 <div class="divBotaoSalvar">
-                    <button type="submit">Salvar</button>
+                    <button>Salvar</button>
                 </div>
 
                 <div class="divBotoes">
                     <button type="button">Mudar senha</button>
-                    <button type="button" style=color:red v-on:click="excluirConta">Excluir perfil</button>
+                    <button type="button" style=color:red @click="modalAlerta = !modalAlerta">Excluir perfil</button>
                     <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
                 </div>
             </form>
@@ -41,7 +51,7 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { ref } from 'vue'
 
 export default {
 
@@ -64,21 +74,25 @@ export default {
             store.commit('CLEAR_TOKEN')
             window.location.href='http://localhost:8080/'  
         }
-        const excluirConta = () => {
+        /* const excluirConta = () => {
             const usuario = {
                 id: store.getters.getId,
                 password: dados.password
             }
             store.dispatch('deletarUsuarioAction', usuario)
-        }
-        const atualizar = () => {
-            
-            const id = computed(() => store.getters.getId)
-            store.dispatch('atualizarUsuarioAction', {id, dados})
-            
-        }
+        } */
+        /* const atualizarDados = () => {
+            const usuario = {
+                id: store.getters.getId,
+                nome: dados.nome,
+                email: dados.email,
+                password: dados.password
+            }
+            store.dispatch('atualizarUsuarioAction', usuario)
+        } */
+        const modalAlerta = ref(false)
 
-        return { fazerLogout, excluirConta, dados, atualizar }
+        return { fazerLogout, /* excluirConta, */ dados, /* atualizarDados, */ modalAlerta }
     },
 
     created() {
@@ -99,6 +113,36 @@ export default {
     section{
         width: 100%;
     }
+
+    .modal {
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,.7);
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        & .fechar{
+            size: 15px;
+        }
+
+        & .conteudoModal{
+            position: absolute;
+            background: $colorBranca;
+            border-radius: 15px;
+            width: 80%;
+            height: 20%
+
+            
+        }
+    }
+
+    
 
     form{
     height: auto;
