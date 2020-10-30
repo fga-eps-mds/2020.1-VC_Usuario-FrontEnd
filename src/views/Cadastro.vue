@@ -25,8 +25,6 @@
                             <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
                         </span>
                     </div>
-                    <!-- <input type="checkbox" v-on:click="alterna()">Mostrar Senha -->
-                    <!-- <button id="eye" v-on:Click="alterna()"><img src="../assets/visibilidade.png" /></button> -->
                 </div>
 
                 <div class="divBotoes">
@@ -57,8 +55,6 @@ export default{
     methods:{
 
         registrarUsuario(){
-            
-            //console.log(this.cadastro)
             Usuarios.Registrar(this.cadastro).then(resposta => {
                 if(resposta.data.User){
                     window.location.href='http://localhost:8080/login'
@@ -73,7 +69,6 @@ export default{
         alterna() {
 
             var x = document.getElementById("senha");
-            console.log("menino");
             if (x.type ==="password"){
                 x.type = "text";
             }else{
@@ -85,6 +80,7 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+    @import "../assets/stylesheets/pallete.scss";
 
     section{
         width: 100%;
@@ -133,7 +129,7 @@ export default{
 
         height: 200px;
         margin-bottom: 20px;
-;
+
         & img{
             display: block;
 
@@ -156,7 +152,7 @@ export default{
                     height: 50px;
 
                     font-size: 14px;
-                    border-bottom: 1px solid #DADDE0;
+                    border-bottom: 1px solid $colorCinza;
                     margin-bottom: 10px;
                 }
             }
@@ -176,7 +172,7 @@ export default{
                     height: 50px;
 
                     font-size: 14px;
-                    border-bottom: 1px solid #DADDE0;
+                    border-bottom: 1px solid $colorCinza;
                 }
 
                 & img{
@@ -203,12 +199,12 @@ export default{
                 font-size: 20px;
                 border: none;
                 border-radius: 25px;   
-                color: #ffffff;
-                background-color: #090673;
+                color: $colorBranca;
+                background-color: $colorAzul;
             }
 
             & button:hover{
-                background-color: #060449;
+                background-color: $colorAzulEscuro;
             }
         }
     }

@@ -120,7 +120,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../assets/stylesheets/pallete.scss";
+    @import "../assets/stylesheets/pallete.scss";
 
     section{
         width: 100%;
@@ -170,15 +170,15 @@ export default {
     }
 
     #postagemStatus0{
-        color: #CE1335;
+        color: $colorVermelho;
     }
 
     #postagemStatus1{
-        color: #090673;
+        color: $colorAzul;
     }
 
     #postagemStatus2{
-        color: #248722;
+        color: $colorVerde;
     }
 
     .divPostagemDescricao{
@@ -190,8 +190,8 @@ export default {
     }
 
     .divApoiarBotao{
-        color: #ffffff;
-        background-color: #090673;
+        color: $colorBranca;
+        background-color: $colorAzul;
         font-size: 20px;
         border: none;
         border-radius: 25px;
@@ -240,21 +240,21 @@ export default {
 
         button:first-child{
             margin-right: 20px;
-            color: #ffffff;
-            background-color: #090673;
+            color: $colorBranca;
+            background-color: $colorAzul;
         }
 
         button:first-child:hover{
-            background-color: #060449;
+            background-color: $colorAzulEscuro;
         }
 
         button:last-child{
-            background-color: #ffffff;
-            border: 1px solid #DADDE0;
+            background-color: $colorBranca;
+            border: 1px solid $colorCinza;
         }
 
         button:last-child:hover{
-            background-color: #DADDE0;
+            background-color: $colorCinza;
         }
     }
 </style>

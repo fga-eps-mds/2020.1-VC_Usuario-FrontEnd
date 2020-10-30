@@ -96,7 +96,8 @@ function mudarStyleApoio(){
 </script>
 
 <style scoped lang="scss">
-@import "../assets/stylesheets/pallete.scss";
+    
+    @import "../assets/stylesheets/pallete.scss";
 
     .postagem {
         height: auto;
@@ -104,7 +105,7 @@ function mudarStyleApoio(){
         height: 150px;
         padding: 10px;
 
-        border: solid 1px #DADDE0;
+        border: solid 1px $colorCinza;
     }
     
     .autor{
@@ -113,24 +114,20 @@ function mudarStyleApoio(){
 
     .tituloEStatus {
         height: auto;
-        /* border: 1px solid red; */
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         margin-bottom: 20px;  
 
         & span:first-child{
-            /* width: 70%; */
-            padding-right: 30px;
-            /* border: 1px solid red; */
-            
+            padding-right: 30px;            
             font-size: 20px;
             font-weight: bold;
-            color: #090673;
+            color: $colorAzul;
         }
 
         & span:last-child{
-            color: #CE1335;
+            color: $colorVermelho;
         }
     }
 
@@ -159,22 +156,22 @@ function mudarStyleApoio(){
 
         & button:first-child{
             margin-right: 20px;
-            color: #ffffff;
-            background-color: #090673;
+            color: $colorBranca;
+            background-color: $colorAzul;
         }
 
         & button:first-child:hover{
-            background-color: #060449;
+            background-color: $colorAzulEscuro;
         }
 
         & button:last-child{
-            background-color: #ffffff;
-            border: 1px solid #248722;
+            background-color: $colorBranca;
+            border: 1px solid $colorVerde;
         }
 
         & button:last-child:hover{
-            color: #ffffff;
-            background-color: #248722;
+            color: $colorBranca;
+            background-color: $colorVerde;
         }
     }
 </style>

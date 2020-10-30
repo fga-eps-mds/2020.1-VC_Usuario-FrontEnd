@@ -28,16 +28,14 @@ export default {
                 window.location.href='http://localhost:8080/perfil'
             }
         }
-
         return {redirectPerfilLogin}
     }
-
 }
-
 
 </script>
 
 <style lang="scss" scoped>
+    @import "../assets/stylesheets/pallete.scss";
 
     nav{
         bottom: 0;
@@ -47,8 +45,8 @@ export default {
         height: 85px;
         width: 100%;
 
-        background-color: #ffffff;
-        border-top: 1px solid #DADDE0;
+        background-color: $colorBranca;
+        border-top: 1px solid $colorCinza;
     }   
 
     .divMenuOpcoes{
