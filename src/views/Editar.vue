@@ -2,15 +2,31 @@
 
     <Header/>
 
-        <div class="modal" v-if="modalAlerta" @click="modalAlerta = false">
+        <div class="modal" v-if="modalAlerta">
             <div class="conteudoModal">
-                <p>Modal</p>
-                <div>
-                    <button>Continuar</button>
-                    <button>Cancelar</button>
+                <div class="textoDeAlerta">
+                    <p>Deseja realmente excluir sua conta?</p>
                 </div>
+                    <div class="divBotoesModal">
+                        <button type="button" @click="modalAlerta = false">Cancelar</button>
+                        <button type="button" @click="modalSenha = !modalSenha, modalAlerta = false">Continuar</button>
+                    </div>
             </div>
         </div>
+
+        <div class="modal" v-if="modalSenha">
+            <div class="conteudoModal">
+                <div class="textoDeSenha">
+                    <p>Digite sua senha</p>
+                    <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                </div>
+                    <div class="divBotoesModal">
+                        <button type="button" @click="modalSenha = false">Cancelar</button>
+                        <button type="button">Continuar</button>
+                    </div>
+            </div>
+        </div>
+
         <section>           
             <form @submit.prevent="">
                 <h1>
@@ -90,9 +106,10 @@ export default {
             }
             store.dispatch('atualizarUsuarioAction', usuario)
         } */
-        const modalAlerta = ref(false)
+        const modalAlerta = ref(false);
+        const modalSenha = ref(false)
 
-        return { fazerLogout, /* excluirConta, */ dados, /* atualizarDados, */ modalAlerta }
+        return { fazerLogout, /* excluirConta, */ dados, /* atualizarDados, */ modalAlerta, modalSenha }
     },
 
     created() {
@@ -136,10 +153,61 @@ export default {
             background: $colorBranca;
             border-radius: 15px;
             width: 80%;
-            height: 20%
+            height: 20%;
+            text-align: center;
 
-            
+            & .textoDeSenha{
+                margin: 0 30px;
+                input{
+                    width: 100%;
+                    height: 50px;
+                    font-size: 14px;
+                    border-bottom: 1px solid $colorCinza;
+                }
+            } 
         }
+
+        & .divBotoesModal{
+        width: 100%;
+        height: 50px;
+        padding-top: 45px;
+        display: flex;
+        justify-content: space-evenly;
+
+        & .divInputSenha{
+
+            height: 100%;
+
+            input{
+                box-shadow: 0 0 0 0;
+                margin-bottom: 10px;
+
+                width: 100%;
+                height: 50px;
+
+                font-size: 14px;
+                border-bottom: 1px solid $colorCinza;
+            }
+
+        }
+
+        & button{
+            bottom: 20px;
+            height: 25px;
+            width: 30%;
+
+            cursor: pointer;
+            font-size: 13px;
+            border: none;
+            border-radius: 15px;   
+            color: $colorBranca;
+            background-color: $colorAzul;
+        }
+
+        & button:hover{
+            background-color: $colorAzulEscuro;
+        }
+    }
     }
 
     
