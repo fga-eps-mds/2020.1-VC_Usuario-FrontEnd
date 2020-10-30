@@ -22,7 +22,7 @@
                 </div>
                     <div class="divBotoesModal">
                         <button type="button" @click="modalSenha = false">Cancelar</button>
-                        <button type="button">Continuar</button>
+                        <button type="button" @click="excluirConta">Continuar</button>
                     </div>
             </div>
         </div>
@@ -104,13 +104,13 @@ export default {
             store.commit('CLEAR_TOKEN')
             window.location.href='http://localhost:8080/'  
         }
-        /* const excluirConta = () => {
+        const excluirConta = () => {
             const usuario = {
                 id: store.getters.getId,
                 password: dados.password
             }
-            store.dispatch('deletarUsuarioAction', usuario)
-        } */
+            store.dispatch('validarSenhaUsuarioAction', usuario)
+        }
         /* const atualizarDados = () => {
             const usuario = {
                 id: store.getters.getId,
@@ -124,7 +124,7 @@ export default {
         const modalSenha = ref(false)
         const modalSenhaNovaSenha = ref(false)
 
-        return { fazerLogout, /* excluirConta, */ dados, /* atualizarDados, */ modalAlerta, modalSenha, modalSenhaNovaSenha }
+        return { fazerLogout, excluirConta, dados, /* atualizarDados, */ modalAlerta, modalSenha, modalSenhaNovaSenha }
     },
 
     created() {

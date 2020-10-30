@@ -97,7 +97,18 @@ const store = createStore({
             }, erro => {
                 console.log(erro.response.data.msg)
             })
-        }
+        },
+
+        async validarSenhaUsuarioAction(payload){
+            console.log("oiiiiii",payload)
+            await Usuarios.ValidaSenhaUsuario(payload).then(response => {
+                //dispatch
+                alert(response.data.msg)
+                window.location.href='http://localhost:8080/editar'
+            }, erro => {
+                console.log(erro.response.data.msg)
+            })
+        },
     },
 
     getters: {
