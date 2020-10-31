@@ -28,6 +28,7 @@
     <a href="https://github.com/fga-eps-mds/2020.1-VC_Usuario/pulls">
         <img alt="Numero de PRs closed" src="https://img.shields.io/github/issues-pr-closed/fga-eps-mds/2020.1-VC_Usuario">
     </a>
+    <a href="https://codeclimate.com/github/fga-eps-mds/2020.1-VC_Usuario-FrontEnd"><img src="https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability" /></a>
 </div>
 
 <h4 align="center"> 

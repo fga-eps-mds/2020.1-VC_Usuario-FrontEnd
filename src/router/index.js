@@ -36,6 +36,11 @@ const routes = [
     name: 'Editar',
     component: () => import(/* webpackChunkName: "Editar" */ '../views/Editar.vue'),
   },
+  {
+    path: '/noticias',
+    name: 'FeedDeNoticias',
+    component: () => import(/* webpackChunkName: "about" */ '../views/FeedDeNoticias.vue'),
+  },
 ]
 
 const router = createRouter({

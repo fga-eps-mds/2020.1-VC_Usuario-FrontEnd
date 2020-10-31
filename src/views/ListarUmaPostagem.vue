@@ -30,21 +30,21 @@
                 <p align = "justify">{{postagem.post_description}}</p>
             </div>
 
-            <!-- <button class="divApoiarBotao">
+            <button v-on:click="apoiarPostagemMetodo" class="divApoiarBotao">
                 <div class="divTextoImagemApoiarBotao">
                     <img src="../assets/like.png" class="iconeLike">
                     Apoiar
                 </div>
-            </button> -->
+            </button>
 
-            <!-- <div class="divPostagemComentario">
+            <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
-            </div> -->
+            </div>
 
-            <!-- <div class="divPostagemBotoes">
+            <div class="divPostagemBotoes">
                 <button type="submit">Comentar</button>
                 <button type="submit">Reportar</button>
-            </div> -->
+            </div>
         </div>
     </section>
 
@@ -68,7 +68,12 @@ export default {
 
     data: function () {
         return{
-            postagem: {}
+            postagem: {},
+            
+            upsAtributos: {
+                fk_user_id: '',
+                fk_postage_id: ''
+            }
         }
     },
     
@@ -80,6 +85,29 @@ export default {
         })
     },
     methods: {
+
+        apoiarPostagemMetodo(){
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        console.log("Usuário não logado")
+                    }
+                    else{
+                        this.upsAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsAtributos.fk_postage_id = this.postagem._id
+
+                        Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                            console.log('Apoio feito com sucesso!')
+                            console.log(resposta)
+                        })
+                    }
+                }
+            }
+            catch(err){
+                console.log({err})
+            }
+        },
 
         statusColor(status){
             var i = 0
@@ -170,6 +198,12 @@ export default {
         width: 100%;
         height: 50px;
         margin-bottom: 20px;
+
+        cursor: pointer;
+    }
+    
+    .divApoiarBotao:hover{
+        background-color: #060449;
     }
 
     .divTextoImagemApoiarBotao{

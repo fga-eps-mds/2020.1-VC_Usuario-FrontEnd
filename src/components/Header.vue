@@ -37,11 +37,14 @@ window.onscroll = function(){
         position: fixed;
         display: flex;
 
+
         height: 45px;
         width: 100%;
         
         transition: top 0.3s;
         background-color: $colorAzul;
+
+
     }
 
     .divWordmark{
@@ -52,6 +55,7 @@ window.onscroll = function(){
         width: 100%;
         margin: auto;
         position:absolute;
+        z-index: -50;
 
         & img{
             display: block;
