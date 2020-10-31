@@ -54,6 +54,8 @@
 
 <script>
 
+import { useStore } from 'vuex'
+
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import Postagem from '@/services/postagens.js'
@@ -74,7 +76,7 @@ export default {
     
     created: function(){
         
-        Postagem.listarUmaPostagem(this.$route.params.post_id).then(res => {
+        Postagem.listarUmaPostagem(useStore().getters.getPostagem).then(res => {
             this.postagem = res.data;
             console.log(res.data);
         })
