@@ -14,8 +14,8 @@ export default {
         return http.get('user/validate_session', {headers: {'authorization': `Bearer ${tk}`}})
     },
 
-    DeletarContaUsuario:(usuario) => {
-        return http.delete(`user/delete/${usuario.id}`, {params: {password: usuario.password}})
+    DeletarContaUsuario:(id) => {
+        return http.delete(`user/delete/${id}`)
     },
 
     ValidaSenhaUsuario:(usuario) => {

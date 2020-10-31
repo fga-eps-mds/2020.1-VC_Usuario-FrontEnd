@@ -57,13 +57,20 @@ const store = createStore({
 
     actions: {
         async loginAction({commit}, login){
+            var aux = true
+
             await Usuarios.Login(login).then(response => {
                 commit('SET_USUARIO', response.data.user)
                 commit('SET_TOKEN', response.data.token)
-                window.location.href='http://localhost:8080/perfil'
+                if(window.location.pathname == '/login'){
+                    window.location.href='http://localhost:8080/perfil'
+                }
             }, erro => {
                 alert(erro.response.data.msg)
+                aux = false
             })
+
+            return aux
         },
 
         async validateSessionAction({commit}, payload){
@@ -100,7 +107,6 @@ const store = createStore({
         },
 
         async validarSenhaUsuarioAction(payload){
-            console.log("oiiiiii",payload)
             await Usuarios.ValidaSenhaUsuario(payload).then(response => {
                 //dispatch
                 alert(response.data.msg)

@@ -94,6 +94,7 @@ export default {
     setup() {
         const store = useStore()
         const dados = {
+            id: store.getters.getId,
             nome: store.getters.getNome,
             email: store.getters.getEmail,
             password: '',
@@ -104,22 +105,17 @@ export default {
             store.commit('CLEAR_TOKEN')
             window.location.href='http://localhost:8080/'  
         }
-        const excluirConta = () => {
-            const usuario = {
-                id: store.getters.getId,
-                password: dados.password
-            }
-            store.dispatch('validarSenhaUsuarioAction', usuario)
-        }
-        /* const atualizarDados = () => {
-            const usuario = {
-                id: store.getters.getId,
-                nome: dados.nome,
+        const excluirConta = async () => {
+            store.dispatch('validateSessionAction', store.getters.getToken)
+            const login = {
                 email: dados.email,
                 password: dados.password
             }
-            store.dispatch('atualizarUsuarioAction', usuario)
-        } */
+            if(await store.dispatch('loginAction', login)){
+                modalSenha.value = false
+                store.dispatch('deletarUsuarioAction', dados.id)
+            }
+        }
         const modalAlerta = ref(false)
         const modalSenha = ref(false)
         const modalSenhaNovaSenha = ref(false)
