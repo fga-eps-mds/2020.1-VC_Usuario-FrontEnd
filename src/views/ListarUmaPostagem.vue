@@ -85,15 +85,6 @@ export default {
             this.postagem = res.data;
         })
     },
-
-    /* methods: {
-        statusColor(status){
-            var i = 0
-            if(status === "Em andamento") i = 1
-            else if (status === "Concluido") i = 2
-            return i
-        }
-    } */
 }
 </script>
 
