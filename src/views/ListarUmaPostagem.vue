@@ -30,21 +30,21 @@
                 <p align = "justify">{{postagem.post_description}}</p>
             </div>
 
-            <!-- <button class="divApoiarBotao">
+            <button class="divApoiarBotao">
                 <div class="divTextoImagemApoiarBotao">
                     <img src="../assets/like.png" class="iconeLike">
                     Apoiar
                 </div>
-            </button> -->
+            </button> 
 
-            <!-- <div class="divPostagemComentario">
+            <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
-            </div> -->
+            </div> 
 
-            <!-- <div class="divPostagemBotoes">
+            <div class="divPostagemBotoes">
                 <button type="submit">Comentar</button>
                 <button type="submit">Reportar</button>
-            </div> -->
+            </div>
         </div>
     </section>
 
@@ -54,11 +54,12 @@
 
 <script>
 
-import { useStore } from 'vuex'
+//import { useStore } from 'vuex'
 
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import Postagem from '@/services/postagens.js'
+import { ref } from 'vue'
 
 export default {
     name: 'listarUmaPostagem',
@@ -68,28 +69,31 @@ export default {
         MenuBar,
     },
 
-    data: function () {
-        return{
-            postagem: {}
+    setup() {
+        const postagem = ref({})
+        const statusColor = (status) => {
+            var i = 0
+            if(status === "Em andamento") i = 1
+            else if (status === "Concluido") i = 2
+            return i
         }
+        return{ postagem, statusColor}
     },
     
-    created: function(){
-        
-        Postagem.listarUmaPostagem(useStore().getters.getPostagem).then(res => {
+    created(){
+        Postagem.listarUmaPostagem(this.$route.params.id).then(res => {
             this.postagem = res.data;
-            console.log(res.data);
         })
     },
-    methods: {
 
+    /* methods: {
         statusColor(status){
             var i = 0
             if(status === "Em andamento") i = 1
             else if (status === "Concluido") i = 2
             return i
         }
-    }
+    } */
 }
 </script>
 
@@ -195,6 +199,7 @@ export default {
 
     .divPostagemBotoes{
         display: flex;
+        margin-bottom: 100px;
 
         & button{
             flex: 1;
