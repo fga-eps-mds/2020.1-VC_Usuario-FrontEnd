@@ -16,7 +16,7 @@
 
         <div class="divBotoes">
             <button @click="verMais(id)">Ver mais</button>
-            <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+            <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagemApoiada">Apoiado</button>
         </div>
     </div>
 </template>
@@ -28,7 +28,6 @@ import Postagem from '@/services/postagens.js'
 export default {
     name: 'postBlock',
     props: {
-        _id: String,
         title: String,
         status: String,
         author: String,
@@ -37,7 +36,7 @@ export default {
         id: String,
         supporting: Boolean
     },
-    
+
     data: function () {
         return{
             upsAtributos: {
@@ -80,24 +79,23 @@ export default {
 
 function mudarStyleApoio(){
 
-    var buttonPostagem = document.getElementById("buttonPostagem");
+    var buttonPostagemApoiada = document.getElementById("buttonPostagemApoiada");
 
-    if(buttonPostagem.innerHTML == "Apoiar"){
-        buttonPostagem.innerHTML = "Apoiado"
-        buttonPostagem.style.backgroundColor = "#248722";
-        buttonPostagem.style.color = "#ffffff";
+    if(buttonPostagemApoiada.innerHTML == "Apoiado"){
+        buttonPostagemApoiada.innerHTML = "Apoiar"
+        buttonPostagemApoiada.style.backgroundColor = "#ffffff";
+        buttonPostagemApoiada.style.color = "#000000";
     }
     else{
-        buttonPostagem.innerHTML = "Apoiar"
-        buttonPostagem.style.backgroundColor = "#ffffff";
-        buttonPostagem.style.color = "#000000";
+        buttonPostagemApoiada.innerHTML = "Apoiado"
+        buttonPostagemApoiada.style.backgroundColor = "#248722";
+        buttonPostagemApoiada.style.color = "#ffffff";
     }
 }
 </script>
 
 <style scoped lang="scss">
-    
-    @import "../assets/stylesheets/pallete.scss";
+@import "../assets/stylesheets/pallete.scss";
 
     .postagem {
         height: auto;
@@ -105,7 +103,7 @@ function mudarStyleApoio(){
         height: 150px;
         padding: 10px;
 
-        border: solid 1px $colorCinza;
+        border: solid 1px #DADDE0;
     }
     
     .autor{
@@ -114,20 +112,24 @@ function mudarStyleApoio(){
 
     .tituloEStatus {
         height: auto;
+        /* border: 1px solid red; */
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         margin-bottom: 20px;  
 
         & span:first-child{
-            padding-right: 30px;            
+            /* width: 70%; */
+            padding-right: 30px;
+            /* border: 1px solid red; */
+            
             font-size: 20px;
             font-weight: bold;
-            color: $colorAzul;
+            color: #090673;
         }
 
         & span:last-child{
-            color: $colorVermelho;
+            color: #CE1335;
         }
     }
 
@@ -156,22 +158,23 @@ function mudarStyleApoio(){
 
         & button:first-child{
             margin-right: 20px;
-            color: $colorBranca;
-            background-color: $colorAzul;
+            color: #ffffff;
+            background-color: #090673;
         }
 
         & button:first-child:hover{
-            background-color: $colorAzulEscuro;
+            background-color: #060449;
         }
 
         & button:last-child{
-            background-color: $colorBranca;
-            border: 1px solid $colorVerde;
+            background-color: #248722;
+            color: #ffffff;
+            border: 1px solid #248722;
         }
 
         & button:last-child:hover{
-            color: $colorBranca;
-            background-color: $colorVerde;
+            color: #000000;
+            background-color: #ffffff;
         }
     }
 </style>
