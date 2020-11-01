@@ -16,25 +16,19 @@
 
     <div class="divBotoes">
       <button @click="verMais(id)">Ver mais</button>
-      <!-- <button>Apoiar</button> -->
+      <button>Apoiar</button>
     </div>
   </div>
 </template>
 
 <script>
 
-import { useStore } from 'vuex'
-
 export default {
   name: "postBlock",
   setup() {
-      const store = useStore()
       const verMais = (post_id) => {
-        store.commit('SET_POSTAGEM', post_id)
         console.log()
-        window.location.href = "http://localhost:8080/post"
-        // aqui teria que redirecionar para um /post/:id
-        // $emit("ver-mais", post_id);
+        window.location.href = `http://localhost:8080/post/${post_id}`
     }
     return { verMais }
   },
@@ -46,12 +40,6 @@ export default {
     date: String,
     id: String,
   },
-//   methods: {
-//     verMais(post_id) {
-//         useStore().commit('SET_POSTAGEM', post_id)
-//       this.$emit("ver-mais", post_id);
-//     }
-//   },
 };
 </script>
 
