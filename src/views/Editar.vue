@@ -4,13 +4,16 @@
 
         <div class="modal" v-if="modalAlerta">
             <div class="conteudoModal">
-                <div class="textoDeAlerta">
-                    <p>Deseja realmente excluir sua conta?</p>
-                </div>
+                <div class="textAndButton">
+                    <div class="textoDeAlerta">
+                        <p>Deseja realmente excluir sua conta?</p>
+                        <br/><br/>
+                    </div>
                     <div class="divBotoesModal">
                         <button type="button" @click="modalAlerta = false">Cancelar</button>
                         <button type="button" @click="modalSenha = !modalSenha, modalAlerta = false">Continuar</button>
                     </div>
+                </div>
             </div>
         </div>
 
@@ -175,134 +178,142 @@ export default {
         }
 
         & .divBotoesModal{
-        width: 100%;
-        height: 50px;
-        padding-top: 20px;
-        display: flex;
-        justify-content: space-evenly;
+            width: 100%;
+            height: 50px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-evenly;
 
-        & .divInputSenha{
+            & .divInputSenha{
 
-            height: 100%;
+                height: 100%;
 
-            input{
-                box-shadow: 0 0 0 0;
-                margin-bottom: 10px;
+                input{
+                    box-shadow: 0 0 0 0;
+                    margin-bottom: 10px;
 
-                width: 100%;
-                height: 50px;
+                    width: 100%;
+                    height: 50px;
 
-                font-size: 14px;
-                border-bottom: 1px solid $colorCinza;
+                    font-size: 14px;
+                    border-bottom: 1px solid $colorCinza;
+                }
+
             }
 
+            & button{
+                bottom: 20px;
+                height: 25px;
+                width: 30%;
+
+                cursor: pointer;
+                font-size: 13px;
+                border: none;
+                border-radius: 15px;   
+                color: $colorBranca;
+                background-color: $colorAzul;
+            }
+
+            & button:hover{
+                background-color: $colorAzulEscuro;
+            }
         }
 
-        & button{
-            bottom: 20px;
-            height: 25px;
-            width: 30%;
-
-            cursor: pointer;
-            font-size: 13px;
-            border: none;
-            border-radius: 15px;   
-            color: $colorBranca;
-            background-color: $colorAzul;
+        & .textAndButton{
+            padding-top: 30px;
         }
 
-        & button:hover{
-            background-color: $colorAzulEscuro;
+        & .textoDeAlerta{
+            font-size: 15px;
         }
-    }
     }
 
     
 
     form{
-    height: auto;
-    margin: 0 30px;
-    margin-top: 60px;
+        height: auto;
+        margin: 0 30px;
+        margin-top: 60px;
 
 
-    & .divInputs{
-        width: 100%;
-        height: 240px;
-        margin-top:  10px;
+        & .divInputs{
+            width: 100%;
+            height: 240px;
+            margin-top:  10px;
 
-        & .divUser{
-            input{
-                width: 100%;
-                height: 50px;
+            & .divUser{
+                input{
+                    width: 100%;
+                    height: 50px;
 
-                font-size: 14px;
-                border-bottom: 1px solid $colorCinza;
-                margin-bottom: 10px;
+                    font-size: 14px;
+                    border-bottom: 1px solid $colorCinza;
+                    margin-bottom: 10px;
+                }
+            }
+            
+            & .divSenha{
+
+                height: 100%;
+
+                input{
+                    box-shadow: 0 0 0 0;
+                    margin-bottom: 10px;
+
+                    width: 100%;
+                    height: 50px;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid $colorCinza;
+                }
+
             }
         }
-        
-        & .divSenha{
 
-            height: 100%;
+        & .divBotaoSalvar{
+            width: 100%;
+            height: 50px;
+            padding-top: 45px;
 
-            input{
-                box-shadow: 0 0 0 0;
-                margin-bottom: 10px;
+            display: flex;
 
-                width: 100%;
+            & button{
                 height: 50px;
+                width: 100%;
 
-                font-size: 14px;
-                border-bottom: 1px solid $colorCinza;
+                cursor: pointer;
+                font-size: 20px;
+                border: none;
+                border-radius: 15px;   
+                color: $colorBranca;
+                background-color: $colorAzul;
             }
 
+            & button:hover{
+                background-color: $colorAzulEscuro;
+            }
         }
-    }
 
-    & .divBotaoSalvar{
-        width: 100%;
-        height: 50px;
-        padding-top: 45px;
-
-        display: flex;
-
-        & button{
-            height: 50px;
+        & .divBotoes{
             width: 100%;
-
-            cursor: pointer;
-            font-size: 20px;
-            border: none;
-            border-radius: 15px;   
-            color: $colorBranca;
-            background-color: $colorAzul;
-        }
-
-        & button:hover{
-            background-color: $colorAzulEscuro;
-        }
-    }
-
-    & .divBotoes{
-        width: 100%;
-        height: 50px;
-
-        & button{
             height: 50px;
-            width: 100%;
-            margin-top: 13px;
+
+            & button{
+                height: 50px;
+                width: 100%;
+                margin-top: 13px;
 
 
-            cursor: pointer;
-            font-size: 20px;
-            border-radius: 15px;
-            background-color: $colorBranca;
-            border: 1px solid $colorCinza;
+                cursor: pointer;
+                font-size: 20px;
+                border-radius: 15px;
+                background-color: $colorBranca;
+                border: 1px solid $colorCinza;
+            }
+
+            & button:hover{
+                background-color:$colorCinza;
+            }
         }
-
-        & button:hover{
-            background-color:$colorCinza;
-        }
-    }
 }
 </style>
