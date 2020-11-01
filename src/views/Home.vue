@@ -6,7 +6,7 @@
         <div class="divHome">
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 
-                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id"/>
             
             </div>
         </div>
@@ -34,7 +34,7 @@ export default {
         PostagemComponent
     },
     
-    data (){
+    data(){
         return {
             postagemData: {}
         }
@@ -49,16 +49,9 @@ export default {
         listarPostagens() {
 
             PostagemService.listarPostagem().then(Response => {
-                console.log(Response);
                 this.postagemData = Response.data.posts;
-                console.log(this.postagemData);
             })
         },
-
-        verMais(post_id){
-
-            this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
-        }
     },
 }
 </script>
