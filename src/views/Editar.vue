@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="divBotaoSalvar">
-                    <button>Salvar</button>
+                    <button type="button" @click="modalSenha = !modalSenha">Salvar</button>
                 </div>
 
                 <div class="divBotoes">
@@ -240,8 +240,6 @@ export default {
             font-size: 15px;
         }
     }
-
-    
 
     form{
         height: auto;
