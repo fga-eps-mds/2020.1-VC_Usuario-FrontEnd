@@ -38,6 +38,25 @@
             </div>
         </div>
 
+        <div class="modal" v-if="modalSenhaSalvar">
+            <div class="conteudoModalSenha">
+                <div class="textAndButton">
+                    <div class="textoDeSenha">
+                        <p>Digite sua senha</p>
+                        <br/><br/>
+
+                        <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                    </div>
+
+                    <div class="divBotoesModal">
+                        <button type="button" @click="modalSenhaSalvar = false">Cancelar</button>
+
+                        <button type="button" @click="atualizarDados">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal" v-if="modalSenhaNovaSenha">
             <div class="conteudoModalSenha">
                 <div class="textAndButton">
@@ -61,18 +80,19 @@
 
         <section>           
             <form @submit.prevent="">
+
                 <h1>
                     Editar
                 </h1>
                 <div class="divInputs">
                     <div class="divUser">
-                        <input style ="padrao" type="text" placeholder="Nome" required="true" v-model="dados.nome">
-                        <input style ="padrao" type="text" placeholder="Email" required="true" v-model="dados.email">
+                        <input style ="padrao" type="text" placeholder="Nome" v-model="dados.nome" >
+                        <input style ="padrao" type="email" placeholder="Email" v-model="dados.email">
                     </div>                
                 </div>
 
                 <div class="divBotaoSalvar">
-                    <button type="button" @click="modalSenha = !modalSenha">Salvar</button>
+                    <button type="button" @click="modalSenhaSalvar = !modalSenhaSalvar">Salvar</button>
                 </div>
 
                 <div class="divBotoes">
@@ -126,11 +146,28 @@ export default {
                 store.dispatch('deletarUsuarioAction', dados.id)
             }
         }
+        const atualizarDados = async () => {
+            store.dispatch('validateSessionAction', store.getters.getToken)
+            const login = {
+                email: dados.email,
+                password: dados.password
+            }
+            const usuario = {
+                email: dados.email,
+                id: dados.id,
+                nome: dados.nome
+            }
+            if(await store.dispatch('loginAction', login)){
+                modalSenhaSalvar.value = false
+                store.dispatch('atualizarUsuarioAction', usuario)
+            }
+        }
         const modalAlerta = ref(false)
         const modalSenha = ref(false)
+        const modalSenhaSalvar = ref(false)
         const modalSenhaNovaSenha = ref(false)
 
-        return { fazerLogout, excluirConta, dados, /* atualizarDados, */ modalAlerta, modalSenha, modalSenhaNovaSenha }
+        return { fazerLogout, excluirConta, dados, atualizarDados, modalAlerta, modalSenha, modalSenhaNovaSenha, modalSenhaSalvar }
     },
 
     created() {
