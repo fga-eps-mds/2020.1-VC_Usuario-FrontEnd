@@ -21,7 +21,7 @@
             </div>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                <div v-if="statusColor(postagem.post_supporting) == 0"><PostagemComponent v-bind:title="postagem.post_title" v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
+                <div v-if="statusColor(postagem.post_supporting) == 0 && postagem.post_category==''"><PostagemComponent v-bind:title="postagem.post_title" v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
 
                 <div v-if="statusColor(postagem.post_supporting) == 1"><PostagemApoiadaComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
             </div>
@@ -117,9 +117,88 @@ export default {
             return auxApoio
         },
 
-        select(number){
-            return number
-        }
+        /* select(number){
+            var categoria = ''
+
+            if (number == 2){
+                categoria = 'Limpeza'
+            }
+            if (number == 3){
+                categoria = 'Segurança'
+            }
+            if (number == 4){
+                categoria = 'Infraestrutura'
+            }
+            if (number == 5){
+                categoria = 'Transportes'
+            }
+            if (number == 6){
+                categoria = 'Serviços Terceirizados'
+            }
+            if (number == 7){
+                categoria = 'Meio Ambiente'
+            }
+            if (number == 8){
+                categoria = 'Jardinagem'
+            }
+            if (number == 9){
+                categoria = 'Alimentação nos campi'
+            }
+            if (number == 10){
+                categoria = 'Saúde e seguridade'
+            }
+            if (number == 11){
+                categoria = 'Abuso de Assédio'
+            }
+            if (number == 12){
+                categoria = 'Outros'
+            }
+
+            console.log("¨¨¨¨¨¨¨¨¨", categoria)
+
+            this.postagemData.map((response) => {
+                if(response.post_category == categoria){
+                    console.log("###########", response)
+                    this.postagemData = response;
+                }else{
+                    this.postagemData = '';
+                    console.log("@@@@@@", this.postagemData)
+                }
+
+            });
+
+             PostagemService.listarPostagem().then(Response => {
+
+                postagemData.map(filtragem => {
+                    if(filtragem.post_category == categoria){
+                        this.postagemData = filtragem;
+                        console.log("@@@@@@@@@", Response.data);
+                    }
+                })
+            })
+
+            const result = this.postagemData.map((filtragem) => {
+                    if(filtragem.post_category == categoria){
+                return{
+                        title:filtragem.post_title,
+                        status:filtragem.post_status,
+                        local:filtragem.post_place,
+                        date:filtragem.post_created_at,
+                        id:filtragem._id,
+                        supporting:filtragem.post_supporting 
+                    }
+                }else{
+                    title:'',
+                    status:'',
+                    local:'',
+                    date:'',
+                    id:'',
+                    supporting:'' 
+                }
+            })
+            console.log(result)
+
+        } */
     },
 }
 </script>
