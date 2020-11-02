@@ -4,24 +4,24 @@
 
     <section>
         <div class="divHome">
+
             <div class="wrapper">
-                <div class="item">Todas</div>
-                <div class="item">Limpeza</div>
-                <div class="item">Segurança</div>
-                <div class="item">Infraestrutura</div>
-                <div class="item">Transportes</div>
-                <div class="item">Serviços Terceirizados</div>
-                <div class="item">Meio Ambiente</div>
-                <div class="item">Jardinagem</div>
-                <div class="item">Alimentação nos campi</div>
-                <div class="item">Saúde e seguridade</div>
-                <div class="item">Abuso de Assédio</div>
-                <div class="item">Outros</div>
+                <div class="item" v-on:click="select(1)">Todas</div>
+                <div class="item" v-on:click="select(2)">Limpeza</div>
+                <div class="item" v-on:click="select(3)">Segurança</div>
+                <div class="item" v-on:click="select(4)">Infraestrutura</div>
+                <div class="item" v-on:click="select(5)">Transportes</div>
+                <div class="item" v-on:click="select(6)">Serviços Terceirizados</div>
+                <div class="item" v-on:click="select(7)">Meio Ambiente</div>
+                <div class="item" v-on:click="select(8)">Jardinagem</div>
+                <div class="item" v-on:click="select(9)">Alimentação nos campi</div>
+                <div class="item" v-on:click="select(10)">Saúde e seguridade</div>
+                <div class="item" v-on:click="select(11)">Abuso de Assédio</div>
+                <div class="item" v-on:click="select(12)">Outros</div>
             </div>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                
-                <div v-if="statusColor(postagem.post_supporting) == 0"><PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
+                <div v-if="statusColor(postagem.post_supporting) == 0"><PostagemComponent v-bind:title="postagem.post_title" v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
 
                 <div v-if="statusColor(postagem.post_supporting) == 1"><PostagemApoiadaComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
             </div>
@@ -78,8 +78,6 @@ export default {
                         PostagemService.listarPostagem().then(Response => {
                             
                             this.postagemData = Response.data.posts;
-
-                            console.log(Response);
                         })
                     }else {
                         this.user.fk_user_id = this.$store.getters.getId
@@ -87,8 +85,8 @@ export default {
                         PostagemService.listarPostagensUsuarioLogado(this.user.fk_user_id).then(Response => {
 
                             this.postagemData = Response.data;
-
                             console.log(Response);
+
                         })
                     }
                 }else{
@@ -117,6 +115,10 @@ export default {
             } 
             
             return auxApoio
+        },
+
+        select(number){
+            return number
         }
     },
 }
@@ -137,12 +139,8 @@ export default {
         overflow-x: auto;
     }
 
-    .wrapper::-webkit-scrollbar{
-        width: 0;
-    }
-
     .wrapper .item{
-        min-width: 150px;
+        min-width: 80px;
         height: 30px;
         line-height: 30px;
         text-align: center;
@@ -151,6 +149,11 @@ export default {
         color: $colorBranca;
         border-radius: 15px;
         font-size: 12px;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 8px;
     }
 
     .divHome{
@@ -165,7 +168,6 @@ export default {
         .divPostagem{
             height: auto;
             margin: 0 30px 20px;
-            margin-top: 10px;
             flex: 1 1 300px;
         }
     }
