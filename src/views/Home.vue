@@ -4,6 +4,21 @@
 
     <section>
         <div class="divHome">
+            <div class="wrapper">
+                <div class="item">Todas</div>
+                <div class="item">Limpeza</div>
+                <div class="item">Segurança</div>
+                <div class="item">Infraestrutura</div>
+                <div class="item">Transportes</div>
+                <div class="item">Serviços Terceirizados</div>
+                <div class="item">Meio Ambiente</div>
+                <div class="item">Jardinagem</div>
+                <div class="item">Alimentação nos campi</div>
+                <div class="item">Saúde e seguridade</div>
+                <div class="item">Abuso de Assédio</div>
+                <div class="item">Outros</div>
+            </div>
+
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 
                 <div v-if="statusColor(postagem.post_supporting) == 0"><PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" @ver-mais="verMais"/></div>
@@ -108,11 +123,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    @import "../assets/stylesheets/pallete.scss";
 
     section{
         width: 100%;
         padding-bottom: 120px;
         display: flex;
+    }
+
+    .wrapper{
+        max-height: 120px;
+        border: 1px solid #ddd;
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .wrapper::webkit-scrollbar{
+        width: 0;
+    }
+
+    .wrapper .item{
+        min-width: 200px;
+        height: 110px;
+        line-height: 110px;
+        text-align: center;
+        background-color: $colorAzul;
+        margin-right: 2px;
+        color: $colorBranca;
     }
 
     .divHome{
