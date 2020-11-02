@@ -1,46 +1,102 @@
 <template>
-  <div class="postagem">
-    <div class="tituloEStatus">
-      <span>{{ title }}</span>
-      <span>{{ status }}</span>
-    </div>
+    <div class="postagem">
+        <div class="tituloEStatus">
+            <span>{{title}}</span>
+            <span>{{status}}</span>
+        </div>
 
-    <div class="autor">
-      <p>{{ author }}</p>
-    </div>
+        <div class="autor">
+            <p>{{author}}</p>
+        </div>
 
-    <div class="localEData">
-      <p>{{ local }}</p>
-      <p>{{ date }}</p>
-    </div>
+        <div class="localEData">
+            <p>{{local}}</p>
+            <p>{{date}}</p>
+        </div>
 
-    <div class="divBotoes">
-      <button @click="verMais(id)">Ver mais</button>
-      <button>Apoiar</button>
+        <div class="divBotoes">
+            <button @click="verMais(id)">Ver mais</button>
+            <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+        </div>
     </div>
-  </div>
 </template>
 
-<script>
+<script>  
+import Postagem from '@/services/postagens.js'
 
 export default {
-  name: "postBlock",
-  setup() {
+    name: 'postBlock',
+    setup() {
       const verMais = (post_id) => {
         console.log()
         window.location.href = `http://localhost:8080/post/${post_id}`
+      }
+      return { verMais }
+    },
+    
+    props: {
+        _id: String,
+        title: String,
+        status: String,
+        author: String,
+        local: String,
+        date: String,
+        id: String,
+        supporting: Boolean
+    },
+    
+    data: function () {
+        return{
+            upsAtributos: {
+                fk_user_id: '',
+                fk_postage_id: ''
+            }
+        }
+    },
+
+    methods: {
+
+        apoiarPostagemMetodo(post_id){
+
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        console.log("Usuário não logado")
+                    }
+                    else{
+                        this.upsAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsAtributos.fk_postage_id = post_id
+
+                        Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                            console.log(resposta)
+                        })
+
+                        mudarStyleApoio()
+                    }
+                }
+            }catch(err){
+                console.log({err})
+            }
+        },
     }
-    return { verMais }
-  },
-  props: {
-    title: String,
-    status: String,
-    author: String,
-    local: String,
-    date: String,
-    id: String,
-  },
-};
+}
+
+function mudarStyleApoio(){
+
+  var buttonPostagem = document.getElementById("buttonPostagem");
+
+  if(buttonPostagem.innerHTML == "Apoiar"){
+      buttonPostagem.innerHTML = "Apoiado"
+      buttonPostagem.style.backgroundColor = "#248722";
+      buttonPostagem.style.color = "#ffffff";
+  }
+  else{
+      buttonPostagem.innerHTML = "Apoiar"
+      buttonPostagem.style.backgroundColor = "#ffffff";
+      buttonPostagem.style.color = "#000000";
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -111,14 +167,14 @@ export default {
     background-color: $colorAzulEscuro;
   }
 
-  /* & button:last-child{
-            background-color: $colorBranca;
-            border: 1px solid $colorVerde;
-        }
-
-        & button:last-child:hover{
-            color: $colorBranca;
-            background-color: $colorVerde;
-        } */
+  & button:last-child{
+      background-color: $colorBranca;
+      border: 1px solid $colorVerde;
+  }
+  
+  & button:last-child:hover{
+      color: $colorBranca;
+      background-color: $colorVerde;
+  } 
 }
 </style>
