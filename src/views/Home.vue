@@ -132,24 +132,25 @@ export default {
     }
 
     .wrapper{
-        max-height: 120px;
-        border: 1px solid #ddd;
+        max-height: 60px;
         display: flex;
         overflow-x: auto;
     }
 
-    .wrapper::webkit-scrollbar{
+    .wrapper::-webkit-scrollbar{
         width: 0;
     }
 
     .wrapper .item{
-        min-width: 200px;
-        height: 110px;
-        line-height: 110px;
+        min-width: 150px;
+        height: 30px;
+        line-height: 30px;
         text-align: center;
         background-color: $colorAzul;
-        margin-right: 2px;
+        margin-left: 5px;
         color: $colorBranca;
+        border-radius: 15px;
+        font-size: 12px;
     }
 
     .divHome{
@@ -164,6 +165,7 @@ export default {
         .divPostagem{
             height: auto;
             margin: 0 30px 20px;
+            margin-top: 10px;
             flex: 1 1 300px;
         }
     }
