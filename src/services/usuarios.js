@@ -22,7 +22,7 @@ export default {
         return http.post(`user/validade_password/${usuario.id}`, usuario.password)
     },
 
-    AtualizarUsuario:(id) => {
-        return http.put(`user/update/${id}`)
+    AtualizarUsuario:(usuario) => {
+        return http.put(`user/update/${usuario.id}`, usuario.data)
     }
 }
