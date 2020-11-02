@@ -24,7 +24,7 @@
                 </div>
                 
                 <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                    <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" author="Anônimo" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
+                    <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
                 </div>
             </section>
         </section>
@@ -35,7 +35,7 @@
     import Header from '@/components/Header.vue'
     import MenuBar from '@/components/MenuBar.vue'
     import PostagemComponent from '@/components/PostagemComponent.vue'
-    import PostagemService from '@/services/postagens.js'
+    import UserService from '@/services/usuarios.js'
 
     import { useStore } from 'vuex'
     import { computed } from 'vue'
@@ -66,7 +66,7 @@ export default {
         }else{
             useStore().commit('SET_SWAP', false)
         }
-        this.listarPostagens();
+        this.listarPostagemUsuario();
     },
 
     data() {
@@ -75,15 +75,11 @@ export default {
         }
     },
 
-
     methods: {
-
-        listarPostagens(){
-
-            PostagemService.listarPostagem().then(Response => {
-                console.log(Response);
-                this.postagemData = Response.data.posts;
-                console.log(this.postagemData);
+        listarPostagemUsuario() {
+            UserService.listarPostagemUsuario(this.$store.getters.getId).then(Response => {
+            this.postagemData = Response.data;
+            console.log(this.postagemData);
             })
         },
 
