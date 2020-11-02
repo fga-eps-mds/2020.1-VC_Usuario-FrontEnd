@@ -153,9 +153,11 @@ export default {
                 password: dados.password
             }
             const usuario = {
-                email: dados.email,
-                id: dados.id,
-                nome: dados.nome
+                data: {
+                    email: dados.email,
+                    nome: dados.nome
+                },
+                id: dados.id
             }
             if(await store.dispatch('loginAction', login)){
                 modalSenhaSalvar.value = false
