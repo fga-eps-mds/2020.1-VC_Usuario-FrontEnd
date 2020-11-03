@@ -79,20 +79,20 @@
         </div>
 
         <section>           
-            <form @submit.prevent="">
+            <form @submit.prevent="checkCampos">
 
                 <h1>
                     Editar
                 </h1>
                 <div class="divInputs">
                     <div class="divUser">
-                        <input style ="padrao" type="text" placeholder="Nome" v-model="dados.nome" >
-                        <input style ="padrao" type="email" placeholder="Email" v-model="dados.email">
+                        <input style ="padrao" type="text" placeholder="Nome" v-model="dados.nome" required="true">
+                        <input style ="padrao" type="email" placeholder="Email" v-model="dados.email" required="true">
                     </div>                
                 </div>
 
                 <div class="divBotaoSalvar">
-                    <button type="button" @click="modalSenhaSalvar = !modalSenhaSalvar">Salvar</button>
+                    <button type="submit">Salvar</button>
                 </div>
 
                 <div class="divBotoes">
@@ -135,41 +135,65 @@ export default {
             store.commit('CLEAR_TOKEN')
             window.location.href='http://localhost:8080/'  
         }
-        const excluirConta = async () => {
-            store.dispatch('validateSessionAction', store.getters.getToken)
-            const login = {
-                email: dados.email,
-                password: dados.password
-            }
-            if(await store.dispatch('loginAction', login)){
-                modalSenha.value = false
-                store.dispatch('deletarUsuarioAction', dados.id)
+        const checkCampos = () => {
+            if (dados.nome.trim() === store.getters.getNome && dados.email.trim() === store.getters.getEmail){
+                alert('Campos inalterados')
+            }else{
+                modalSenhaSalvar.value = true
             }
         }
-        const atualizarDados = async () => {
-            store.dispatch('validateSessionAction', store.getters.getToken)
+        const validarSessao = async () => {
+            await store.dispatch('validateSessionAction', store.getters.getToken)
             const login = {
-                email: dados.email,
+                email: store.getters.getEmail,
                 password: dados.password
-            }
-            const usuario = {
-                data: {
-                    email: dados.email,
-                    nome: dados.nome
-                },
-                id: dados.id
             }
             if(await store.dispatch('loginAction', login)){
                 modalSenhaSalvar.value = false
+                modalSenha.value = false
+                return true
+            }else{
+                return false
+            }
+        }
+        const excluirConta = () => {            
+            if(validarSessao()){
+                store.dispatch('deletarUsuarioAction', dados.id)
+            }
+        }
+        const atualizarDados = async() => {
+            if(await validarSessao()){
+                const usuario = {
+                    data: {
+                        email: dados.email.trim(),
+                        nome: dados.nome.trim()
+                    },
+                    id: dados.id
+                }
                 store.dispatch('atualizarUsuarioAction', usuario)
             }
         }
         const modalAlerta = ref(false)
         const modalSenha = ref(false)
         const modalSenhaSalvar = ref(false)
+        const modalSenhaSalvarFunction = () => {
+            modalSenhaSalvar.value = !modalSenhaSalvar.value
+        }
         const modalSenhaNovaSenha = ref(false)
 
-        return { fazerLogout, excluirConta, dados, atualizarDados, modalAlerta, modalSenha, modalSenhaNovaSenha, modalSenhaSalvar }
+        return { 
+            fazerLogout, 
+            excluirConta, 
+            dados, 
+            atualizarDados, 
+            modalAlerta, 
+            modalSenha, 
+            modalSenhaNovaSenha, 
+            modalSenhaSalvar, 
+            modalSenhaSalvarFunction,
+            validarSessao, 
+            checkCampos
+        }
     },
 
     created() {

@@ -75,6 +75,7 @@ const store = createStore({
 
         async validateSessionAction({commit}, payload){
             await Usuarios.Validar(payload).then(response => {
+                commit('SET_USUARIO', response.data.refreshed_user)
                 commit('SET_TOKEN', response.data.new_token)
             }, erro => {
                 console.log('com err')
