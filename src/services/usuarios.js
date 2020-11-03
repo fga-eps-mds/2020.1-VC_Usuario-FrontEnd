@@ -18,11 +18,12 @@ export default {
         return http.delete(`user/delete/${id}`)
     },
 
-    ValidaSenhaUsuario:(usuario) => {
-        return http.post(`user/validade_password/${usuario.id}`, usuario.password)
+    MudarSenha:(dados) => {
+        return http.put(`user/change_password/${dados.id}`, dados.password)
     },
 
     AtualizarUsuario:(usuario) => {
+        console.log(usuario.novaSenha)
         return http.put(`user/update/${usuario.id}`, usuario.data)
     }
 }

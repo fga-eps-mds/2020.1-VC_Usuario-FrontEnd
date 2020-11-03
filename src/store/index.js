@@ -109,15 +109,16 @@ const store = createStore({
             })
         },
 
-        async validarSenhaUsuarioAction(payload){
-            await Usuarios.ValidaSenhaUsuario(payload).then(response => {
-                //dispatch
+        async mudarSenhaAction({commit}, payload){
+            commit('SET_SWAP', false)
+            await Usuarios.MudarSenha(payload).then(response => {
                 alert(response.data.msg)
-                window.location.href='http://localhost:8080/editar'
+                window.location.href='http://localhost:8080/perfil'
             }, erro => {
                 console.log(erro.response.data.msg)
             })
-        },
+
+        }
     },
 
     getters: {
