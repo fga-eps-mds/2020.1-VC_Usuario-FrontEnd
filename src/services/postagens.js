@@ -27,6 +27,6 @@ export default {
     },
 
     listarPorCategoria:(categoria) => {
-        return http.get('postage/list_by_category', {params: {post_category: categoria}})
+        return http.get('postage/list_by_category', {params: {categoria: categoria}})
     },
 }

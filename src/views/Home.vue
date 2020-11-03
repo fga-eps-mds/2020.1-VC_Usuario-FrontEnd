@@ -87,16 +87,12 @@ export default {
                         PostagemService.listarPostagensUsuarioLogado(this.user.fk_user_id).then(Response => {
 
                             this.postagemData = Response.data;
-                            console.log(Response);
-
                         })
                     }
                 }else{
                     PostagemService.listarPostagem().then(Response => {
                         
                         this.postagemData = Response.data.posts;
-
-                        console.log(Response);
                     })
                 }
             }catch(err){
@@ -121,7 +117,7 @@ export default {
 
         listarPostagemPorCategoria(categoria){
             PostagemService.listarPorCategoria(categoria).then(Response => {
-                console.log("**********************",Response.data);
+                this.postagemData = Response.data.posts;
             }) 
         },
 
