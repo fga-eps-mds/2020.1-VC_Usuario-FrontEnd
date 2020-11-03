@@ -12,7 +12,7 @@
             </div>
 
             <div class="divPostagemNome">
-                <h2>Anônimo</h2>
+                <h2>{{postagem.post_author}}</h2>
             </div>
 
             <div class="divPostagemCaracteristicas">
