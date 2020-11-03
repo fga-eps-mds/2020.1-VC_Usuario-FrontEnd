@@ -58,24 +58,24 @@
         </div>
 
         <div class="modal" v-if="modalSenhaNovaSenha">
-            <div class="conteudoModalSenha">
+            <form @submit.prevent="mudarSenha" class="conteudoModalSenha">
                 <div class="textAndButton">
                     <div class="textoDeSenha">
                         <p>Preencha os campos</p>
                         <br/>
 
-                        <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                        <input style="senha" type="password" id="senha" placeholder="Senha" v-model="dados.password" required="true">
 
-                        <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha">
+                        <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha" required="true">
                     </div>
 
                     <div class="divBotoesModal">
                         <button type="button" @click="modalSenhaNovaSenha = false">Cancelar</button>
 
-                        <button type="button">Continuar</button>
+                        <button type="submit">Continuar</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <section>           
@@ -151,6 +151,7 @@ export default {
             if(await store.dispatch('loginAction', login)){
                 modalSenhaSalvar.value = false
                 modalSenha.value = false
+                modalSenhaNovaSenha.value = false
                 return true
             }else{
                 return false
@@ -173,12 +174,21 @@ export default {
                 store.dispatch('atualizarUsuarioAction', usuario)
             }
         }
+        const mudarSenha = () => {
+            if(validarSessao()){
+                const data = {
+                    id: dados.id,
+                    password:{
+                        novaSenha: dados.novaSenha
+                    } 
+                }
+
+                store.dispatch('mudarSenhaAction', data)
+            }
+        }
         const modalAlerta = ref(false)
         const modalSenha = ref(false)
         const modalSenhaSalvar = ref(false)
-        const modalSenhaSalvarFunction = () => {
-            modalSenhaSalvar.value = !modalSenhaSalvar.value
-        }
         const modalSenhaNovaSenha = ref(false)
 
         return { 
@@ -189,10 +199,10 @@ export default {
             modalAlerta, 
             modalSenha, 
             modalSenhaNovaSenha, 
-            modalSenhaSalvar, 
-            modalSenhaSalvarFunction,
+            modalSenhaSalvar,
             validarSessao, 
-            checkCampos
+            checkCampos,
+            mudarSenha
         }
     },
 
