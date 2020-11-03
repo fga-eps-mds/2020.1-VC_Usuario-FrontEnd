@@ -64,6 +64,8 @@ export default {
 
     created: function() {
         this.listarPostagens();
+        this.listarPostagemPorCategoria();
+
     },
         
     methods: {
@@ -117,7 +119,16 @@ export default {
             return auxApoio
         },
 
-        /* select(number){
+        listarPostagemPorCategoria(categoria){
+            console.log("categoria", categoria)
+            PostagemService.listarPorCategoria(categoria).then(Response => {
+                console.log("**********************",Response.data);
+
+            }) 
+        },
+
+        select(number){
+
             var categoria = ''
 
             if (number == 2){
@@ -154,51 +165,10 @@ export default {
                 categoria = 'Outros'
             }
 
-            console.log("¨¨¨¨¨¨¨¨¨", categoria)
+            this.listarPostagemPorCategoria(categoria)
+            console.log(number)
 
-            this.postagemData.map((response) => {
-                if(response.post_category == categoria){
-                    console.log("###########", response)
-                    this.postagemData = response;
-                }else{
-                    this.postagemData = '';
-                    console.log("@@@@@@", this.postagemData)
-                }
-
-            });
-
-             PostagemService.listarPostagem().then(Response => {
-
-                postagemData.map(filtragem => {
-                    if(filtragem.post_category == categoria){
-                        this.postagemData = filtragem;
-                        console.log("@@@@@@@@@", Response.data);
-                    }
-                })
-            })
-
-            const result = this.postagemData.map((filtragem) => {
-                    if(filtragem.post_category == categoria){
-                return{
-                        title:filtragem.post_title,
-                        status:filtragem.post_status,
-                        local:filtragem.post_place,
-                        date:filtragem.post_created_at,
-                        id:filtragem._id,
-                        supporting:filtragem.post_supporting 
-                    }
-                }else{
-                    title:'',
-                    status:'',
-                    local:'',
-                    date:'',
-                    id:'',
-                    supporting:'' 
-                }
-            })
-            console.log(result)
-
-        } */
+        },
     },
 }
 </script>
