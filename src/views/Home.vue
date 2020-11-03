@@ -120,10 +120,8 @@ export default {
         },
 
         listarPostagemPorCategoria(categoria){
-            console.log("categoria", categoria)
             PostagemService.listarPorCategoria(categoria).then(Response => {
                 console.log("**********************",Response.data);
-
             }) 
         },
 
@@ -166,8 +164,6 @@ export default {
             }
 
             this.listarPostagemPorCategoria(categoria)
-            console.log(number)
-
         },
     },
 }
