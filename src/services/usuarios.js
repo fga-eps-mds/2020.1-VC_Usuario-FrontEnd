@@ -12,5 +12,9 @@ export default {
 
     Validar:(tk) => {
         return http.get('user/validate_session', {headers: {'authorization': `Bearer ${tk}`}})
+    },
+
+    listarPostagemUsuario:(id) => {
+        return http.get(`/user/list_postages/${id}`)
     }
 }
