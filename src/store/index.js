@@ -52,6 +52,10 @@ const store = createStore({
     
             state.token = ''
         },
+
+        SET_POSTAGEM(state, payload) {
+            state.postagem = payload
+        }
     },
 
     actions: {
@@ -96,8 +100,7 @@ const store = createStore({
 
         getSwap(state) {
             return state.swapPerfilLogin
-        }
-
+        },
     }     
 })
 
