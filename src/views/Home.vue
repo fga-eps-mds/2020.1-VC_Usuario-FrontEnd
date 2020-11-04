@@ -125,6 +125,10 @@ export default {
 
             var categoria = ''
 
+            if (number == 1){
+                this.listarPostagens()
+            }
+
             if (number == 2){
                 categoria = 'Limpeza'
             }
