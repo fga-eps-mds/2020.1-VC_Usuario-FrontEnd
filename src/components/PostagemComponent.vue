@@ -20,9 +20,10 @@
                 <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
             </div>
 
-            <div class="divBotaoEditar">
-                <button @click="editar(id)">Editar</button>
+            <div v-if="$route.name === 'Perfil'" class="divBotaoEditar">
+                <img src="../assets/edit.png" @click="editar(id)">
             </div>
+
         </div>
     </div>
 </template>
@@ -154,6 +155,10 @@ function mudarStyleApoio(){
         width: 100%;
         margin-bottom: 10px;
         justify-content: space-between;
+
+        & img {
+            height: 20px;
+        }
 
         .divBotaoVerMaisApoiar {
             display: flex;
