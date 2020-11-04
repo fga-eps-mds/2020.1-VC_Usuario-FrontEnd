@@ -23,7 +23,6 @@ export default {
     },
 
     AtualizarUsuario:(usuario) => {
-        console.log(usuario.novaSenha)
         return http.put(`user/update/${usuario.id}`, usuario.data)
     }
 }

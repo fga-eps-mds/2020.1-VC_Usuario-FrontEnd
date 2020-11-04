@@ -99,12 +99,10 @@ const store = createStore({
 
         async atualizarUsuarioAction({commit}, payload){
             commit('SET_SWAP', false)
-            console.log("#####################################",payload) 
             await Usuarios.AtualizarUsuario(payload).then(response => {
                 alert(response.data.msg)
                 window.location.href='http://localhost:8080/perfil'
             }, erro => {
-                console.log("here")
                 console.log(erro.response.data.msg)
             })
         },
