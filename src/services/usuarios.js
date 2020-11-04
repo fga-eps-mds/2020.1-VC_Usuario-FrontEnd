@@ -24,5 +24,9 @@ export default {
 
     AtualizarUsuario:(usuario) => {
         return http.put(`user/update/${usuario.id}`, usuario.data)
+    },
+
+    listarPostagemUsuario:(id) => {
+        return http.get(`/user/list_postages/${id}`)
     }
 }
