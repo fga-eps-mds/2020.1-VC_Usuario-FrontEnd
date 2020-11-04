@@ -24,7 +24,7 @@
                 </div>
                 
                 <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                    <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais"/>
+                    <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais" @editar-postagem="editar"/> 
                 </div>
             </section>
         </section>
@@ -86,6 +86,11 @@ export default {
         verMais(post_id){
 
             this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
+        },
+
+        editar(post_id){
+
+            this.$router.push({ name: 'editarUmaPostagem', params: { post_id: post_id }})
         }
     },
 }
