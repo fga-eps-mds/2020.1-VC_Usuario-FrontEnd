@@ -157,8 +157,8 @@ export default {
                 return false
             }
         }
-        const excluirConta = () => {            
-            if(validarSessao()){
+        const excluirConta = async () => {            
+            if(await validarSessao()){
                 store.dispatch('deletarUsuarioAction', dados.id)
             }
         }
@@ -174,8 +174,8 @@ export default {
                 store.dispatch('atualizarUsuarioAction', usuario)
             }
         }
-        const mudarSenha = () => {
-            if(validarSessao()){
+        const mudarSenha = async () => {
+            if(await validarSessao()){
                 const data = {
                     id: dados.id,
                     password:{
