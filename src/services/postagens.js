@@ -25,4 +25,8 @@ export default {
     listarPostagensUsuarioLogado:(idDoUsuario) => {
         return http.get(`postage/list_all_with_UPS/${idDoUsuario}`)
     },
+
+    editarUmaPostagem:(postagem) => {
+        return http.put('/postage/update_one', postagem)
+    }
 }
