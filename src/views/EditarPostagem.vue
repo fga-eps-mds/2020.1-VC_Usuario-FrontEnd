@@ -43,6 +43,8 @@
             
             <div class="divBotoes">
                 <button type="submit">Atualizar</button>
+                <button>Cancelar</button>
+                <button>Excluir</button>
             </div>
         </form>
     </section>
@@ -202,18 +204,41 @@ export default {
         & button{
             height: 50px;
             width: 100%;
-            margin-top: 13px;
-
+            margin-bottom: 20px;
 
             cursor: pointer;
             font-size: 20px;
             border-radius: 15px;
-            background-color: $colorBranca;
+        }
+
+        & button:first-child{
+            border: none;
+            background-color: $colorAzul;
+            color: #ffffff;
+        }
+
+        & button:first-child:hover{
+            background-color:$colorAzulEscuro;
+        }
+
+        & button:nth-child(even){
+            background-color: #ffffff;
             border: 1px solid $colorCinza;
         }
 
-        & button:hover{
+        & button:nth-child(even):hover{
             background-color:$colorCinza;
+        }
+
+        & button:last-child{            
+            color: $colorVermelho;
+            background-color: #ffffff;
+            border: 1px solid $colorCinza;
+        }
+
+        & button:last-child:hover{
+            color: #ffffff;
+            background-color: $colorVermelho;
         }
     }
 </style>
