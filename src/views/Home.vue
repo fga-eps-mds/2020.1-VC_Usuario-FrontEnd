@@ -6,18 +6,18 @@
         <div class="divHome">
 
             <div class="wrapper">
-                <div class="item" v-on:click="select(1)">Todas</div>
-                <div class="item" v-on:click="select(2)">Limpeza</div>
-                <div class="item" v-on:click="select(3)">Segurança</div>
-                <div class="item" v-on:click="select(4)">Infraestrutura</div>
-                <div class="item" v-on:click="select(5)">Transportes</div>
-                <div class="item" v-on:click="select(6)">Serviços Terceirizados</div>
-                <div class="item" v-on:click="select(7)">Meio Ambiente</div>
-                <div class="item" v-on:click="select(8)">Jardinagem</div>
-                <div class="item" v-on:click="select(9)">Alimentação nos campi</div>
-                <div class="item" v-on:click="select(10)">Saúde e seguridade</div>
-                <div class="item" v-on:click="select(11)">Abuso de Assédio</div>
-                <div class="item" v-on:click="select(12)">Outros</div>
+                <button class="item" v-on:click="select(1); mudarStyleTodas()">Todas</button>
+                <button class="item" v-on:click="select(2); mudarStyleLimpeza()">Limpeza</button>
+                <button class="item" v-on:click="select(3); mudarStyleSeguranca()">Segurança</button>
+                <button class="item" v-on:click="select(4); mudarStyleInfraestrutura()">Infraestrutura</button>
+                <button class="item" v-on:click="select(5); mudarStyleTransportes()">Transportes</button>
+                <button class="item" v-on:click="select(6); mudarStyleServicosTerceirizados()">Serviços Terceirizados</button>
+                <button class="item" v-on:click="select(7); mudarStyleMeioAmbiente()">Meio Ambiente</button>
+                <button class="item" v-on:click="select(8); mudarStyleJardinagem()">Jardinagem</button>
+                <button class="item" v-on:click="select(9); mudarStyleAlimentacaoNosCampi()">Alimentação nos campi</button>
+                <button class="item" v-on:click="select(10); mudarStyleSaudeESeguridade()">Saúde e seguridade</button>
+                <button class="item" v-on:click="select(11); mudarStyleAbusoDeAssedio()">Abuso de Assédio</button>
+                <button class="item" v-on:click="select(12); mudarStyleOutros()">Outros</button>
             </div>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
@@ -163,6 +163,8 @@ export default {
         },
     },
 }
+
+ 
 </script>
 
 <style scoped lang="scss">
@@ -186,16 +188,22 @@ export default {
         height: 30px;
         line-height: 30px;
         text-align: center;
-        background-color: $colorAzul;
+        background-color: $colorCinza;
         margin-left: 5px;
         color: $colorBranca;
         border-radius: 15px;
+        color: black;
         font-size: 12px;
         text-overflow: ellipsis;
         cursor: pointer;
         white-space: nowrap;
         overflow: hidden;
         margin: 8px;
+    }
+
+    .wrapper .item:focus {
+        background-color: $colorAzulEscuro;
+        color: $colorBranca;
     }
 
     .divHome{
