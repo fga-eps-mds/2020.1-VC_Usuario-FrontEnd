@@ -15,8 +15,14 @@
         </div>
 
         <div class="divBotoes">
-            <button @click="verMais(id)">Ver mais</button>
-            <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+            <div class="divBotaoVerMaisApoiar">
+                <button @click="verMais(id)">Ver mais</button>
+                <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+            </div>
+
+            <div class="divBotaoEditar">
+                <button @click="editar(id)">Editar</button>
+            </div>
         </div>
     </div>
 </template>
@@ -50,6 +56,10 @@ export default {
     methods: {
         verMais(post_id){
             this.$emit('ver-mais', post_id)
+        },
+
+        editar(post_id) {
+            this.$emit('editar-postagem', post_id)
         },
 
         apoiarPostagemMetodo(post_id){
@@ -141,37 +151,44 @@ function mudarStyleApoio(){
     /* BOTÕES */
     .divBotoes{
         display: flex;
-        width: 80%;
-        max-width: 300px;
+        width: 100%;
         margin-bottom: 10px;
-        
-        & button{
-            flex: 1;
-            height: 30px;
+        justify-content: space-between;
 
-            cursor: pointer;
-            border: none;
-            border-radius: 25px; 
-        }
+        .divBotaoVerMaisApoiar {
+            display: flex;
+            width: 80%;
+            max-width: 300px;
+            justify-content: space-between;
 
-        & button:first-child{
-            margin-right: 20px;
-            color: $colorBranca;
-            background-color: $colorAzul;
-        }
+            & button{
+                flex: 1;
+                height: 30px;
 
-        & button:first-child:hover{
-            background-color: $colorAzulEscuro;
-        }
+                cursor: pointer;
+                border: none;
+                border-radius: 25px; 
+            }
 
-        & button:last-child{
-            background-color: $colorBranca;
-            border: 1px solid $colorVerde;
-        }
+            & button:first-child{
+                margin-right: 20px;
+                color: $colorBranca;
+                background-color: $colorAzul;
+            }
 
-        & button:last-child:hover{
-            color: $colorBranca;
-            background-color: $colorVerde;
+            & button:first-child:hover{
+                background-color: $colorAzulEscuro;
+            }
+
+            & button:last-child{
+                background-color: $colorBranca;
+                border: 1px solid $colorVerde;
+            }
+
+            & button:last-child:hover{
+                color: $colorBranca;
+                background-color: $colorVerde;
+            }
         }
     }
 </style>
