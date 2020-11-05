@@ -35,7 +35,6 @@
                 <input type="file" ref="file" id="file" accept="image/png, image/jpeg" @change="imagemSelecionada">  
             </div> -->
 
-
             <div class="divDescricao">
                 <legend>Descrição</legend>
                 <textarea class="inputDescricao" rows="5" cols="50" v-model="editarPostagemObjeto.post_description"></textarea>
@@ -96,24 +95,19 @@ export default {
 
             this.excluirPostagemObjeto.user_id = this.$store.getters.getId
             this.excluirPostagemObjeto.postage_id = res.data._id
-
-            console.log(this.editarPostagemObjeto);
-            console.log(this.excluirPostagemObjeto);
         })
     },
 
     methods:{
         editarPostagem() {
             Postagem.editarUmaPostagem(this.editarPostagemObjeto).then(res => {
-                console.log(res.data)
                 window.location.href='http://localhost:8080/perfil'  
             })
         },
 
         excluirPostagem(){
-            console.log(this.excluirPostagemObjeto);
             Postagem.excluirUmaPostagem(this.excluirPostagemObjeto).then(res => {
-                console.log(res.data) 
+                window.location.href='http://localhost:8080/perfil'  
             })
         }
     }
