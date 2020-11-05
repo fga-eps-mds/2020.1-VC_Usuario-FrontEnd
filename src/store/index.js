@@ -21,6 +21,7 @@ const store = createStore({
     
             state.swapPerfilLogin = payload;
         },
+
         SET_USUARIO(state, payload) {
             if(this.debug){
                 console.log('Novo usuário: ', payload)
@@ -60,30 +61,75 @@ const store = createStore({
 
     actions: {
         async loginAction({commit}, login){
+            var aux = true
+
             await Usuarios.Login(login).then(response => {
                 commit('SET_USUARIO', response.data.user)
                 commit('SET_TOKEN', response.data.token)
-                window.location.href='http://localhost:8080/perfil'
+                if(window.location.pathname == '/login'){
+                    window.location.href='http://localhost:8080/perfil'
+                }
             }, erro => {
                 alert(erro.response.data.msg)
+                aux = false
             })
+
+            return aux
         },
 
         async validateSessionAction({commit}, payload){
-            
             await Usuarios.Validar(payload).then(response => {
+                commit('SET_USUARIO', response.data.refreshed_user)
                 commit('SET_TOKEN', response.data.new_token)
             }, erro => {
                 console.log('com err')
                 console.log(erro.response.data.msg)
+                commit('CLEAR_USUARIO')
+                commit('CLEAR_TOKEN')
                 window.location.href='http://localhost:8080/login'
             }) 
+        },
+
+        async deletarUsuarioAction({commit}, payload){
+            await Usuarios.DeletarContaUsuario(payload).then(response => {
+                commit('CLEAR_USUARIO')
+                commit('CLEAR_TOKEN')
+                console.log(response.data.msg)
+                window.location.href='http://localhost:8080'
+            }, erro => {
+                console.log(erro.response.data.msg)
+            })
+        },
+
+        async atualizarUsuarioAction({commit}, payload){
+            commit('SET_SWAP', false)
+            await Usuarios.AtualizarUsuario(payload).then(response => {
+                alert(response.data.msg)
+                window.location.href='http://localhost:8080/perfil'
+            }, erro => {
+                console.log(erro.response.data.msg)
+            })
+        },
+
+        async mudarSenhaAction({commit}, payload){
+            commit('SET_SWAP', false)
+            await Usuarios.MudarSenha(payload).then(response => {
+                alert(response.data.msg)
+                window.location.href='http://localhost:8080/perfil'
+            }, erro => {
+                console.log(erro.response.data.msg)
+            })
+
         }
     },
 
     getters: {
+        getEmail(state){
+            return state.usuario.user_email
+        },
+
         getNome(state) {
-            return state.usuario.user_name;
+            return state.usuario.user_name
         },
 
         getId(state) {
