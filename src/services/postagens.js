@@ -28,5 +28,9 @@ export default {
 
     editarUmaPostagem:(postagem) => {
         return http.put('/postage/update_one', postagem)
+    },
+
+    excluirUmaPostagem:(postagem) => {
+        return http.delete('/postage/delete_one', postagem)
     }
 }
