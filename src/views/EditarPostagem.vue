@@ -1,6 +1,7 @@
 <template>
 
     <Header/>
+    
     <section>
         <form @submit.prevent="" enctype="multipart/form-data">
             <input class= "inputTitulo" type="text" placeholder="Título" v-model="editarPostagemObjeto.post_title">
@@ -42,7 +43,7 @@
             
             <div class="divBotoes">
                 <button @click="editarPostagem">Atualizar</button>
-                <button>Cancelar</button>
+                <button onclick='history.go(-1)'>Cancelar</button>
                 <button @click="excluirPostagem">Excluir</button>
             </div>
         </form>
@@ -139,7 +140,6 @@ export default {
         min-height: 620px;
     }
 
-    // TÍTULO
     .inputTitulo{
         box-shadow: 0 0 0 0;
         border: 0 none;
@@ -161,7 +161,6 @@ export default {
         color: $colorPreta;
     }
 
-    // CATEGORIA E LOCAL
     .divCategoriaLocal{
         display: flex;
 
