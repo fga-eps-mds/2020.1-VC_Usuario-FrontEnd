@@ -127,13 +127,14 @@ export default {
             this.listarPostagemPorCategoria(categoria)
         },
 
-        codeAddress() {
+        focarTodas() {
             document.getElementById("Todas").focus()
         },
     },
 
     mounted(){
-        this.codeAddress() //method1 will execute at pageload
+        this.focarTodas()
+        this.listarPostagemPorCategoria('Todas') //method1 will execute at pageload
     },
 }
 
