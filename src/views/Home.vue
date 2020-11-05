@@ -5,7 +5,7 @@
     <section>
         <div class="divHome">
 
-            <div class="wrapper">
+            <div class="divCategorias">
                 <button class="item" v-on:click="select('Todas')">Todas</button>
                 <button class="item" v-on:click="select('Limpeza')">Limpeza</button>
                 <button class="item" v-on:click="select('Segurança')">Segurança</button>
@@ -100,10 +100,6 @@ export default {
             }
         },
 
-        verMais(post_id){
-            this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
-        },
-
         statusColor(post_supporting){
             var auxApoio = 0
 
@@ -144,34 +140,40 @@ export default {
         display: flex;
     }
 
-    .wrapper{
+    .divCategorias{
         max-height: 60px;
         display: flex;
         width: 100%;
         overflow-x: auto;
-    }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
 
-    .wrapper .item{
-        min-width: 80px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        background-color: $colorCinza;
-        margin-left: 5px;
-        color: $colorBranca;
-        border-radius: 15px;
-        color: $colorAzulEscuro;
-        font-size: 12px;
-        text-overflow: ellipsis;
-        cursor: pointer;
-        white-space: nowrap;
-        overflow: hidden;
-        margin: 8px;
-    }
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
-    .wrapper .item:focus {
-        background-color: $colorAzulEscuro;
-        color: $colorBranca;
+        .item{
+            min-width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: $colorCinza;
+            margin-left: 5px;
+            color: $colorBranca;
+            border-radius: 15px;
+            color: $colorAzulEscuro;
+            font-size: 12px;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 8px;
+
+            &:focus{
+                background-color: $colorAzulEscuro;
+                color: $colorBranca;
+            }
+        }
     }
 
     .divHome{
