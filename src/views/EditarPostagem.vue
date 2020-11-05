@@ -101,12 +101,14 @@ export default {
     methods:{
         editarPostagem() {
             Postagem.editarUmaPostagem(this.editarPostagemObjeto).then(res => {
+                console.log(res.data)
                 window.location.href='http://localhost:8080/perfil'  
             })
         },
 
         excluirPostagem(){
             Postagem.excluirUmaPostagem(this.excluirPostagemObjeto).then(res => {
+                console.log(res.data)
                 window.location.href='http://localhost:8080/perfil'  
             })
         }
