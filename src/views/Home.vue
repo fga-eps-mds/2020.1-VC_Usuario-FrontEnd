@@ -5,7 +5,7 @@
     <section>
         <div class="divHome">
             <div class="divCategorias">
-                <button class="item" v-on:click="select('Todas')">Todas</button>
+                <button class="item" id = "Todas" v-on:click="select('Todas')">Todas</button>
                 <button class="item" v-on:click="select('Limpeza')">Limpeza</button>
                 <button class="item" v-on:click="select('Segurança')">Segurança</button>
                 <button class="item" v-on:click="select('Infraestrutura')">Infraestrutura</button>
@@ -126,6 +126,14 @@ export default {
         select(categoria){
             this.listarPostagemPorCategoria(categoria)
         },
+
+        codeAddress() {
+            document.getElementById("Todas").focus()
+        },
+    },
+
+    mounted(){
+        this.codeAddress() //method1 will execute at pageload
     },
 }
 
