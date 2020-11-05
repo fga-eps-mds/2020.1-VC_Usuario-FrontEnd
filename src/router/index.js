@@ -22,7 +22,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "Cadastro" */ '../views/Cadastro.vue')
   },
   {
-    path: '/post',
+    path: '/post/:id',
     name: 'listarUmaPostagem',
     component: () => import(/* webpackChunkName: "ListarUmaPostagem" */ '../views/ListarUmaPostagem.vue'),
   },

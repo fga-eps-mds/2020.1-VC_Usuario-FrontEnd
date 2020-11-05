@@ -21,12 +21,19 @@
     </div>
 </template>
 
-<script>
-
+<script>  
 import Postagem from '@/services/postagens.js'
 
 export default {
     name: 'postBlock',
+    setup() {
+      const verMais = (post_id) => {
+        console.log()
+        window.location.href = `http://localhost:8080/post/${post_id}`
+      }
+      return { verMais }
+    },
+    
     props: {
         _id: String,
         title: String,
@@ -48,9 +55,6 @@ export default {
     },
 
     methods: {
-        verMais(post_id){
-            this.$emit('ver-mais', post_id)
-        },
 
         apoiarPostagemMetodo(post_id){
 
@@ -80,98 +84,97 @@ export default {
 
 function mudarStyleApoio(){
 
-    var buttonPostagem = document.getElementById("buttonPostagem");
+  var buttonPostagem = document.getElementById("buttonPostagem");
 
-    if(buttonPostagem.innerHTML == "Apoiar"){
-        buttonPostagem.innerHTML = "Apoiado"
-        buttonPostagem.style.backgroundColor = "#248722";
-        buttonPostagem.style.color = "#ffffff";
-    }
-    else{
-        buttonPostagem.innerHTML = "Apoiar"
-        buttonPostagem.style.backgroundColor = "#ffffff";
-        buttonPostagem.style.color = "#000000";
-    }
+  if(buttonPostagem.innerHTML == "Apoiar"){
+      buttonPostagem.innerHTML = "Apoiado"
+      buttonPostagem.style.backgroundColor = "#248722";
+      buttonPostagem.style.color = "#ffffff";
+  }
+  else{
+      buttonPostagem.innerHTML = "Apoiar"
+      buttonPostagem.style.backgroundColor = "#ffffff";
+      buttonPostagem.style.color = "#000000";
+  }
 }
 </script>
 
 <style scoped lang="scss">
-    
-    @import "../assets/stylesheets/pallete.scss";
+@import "../assets/stylesheets/pallete.scss";
 
-    .postagem {
-        height: auto;
-        border-radius: 15px;
-        height: 150px;
-        padding: 10px;
+.postagem {
+  height: auto;
+  border-radius: 15px;
+  height: 150px;
+  padding: 10px;
 
-        border: solid 1px $colorCinza;
-    }
-    
-    .autor{
-        margin-bottom: 10px;
-    }
+  border: solid 1px $colorCinza;
+}
 
-    .tituloEStatus {
-        height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-bottom: 20px;  
+.autor {
+  margin-bottom: 10px;
+}
 
-        & span:first-child{
-            padding-right: 30px;            
-            font-size: 20px;
-            font-weight: bold;
-            color: $colorAzul;
-        }
+.tituloEStatus {
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
 
-        & span:last-child{
-            color: $colorVermelho;
-        }
-    }
+  & span:first-child {
+    padding-right: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: $colorAzul;
+  }
 
-    .localEData{
-        display: flex;
-        justify-content: space-between;
+  & span:last-child {
+    color: $colorVermelho;
+  }
+}
 
-        margin-bottom: 20px;
-    }
+.localEData {
+  display: flex;
+  justify-content: space-between;
 
-    /* BOTÕES */
-    .divBotoes{
-        display: flex;
-        width: 80%;
-        max-width: 300px;
-        margin-bottom: 10px;
-        
-        & button{
-            flex: 1;
-            height: 30px;
+  margin-bottom: 20px;
+}
 
-            cursor: pointer;
-            border: none;
-            border-radius: 25px; 
-        }
+/* BOTÕES */
+.divBotoes {
+  display: flex;
+  width: 80%;
+  max-width: 300px;
+  margin-bottom: 10px;
 
-        & button:first-child{
-            margin-right: 20px;
-            color: $colorBranca;
-            background-color: $colorAzul;
-        }
+  & button {
+    flex: 1;
+    height: 30px;
 
-        & button:first-child:hover{
-            background-color: $colorAzulEscuro;
-        }
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+  }
 
-        & button:last-child{
-            background-color: $colorBranca;
-            border: 1px solid $colorVerde;
-        }
+  & button:first-child {
+    margin-right: 20px;
+    color: $colorBranca;
+    background-color: $colorAzul;
+  }
 
-        & button:last-child:hover{
-            color: $colorBranca;
-            background-color: $colorVerde;
-        }
-    }
+  & button:first-child:hover {
+    background-color: $colorAzulEscuro;
+  }
+
+  & button:last-child{
+      background-color: $colorBranca;
+      border: 1px solid $colorVerde;
+  }
+  
+  & button:last-child:hover{
+      color: $colorBranca;
+      background-color: $colorVerde;
+  } 
+}
 </style>
