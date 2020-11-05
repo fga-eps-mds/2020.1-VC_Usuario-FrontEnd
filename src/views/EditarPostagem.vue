@@ -2,11 +2,11 @@
 
     <Header/>
     <section>
-        <form @submit.prevent="editarPostagem" enctype="multipart/form-data">
-            <input class= "inputTitulo" type="text" placeholder="Título" v-model="postagem.post_title">
+        <form @submit.prevent="" enctype="multipart/form-data">
+            <input class= "inputTitulo" type="text" placeholder="Título" v-model="editarPostagemObjeto.post_title">
 
             <div class="divCategoriaLocal">
-                <select v-model="postagem.post_category">
+                <select v-model="editarPostagemObjeto.post_category">
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
                     <option>Segurança</option>
@@ -21,7 +21,7 @@
                     <option>Outros</option>
                 </select>
 
-                <select v-model="postagem.post_place">
+                <select v-model="editarPostagemObjeto.post_place">
                     <option disabled value="">Local</option>
                     <option>FGA</option>
                     <option>DARCY</option>
@@ -38,13 +38,13 @@
 
             <div class="divDescricao">
                 <legend>Descrição</legend>
-                <textarea class="inputDescricao" rows="5" cols="50" v-model="postagem.post_description"></textarea>
+                <textarea class="inputDescricao" rows="5" cols="50" v-model="editarPostagemObjeto.post_description"></textarea>
             </div>
             
             <div class="divBotoes">
-                <button type="submit">Atualizar</button>
+                <button @click="editarPostagem">Atualizar</button>
                 <button>Cancelar</button>
-                <button>Excluir</button>
+                <button @click="excluirPostagem">Excluir</button>
             </div>
         </form>
     </section>
@@ -68,48 +68,54 @@ export default {
 
     data(){
         return{
-            postagem: {
-                fk_user_id: '',
+            editarPostagemObjeto: {
+                user_id: '',
+                postage_id: '',
                 post_title: '',
                 post_place: '',
                 post_category: '',
-                post_description: '',
-                file: '',
-                _id: ''
+                post_description: ''
+            },
+
+            excluirPostagemObjeto: {
+                user_id: '',
+                postage_id: ''
             }
         }
     },
 
-    // created : function() {
-    //     this.postagem._id = this.$route.params.
-    //     console.log(this.postagem._id)
-    // },
-
     created: function(){
         
         Postagem.listarUmaPostagem(this.$route.params.post_id).then(res => {
-            this.postagem = res.data;
-            console.log(res.data);
+            this.editarPostagemObjeto.user_id = this.$store.getters.getId
+            this.editarPostagemObjeto.postage_id = res.data._id
+            this.editarPostagemObjeto.post_title = res.data.post_title
+            this.editarPostagemObjeto.post_place = res.data.post_place
+            this.editarPostagemObjeto.post_category = res.data.post_category
+            this.editarPostagemObjeto.post_description = res.data.post_description
+
+            this.excluirPostagemObjeto.user_id = this.$store.getters.getId
+            this.excluirPostagemObjeto.postage_id = res.data._id
+
+            console.log(this.editarPostagemObjeto);
+            console.log(this.excluirPostagemObjeto);
         })
     },
 
     methods:{
         editarPostagem() {
-            // const formData = new FormData();
-            // formData.append('post_title', this.postagem.post_title,)
-            // formData.append('post_place', this.postagem.post_place,)
-            // formData.append('post_category', this.postagem.post_category,)
-            // formData.append('post_description', this.postagem.post_description,)
-
-            this.postagem.fk_user_id_logged = this.$store.getters.getId
-            console.log(this.postagem)
-
-
-            Postagem.editarUmaPostagem(this.postagem).then(res => {
+            Postagem.editarUmaPostagem(this.editarPostagemObjeto).then(res => {
                 console.log(res.data)
                 window.location.href='http://localhost:8080/perfil'  
             })
         },
+
+        excluirPostagem(){
+            console.log(this.excluirPostagemObjeto);
+            Postagem.excluirUmaPostagem(this.excluirPostagemObjeto).then(res => {
+                console.log(res.data) 
+            })
+        }
     }
 
 }
