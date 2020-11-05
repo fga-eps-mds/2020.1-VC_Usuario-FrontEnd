@@ -6,18 +6,18 @@
         <div class="divHome">
 
             <div class="wrapper">
-                <button class="item" v-on:click="select(1); mudarStyleTodas()">Todas</button>
-                <button class="item" v-on:click="select(2); mudarStyleLimpeza()">Limpeza</button>
-                <button class="item" v-on:click="select(3); mudarStyleSeguranca()">Segurança</button>
-                <button class="item" v-on:click="select(4); mudarStyleInfraestrutura()">Infraestrutura</button>
-                <button class="item" v-on:click="select(5); mudarStyleTransportes()">Transportes</button>
-                <button class="item" v-on:click="select(6); mudarStyleServicosTerceirizados()">Serviços Terceirizados</button>
-                <button class="item" v-on:click="select(7); mudarStyleMeioAmbiente()">Meio Ambiente</button>
-                <button class="item" v-on:click="select(8); mudarStyleJardinagem()">Jardinagem</button>
-                <button class="item" v-on:click="select(9); mudarStyleAlimentacaoNosCampi()">Alimentação nos campi</button>
-                <button class="item" v-on:click="select(10); mudarStyleSaudeESeguridade()">Saúde e seguridade</button>
-                <button class="item" v-on:click="select(11); mudarStyleAbusoDeAssedio()">Abuso de Assédio</button>
-                <button class="item" v-on:click="select(12); mudarStyleOutros()">Outros</button>
+                <button class="item" v-on:click="select('Todas')">Todas</button>
+                <button class="item" v-on:click="select('Limpeza')">Limpeza</button>
+                <button class="item" v-on:click="select('Segurança')">Segurança</button>
+                <button class="item" v-on:click="select('Infraestrutura')">Infraestrutura</button>
+                <button class="item" v-on:click="select('Transportes')">Transportes</button>
+                <button class="item" v-on:click="select('Serviços Terceirizados')">Serviços Terceirizados</button>
+                <button class="item" v-on:click="select('Meio Ambiente')">Meio Ambiente</button>
+                <button class="item" v-on:click="select('Jardinagem')">Jardinagem</button>
+                <button class="item" v-on:click="select('Alimentação nos campi')">Alimentação nos campi</button>
+                <button class="item" v-on:click="select('Saúde e seguridade')">Saúde e seguridade</button>
+                <button class="item" v-on:click="select('Abuso de Assédio')">Abuso de Assédio</button>
+                <button class="item" v-on:click="select('Outros')">Outros</button>
             </div>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
@@ -71,7 +71,6 @@ export default {
     methods: {
 
         listarPostagens() {
-
             try{
                 if( !this.$store.getters.getSwap ){
 
@@ -101,7 +100,6 @@ export default {
         },
 
         verMais(post_id){
-
             this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
         },
 
@@ -116,49 +114,18 @@ export default {
         },
 
         listarPostagemPorCategoria(categoria){
-            PostagemService.listarPorCategoria(categoria).then(Response => {
-                this.postagemData = Response.data.posts;
-            }) 
+            if(categoria == 'Todas'){
+                PostagemService.listarPostagem().then(Response => {
+                    this.postagemData = Response.data.posts;
+                })
+            }else{
+                PostagemService.listarPorCategoria(categoria).then(Response => {
+                    this.postagemData = Response.data.posts;
+                })
+            }
         },
 
-        select(number){
-
-            var categoria = ''
-
-            if (number == 2){
-                categoria = 'Limpeza'
-            }
-            if (number == 3){
-                categoria = 'Segurança'
-            }
-            if (number == 4){
-                categoria = 'Infraestrutura'
-            }
-            if (number == 5){
-                categoria = 'Transportes'
-            }
-            if (number == 6){
-                categoria = 'Serviços Terceirizados'
-            }
-            if (number == 7){
-                categoria = 'Meio Ambiente'
-            }
-            if (number == 8){
-                categoria = 'Jardinagem'
-            }
-            if (number == 9){
-                categoria = 'Alimentação nos campi'
-            }
-            if (number == 10){
-                categoria = 'Saúde e seguridade'
-            }
-            if (number == 11){
-                categoria = 'Abuso de Assédio'
-            }
-            if (number == 12){
-                categoria = 'Outros'
-            }
-
+        select(categoria){
             this.listarPostagemPorCategoria(categoria)
         },
     },
@@ -192,7 +159,7 @@ export default {
         margin-left: 5px;
         color: $colorBranca;
         border-radius: 15px;
-        color: black;
+        color: $colorAzulEscuro;
         font-size: 12px;
         text-overflow: ellipsis;
         cursor: pointer;
