@@ -31,6 +31,6 @@ export default {
     },
 
     excluirUmaPostagem:(postagem) => {
-        return http.delete('/postage/delete_one', postagem)
+        return http.put('/postage/delete_one', postagem)
     }
 }
