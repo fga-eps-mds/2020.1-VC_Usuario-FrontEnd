@@ -195,5 +195,11 @@ function mudarStyleApoio(){
                 background-color: $colorVerde;
             }
         }
+
+        .divBotaoEditar{
+            & img{
+                cursor: pointer;
+            }
+        }
     }
 </style>
