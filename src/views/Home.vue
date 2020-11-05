@@ -4,7 +4,6 @@
 
     <section>
         <div class="divHome">
-
             <div class="divCategorias">
                 <button class="item" v-on:click="select('Todas')">Todas</button>
                 <button class="item" v-on:click="select('Limpeza')">Limpeza</button>
@@ -19,6 +18,8 @@
                 <button class="item" v-on:click="select('Abuso de Assédio')">Abuso de Assédio</button>
                 <button class="item" v-on:click="select('Outros')">Outros</button>
             </div>
+
+            <div class="divSeparador"/>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
           
@@ -191,4 +192,13 @@ export default {
             flex: 1 1 300px;
         }
     }
+
+    .divSeparador{
+        width: 100%;
+        background-color: $colorCinza;
+        height: 1px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
 </style>
