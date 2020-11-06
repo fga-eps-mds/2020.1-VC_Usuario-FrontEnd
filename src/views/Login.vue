@@ -11,8 +11,8 @@
 
             <form @submit.prevent="fazerLogin">
                 <div class="divInputs">
-                    <input type="email" placeholder="Email" v-model="login.email">
-                    <input type="password" placeholder="Senha" v-model="login.password">
+                    <input type="email" placeholder="Email" v-model="login.email" required="true">
+                    <input type="password" placeholder="Senha" v-model="login.password" required="true">
                     <a href="#">Esqueceu sua senha?</a>
                 </div>
 

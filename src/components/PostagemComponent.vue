@@ -28,12 +28,19 @@
     </div>
 </template>
 
-<script>
-
+<script>  
 import Postagem from '@/services/postagens.js'
 
 export default {
     name: 'postBlock',
+    setup() {
+      const verMais = (post_id) => {
+        console.log()
+        window.location.href = `http://localhost:8080/post/${post_id}`
+      }
+      return { verMais }
+    },
+    
     props: {
         _id: String,
         title: String,
@@ -55,9 +62,6 @@ export default {
     },
 
     methods: {
-        verMais(post_id){
-            this.$emit('ver-mais', post_id)
-        },
 
         editar(post_id) {
             this.$emit('editar-postagem', post_id)
@@ -91,115 +95,105 @@ export default {
 
 function mudarStyleApoio(){
 
-    var buttonPostagem = document.getElementById("buttonPostagem");
+  var buttonPostagem = document.getElementById("buttonPostagem");
 
-    if(buttonPostagem.innerHTML == "Apoiar"){
-        buttonPostagem.innerHTML = "Apoiado"
-        buttonPostagem.style.backgroundColor = "#248722";
-        buttonPostagem.style.color = "#ffffff";
-    }
-    else{
-        buttonPostagem.innerHTML = "Apoiar"
-        buttonPostagem.style.backgroundColor = "#ffffff";
-        buttonPostagem.style.color = "#000000";
-    }
+  if(buttonPostagem.innerHTML == "Apoiar"){
+      buttonPostagem.innerHTML = "Apoiado"
+      buttonPostagem.style.backgroundColor = "#248722";
+      buttonPostagem.style.color = "#ffffff";
+  }
+  else{
+      buttonPostagem.innerHTML = "Apoiar"
+      buttonPostagem.style.backgroundColor = "#ffffff";
+      buttonPostagem.style.color = "#000000";
+  }
 }
 </script>
 
 <style scoped lang="scss">
-    
-    @import "../assets/stylesheets/pallete.scss";
+@import "../assets/stylesheets/pallete.scss";
 
-    .postagem {
-        height: auto;
-        border-radius: 15px;
-        height: 150px;
-        padding: 10px;
+.postagem {
+  height: auto;
+  border-radius: 15px;
+  height: 150px;
+  padding: 10px;
 
-        border: solid 1px $colorCinza;
+  border: solid 1px $colorCinza;
+}
+
+.autor {
+  margin-bottom: 10px;
+}
+
+.tituloEStatus {
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  & span:first-child {
+    padding-right: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: $colorAzul;
+  }
+
+  & span:last-child {
+    color: $colorVermelho;
+  }
+}
+
+.localEData {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+/* BOTÕES */
+.divBotoes{
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    & img {
+        height: 20px;
     }
-    
-    .autor{
-        margin-bottom: 10px;
-    }
-
-    .tituloEStatus {
-        height: auto;
+    .divBotaoVerMaisApoiar {
         display: flex;
-        flex-wrap: wrap;
+        width: 80%;
+        max-width: 300px;
         justify-content: space-between;
-        margin-bottom: 20px;  
-
-        & span:first-child{
-            padding-right: 30px;            
-            font-size: 20px;
-            font-weight: bold;
-            color: $colorAzul;
+        & button{
+            flex: 1;
+            height: 30px;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px; 
         }
-
-        & span:last-child{
-            color: $colorVermelho;
+        & button:first-child{
+            margin-right: 20px;
+            color: $colorBranca;
+            background-color: $colorAzul;
+        }
+        & button:first-child:hover{
+            background-color: $colorAzulEscuro;
+        }
+        & button:last-child{
+            background-color: $colorBranca;
+            border: 1px solid $colorVerde;
+        }
+        & button:last-child:hover{
+            color: $colorBranca;
+            background-color: $colorVerde;
         }
     }
-
-    .localEData{
-        display: flex;
-        justify-content: space-between;
-
-        margin-bottom: 20px;
-    }
-
-    /* BOTÕES */
-    .divBotoes{
-        display: flex;
-        width: 100%;
-        margin-bottom: 10px;
-        justify-content: space-between;
-
-        & img {
-            height: 20px;
-        }
-
-        .divBotaoVerMaisApoiar {
-            display: flex;
-            width: 80%;
-            max-width: 300px;
-            justify-content: space-between;
-
-            & button{
-                flex: 1;
-                height: 30px;
-
-                cursor: pointer;
-                border: none;
-                border-radius: 25px; 
-            }
-
-            & button:first-child{
-                margin-right: 20px;
-                color: $colorBranca;
-                background-color: $colorAzul;
-            }
-
-            & button:first-child:hover{
-                background-color: $colorAzulEscuro;
-            }
-
-            & button:last-child{
-                background-color: $colorBranca;
-                border: 1px solid $colorVerde;
-            }
-
-            & button:last-child:hover{
-                color: $colorBranca;
-                background-color: $colorVerde;
-            }
-        }
-
-        .divBotaoEditar{
-            & img{
-                cursor: pointer;
-            }
+    .divBotaoEditar{
+        & img{
+            cursor: pointer;
         }
     }
+}
 </style>
