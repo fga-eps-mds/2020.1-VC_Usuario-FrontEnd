@@ -66,8 +66,7 @@ export default {
 
     created: function() {
         this.listarPostagens();
-        this.listarPostagemPorCategoria();
-
+        this.listarPostagemPorCategoria('Todas');
     },
         
     methods: {
@@ -113,9 +112,7 @@ export default {
 
         listarPostagemPorCategoria(categoria){
             if(categoria == 'Todas'){
-                PostagemService.listarPostagem().then(Response => {
-                    this.postagemData = Response.data.posts;
-                })
+                this.listarPostagens();
             }else{
                 PostagemService.listarPorCategoria(categoria).then(Response => {
                     this.postagemData = Response.data.posts;
@@ -134,7 +131,6 @@ export default {
 
     mounted(){
         this.focarTodas()
-        this.listarPostagemPorCategoria('Todas') //method1 will execute at pageload
     },
 }
 
