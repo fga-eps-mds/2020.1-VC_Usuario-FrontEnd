@@ -26,7 +26,15 @@ export default {
         return http.get(`postage/list_all_with_UPS/${idDoUsuario}`)
     },
 
+    editarUmaPostagem:(postagem) => {
+        return http.put('/postage/update_one', postagem)
+    },
+
+    excluirUmaPostagem:(postagem) => {
+        return http.put('/postage/delete_one', postagem)
+    },
+
     listarPorCategoria:(categoria) => {
         return http.get('postage/list_by_category', {params: {categoria: categoria}})
-    },
+    }
 }

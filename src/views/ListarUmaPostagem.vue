@@ -83,8 +83,8 @@ export default {
     data() {
         return{            
             upsAtributos: {
-                fk_user_id: '',
-                fk_postage_id: ''
+                user_id: '',
+                postage_id: ''
             }
         }
     },
@@ -104,8 +104,8 @@ export default {
                         console.log("Usuário não logado")
                     }
                     else{
-                        this.upsAtributos.fk_user_id = this.$store.getters.getId
-                        this.upsAtributos.fk_postage_id = this.postagem._id
+                        this.upsAtributos.user_id = this.$store.getters.getId
+                        this.upsAtributos.postage_id = this.postagem._id
 
                         Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
                             console.log('Apoio feito com sucesso!')

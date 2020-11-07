@@ -15,8 +15,15 @@
         </div>
 
         <div class="divBotoes">
-            <button @click="verMais(id)">Ver mais</button>
-            <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+            <div class="divBotaoVerMaisApoiar">
+                <button @click="verMais(id)">Ver mais</button>
+                <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+            </div>
+
+            <div v-if="$route.name === 'Perfil'" class="divBotaoEditar">
+                <img src="../assets/edit.png" @click="editar(id)">
+            </div>
+
         </div>
     </div>
 </template>
@@ -48,13 +55,17 @@ export default {
     data: function () {
         return{
             upsAtributos: {
-                fk_user_id: '',
-                fk_postage_id: ''
+                user_id: '',
+                postage_id: ''
             }
         }
     },
 
     methods: {
+
+        editar(post_id) {
+            this.$emit('editar-postagem', post_id)
+        },
 
         apoiarPostagemMetodo(post_id){
 
@@ -65,8 +76,8 @@ export default {
                         console.log("Usuário não logado")
                     }
                     else{
-                        this.upsAtributos.fk_user_id = this.$store.getters.getId
-                        this.upsAtributos.fk_postage_id = post_id
+                        this.upsAtributos.user_id = this.$store.getters.getId
+                        this.upsAtributos.postage_id = post_id
 
                         Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
                             console.log(resposta)
@@ -142,39 +153,47 @@ function mudarStyleApoio(){
 }
 
 /* BOTÕES */
-.divBotoes {
-  display: flex;
-  width: 80%;
-  max-width: 300px;
-  margin-bottom: 10px;
-
-  & button {
-    flex: 1;
-    height: 30px;
-
-    cursor: pointer;
-    border: none;
-    border-radius: 25px;
-  }
-
-  & button:first-child {
-    margin-right: 20px;
-    color: $colorBranca;
-    background-color: $colorAzul;
-  }
-
-  & button:first-child:hover {
-    background-color: $colorAzulEscuro;
-  }
-
-  & button:last-child{
-      background-color: $colorBranca;
-      border: 1px solid $colorVerde;
-  }
-  
-  & button:last-child:hover{
-      color: $colorBranca;
-      background-color: $colorVerde;
-  } 
+.divBotoes{
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    & img {
+        height: 20px;
+    }
+    .divBotaoVerMaisApoiar {
+        display: flex;
+        width: 80%;
+        max-width: 300px;
+        justify-content: space-between;
+        & button{
+            flex: 1;
+            height: 30px;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px; 
+        }
+        & button:first-child{
+            margin-right: 20px;
+            color: $colorBranca;
+            background-color: $colorAzul;
+        }
+        & button:first-child:hover{
+            background-color: $colorAzulEscuro;
+        }
+        & button:last-child{
+            background-color: $colorBranca;
+            border: 1px solid $colorVerde;
+        }
+        & button:last-child:hover{
+            color: $colorBranca;
+            background-color: $colorVerde;
+        }
+    }
+    .divBotaoEditar{
+        & img{
+            cursor: pointer;
+        }
+    }
 }
 </style>
