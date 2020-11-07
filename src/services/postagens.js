@@ -32,5 +32,9 @@ export default {
 
     excluirUmaPostagem:(postagem) => {
         return http.put('/postage/delete_one', postagem)
+    },
+
+    listarPorCategoria:(categoria) => {
+        return http.get('postage/list_by_category', {params: {categoria: categoria}})
     }
 }
