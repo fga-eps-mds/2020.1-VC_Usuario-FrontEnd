@@ -25,4 +25,8 @@ export default {
     listarPostagensUsuarioLogado:(idDoUsuario) => {
         return http.get(`postage/list_all_with_UPS/${idDoUsuario}`)
     },
+
+    listarPorCategoria:(categoria) => {
+        return http.get('postage/list_by_category', {params: {categoria: categoria}})
+    },
 }
