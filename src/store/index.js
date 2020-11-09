@@ -136,6 +136,10 @@ const store = createStore({
             return state.usuario._id
         },
 
+        getScore(state) {
+            return state.usuario.user_score
+        },
+
         getToken(state) {
             if (state.token){
                 return state.token
