@@ -17,7 +17,7 @@
         <div class="divBotoes">
             <div class="divBotaoVerMaisApoiar">
                 <button @click="verMais(id)">Ver mais</button>
-                <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+                <button v-on:click="apoiarPostagemMetodo(id)" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">Apoiar</button>
             </div>
 
             <div v-if="$route.name === 'Perfil'" class="divBotaoEditar">
@@ -57,8 +57,14 @@ export default {
             upsAtributos: {
                 user_id: '',
                 postage_id: ''
-            }
+            },
+
+            statusBotaoApoio: false
         }
+    },
+
+    created: function() {
+        this.setupStatusBotaoApoio(this.supporting);
     },
 
     methods: {
@@ -83,17 +89,21 @@ export default {
                             console.log(resposta)
                         })
 
-                        mudarStyleApoio()
+                        /* mudarStyleApoio() */
                     }
                 }
             }catch(err){
                 console.log({err})
             }
         },
+
+        setupStatusBotaoApoio(post_supporting){
+            this.statusBotaoApoio = post_supporting
+        }
     }
 }
 
-function mudarStyleApoio(){
+/* function mudarStyleApoio(){
 
   var buttonPostagem = document.getElementById("buttonPostagem");
 
@@ -107,7 +117,7 @@ function mudarStyleApoio(){
       buttonPostagem.style.backgroundColor = "#ffffff";
       buttonPostagem.style.color = "#000000";
   }
-}
+} */
 </script>
 
 <style scoped lang="scss">
@@ -181,14 +191,20 @@ function mudarStyleApoio(){
         & button:first-child:hover{
             background-color: $colorAzulEscuro;
         }
-        & button:last-child{
+        
+        .botaoApoio{
             background-color: $colorBranca;
             border: 1px solid $colorVerde;
         }
-        & button:last-child:hover{
+
+        .apoio{
+            background-color: $colorVerde;
+            color: $colorBranca; 
+        }
+        /* & button:last-child:hover{
             color: $colorBranca;
             background-color: $colorVerde;
-        }
+        } */
     }
     .divBotaoEditar{
         & img{
