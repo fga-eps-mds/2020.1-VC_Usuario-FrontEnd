@@ -79,6 +79,8 @@ export default {
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
+                        this.statusBotaoApoio = true
+                        
                         console.log("Usuário não logado")
                     }
                     else{
@@ -88,8 +90,6 @@ export default {
                         Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
                             console.log(resposta)
                         })
-
-                        /* mudarStyleApoio() */
                     }
                 }
             }catch(err){
@@ -103,21 +103,6 @@ export default {
     }
 }
 
-/* function mudarStyleApoio(){
-
-  var buttonPostagem = document.getElementById("buttonPostagem");
-
-  if(buttonPostagem.innerHTML == "Apoiar"){
-      buttonPostagem.innerHTML = "Apoiado"
-      buttonPostagem.style.backgroundColor = "#248722";
-      buttonPostagem.style.color = "#ffffff";
-  }
-  else{
-      buttonPostagem.innerHTML = "Apoiar"
-      buttonPostagem.style.backgroundColor = "#ffffff";
-      buttonPostagem.style.color = "#000000";
-  }
-} */
 </script>
 
 <style scoped lang="scss">
