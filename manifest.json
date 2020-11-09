@@ -1,0 +1,15 @@
+{
+    "name": "VamosCuidar",
+    "short_name": "VamosCuidar",
+    "theme_color": "#090673",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "src/assets/vamosCuidarIcon.png",
+        "sizes": "72x72",
+        "type": "image/png"
+      }
+    ]
+  }
