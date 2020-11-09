@@ -19,7 +19,7 @@
                         <img src="../assets/trophy.png" class="PerfilContainer__pontosPerfil__trofeu"> 
                     </span>
                     <span class="PerfilContainer__pontosPerfil__numero">
-                        800
+                        {{ pontos }}
                     </span>
                 </div>
                 
@@ -51,7 +51,8 @@ export default {
 
     setup(){
         const nome = computed(() => useStore().getters.getNome)
-        return { nome }
+        const pontos = computed(() => useStore().getters.getScore)
+        return { nome, pontos }
     },
     
     created() {
