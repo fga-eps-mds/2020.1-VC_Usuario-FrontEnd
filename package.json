@@ -31,11 +31,5 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "vue-jest": "^3.0.7"
-  },
-
-  "eslintConfig": {
-    "rules": {
-      "no-console": "off"
-    },
   }
 }
