@@ -36,6 +36,7 @@
     import MenuBar from '@/components/MenuBar.vue'
     import PostagemComponent from '@/components/PostagemComponent.vue'
     import UserService from '@/services/usuarios.js'
+    /* eslint-disable */
 
     import { useStore } from 'vuex'
     import { computed } from 'vue'

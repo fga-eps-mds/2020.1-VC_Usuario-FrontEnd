@@ -57,6 +57,7 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import Postagem from '@/services/postagens.js'
+/* eslint-disable */
 
 export default {
 

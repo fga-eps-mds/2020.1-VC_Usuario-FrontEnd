@@ -30,6 +30,7 @@
 
 <script>  
 import Postagem from '@/services/postagens.js'
+/* eslint-disable */
 
 export default {
     name: 'postBlock',
