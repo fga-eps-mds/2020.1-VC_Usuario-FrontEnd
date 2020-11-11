@@ -17,7 +17,7 @@
         <div class="divBotoes">
             <div class="divBotaoVerMaisApoiar">
                 <button @click="verMais(id)">Ver mais</button>
-                <button v-on:click="apoiarPostagemMetodo(id)" id="buttonPostagem">Apoiar</button>
+                <button v-on:click="apoiarPostagemMetodo(id)" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">Apoiar</button>
             </div>
 
             <div v-if="$route.name === 'Perfil'" class="divBotaoEditar">
@@ -57,8 +57,14 @@ export default {
             upsAtributos: {
                 user_id: '',
                 postage_id: ''
-            }
+            },
+
+            statusBotaoApoio: false
         }
+    },
+
+    created: function() {
+        this.setupStatusBotaoApoio(this.supporting);
     },
 
     methods: {
@@ -73,6 +79,8 @@ export default {
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
+                        this.statusBotaoApoio = true
+                        
                         console.log("Usuário não logado")
                     }
                     else{
@@ -82,32 +90,19 @@ export default {
                         Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
                             console.log(resposta)
                         })
-
-                        mudarStyleApoio()
                     }
                 }
             }catch(err){
                 console.log({err})
             }
         },
+
+        setupStatusBotaoApoio(post_supporting){
+            this.statusBotaoApoio = post_supporting
+        }
     }
 }
 
-function mudarStyleApoio(){
-
-  var buttonPostagem = document.getElementById("buttonPostagem");
-
-  if(buttonPostagem.innerHTML == "Apoiar"){
-      buttonPostagem.innerHTML = "Apoiado"
-      buttonPostagem.style.backgroundColor = "#248722";
-      buttonPostagem.style.color = "#ffffff";
-  }
-  else{
-      buttonPostagem.innerHTML = "Apoiar"
-      buttonPostagem.style.backgroundColor = "#ffffff";
-      buttonPostagem.style.color = "#000000";
-  }
-}
 </script>
 
 <style scoped lang="scss">
@@ -181,14 +176,20 @@ function mudarStyleApoio(){
         & button:first-child:hover{
             background-color: $colorAzulEscuro;
         }
-        & button:last-child{
+        
+        .botaoApoio{
             background-color: $colorBranca;
             border: 1px solid $colorVerde;
         }
-        & button:last-child:hover{
+
+        .apoio{
+            background-color: $colorVerde;
+            color: $colorBranca; 
+        }
+        /* & button:last-child:hover{
             color: $colorBranca;
             background-color: $colorVerde;
-        }
+        } */
     }
     .divBotaoEditar{
         & img{
