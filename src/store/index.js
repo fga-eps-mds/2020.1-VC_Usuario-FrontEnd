@@ -68,7 +68,7 @@ const store = createStore({
                 commit('SET_USUARIO', response.data.user)
                 commit('SET_TOKEN', response.data.token)
                 if(window.location.pathname == '/login'){
-                    window.location.href='http://localhost:8080/perfil'
+                    window.location.href='/perfil'
                 }
             }, erro => {
                 alert(erro.response.data.msg)
@@ -87,7 +87,7 @@ const store = createStore({
                 console.log(erro.response.data.msg)
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
-                window.location.href='http://localhost:8080/login'
+                window.location.href='/login'
             }) 
         },
 
@@ -96,7 +96,7 @@ const store = createStore({
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
                 console.log(response.data.msg)
-                window.location.href='http://localhost:8080'
+                window.location.href=''
             }, erro => {
                 console.log(erro.response.data.msg)
             })
@@ -106,7 +106,7 @@ const store = createStore({
             commit('SET_SWAP', false)
             await Usuarios.AtualizarUsuario(payload).then(response => {
                 alert(response.data.msg)
-                window.location.href='http://localhost:8080/perfil'
+                window.location.href='/perfil'
             }, erro => {
                 console.log(erro.response.data.msg)
             })
@@ -116,7 +116,7 @@ const store = createStore({
             commit('SET_SWAP', false)
             await Usuarios.MudarSenha(payload).then(response => {
                 alert(response.data.msg)
-                window.location.href='http://localhost:8080/perfil'
+                window.location.href='/perfil'
             }, erro => {
                 console.log(erro.response.data.msg)
             })
