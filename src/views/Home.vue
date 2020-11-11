@@ -22,10 +22,7 @@
             <div class="divSeparador"/>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-          
-                <div v-if="statusColor(postagem.post_supporting) == 0"><PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting"/></div>
-                <div v-if="statusColor(postagem.post_supporting) == 1"><PostagemApoiadaComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting"/></div>
-
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting"/>
             </div>
         </div>
     </section>
@@ -39,7 +36,6 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import PostagemComponent from '@/components/PostagemComponent.vue'
-import PostagemApoiadaComponent from '@/components/PostagemApoiadaComponent.vue'
 
 /* Import dos services */
 import PostagemService from '@/services/postagens.js'
@@ -51,7 +47,6 @@ export default {
         Header,
         MenuBar,
         PostagemComponent,
-        PostagemApoiadaComponent
     },
     
     data(){
