@@ -18,7 +18,7 @@
 
                 <div class="divBotoes">
                     <button type="submit">Entrar</button>
-                    <button type="button" onclick="window.location.href=`${process.env.BASE_URL}/cadastro`">Cadastrar</button>
+                    <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
                 </div>
             </form>
         </div>
