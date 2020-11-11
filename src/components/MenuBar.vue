@@ -21,11 +21,11 @@ export default {
 
             const token = store.getters.getToken
             if(!token){
-                window.location.href='http://localhost:8080/login'
+                window.location.href='/login'
             }else {
                 store.dispatch('validateSessionAction', token)
                 store.commit('SET_SWAP', true)
-                window.location.href='http://localhost:8080/perfil'
+                window.location.href='/perfil'
             }
         }
         return {redirectPerfilLogin}
