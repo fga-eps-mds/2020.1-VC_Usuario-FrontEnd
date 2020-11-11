@@ -12,5 +12,21 @@
     <body>
         <div id="app"></div>
         <!-- built files will be auto injected -->
+        <script>
+            
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker
+                        .register('sw.js')
+                        .then(function(registration) {
+                        // Registrado com sucesso
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                // Registro falhou
+                console.log('ServiceWorker registration failed: ', err);
+                    });
+                });
+            }
+        </script>
     </body>
 </html>
