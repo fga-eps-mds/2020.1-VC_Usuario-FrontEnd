@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test": "jest",
+    "start": "nodemon src/main.js"
   },
   "dependencies": {
     "axios": "^0.20.0",
