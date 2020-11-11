@@ -2,6 +2,10 @@
   "root": "dist",
   "clean_urls": true,
   "routes": {
-    "/**": "index.js"
+  	"/*.js": "/",
+    "/*.css": "/",
+    "/*.map": "/",
+    "/*.ico": "/",
+    "/**": "index.html"
   }
 }
