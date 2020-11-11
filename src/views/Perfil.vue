@@ -9,7 +9,7 @@
                     </div>
 
                     <span>
-                        <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='http://localhost:8080/editar'"> 
+                        <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='/editar'"> 
                     </span>
 
                 </div>
@@ -60,7 +60,7 @@ export default {
         if( !useStore().getters.getSwap ){
             const token = useStore().getters.getToken
             if(!token){
-                window.location.href='http://localhost:8080/login'
+                window.location.href='/login'
             }else {
                 useStore().dispatch('validateSessionAction', token)
             }

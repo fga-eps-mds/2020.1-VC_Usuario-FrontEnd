@@ -57,7 +57,7 @@ export default{
         registrarUsuario(){
             Usuarios.Registrar(this.cadastro).then(resposta => {
                 if(resposta.data.User){
-                    window.location.href='http://localhost:8080/login'
+                    window.location.href='/login'
                 }else{
                     alert(resposta.data.msg)
                 }
