@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-const port = process.env.PORT || '8000'
-
 const http = axios.create({
-    baseURL: '' + port,
+    baseURL: process.env.VUE_APP_API_URL
 })
 
 export default http 
