@@ -7,7 +7,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "jest",
-    "start": "npm run serve"
+    "start": "node server.js",
+    "postinstall": "npm run build",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run dev"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -16,7 +18,8 @@
     "vue": "^3.0.0-0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-beta.4",
-    "vuex-persistedstate": "^4.0.0-beta.1"
+    "vuex-persistedstate": "^4.0.0-beta.1",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
