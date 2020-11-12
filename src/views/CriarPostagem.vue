@@ -135,7 +135,7 @@ export default {
                 })
             }
 
-            window.location.href = "";
+            window.location.href = "/";
         }
     }
 }

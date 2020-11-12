@@ -96,7 +96,7 @@ const store = createStore({
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
                 console.log(response.data.msg)
-                window.location.href=''
+                window.location.href='/'
             }, erro => {
                 console.log(erro.response.data.msg)
             })
