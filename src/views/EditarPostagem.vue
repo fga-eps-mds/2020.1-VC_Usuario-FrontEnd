@@ -4,6 +4,9 @@
     
     <section>
         <form @submit.prevent="" enctype="multipart/form-data">
+
+            <h1>Editar Postagem</h1>
+
             <input class= "inputTitulo" type="text" placeholder="Título" v-model="editarPostagemObjeto.post_title">
 
             <div class="divCategoriaLocal">
@@ -126,10 +129,6 @@ export default {
         display: flex;
     }
 
-    header{
-        margin-bottom: 20px;
-    }
-
     form{
         height: auto;
         margin: 0 30px;
@@ -137,6 +136,10 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
+
+        & h1{
+            color: $colorAzulEscuro;
+        }
     }
 
     .inputTitulo{
@@ -148,10 +151,10 @@ export default {
         padding: 0;
 
         height: 50px;
-        margin-bottom: 20px;
+        margin: 20px 0 20px;
         width: 100%;
 
-        font-size: 20px;
+        font-size: 18px;
         border-bottom: 1px solid $colorCinza; 
     }
 
@@ -186,7 +189,7 @@ export default {
 
         .inputDescricao{
             width: 100%;
-            
+
             font-size: 16px;
             border-radius: 10px;
             border: 1px solid $colorCinza;
@@ -209,7 +212,7 @@ export default {
 
             cursor: pointer;
             font-size: 20px;
-            border-radius: 15px;
+            border-radius: 25px;
         }
 
         & button:first-child{
@@ -238,6 +241,7 @@ export default {
         }
 
         & button:last-child:hover{
+            border: none;
             color: #ffffff;
             background-color: $colorVermelho;
         }
