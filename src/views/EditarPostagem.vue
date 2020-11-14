@@ -121,7 +121,6 @@ export default {
 <style lang="scss" scoped>
     @import "../assets/stylesheets/pallete.scss";
 
-
     section{
         width: 100%;
         display: flex;
@@ -187,6 +186,7 @@ export default {
 
         .inputDescricao{
             width: 100%;
+            
             font-size: 16px;
             border-radius: 10px;
             border: 1px solid $colorCinza;

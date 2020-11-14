@@ -2,106 +2,105 @@
 
     <Header/>
 
-        <div class="modal" v-if="modalAlerta">
-            <div class="conteudoModal">
-                <div class="textAndButton">
-                    <div class="textoDeAlerta">
-                        <p>Deseja realmente excluir sua conta?</p>
-                        <br/>
-                    </div>
+    <section>           
+        <form @submit.prevent="checkCampos">
 
-                    <div class="divBotoesModal">
-                        <button type="button" @click="modalAlerta = false">Cancelar</button>
+            <h1>Editar Conta</h1>
 
-                        <button type="button" @click="modalSenha = !modalSenha, modalAlerta = false">Continuar</button>
-                    </div>
+            <div class="divInputs">
+                <div class="divUser">
+                    <input style ="padrao" type="text" placeholder="Nome" v-model="dados.nome" required="true">
+                    <input style ="padrao" type="email" placeholder="Email" v-model="dados.email" required="true">
+                </div>                
+            </div>
+
+            <div class="divBotaoSalvar">
+                <button type="submit">Salvar</button>
+            </div>
+
+            <div class="divBotoes">
+                <button type="button" @click="modalSenhaNovaSenha = !modalSenhaNovaSenha">Mudar senha</button>
+                <button type="button" style=color:red @click="modalAlerta = !modalAlerta">Excluir perfil</button>
+                <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
+            </div>
+        </form>
+    </section>
+
+    <div class="modal" v-if="modalAlerta">
+        <div class="conteudoModal">
+            <div class="textAndButton">
+                <div class="textoDeAlerta">
+                    <p>Deseja realmente excluir sua conta?</p>
+                    <br/>
+                </div>
+
+                <div class="divBotoesModal">
+                    <button type="button" @click="modalAlerta = false">Cancelar</button>
+
+                    <button type="button" @click="modalSenha = !modalSenha, modalAlerta = false">Continuar</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal" v-if="modalSenha">
-            <div class="conteudoModalSenha">
-                <div class="textAndButton">
-                    <div class="textoDeSenha">
-                        <p>Digite sua senha</p>
-                        <br/><br/>
+    <div class="modal" v-if="modalSenha">
+        <div class="conteudoModalSenha">
+            <div class="textAndButton">
+                <div class="textoDeSenha">
+                    <p>Digite sua senha</p>
+                    <br/><br/>
 
-                        <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
-                    </div>
+                    <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                </div>
 
-                    <div class="divBotoesModal">
-                        <button type="button" @click="modalSenha = false">Cancelar</button>
+                <div class="divBotoesModal">
+                    <button type="button" @click="modalSenha = false">Cancelar</button>
 
-                        <button type="button" @click="excluirConta">Continuar</button>
-                    </div>
+                    <button type="button" @click="excluirConta">Continuar</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal" v-if="modalSenhaSalvar">
-            <div class="conteudoModalSenha">
-                <div class="textAndButton">
-                    <div class="textoDeSenha">
-                        <p>Digite sua senha</p>
-                        <br/><br/>
+    <div class="modal" v-if="modalSenhaSalvar">
+        <div class="conteudoModalSenha">
+            <div class="textAndButton">
+                <div class="textoDeSenha">
+                    <p>Digite sua senha</p>
+                    <br/><br/>
 
-                        <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
-                    </div>
+                    <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                </div>
 
-                    <div class="divBotoesModal">
-                        <button type="button" @click="modalSenhaSalvar = false">Cancelar</button>
+                <div class="divBotoesModal">
+                    <button type="button" @click="modalSenhaSalvar = false">Cancelar</button>
 
-                        <button type="button" @click="atualizarDados">Continuar</button>
-                    </div>
+                    <button type="button" @click="atualizarDados">Continuar</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal" v-if="modalSenhaNovaSenha">
-            <form @submit.prevent="mudarSenha" class="conteudoModalSenha">
-                <div class="textAndButton">
-                    <div class="textoDeSenha">
-                        <p>Preencha os campos</p>
-                        <br/>
+    <div class="modal" v-if="modalSenhaNovaSenha">
+        <form @submit.prevent="mudarSenha" class="conteudoModalSenha">
+            <div class="textAndButton">
+                <div class="textoDeSenha">
+                    <p>Preencha os campos</p>
+                    <br/>
 
-                        <input style="senha" type="password" id="senha" placeholder="Senha" v-model="dados.password" required="true">
+                    <input style="senha" type="password" id="senha" placeholder="Senha" v-model="dados.password" required="true">
 
-                        <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha" required="true">
-                    </div>
-
-                    <div class="divBotoesModal">
-                        <button type="button" @click="modalSenhaNovaSenha = false">Cancelar</button>
-
-                        <button type="submit">Continuar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <section>           
-            <form @submit.prevent="checkCampos">
-
-                <h1>
-                    Editar
-                </h1>
-                <div class="divInputs">
-                    <div class="divUser">
-                        <input style ="padrao" type="text" placeholder="Nome" v-model="dados.nome" required="true">
-                        <input style ="padrao" type="email" placeholder="Email" v-model="dados.email" required="true">
-                    </div>                
+                    <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha" required="true">
                 </div>
 
-                <div class="divBotaoSalvar">
-                    <button type="submit">Salvar</button>
-                </div>
+                <div class="divBotoesModal">
+                    <button type="button" @click="modalSenhaNovaSenha = false">Cancelar</button>
 
-                <div class="divBotoes">
-                    <button type="button" @click="modalSenhaNovaSenha = !modalSenhaNovaSenha">Mudar senha</button>
-                    <button type="button" style=color:red @click="modalAlerta = !modalAlerta">Excluir perfil</button>
-                    <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
+                    <button type="submit">Continuar</button>
                 </div>
-            </form>
-        </section>
+            </div>
+        </form>
+    </div>
 
     <MenuBar/>
     
@@ -130,11 +129,13 @@ export default {
             password: '',
             novaSenha: ''
         }
+
         const fazerLogout = () => {
             store.commit('CLEAR_USUARIO')
             store.commit('CLEAR_TOKEN')
             window.location.href='http://localhost:8080/'  
         }
+
         const checkCampos = () => {
             if (dados.nome.trim() === store.getters.getNome && dados.email.trim() === store.getters.getEmail){
                 alert('Campos inalterados')
@@ -142,6 +143,7 @@ export default {
                 modalSenhaSalvar.value = true
             }
         }
+
         const validarSessao = async () => {
             await store.dispatch('validateSessionAction', store.getters.getToken)
             const login = {
@@ -157,11 +159,13 @@ export default {
                 return false
             }
         }
+
         const excluirConta = async () => {            
             if(await validarSessao()){
                 store.dispatch('deletarUsuarioAction', dados.id)
             }
         }
+
         const atualizarDados = async() => {
             if(await validarSessao()){
                 const usuario = {
@@ -174,6 +178,7 @@ export default {
                 store.dispatch('atualizarUsuarioAction', usuario)
             }
         }
+
         const mudarSenha = async () => {
             if(await validarSessao()){
                 const data = {
@@ -220,7 +225,6 @@ export default {
 <style lang="scss" scoped>
     @import "../assets/stylesheets/pallete.scss";
 
-
     section{
         width: 100%;
     }
@@ -231,46 +235,54 @@ export default {
         top: 0;
         left: 0;
         bottom: 0;
-        background-color: rgba(0,0,0,.7);
+
         position: fixed;
         display: flex;
         flex-direction: row;
         justify-content: center;
+        
         align-items: center;
+        background-color: rgba(0,0,0,.7);
 
         & .conteudoModal{
-            position: absolute;
-            background: $colorBranca;
-            border-radius: 15px;
             width: 80%;
             height: 150px;
+
+            position: absolute;
             text-align: center;
+
+            border-radius: 15px;
+            background-color: $colorBranca;
         }
 
         & .conteudoModalSenha{
-            position: absolute;
-            background: $colorBranca;
-            border-radius: 15px;
             width: 80%;
             height: 220px;
+
+            position: absolute;
             text-align: center;
+
+            border-radius: 15px;
+            background-color: $colorBranca;
         }
 
         & .textoDeSenha{
-                margin: 0 30px;
-                input{
-                    width: 100%;
-                    height: 35px;
-                    font-size: 14px;
-                    border-bottom: 1px solid $colorCinza;
-                }
-        } 
+            margin: 0 30px;
 
+            input{
+                width: 100%;
+                height: 35px;
+
+                font-size: 14px;
+                border-bottom: 1px solid $colorCinza;
+            }
+        } 
 
         & .divBotoesModal{
             width: 100%;
             height: 50px;
             padding-top: 50px;
+
             display: flex;
             justify-content: space-evenly;
 
@@ -278,13 +290,13 @@ export default {
                 height: 100%;
 
                 input{
-                    box-shadow: 0 0 0 0;
                     width: 100%;
                     height: 50px;
+                    box-shadow: 0 0 0 0;
+                   
                     font-size: 14px;
                     border-bottom: 1px solid $colorCinza;
                 }
-
             }
 
             & button{
@@ -318,7 +330,6 @@ export default {
         height: auto;
         margin: 0 30px;
         margin-top: 60px;
-
 
         & .divInputs{
             width: 100%;
@@ -369,7 +380,6 @@ export default {
                 height: 50px;
                 width: 100%;
                 margin-top: 13px;
-
 
                 cursor: pointer;
                 font-size: 20px;
