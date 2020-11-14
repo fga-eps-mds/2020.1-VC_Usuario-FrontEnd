@@ -8,19 +8,14 @@
             <h1>Editar Conta</h1>
 
             <div class="divInputs">
-                <div class="divUser">
-                    <input style ="padrao" type="text" placeholder="Nome" v-model="dados.nome" required="true">
-                    <input style ="padrao" type="email" placeholder="Email" v-model="dados.email" required="true">
-                </div>                
-            </div>
-
-            <div class="divBotaoSalvar">
-                <button type="submit">Salvar</button>
+                <input type="text" placeholder="Nome" v-model="dados.nome" required="true">
+                <input type="email" placeholder="Email" v-model="dados.email" required="true">            
             </div>
 
             <div class="divBotoes">
+                <button type="submit">Salvar</button>
                 <button type="button" @click="modalSenhaNovaSenha = !modalSenhaNovaSenha">Mudar senha</button>
-                <button type="button" style=color:red @click="modalAlerta = !modalAlerta">Excluir perfil</button>
+                <button type="button" @click="modalAlerta = !modalAlerta">Excluir perfil</button>
                 <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
             </div>
         </form>
@@ -50,7 +45,7 @@
                     <p>Digite sua senha</p>
                     <br/><br/>
 
-                    <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                    <input type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
                 </div>
 
                 <div class="divBotoesModal">
@@ -69,7 +64,7 @@
                     <p>Digite sua senha</p>
                     <br/><br/>
 
-                    <input style="senha" type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+                    <input type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
                 </div>
 
                 <div class="divBotoesModal">
@@ -88,9 +83,9 @@
                     <p>Preencha os campos</p>
                     <br/>
 
-                    <input style="senha" type="password" id="senha" placeholder="Senha" v-model="dados.password" required="true">
+                    <input type="password" id="senha" placeholder="Senha" v-model="dados.password" required="true">
 
-                    <input style ="senha" type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha" required="true">
+                    <input type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha" required="true">
                 </div>
 
                 <div class="divBotoesModal">
@@ -227,6 +222,7 @@ export default {
 
     section{
         width: 100%;
+        display: flex;
     }
 
     .modal {
@@ -328,69 +324,69 @@ export default {
 
     form{
         height: auto;
+        width: 100%;
         margin: 0 30px;
-        margin-top: 60px;
+        margin-top: 65px;
 
-        & .divInputs{
-            width: 100%;
-            height: 240px;
-            margin-top:  10px;
-
-            & .divUser{
-                input{
-                    width: 100%;
-                    height: 50px;
-
-                    font-size: 14px;
-                    border-bottom: 1px solid $colorCinza;
-                    margin-bottom: 10px;
-                }
-            }
+        & h1{
+            color: $colorAzulEscuro;
         }
+    }
 
-        & .divBotaoSalvar{
+    .divInputs{
+        width: 100%;
+        margin-top: 20px;
+
+        & input{
             width: 100%;
             height: 50px;
-            padding-top: 45px;
+            margin-bottom: 20px;
 
-            display: flex;
-
-            & button{
-                height: 50px;
-                width: 100%;
-
-                cursor: pointer;
-                font-size: 20px;
-                border: none;
-                border-radius: 15px;   
-                color: $colorBranca;
-                background-color: $colorAzul;
-            }
-
-            & button:hover{
-                background-color: $colorAzulEscuro;
-            }
+            font-size: 18px;
+            border-bottom: 1px solid $colorCinza; 
         }
+    }
 
-        & .divBotoes{
-            width: 100%;
+    .divBotoes{
+        width: 100%;
+        height: 50px;
+
+        & button{
             height: 50px;
+            width: 100%;
+            margin-bottom: 20px;
 
-            & button{
-                height: 50px;
-                width: 100%;
-                margin-top: 13px;
-
-                cursor: pointer;
-                font-size: 20px;
-                border-radius: 15px;
-                background-color: $colorBranca;
-                border: 1px solid $colorCinza;
-            }
-
-            & button:hover{
-                background-color:$colorCinza;
-            }
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 25px;
+            background-color: #ffffff;
+            border: 1px solid $colorCinza;
         }
-}
+
+        & button:hover{
+            background-color:$colorCinza;
+        }
+
+        & button:first-child{
+            border: none;
+            background-color: $colorAzul;
+            color: #ffffff;
+        }
+
+        & button:first-child:hover{
+            background-color:$colorAzulEscuro;
+        }
+
+        & button:nth-child(3){            
+            color: $colorVermelho;
+            background-color: #ffffff;
+            border: 1px solid $colorCinza;
+        }
+
+        & button:nth-child(3):hover{
+            border: none;
+            color: #ffffff;
+            background-color: $colorVermelho;
+        }
+    }
 </style>
