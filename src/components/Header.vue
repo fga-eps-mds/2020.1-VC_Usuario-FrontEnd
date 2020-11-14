@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 /* Script do scroll da Header */
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function(){
@@ -37,14 +36,11 @@ window.onscroll = function(){
         position: fixed;
         display: flex;
 
-
         height: 45px;
         width: 100%;
         
         transition: top 0.3s;
         background-color: $colorAzul;
-
-
     }
 
     .divWordmark{
@@ -74,7 +70,5 @@ window.onscroll = function(){
             padding: 10px 10px 10px 0;
             margin-left: 30px;
         }
-    }
-
-    
+    } 
 </style>
