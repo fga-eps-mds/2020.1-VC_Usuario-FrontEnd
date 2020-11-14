@@ -4,6 +4,9 @@
     
     <section>
         <form @submit.prevent="criarPostagem" enctype="multipart/form-data">
+
+            <h1>Criar Postagem</h1>
+
             <input class= "inputTitulo" type="text" placeholder="Título" v-model="postagem.post_title" required>
 
             <div class="divCategoriaLocal">
@@ -160,6 +163,10 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
+
+        & h1{
+            color: $colorAzulEscuro;
+        }
     }
 
     // TÍTULO
@@ -172,15 +179,16 @@ export default {
         padding: 0;
 
         height: 50px;
+        margin-top: 20px;
         margin-bottom: 20px;
         width: 100%;
 
-        font-size: 20px;
+        font-size: 18px;
         border-bottom: 1px solid $colorCinza; 
     }
 
     .inputTitulo::placeholder {
-        font-size: 20px;
+        font-size: 18px;
         color: $colorPreta;
     }
 
@@ -272,19 +280,20 @@ export default {
     // BOTÕES
     .divBotoes{
         display: flex;
+        flex-direction: column;
 
         & button{
-            flex: 1;
-            font-size: 20px;
+            height: 50px;
+            width: 100%;
+            
             border: none;
             border-radius: 25px;
-            height: 50px;
-
+            font-size: 20px;
             cursor: pointer;
         }
 
         button:first-child{
-            margin-right: 20px;
+            margin-bottom: 20px;
             color: $colorBranca;
             background-color: $colorAzul;
         }
