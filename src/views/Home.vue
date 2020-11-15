@@ -39,6 +39,7 @@ import PostagemComponent from '@/components/PostagemComponent.vue'
 
 /* Import dos services */
 import PostagemService from '@/services/postagens.js'
+/* eslint-disable */
 
 export default {
     name: 'Home',

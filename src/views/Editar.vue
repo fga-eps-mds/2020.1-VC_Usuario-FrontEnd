@@ -114,7 +114,7 @@ export default {
         const fazerLogout = () => {
             store.commit('CLEAR_USUARIO')
             store.commit('CLEAR_TOKEN')
-            window.location.href='http://localhost:8080/'  
+            window.location.href=''  
         }
 
         const checkCampos = () => {
@@ -196,7 +196,7 @@ export default {
     created() {
         const token = useStore().getters.getToken
         if(!token){
-            window.location.href='http://localhost:8080/login'
+            window.location.href='login'
         }else {
             useStore().dispatch('validateSessionAction', token)
         }

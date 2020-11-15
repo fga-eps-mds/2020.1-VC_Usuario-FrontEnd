@@ -30,13 +30,14 @@
 
 <script>  
 import Postagem from '@/services/postagens.js'
+/* eslint-disable */
 
 export default {
     name: 'postBlock',
     setup() {
       const verMais = (post_id) => {
         console.log()
-        window.location.href = `http://localhost:8080/post/${post_id}`
+        window.location.href = `/post/${post_id}`
       }
       return { verMais }
     },

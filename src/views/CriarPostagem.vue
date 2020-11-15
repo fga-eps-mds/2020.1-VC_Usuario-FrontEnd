@@ -51,7 +51,7 @@
                     <input type="checkbox" id="postagem.post_type">
                     <span class="slider round"></span>
                 </label>
-                <label v-else class="switch" onclick="window.location.href='http://localhost:8080/Login'">
+                <label v-else class="switch" onclick="window.location.href='/Login'">
                     <input type="checkbox" id="postagem.post_type" checked>
                     <span class="slider round"></span>
                 </label>
@@ -73,6 +73,7 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import Postagem from '@/services/postagens.js'
+/* eslint-disable */
 
 export default {
     name: 'CriarPostagem',
@@ -137,7 +138,7 @@ export default {
                 })
             }
 
-            window.location.href = "http://localhost:8080";
+            window.location.href = "/";
         }
     }
 }

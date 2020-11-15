@@ -60,6 +60,7 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import Postagem from '@/services/postagens.js'
+/* eslint-disable */
 
 export default {
 
@@ -106,14 +107,14 @@ export default {
         editarPostagem() {
             Postagem.editarUmaPostagem(this.editarPostagemObjeto).then(res => {
                 console.log(res.data)
-                window.location.href='http://localhost:8080/perfil'  
+                window.location.href='/perfil'  
             })
         },
 
         excluirPostagem(){
             Postagem.excluirUmaPostagem(this.excluirPostagemObjeto).then(res => {
                 console.log(res.data)
-                window.location.href='http://localhost:8080/perfil'  
+                window.location.href='/perfil'  
             })
         }
     }

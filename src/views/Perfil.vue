@@ -9,7 +9,7 @@
                     </div>
 
                     <span>
-                        <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='http://localhost:8080/editar'"> 
+                        <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='/editar'"> 
                     </span>
 
                 </div>
@@ -36,6 +36,7 @@
     import MenuBar from '@/components/MenuBar.vue'
     import PostagemComponent from '@/components/PostagemComponent.vue'
     import UserService from '@/services/usuarios.js'
+    /* eslint-disable */
 
     import { useStore } from 'vuex'
     import { computed } from 'vue'
@@ -60,7 +61,7 @@ export default {
         if( !useStore().getters.getSwap ){
             const token = useStore().getters.getToken
             if(!token){
-                window.location.href='http://localhost:8080/login'
+                window.location.href='/login'
             }else {
                 useStore().dispatch('validateSessionAction', token)
             }
