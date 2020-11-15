@@ -18,7 +18,7 @@
 
                 <div class="divBotoes">
                     <button type="submit">Entrar</button>
-                    <button type="button" onclick="window.location.href='http://localhost:8080/cadastro'">Cadastrar</button>
+                    <button type="button" onclick="window.location.href='/cadastro'">Cadastrar</button>
                 </div>
             </form>
         </div>
@@ -43,8 +43,8 @@ export default {
         }
 
         const voltar = () => {
-            if(document.referrer === "http://localhost:8080/perfil"){
-                window.location.href = "http://localhost:8080/"
+            if(document.referrer === "/perfil"){
+                window.location.href = ""
             }else{
                 history.go(-1)
             }
@@ -57,7 +57,7 @@ export default {
         const token = useStore().getters.getToken
         if(token){
             useStore().dispatch('validateSessionAction', token)
-            window.location.href = 'http://localhost:8080/perfil'
+            window.location.href = '/perfil'
         }
     }
 }
