@@ -255,7 +255,7 @@ export default {
         & button:first-child{
             border: none;
             background-color: $colorAzul;
-            color: #ffffff;
+            color: $colorBranca;
         }
 
         & button:first-child:hover{
@@ -294,8 +294,6 @@ export default {
 
         border-radius: 15px;
         background-color: $colorBranca;
-
-        border: 1px solid red;
     }
 
     .divConteudoModalSenha{
@@ -308,8 +306,6 @@ export default {
 
         border-radius: 15px;
         background-color: $colorBranca;
-
-        border: 1px solid yellow;
     }
 
     .textoDeSenha{
@@ -355,13 +351,13 @@ export default {
     
     .buttonExcluir{
         color: $colorVermelho;
-        background-color: #ffffff;
+        background-color: $colorBranca;
         border: 1px solid $colorCinza;
     }
 
     .buttonExcluir:hover{
         border: none;
-        color: #ffffff;
+        color: $colorBranca;
         background-color: $colorVermelho;
     }
 
@@ -372,7 +368,7 @@ export default {
 
     .buttonAcao:hover{
         border: none;
-        color: #ffffff;
+        color: $colorBranca;
         background-color: $colorAzulEscuro;
     }
 </style>
