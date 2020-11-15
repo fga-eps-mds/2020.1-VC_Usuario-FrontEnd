@@ -14,85 +14,67 @@
 
             <div class="divBotoes">
                 <button type="submit">Salvar</button>
-                <button type="button" @click="modalSenhaNovaSenha = !modalSenhaNovaSenha">Mudar senha</button>
-                <button type="button" @click="modalAlerta = !modalAlerta">Excluir perfil</button>
-                <button type="button" v-on:click="fazerLogout" >Sair da conta</button>
+                <button type="button" class="buttonBasico" v-on:click="cancelarEdicao">Cancelar</button>
+                <button type="button" class="buttonBasico" @click="modalSenhaNovaSenha = !modalSenhaNovaSenha">Mudar senha</button>
+                <button type="button" class="buttonExcluir" @click="modalAlerta = !modalAlerta">Excluir perfil</button>
+                <button type="button" class="buttonBasico" v-on:click="fazerLogout">Sair da conta</button>
             </div>
         </form>
     </section>
 
     <div class="modal" v-if="modalAlerta">
-        <div class="conteudoModal">
-            <div class="textAndButton">
-                <div class="textoDeAlerta">
-                    <p>Deseja realmente excluir sua conta?</p>
-                    <br/>
-                </div>
+        <div class="divConteudoModal">
+            <p>Deseja realmente excluir sua conta?</p>
 
-                <div class="divBotoesModal">
-                    <button type="button" @click="modalAlerta = false">Cancelar</button>
-
-                    <button type="button" @click="modalSenha = !modalSenha, modalAlerta = false">Continuar</button>
-                </div>
+            <div class="divBotoesModal">
+                <button type="button" class="buttonBasico" @click="modalAlerta = false">Cancelar</button>
+                <button type="button" class="buttonExcluir" @click="modalSenha = !modalSenha, modalAlerta = false">Continuar</button>
             </div>
         </div>
     </div>
 
     <div class="modal" v-if="modalSenha">
-        <div class="conteudoModalSenha">
-            <div class="textAndButton">
-                <div class="textoDeSenha">
-                    <p>Digite sua senha</p>
-                    <br/><br/>
+        <div class="divConteudoModalSenha">
+            <div class="textoDeSenha">
+                <p>Digite sua senha</p>
 
-                    <input type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
-                </div>
+                <input type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+            </div>
 
-                <div class="divBotoesModal">
-                    <button type="button" @click="modalSenha = false">Cancelar</button>
-
-                    <button type="button" @click="excluirConta">Continuar</button>
-                </div>
+            <div class="divBotoesModal">
+                <button type="button" class="buttonBasico" @click="modalSenha = false">Cancelar</button>
+                <button type="button" class="buttonAcao" @click="excluirConta">Continuar</button>
             </div>
         </div>
     </div>
 
     <div class="modal" v-if="modalSenhaSalvar">
-        <div class="conteudoModalSenha">
-            <div class="textAndButton">
-                <div class="textoDeSenha">
-                    <p>Digite sua senha</p>
-                    <br/><br/>
+        <div class="divConteudoModalSenha">
+            <div class="textoDeSenha">
+                <p>Digite sua senha</p>
 
-                    <input type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
-                </div>
+                <input type="password" id="senha" placeholder="Senha" required="true" v-model="dados.password">
+            </div>
 
-                <div class="divBotoesModal">
-                    <button type="button" @click="modalSenhaSalvar = false">Cancelar</button>
-
-                    <button type="button" @click="atualizarDados">Continuar</button>
-                </div>
+            <div class="divBotoesModal">
+                <button type="button" class="buttonBasico" @click="modalSenhaSalvar = false">Cancelar</button>
+                <button type="button" class="buttonAcao" @click="atualizarDados">Continuar</button>
             </div>
         </div>
     </div>
 
     <div class="modal" v-if="modalSenhaNovaSenha">
-        <form @submit.prevent="mudarSenha" class="conteudoModalSenha">
-            <div class="textAndButton">
-                <div class="textoDeSenha">
-                    <p>Preencha os campos</p>
-                    <br/>
+        <form class="divConteudoModalSenha" @submit.prevent="mudarSenha">
+            <div class="textoDeSenha">
+                <p>Preencha os campos</p>
 
-                    <input type="password" id="senha" placeholder="Senha" v-model="dados.password" required="true">
+                <input type="password" id="senha" placeholder="Senha" v-model="dados.password" required="true">
+                <input type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha" required="true">
+            </div>
 
-                    <input type="password" id="novaSenha" placeholder="Nova Senha" v-model="dados.novaSenha" required="true">
-                </div>
-
-                <div class="divBotoesModal">
-                    <button type="button" @click="modalSenhaNovaSenha = false">Cancelar</button>
-
-                    <button type="submit">Continuar</button>
-                </div>
+            <div class="divBotoesModal">
+                <button type="button" class="buttonBasico" @click="modalSenhaNovaSenha = false">Cancelar</button>
+                <button type="submit" class="buttonAcao" >Continuar</button>
             </div>
         </form>
     </div>
@@ -123,6 +105,10 @@ export default {
             email: store.getters.getEmail,
             password: '',
             novaSenha: ''
+        }
+
+        const cancelarEdicao = () => {
+            window.location.href='http://localhost:8080/perfil'  
         }
 
         const fazerLogout = () => {
@@ -192,6 +178,7 @@ export default {
         const modalSenhaNovaSenha = ref(false)
 
         return { 
+            cancelarEdicao,
             fazerLogout, 
             excluirConta, 
             dados, 
@@ -223,103 +210,6 @@ export default {
     section{
         width: 100%;
         display: flex;
-    }
-
-    .modal {
-        width: 100vw;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        bottom: 0;
-
-        position: fixed;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        
-        align-items: center;
-        background-color: rgba(0,0,0,.7);
-
-        & .conteudoModal{
-            width: 80%;
-            height: 150px;
-
-            position: absolute;
-            text-align: center;
-
-            border-radius: 15px;
-            background-color: $colorBranca;
-        }
-
-        & .conteudoModalSenha{
-            width: 80%;
-            height: 220px;
-
-            position: absolute;
-            text-align: center;
-
-            border-radius: 15px;
-            background-color: $colorBranca;
-        }
-
-        & .textoDeSenha{
-            margin: 0 30px;
-
-            input{
-                width: 100%;
-                height: 35px;
-
-                font-size: 14px;
-                border-bottom: 1px solid $colorCinza;
-            }
-        } 
-
-        & .divBotoesModal{
-            width: 100%;
-            height: 50px;
-            padding-top: 50px;
-
-            display: flex;
-            justify-content: space-evenly;
-
-            & .divInputSenha{
-                height: 100%;
-
-                input{
-                    width: 100%;
-                    height: 50px;
-                    box-shadow: 0 0 0 0;
-                   
-                    font-size: 14px;
-                    border-bottom: 1px solid $colorCinza;
-                }
-            }
-
-            & button{
-                bottom: 20px;
-                height: 25px;
-                width: 30%;
-
-                cursor: pointer;
-                font-size: 13px;
-                border: none;
-                border-radius: 15px;   
-                color: $colorBranca;
-                background-color: $colorAzul;
-            }
-
-            & button:hover{
-                background-color: $colorAzulEscuro;
-            }
-        }
-
-        & .textAndButton{
-            padding-top: 20px;
-        }
-
-        & .textoDeAlerta{
-            font-size: 15px;
-        }
     }
 
     form{
@@ -359,12 +249,7 @@ export default {
             cursor: pointer;
             font-size: 20px;
             border-radius: 25px;
-            background-color: #ffffff;
             border: 1px solid $colorCinza;
-        }
-
-        & button:hover{
-            background-color:$colorCinza;
         }
 
         & button:first-child{
@@ -376,17 +261,118 @@ export default {
         & button:first-child:hover{
             background-color:$colorAzulEscuro;
         }
+    }
 
-        & button:nth-child(3){            
-            color: $colorVermelho;
-            background-color: #ffffff;
-            border: 1px solid $colorCinza;
+    .modal{
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        
+        background-color: rgba(0,0,0,.7);
+        
+        & p{
+            font-size: 20px;
+            color:  $colorAzulEscuro;
+            margin-bottom: 20px;
+        }
+    }
+
+    .divConteudoModal{
+        width: 80%;
+        height: auto;
+        margin: auto;
+        padding: 20px;
+
+        text-align: center;
+
+        border-radius: 15px;
+        background-color: $colorBranca;
+
+        border: 1px solid red;
+    }
+
+    .divConteudoModalSenha{
+        width: 80%;
+        height: auto;
+        margin: auto;
+        padding: 20px;
+
+        text-align: center;
+
+        border-radius: 15px;
+        background-color: $colorBranca;
+
+        border: 1px solid yellow;
+    }
+
+    .textoDeSenha{
+        input{
+            width: 100%;
+            height: 50px;
+            margin-bottom: 20px;
+
+            font-size: 18px;
+            border-bottom: 1px solid $colorCinza;
+        }
+    } 
+
+    .divBotoesModal{
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        & button{
+            height: 50px;
+            width: 100%;
+
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 25px;   
         }
 
-        & button:nth-child(3):hover{
-            border: none;
-            color: #ffffff;
-            background-color: $colorVermelho;
+        & button:first-child{
+            margin-bottom: 20px;
         }
+    }
+
+    .buttonBasico{
+        color: #000000;
+        background-color: $colorBranca;
+        border: 1px solid $colorCinza;
+    }
+
+    .buttonBasico:hover{
+        background-color:$colorCinza;
+    }
+    
+    .buttonExcluir{
+        color: $colorVermelho;
+        background-color: #ffffff;
+        border: 1px solid $colorCinza;
+    }
+
+    .buttonExcluir:hover{
+        border: none;
+        color: #ffffff;
+        background-color: $colorVermelho;
+    }
+
+    .buttonAcao{
+        color: $colorBranca;
+        background-color: $colorAzul;
+    }
+
+    .buttonAcao:hover{
+        border: none;
+        color: #ffffff;
+        background-color: $colorAzulEscuro;
     }
 </style>
