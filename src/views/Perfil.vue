@@ -1,34 +1,37 @@
 <template>
+
     <Header/>
-        <section>
-            <section class="PerfilContainer">
-                <div class="PerfilContainer__infoPerfil">
 
-                    <div class="PerfilContainer__infoPerfil__nome">
-                        <h4> {{ nome }} </h4>
-                    </div>
-
-                    <span>
-                        <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='/editarperfil'"> 
-                    </span>
-
+    <section>
+        <section class="PerfilContainer">
+            <div class="PerfilContainer__infoPerfil">
+                <div class="PerfilContainer__infoPerfil__nome">
+                    <h4> {{ nome }} </h4>
                 </div>
 
-                <div class="PerfilContainer__pontosPerfil">
-                    <span>
-                        <img src="../assets/trophy.png" class="PerfilContainer__pontosPerfil__trofeu"> 
-                    </span>
-                    <span class="PerfilContainer__pontosPerfil__numero">
-                        {{ pontos }}
-                    </span>
-                </div>
-                
-                <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                    <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais" @editar-postagem="editar"/> 
-                </div>
-            </section>
+                <span>
+                    <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='/editarperfil'"> 
+                </span>
+            </div>
+
+            <div class="PerfilContainer__pontosPerfil">
+                <span>
+                    <img src="../assets/trophy.png" class="PerfilContainer__pontosPerfil__trofeu"> 
+                </span>
+
+                <span class="PerfilContainer__pontosPerfil__numero">
+                    {{ pontos }}
+                </span>
+            </div>
+            
+            <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais" @editar-postagem="editar"/> 
+            </div>
         </section>
+    </section>
+
     <MenuBar/>
+
 </template>
 
 <script>
@@ -50,6 +53,12 @@ export default {
         PostagemComponent
     },
 
+    data() {
+        return {
+            postagemData: {}
+        }
+    },
+
     setup(){
         const nome = computed(() => useStore().getters.getNome)
         const pontos = computed(() => useStore().getters.getScore)
@@ -57,7 +66,6 @@ export default {
     },
     
     created() {
-
         if( !useStore().getters.getSwap ){
             const token = useStore().getters.getToken
             if(!token){
@@ -68,30 +76,23 @@ export default {
         }else{
             useStore().commit('SET_SWAP', false)
         }
-        this.listarPostagemUsuario();
-    },
 
-    data() {
-        return {
-            postagemData: {}
-        }
+        this.listarPostagemUsuario();
     },
 
     methods: {
         listarPostagemUsuario() {
             UserService.listarPostagemUsuario(this.$store.getters.getId).then(Response => {
-            this.postagemData = Response.data;
-            console.log(this.postagemData);
+                this.postagemData = Response.data;
+                console.log(this.postagemData);
             })
         },
 
         verMais(post_id){
-
             this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
         },
 
         editar(post_id){
-
             this.$router.push({ name: 'editarUmaPostagem', params: { post_id: post_id }})
         }
     },
