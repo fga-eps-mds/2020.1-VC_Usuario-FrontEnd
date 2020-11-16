@@ -27,7 +27,7 @@
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import NoticiaComponent from '@/components/NoticiaComponent.vue'
-
+import Noticia from '@/services/noticiaService.js'
 
 export default {
     name: 'FeedDeNoticias',
@@ -36,6 +36,19 @@ export default {
         Header,
         MenuBar,
         NoticiaComponent
+    },
+
+    mounted(){
+        this.listarNoticiasFeed();
+    },
+
+    methods: {
+        listarNoticiasFeed() {
+            Noticia.listarNoticias().then(res => {
+                console.log("111", res.data);
+                console.log("2222", res);
+            })
+        }
     },
 }
 </script>
