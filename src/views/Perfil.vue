@@ -9,7 +9,7 @@
                     </div>
 
                     <span>
-                        <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='/editar'"> 
+                        <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='/editarperfil'"> 
                     </span>
 
                 </div>

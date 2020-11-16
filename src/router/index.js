@@ -7,8 +7,13 @@ const routes = [
     component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue')
   },
   {
+    path: '/postagem/:id',
+    name: 'ListarUmaPostagem',
+    component: () => import(/* webpackChunkName: "ListarUmaPostagem" */ '../views/ListarUmaPostagem.vue'),
+  },
+  {
     path: '/criarpostagem',
-    name: 'criarPostagem',
+    name: 'CriarPostagem',
     component: () => import(/* webpackChunkName: "CriarPostagem" */ '../views/CriarPostagem.vue')
   },
   {
@@ -22,29 +27,24 @@ const routes = [
     component: () => import(/* webpackChunkName: "Cadastro" */ '../views/Cadastro.vue')
   },
   {
-    path: '/post/:id',
-    name: 'listarUmaPostagem',
-    component: () => import(/* webpackChunkName: "ListarUmaPostagem" */ '../views/ListarUmaPostagem.vue'),
-  },
-  {
     path: '/perfil',
     name: 'Perfil',
     component: () => import(/* webpackChunkName: "Perfil" */ '../views/Perfil.vue'),
   },
   {
-    path: '/editar',
-    name: 'Editar',
-    component: () => import(/* webpackChunkName: "Editar" */ '../views/Editar.vue'),
+    path: '/editarperfil',
+    name: 'EditarPerfil',
+    component: () => import(/* webpackChunkName: "Editar" */ '../views/EditarPerfil.vue'),
+  },
+  {
+    path: '/editarpostagem',
+    name: 'EditarUmaPostagem',
+    component: () => import(/* webpackChunkName: "Editar" */ '../views/EditarPostagem.vue'),
   },
   {
     path: '/noticias',
     name: 'FeedDeNoticias',
     component: () => import(/* webpackChunkName: "about" */ '../views/FeedDeNoticias.vue'),
-  },
-  {
-    path: '/editarPostagem',
-    name: 'editarUmaPostagem',
-    component: () => import(/* webpackChunkName: "Editar" */ '../views/EditarPostagem.vue'),
   },
 ]
 
