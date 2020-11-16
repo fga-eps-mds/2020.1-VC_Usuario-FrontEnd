@@ -22,6 +22,7 @@
         </form>
     </section>
 
+    <!-- Modais: -->
     <div class="modal" v-if="modalAlerta">
         <div class="divConteudoModal">
             <p>Deseja realmente excluir sua conta?</p>
