@@ -42,7 +42,7 @@ export default {
         position: fixed;
         display: flex;
 
-        height: 85px;
+        height: 70px;
         width: 100%;
 
         background-color: $colorBranca;
@@ -67,7 +67,9 @@ export default {
 
                 margin: auto;
                 height: 30px;
-                padding: 15px 15px;
+                padding: 10px 15px;
+
+                cursor: pointer;
             }
         }
     }   
