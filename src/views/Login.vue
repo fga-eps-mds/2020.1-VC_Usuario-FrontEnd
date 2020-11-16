@@ -12,7 +12,16 @@
             <form @submit.prevent="fazerLogin">
                 <div class="divInputs">
                     <input type="email" placeholder="Email" v-model="login.email" required="true">
-                    <input type="password" placeholder="Senha" v-model="login.password" required="true">
+
+                    <div class="divSenha">
+                        <span>
+                            <input type="password" id="senha" placeholder="Senha" v-model="login.password" required="true">
+                        </span>
+                        <span>
+                            <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
+                        </span>
+                    </div>
+                    
                     <a href="#">Esqueceu sua senha?</a>
                 </div>
 
@@ -50,7 +59,17 @@ export default {
             }
         }
 
-        return { login, fazerLogin, voltar }
+        const alterna = () =>{
+
+            var x = document.getElementById("senha");
+            if (x.type ==="password"){
+                x.type = "text";
+            }else{
+                x.type = "password";
+            }
+        }
+
+        return { login, fazerLogin, voltar, alterna }
     },
 
     created() {
@@ -153,6 +172,32 @@ export default {
                 text-decoration: none;
                 font-size: 11px;
                 float: right;
+            }
+
+            & .divSenha{
+
+                height: 50%;
+
+                input{
+                    box-shadow: 0 0 0 0;
+                    border: 0 none;
+                    outline: 0;
+
+                    display: block;
+
+                    width: 100%;
+                    height: 50px;
+
+                    font-size: 14px;
+                    border-bottom: 1px solid $colorCinza;
+                }
+
+                & img{
+                    float: right;
+                    height: 25%;
+                    position: relative;
+                    transform: translateY(-230%);
+                }
             }
         }
 
