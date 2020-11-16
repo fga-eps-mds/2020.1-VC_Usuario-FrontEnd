@@ -3,7 +3,7 @@
     <Header/>
 
     <section>
-        <div class="PerfilContainer">
+        <div class="divPerfil">
             <div class="divInfoPerfil">
                 <h1> {{ nome }} </h1>
                     
@@ -15,7 +15,9 @@
 
                 <span> {{ pontos }} </span>
             </div>
-            
+        </div>
+
+        <div class="divListagemPostagens">
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais" @editar-postagem="editar"/> 
             </div>
@@ -97,17 +99,20 @@ export default {
 
     section{
         width: 100%;
+        
         display: flex;
+        flex-direction: column;
     }
 
-    .PerfilContainer{
+    .divPerfil{
         height: auto;
-        margin: 0 30px;
+        flex: 1;
         min-width: 200px;
-        width: 100%;
-        margin-top: 65px;
-        min-height: 620px;
+        margin: 65px 30px 0;
+        
         display: block;
+
+        border-bottom: 1px solid $colorCinza;
     }
 
     .divInfoPerfil{
@@ -115,10 +120,9 @@ export default {
         height: auto;
 
         display: flex;
-        align-content: space-between;
+        justify-content: space-between;
 
         & h1{
-            width: 100%;
             overflow: hidden;
             
             color: $colorAzulEscuro;
@@ -126,6 +130,7 @@ export default {
 
         & img{
             height: 25px;
+            padding-left: 10px;
 
             cursor: pointer;
         }
@@ -134,7 +139,7 @@ export default {
     .divPontosPerfil{
         height: 30px;
         width: 60px; 
-        margin-top: 20px;
+        margin: 20px 0px;
 
         display: flex;
         align-items: center;
@@ -158,9 +163,16 @@ export default {
         }
     }
 
+    .divListagemPostagens{
+        margin-top: 20px;
+        
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
     .divPostagem{
         height: auto;
-        margin-top: 20px;
+        margin: 0 30px 20px;
         flex: 1 1 300px; 
     }
 </style>
