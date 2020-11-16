@@ -5,7 +5,7 @@
         </div>
 
         <div class="divWordmark">
-            <img src="../assets/WordMark_VC.png"> 
+            <img src="../assets/WordMark_VC.png" onclick="window.location.href='/'"> 
         </div>
     </header>
 </template>
@@ -54,10 +54,14 @@ window.onscroll = function(){
         z-index: -50;
 
         & img{
-            display: block;
             height: 30px;
+            padding: 5px 10px;
             margin: auto;
-            position:relative;
+
+            display: block;
+            position: relative;
+            
+            cursor: pointer;
         }
     }
 
