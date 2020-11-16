@@ -178,7 +178,6 @@ export default{
                 & img{
                     float: right;
                     height: 10%;
-                    position: relative;
                     top: 20%;
                     transform: translateY(-150%);
                 }

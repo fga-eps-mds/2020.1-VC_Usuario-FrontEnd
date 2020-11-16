@@ -195,8 +195,8 @@ export default {
                 & img{
                     float: right;
                     height: 25%;
-                    position: relative;
-                    transform: translateY(-230%);
+                    //position: relative;
+                    transform: translateY(-220%);
                 }
             }
         }
