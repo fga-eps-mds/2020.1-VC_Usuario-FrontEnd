@@ -51,6 +51,7 @@
                     <input type="checkbox" id="postagem.post_type">
                     <span class="slider round"></span>
                 </label>
+
                 <label v-else class="switch" onclick="window.location.href='/Login'">
                     <input type="checkbox" id="postagem.post_type" checked>
                     <span class="slider round"></span>
@@ -150,6 +151,7 @@ export default {
 
     section{
         width: 100%;
+        padding-bottom: 100px;
         display: flex;
     }
 
@@ -161,7 +163,7 @@ export default {
         margin-top: 65px;
         min-height: 620px;
 
-        & h1{
+        & h1, legend{
             color: $colorAzulEscuro;
         }
     }
@@ -270,10 +272,6 @@ export default {
         }
     }
 
-    .divPermissao {
-        margin-bottom: 20px;
-    }
-
     // BOTÕES
     .divBotoes{
         display: flex;
@@ -309,63 +307,63 @@ export default {
         }
     }
 
-    // //Configuração Radio Postagem Anonima
+    // Radio
+    .divPermissao {
+        margin-bottom: 20px;
 
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
+        & .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-    /* Hide default HTML checkbox */
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+        & .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-    /* The slider */
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: $colorCinza;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+        & .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $colorCinza;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: $colorBranca;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+        & .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: $colorBranca;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-    input:checked + .slider {
-        background-color: $colorAzul;
-    }
+        & input:checked + .slider {
+            background-color: $colorAzul;
+        }
 
-    input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
+        & input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
 
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 25px;
-    }
+        & .slider.round {
+            border-radius: 25px;
+        }
 
-    .slider.round:before {
-        border-radius: 50%;
+        & .slider.round:before {
+            border-radius: 50%;
+        }
     }
 </style>
