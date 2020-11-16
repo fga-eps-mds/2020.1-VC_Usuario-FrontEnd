@@ -3,15 +3,11 @@
     <Header/>
 
     <section>
-        <section class="PerfilContainer">
-            <div class="PerfilContainer__infoPerfil">
-                <div class="PerfilContainer__infoPerfil__nome">
-                    <h4> {{ nome }} </h4>
-                </div>
-
-                <span>
-                    <img src="../assets/edit.png" class="PerfilContainer__infoPerfil__edit" onclick="window.location.href='/editarperfil'"> 
-                </span>
+        <div class="PerfilContainer">
+            <div class="divInfoPerfil">
+                <h1> {{ nome }} </h1>
+                    
+                <img src="../assets/edit.png" class="edit" onclick="window.location.href='/editarperfil'"> 
             </div>
 
             <div class="PerfilContainer__pontosPerfil">
@@ -27,7 +23,7 @@
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" @ver-mais="verMais" @editar-postagem="editar"/> 
             </div>
-        </section>
+        </div>
     </section>
 
     <MenuBar/>
@@ -117,24 +113,6 @@ export default {
         min-height: 620px;
         display: block;
 
-		&__infoPerfil{
-			display: flex;
-			width: 100%;
-			align-content: space-between;
-
-			&__nome{
-				font-size: 18px;
-				max-height: 30px;
-				color: $colorPreta;
-				width: 100%;
-				overflow: hidden;
-			}
-
-			&__edit{
-				height: 20px;
-			}
-		}
-
 		&__pontosPerfil{
 			margin-top: 20px;
 			font-size: 13px;
@@ -162,6 +140,28 @@ export default {
             height: auto;
             margin-top: 40px;
             flex: 1 1 300px; 
+        }
+    }
+
+    .divInfoPerfil{
+        width: 100%;
+        height: auto;
+
+        display: flex;
+        align-content: space-between;
+        border: 1px solid red;
+
+        & h1{
+            width: 100%;
+            overflow: hidden;
+            
+            color: $colorAzulEscuro;
+        }
+
+        & .edit{
+            height: 25px;
+
+            cursor: pointer;
         }
     }
 </style>
