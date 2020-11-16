@@ -6,7 +6,7 @@
         <div class="divFeedDeNoticia">
             <div class="divNoticia">
                 <div v-for="noticia in this.noticiasData" :key="noticia.news_id">
-                    <NoticiaComponent v-bind:titulo="noticia.title"  v-bind:subTitulo="noticia.subtitle"/>
+                    <NoticiaComponent v-bind:titulo="noticia.title" v-bind:subTitulo="noticia.subtitle"/>
                 </div>
                 
             </div>

@@ -16,7 +16,7 @@
 
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
-/* import NoticiaService from '@/services/noticiaService.js' */
+import NoticiaService from '@/services/noticiaService.js'
 
 export default {
     name: 'vizualizarNoticia',
@@ -24,6 +24,27 @@ export default {
     components: {
         Header,
         MenuBar,
+    },
+
+    data(){
+        return {
+            noticiasData: {}
+        }
+    },
+
+    mounted : function(){
+        this.listarUmaNoticiasFeed();
+    },
+
+    methods: {
+        listarUmaNoticiasFeed() {
+            console.log(NoticiaService);
+            NoticiaService.listarUmaNoticia(this.$route.params.id).then(res => {
+                console.log("111", res.data);
+                console.log("2222", res);
+                this.noticiasData = res.data;
+            })
+        }
     },
 }
 </script>

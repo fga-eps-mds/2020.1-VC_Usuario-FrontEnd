@@ -6,7 +6,7 @@
         </div>
 
         <div class="divBotoes">
-            <button>Ver mais</button>
+            <button @click="verMais(id)">Ver mais</button>
         </div>
     </div>
 </template>
@@ -14,6 +14,13 @@
 <script>
 export default {
     name: 'noticia',
+
+    setup() {
+      const verMais = (news_id) => {
+        window.location.href = `/noticias/${news_id}`
+      }
+      return { verMais }
+    },
 
     props: {
         titulo: String,
