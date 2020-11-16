@@ -109,7 +109,7 @@ export default {
         }
 
         const cancelarEdicao = () => {
-            window.location.href='http://localhost:8080/perfil'  
+            window.location.href='perfil'  
         }
 
         const fazerLogout = () => {
