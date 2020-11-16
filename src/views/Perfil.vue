@@ -7,17 +7,13 @@
             <div class="divInfoPerfil">
                 <h1> {{ nome }} </h1>
                     
-                <img src="../assets/edit.png" class="edit" onclick="window.location.href='/editarperfil'"> 
+                <img src="../assets/edit.png" onclick="window.location.href='/editarperfil'"> 
             </div>
 
-            <div class="PerfilContainer__pontosPerfil">
-                <span>
-                    <img src="../assets/trophy.png" class="PerfilContainer__pontosPerfil__trofeu"> 
-                </span>
+            <div class="divPontosPerfil">
+                <img src="../assets/trophy.png"> 
 
-                <span class="PerfilContainer__pontosPerfil__numero">
-                    {{ pontos }}
-                </span>
+                <span> {{ pontos }} </span>
             </div>
             
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
@@ -113,29 +109,6 @@ export default {
         min-height: 620px;
         display: block;
 
-		&__pontosPerfil{
-			margin-top: 20px;
-			font-size: 13px;
-			height: 30px;
-			border:1px solid $colorPreta;
-			width: 60px; 
-			border-radius: 5px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			&__trofeu{
-				height: 15px;
-			}
-
-            &__numero{
-                max-width: 40px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                display: inline-block;
-            }
-		}
          .divPostagem{
             height: auto;
             margin-top: 40px;
@@ -149,7 +122,6 @@ export default {
 
         display: flex;
         align-content: space-between;
-        border: 1px solid red;
 
         & h1{
             width: 100%;
@@ -158,10 +130,37 @@ export default {
             color: $colorAzulEscuro;
         }
 
-        & .edit{
+        & img{
             height: 25px;
 
             cursor: pointer;
+        }
+    }
+
+    .divPontosPerfil{
+        height: 30px;
+        width: 60px; 
+        margin-top: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        font-size: 13px;
+        border-radius: 5px;
+        border:1px solid $colorAzulEscuro;
+        
+        & img{
+            height: 15px;
+        }
+
+        & span{
+            max-width: 40px;
+            
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
         }
     }
 </style>
