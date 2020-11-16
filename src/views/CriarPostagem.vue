@@ -153,10 +153,6 @@ export default {
         display: flex;
     }
 
-    header{
-        margin-bottom: 20px;
-    }
-
     form{
         height: auto;
         margin: 0 30px;
