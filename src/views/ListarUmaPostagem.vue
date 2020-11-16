@@ -2,7 +2,7 @@
 
     <Header/>
 
-    <section class="divPostagemView">
+    <section>
         <div class="divListarPostagem">
             <div class="divPostagemTituloEStatus">
                 <h1>{{postagem.post_title}}</h1>
@@ -41,7 +41,7 @@
                 <legend>Comentários:</legend>
             </div>
 
-            <div class="divPostagemBotoes">
+            <div class="divBotoes">
                 <button type="submit">Comentar</button>
                 <button type="submit">Reportar</button>
             </div>
@@ -137,6 +137,11 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
+
+        & legend{
+            color: $colorAzulEscuro;
+            font-weight: bold;
+        }
     }
 
     .divPostagemTituloEStatus{
@@ -187,10 +192,6 @@ export default {
 
     .divPostagemDescricao{
         margin-bottom: 20px;
-
-        & legend{
-            font-weight: bold;
-        };
     }
 
     .divApoiarBotao{
@@ -223,13 +224,9 @@ export default {
 
     .divPostagemComentario{
         margin-bottom: 20px;
-
-        & legend{
-            font-weight: bold;
-        };
     }
 
-    .divPostagemBotoes{
+    .divBotoes{
         display: flex;
         margin-bottom: 100px;
 
