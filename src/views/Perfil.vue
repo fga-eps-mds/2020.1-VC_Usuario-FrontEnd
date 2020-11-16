@@ -108,12 +108,6 @@ export default {
         margin-top: 65px;
         min-height: 620px;
         display: block;
-
-         .divPostagem{
-            height: auto;
-            margin-top: 40px;
-            flex: 1 1 300px; 
-        }
     }
 
     .divInfoPerfil{
@@ -162,5 +156,11 @@ export default {
             white-space: nowrap;
             display: inline-block;
         }
+    }
+
+    .divPostagem{
+        height: auto;
+        margin-top: 20px;
+        flex: 1 1 300px; 
     }
 </style>
