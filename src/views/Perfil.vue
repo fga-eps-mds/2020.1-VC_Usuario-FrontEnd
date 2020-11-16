@@ -83,11 +83,11 @@ export default {
         },
 
         verMais(post_id){
-            this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
+            this.$router.push({ name: 'ListarUmaPostagem', params: { post_id: post_id }})
         },
 
         editar(post_id){
-            this.$router.push({ name: 'editarUmaPostagem', params: { post_id: post_id }})
+            this.$router.push({ name: 'EditarPostagem', params: { post_id: post_id }})
         }
     },
 }
