@@ -1,8 +1,8 @@
 <template>
     <div class="noticia">
         <div class="tituloESubTitulo">
-            <span>Titulo</span>
-            <span>SubTitulo</span>
+            <span>{{titulo}}</span>
+            <span>{{subTitulo}}</span>
         </div>
 
         <div class="divBotoes">
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-    name: 'noticia'
+    name: 'noticia',
+
+    props: {
+        titulo: String,
+        subTitulo: String,
+    },
 }
 </script>
 

@@ -5,15 +5,10 @@
     <section>
         <div class="divFeedDeNoticia">
             <div class="divNoticia">
+                <div v-for="noticia in this.noticiasData" :key="noticia.news_id">
+                    <NoticiaComponent v-bind:titulo="noticia.title"  v-bind:subTitulo="noticia.subtitle"/>
+                </div>
                 
-                <NoticiaComponent/>
-                
-            </div>
-
-            <div class="divNoticia">
-
-                <NoticiaComponent/>
-            
             </div>
         </div>
     </section>
@@ -54,7 +49,7 @@ export default {
             Noticia.listarNoticias().then(res => {
                 console.log("111", res.data);
                 console.log("2222", res);
-                this.noticiasData = res;
+                this.noticiasData = res.data;
             })
         }
     },
