@@ -1,4 +1,4 @@
-import httpNews from './config'
+import httpNews from './configNews.js'
 
 export default{
     listarNoticias:() => {

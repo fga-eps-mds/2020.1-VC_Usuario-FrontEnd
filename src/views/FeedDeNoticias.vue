@@ -38,15 +38,23 @@ export default {
         NoticiaComponent
     },
 
-    mounted(){
+    data(){
+        return {
+            noticiasData: {}
+        }
+    },
+
+    mounted : function(){
         this.listarNoticiasFeed();
     },
 
     methods: {
         listarNoticiasFeed() {
+            console.log(Noticia);
             Noticia.listarNoticias().then(res => {
                 console.log("111", res.data);
                 console.log("2222", res);
+                this.noticiasData = res;
             })
         }
     },
