@@ -102,6 +102,7 @@ export default {
         
         display: flex;
         flex-direction: column;
+        padding-bottom: 100px;
     }
 
     .divPerfil{

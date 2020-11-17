@@ -154,7 +154,7 @@ export default {
 
     section{
         width: 100%;
-        padding-bottom: 120px;
+        padding-bottom: 100px;
         display: flex;
     }
 
