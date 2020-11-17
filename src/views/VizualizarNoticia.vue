@@ -4,7 +4,7 @@
 
     <section>
         <div class="divVisualizarNoticia">
-            
+            <h1> helooo </h1>
         </div>
     </section>
 
@@ -38,10 +38,7 @@ export default {
 
     methods: {
         listarUmaNoticiasFeed() {
-            console.log(NoticiaService);
             NoticiaService.listarUmaNoticia(this.$route.params.id).then(res => {
-                console.log("111", res.data);
-                console.log("2222", res);
                 this.noticiasData = res.data;
             })
         }

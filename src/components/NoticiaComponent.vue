@@ -16,13 +16,14 @@ export default {
     name: 'noticia',
 
     setup() {
-      const verMais = (news_id) => {
-        window.location.href = `/noticias/${news_id}`
+      const verMais = (noticia_id) => {
+        window.location.href = `/noticias/${noticia_id}`
       }
       return { verMais }
     },
 
     props: {
+        id: String,
         titulo: String,
         subTitulo: String,
     },

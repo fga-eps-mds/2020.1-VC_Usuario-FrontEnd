@@ -6,7 +6,7 @@
         <div class="divFeedDeNoticia">
             <div class="divNoticia">
                 <div v-for="noticia in this.noticiasData" :key="noticia.news_id">
-                    <NoticiaComponent v-bind:titulo="noticia.title" v-bind:subTitulo="noticia.subtitle"/>
+                    <NoticiaComponent v-bind:titulo="noticia.title" v-bind:subTitulo="noticia.subtitle" v-bind:id="noticia.news_id"/>
                 </div>
                 
             </div>
@@ -47,8 +47,6 @@ export default {
         listarNoticiasFeed() {
             console.log(Noticia);
             Noticia.listarNoticias().then(res => {
-                console.log("111", res.data);
-                console.log("2222", res);
                 this.noticiasData = res.data;
             })
         }
