@@ -19,8 +19,6 @@
                 <button class="item" v-on:click="select('Outros')">Outros</button>
             </div>
 
-            <div class="divSeparador"/>
-
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
                 <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting"/>
             </div>
@@ -143,33 +141,37 @@ export default {
     }
 
     .divCategorias{
-        max-height: 60px;
-        display: flex;
         width: 100%;
+        margin-bottom: 20px;
+        padding: 5px 0px 5px 30px;
+       
+        display: flex;
         overflow-x: auto;
         -ms-overflow-style: none;
         scrollbar-width: none;
+
+        border-bottom: 1px solid $colorCinza;
 
         &::-webkit-scrollbar {
             display: none;
         }
 
         .item{
-            min-width: 80px;
+            padding: 0 10px;
             height: 30px;
-            line-height: 30px;
+            min-width: 80px;
+            
             text-align: center;
-            background-color: $colorCinza;
-            margin-left: 5px;
-            color: $colorBranca;
-            border-radius: 15px;
-            color: $colorAzulEscuro;
-            font-size: 12px;
             text-overflow: ellipsis;
-            cursor: pointer;
             white-space: nowrap;
             overflow: hidden;
-            margin: 8px;
+
+            margin-right: 5px;
+
+            cursor: pointer;
+            border-radius: 25px;
+            color: $colorAzulEscuro;
+            background-color: $colorBranca;
 
             &:focus{
                 background-color: $colorAzulEscuro;
@@ -181,7 +183,7 @@ export default {
     .divHome{
         height: auto;
         width: 100%;
-        margin-top: 65px;
+        margin-top: 45px;
         min-width: 250px;
 
         display: flex;
@@ -193,13 +195,4 @@ export default {
             flex: 1 1 300px;
         }
     }
-
-    .divSeparador{
-        width: 100%;
-        background-color: $colorCinza;
-        height: 1px;
-        margin-top: 5px;
-        margin-bottom: 15px;
-    }
-
 </style>
