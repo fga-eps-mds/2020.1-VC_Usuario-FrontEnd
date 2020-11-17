@@ -5,18 +5,18 @@
     <section>
         <div class="divHome">
             <div class="divCategorias">
-                <button class="item" id = "Todas" v-on:click="select('Todas')">Todas</button>
-                <button class="item" v-on:click="select('Limpeza')">Limpeza</button>
-                <button class="item" v-on:click="select('Segurança')">Segurança</button>
-                <button class="item" v-on:click="select('Infraestrutura')">Infraestrutura</button>
-                <button class="item" v-on:click="select('Transportes')">Transportes</button>
-                <button class="item" v-on:click="select('Serviços Terceirizados')">Serviços Terceirizados</button>
-                <button class="item" v-on:click="select('Meio Ambiente')">Meio Ambiente</button>
-                <button class="item" v-on:click="select('Jardinagem')">Jardinagem</button>
-                <button class="item" v-on:click="select('Alimentação nos campi')">Alimentação nos campi</button>
-                <button class="item" v-on:click="select('Saúde e seguridade')">Saúde e seguridade</button>
-                <button class="item" v-on:click="select('Abuso de Assédio')">Abuso de Assédio</button>
-                <button class="item" v-on:click="select('Outros')">Outros</button>
+                <button id="Todas" v-on:click="select('Todas')">Todas</button>
+                <button id="Limpeza" v-on:click="select('Limpeza')">Limpeza</button>
+                <button id="Segurança" v-on:click="select('Segurança')">Segurança</button>
+                <button id="Infraestrutura" v-on:click="select('Infraestrutura')">Infraestrutura</button>
+                <button id="Transportes" v-on:click="select('Transportes')">Transportes</button>
+                <button id="Serviços Terceirizados" v-on:click="select('Serviços Terceirizados')">Serviços Terceirizados</button>
+                <button id="Meio Ambiente" v-on:click="select('Meio Ambiente')">Meio Ambiente</button>
+                <button id="Jardinagem" v-on:click="select('Jardinagem')">Jardinagem</button>
+                <button id="Alimentação nos campi" v-on:click="select('Alimentação nos campi')">Alimentação nos campi</button>
+                <button id="Saúde e seguridade" v-on:click="select('Saúde e seguridade')">Saúde e seguridade</button>
+                <button id="Abuso de Assédio" v-on:click="select('Abuso de Assédio')">Abuso de Assédio</button>
+                <button id="Outros" v-on:click="select('Outros')">Outros</button>
             </div>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
@@ -54,7 +54,9 @@ export default {
 
             user: {
                 fk_user_id: '',
-            }
+            },
+
+            filtragemAntiga: "Todas"
         }
     },
 
@@ -115,11 +117,27 @@ export default {
         },
 
         select(categoria){
+            this.mudarCorFiltrageAntiga(this.filtragemAntiga)
+            this.mudarCorFiltrageAtual(categoria)
+            
             this.listarPostagemPorCategoria(categoria)
         },
 
+        mudarCorFiltrageAntiga(filtragemAntiga){
+            document.getElementById(filtragemAntiga).style.backgroundColor = '#ffffff';
+            document.getElementById(filtragemAntiga).style.color = '#060449';
+        },
+
+        mudarCorFiltrageAtual(categoria){
+            document.getElementById(categoria).style.backgroundColor = "#060449";
+            document.getElementById(categoria).style.color = '#ffffff';
+
+            this.filtragemAntiga = categoria
+        },
+
         focarTodas() {
-            document.getElementById("Todas").focus()
+            document.getElementById(this.filtragemAntiga).style.backgroundColor = "#060449";
+            document.getElementById(this.filtragemAntiga).style.color = '#ffffff';
         },
     },
 
@@ -156,7 +174,7 @@ export default {
             display: none;
         }
 
-        .item{
+        & button{
             padding: 0 10px;
             height: 30px;
             min-width: 80px;
@@ -172,11 +190,6 @@ export default {
             border-radius: 25px;
             color: $colorAzulEscuro;
             background-color: $colorBranca;
-
-            &:focus{
-                background-color: $colorAzulEscuro;
-                color: $colorBranca;
-            }
         }
     }
 
