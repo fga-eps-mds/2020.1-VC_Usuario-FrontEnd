@@ -6,12 +6,16 @@
         </div>
 
         <div class="noticiaBotaoImagem">
-            <div class="divBotoes">
-                <button @click="verMais(id)">Ver mais</button>
+            <div class="noticiaImagem">
+                <img v-bind:src="this.imagemDaNoticia"/>
             </div>
 
-            <div class="noticiaImagem">
-                <img v-bind:src="this.imageDaNoticia"/>
+            <div class="NoticiaTexto">
+                <span>{{texto}}</span>
+            </div>
+
+            <div class="divBotoes">
+                <button @click="verMais(id)">Ver mais</button>
             </div>
         </div>
     </div>
@@ -30,7 +34,7 @@ export default {
 
     data() {
         return{
-            imageDaNoticia: process.env.VUE_APP_API_URL_NEWS + /img/ + this.image1,
+            imagemDaNoticia: process.env.VUE_APP_API_URL_NEWS + /img/ + this.image1,
         }
     },
 
@@ -38,6 +42,7 @@ export default {
         id: Number,
         titulo: String,
         subTitulo: String,
+        texto: String,
         image1: String,
     }
 }
@@ -58,6 +63,7 @@ export default {
         height: auto;
         display: flex;
         flex-direction: column;
+        padding-bottom: 15px;
 
         & span:first-child{
             padding-right: 30px;
@@ -66,6 +72,10 @@ export default {
             padding-bottom: 10px;
             color: $colorAzul;
         }
+    }
+
+    .NoticiaTexto{
+        height: auto;
     }
 
     .noticiaBotaoImagem{

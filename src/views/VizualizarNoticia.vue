@@ -4,7 +4,18 @@
 
     <section>
         <div class="divVisualizarNoticia">
-            <h1> helooo </h1>
+            <div class="titulo">
+                <span>{{noticiasData.title}}</span>
+                <span>{{noticiasData.subtitle}}</span>
+            </div>
+
+            <div class="imagem">
+                <img v-bind:src="imageDaNoticia"/>
+            </div>
+
+            <div class="texto">
+                <span>{{noticiasData.text}}</span>
+            </div>
         </div>
     </section>
 
@@ -28,7 +39,8 @@ export default {
 
     data(){
         return {
-            noticiasData: {}
+            noticiasData: {},
+            imageDaNoticia: {},
         }
     },
 
@@ -40,6 +52,7 @@ export default {
         listarUmaNoticiasFeed() {
             NoticiaService.listarUmaNoticia(this.$route.params.id).then(res => {
                 this.noticiasData = res.data;
+                this.imageDaNoticia = process.env.VUE_APP_API_URL_NEWS + /img/ + this.noticiasData.image1;
             })
         }
     },
@@ -47,10 +60,37 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/stylesheets/pallete.scss";
 
     section{
         width: 100%;
         display: flex;
+    }
+
+    .titulo{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 15px;
+
+        & span:first-child{
+            padding-right: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            padding-bottom: 10px;
+            color: $colorAzul;
+        }
+    }
+
+    .imagem{
+        text-align: center;
+        margin-bottom: 40px;
+
+        & img {
+            max-width:100%;
+            max-height:150px;
+            border-radius: 15px;
+        }
     }
 
     .divVisualizarNoticia{

@@ -7,7 +7,8 @@
             <div class="divNoticia">
                 <div v-for="noticia in this.noticiasData" :key="noticia.news_id">
                     <NoticiaComponent v-bind:titulo="noticia.title" v-bind:subTitulo="noticia.subtitle" v-bind:id="noticia.news_id"
-                    v-bind:image1="noticia.image1"/>
+                    v-bind:image1="noticia.image1"
+                    v-bind:texto="noticia.text"/>
                 </div>
             </div>
         </div>
