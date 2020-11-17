@@ -3,11 +3,14 @@
         <div class="tituloESubTitulo">
             <span>{{titulo}}</span>
             <span>{{subTitulo}}</span>
-        </div>
-
+            <div class="noticiaImagem">
+                <img v-bind:src="this.imageDaNoticia"/>
+            </div>
         <div class="divBotoes">
             <button @click="verMais(id)">Ver mais</button>
         </div>
+        </div>
+
     </div>
 </template>
 
@@ -22,11 +25,18 @@ export default {
       return { verMais }
     },
 
+    data() {
+        return{
+            imageDaNoticia: process.env.VUE_APP_API_URL_NEWS + /img/ + this.image1,
+        }
+    },
+
     props: {
-        id: String,
+        id: Number,
         titulo: String,
         subTitulo: String,
-    },
+        image1: String,
+    }
 }
 </script>
 
@@ -35,9 +45,9 @@ export default {
     .noticia {
         height: auto;
         border-radius: 15px;
-        height: 150px;
+        height: 180px;
         padding: 10px;
-
+        margin-bottom: 20px;
         border: solid 1px #DADDE0;
     }
 
@@ -60,12 +70,12 @@ export default {
         }
     }
 
+    .noticiaImagem img{
+        width:150px;
+        height:150px;
+    }
+
     .divBotoes{
-        display: flex;
-        width: 80%;
-        max-width: 300px;
-        margin-bottom: 10px;
-        
         & button{
             flex: 1;
             height: 30px;

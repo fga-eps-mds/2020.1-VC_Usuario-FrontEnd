@@ -6,9 +6,9 @@
         <div class="divFeedDeNoticia">
             <div class="divNoticia">
                 <div v-for="noticia in this.noticiasData" :key="noticia.news_id">
-                    <NoticiaComponent v-bind:titulo="noticia.title" v-bind:subTitulo="noticia.subtitle" v-bind:id="noticia.news_id"/>
+                    <NoticiaComponent v-bind:titulo="noticia.title" v-bind:subTitulo="noticia.subtitle" v-bind:id="noticia.news_id"
+                    v-bind:image1="noticia.image1"/>
                 </div>
-                
             </div>
         </div>
     </section>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-/* Import dos components */
+
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import NoticiaComponent from '@/components/NoticiaComponent.vue'
@@ -45,7 +45,7 @@ export default {
 
     methods: {
         listarNoticiasFeed() {
-            console.log(Noticia);
+
             Noticia.listarNoticias().then(res => {
                 this.noticiasData = res.data;
             })
