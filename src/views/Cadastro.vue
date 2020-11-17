@@ -12,8 +12,8 @@
             <form @submit.prevent="registrarUsuario">
                 <div class="divInputs">
                     <div class="divUser">
-                        <input style ="padrao" type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
-                        <input style ="padrao" type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
+                        <input type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name" required="true">
+                        <input type="text" name="" placeholder="Email" v-model="this.cadastro.user_email" required="true">
                     </div>
 
                     <div class="divSenha">
