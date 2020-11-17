@@ -78,8 +78,17 @@ export default {
             font-size: 20px;
             font-weight: bold;
             padding-bottom: 10px;
+            overflow: hidden;
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
             color: $colorAzul;
         }
+    }
+
+    .texto{
+        height: auto;
+        width: 100%;
     }
 
     .imagem{
