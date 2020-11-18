@@ -157,11 +157,10 @@ export default {
 
     form{
         height: auto;
+        width: 100%;
         margin: 0 30px;
         min-width: 200px;
-        width: 100%;
         margin-top: 65px;
-        min-height: 620px;
 
         & h1, legend{
             color: $colorAzulEscuro;
@@ -178,8 +177,7 @@ export default {
         padding: 0;
 
         height: 50px;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 20px 0 20px;
         width: 100%;
 
         font-size: 18px;
@@ -261,6 +259,7 @@ export default {
 
         .inputDescricao{
             width: 100%;
+
             font-size: 16px;
             border-radius: 10px;
             border: 1px solid $colorCinza;

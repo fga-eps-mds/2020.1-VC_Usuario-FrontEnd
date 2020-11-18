@@ -210,6 +210,7 @@ export default {
 
     section{
         width: 100%;
+        height: auto;
         display: flex;
         padding-bottom: 100px;
     }
@@ -218,6 +219,7 @@ export default {
         height: auto;
         width: 100%;
         margin: 0 30px;
+        min-width: 200px;
         margin-top: 65px;
 
         & h1{
@@ -240,8 +242,8 @@ export default {
     }
 
     .divBotoes{
-        width: 100%;
-        height: 50px;
+        display: flex;
+        flex-direction: column;
 
         & button{
             height: 50px;
@@ -262,6 +264,10 @@ export default {
 
         & button:first-child:hover{
             background-color:$colorAzulEscuro;
+        }
+
+        & button:last-child{
+            margin-bottom: 0px;
         }
     }
 
