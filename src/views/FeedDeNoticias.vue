@@ -5,15 +5,11 @@
     <section>
         <div class="divFeedDeNoticia">
             <div class="divNoticia">
-                
-                <NoticiaComponent/>
-                
-            </div>
-
-            <div class="divNoticia">
-
-                <NoticiaComponent/>
-            
+                <div v-for="noticia in this.noticiasData" :key="noticia.news_id">
+                    <NoticiaComponent v-bind:titulo="noticia.title" v-bind:subTitulo="noticia.subtitle" v-bind:id="noticia.news_id"
+                    v-bind:image1="noticia.image1"
+                    v-bind:texto="noticia.text"/>
+                </div>
             </div>
         </div>
     </section>
@@ -23,11 +19,11 @@
 </template>
 
 <script>
-/* Import dos components */
+
 import Header from '@/components/Header.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import NoticiaComponent from '@/components/NoticiaComponent.vue'
-
+import Noticia from '@/services/noticiaService.js'
 
 export default {
     name: 'FeedDeNoticias',
@@ -36,6 +32,25 @@ export default {
         Header,
         MenuBar,
         NoticiaComponent
+    },
+
+    data(){
+        return {
+            noticiasData: {}
+        }
+    },
+
+    mounted : function(){
+        this.listarNoticiasFeed();
+    },
+
+    methods: {
+        listarNoticiasFeed() {
+
+            Noticia.listarNoticias().then(res => {
+                this.noticiasData = res.data;
+            })
+        }
     },
 }
 </script>

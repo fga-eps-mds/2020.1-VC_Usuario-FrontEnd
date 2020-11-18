@@ -3,7 +3,7 @@
         <div class="divMenuOpcoes">
             <div><router-link to="/"><img src="../assets/homeIcon.png"></router-link></div>
             <div><router-link to="/criarpostagem"><img src="../assets/addIcon.png"></router-link></div>
-            <div><img src="../assets/newsIcon.png"></div>
+            <div><router-link to="/noticias"><img src="../assets/newsIcon.png"></router-link></div>
             <div><img src="../assets/userIcon.png" v-on:click="redirectPerfilLogin"></div>
         </div>
     </nav>
