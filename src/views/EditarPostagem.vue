@@ -166,11 +166,10 @@ export default {
 
     form{
         height: auto;
+        width: 100%;
         margin: 0 30px;
         min-width: 200px;
-        width: 100%;
         margin-top: 65px;
-        min-height: 620px;
 
         & h1{
             color: $colorAzulEscuro;
@@ -194,7 +193,7 @@ export default {
     }
 
     .inputTitulo::placeholder {
-        font-size: 20px;
+        font-size: 18px;
         color: $colorPreta;
     }
 
@@ -237,8 +236,8 @@ export default {
     }
 
     .divBotoes{
-        width: 100%;
-        height: 50px;
+        display: flex;
+        flex-direction: column;
 
         & button{
             height: 50px;
@@ -248,6 +247,10 @@ export default {
             cursor: pointer;
             font-size: 20px;
             border-radius: 25px;
+        }
+
+        & button:last-child{
+            margin-bottom: 0px;
         }
     }
     
