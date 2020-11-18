@@ -13,10 +13,10 @@
             <label for="chec">
                 <img src="../assets/sidebar.png">
             </label>
-            <nav class="SideBar">
+            <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/criarpostagem">Criar Postagem</a></li>
+                    <li class="botaoCriar"><a href="/criarpostagem">Criar Postagem</a></li>
                     <li><a href="">Notícias</a></li>
                     <li><a href="/Perfil">Perfil</a></li>
                 </ul>
@@ -35,7 +35,7 @@ window.onscroll = function(){
     if(prevScrollpos > currentScrollpos){
         document.getElementById("header").style.top = "0px";
     }else{
-        document.getElementById("header").style.top = "-100px"
+        document.getElementById("header").style.top = "-45px"
     }
 
     prevScrollpos = currentScrollpos;
@@ -45,10 +45,6 @@ window.onscroll = function(){
 
 <style lang="scss" scoped>
     @import "../assets/stylesheets/pallete.scss";
-
-    @media only screen 
-    and (min-device-width : 0px) 
-    and (max-device-width : 1024px) {
 
     header{
         top: 0;
@@ -95,81 +91,41 @@ window.onscroll = function(){
         }
     }
 
-    .divSideBar{
-        display: none;
-    }
-
-    }
-
-    @media only screen 
-    and (min-device-width : 1024px) {
-
-    header{
-        top: 0;
-        position: fixed;
-        display: flex;
-
-        height: 45px;
-        width: 100%;
-        
-        transition: top 0.3s;
-        background-color: $colorAzul;
-    }
-
-    .divWordmark{
-        display: flex;
-        justify-content: center;
-        
-        height: 100%;
-        width: 100%;
-        margin: auto;
-        position:absolute;
-        z-index: -50;
-
-        & img{
-            height: 30px;
-            width: 60px;
-            padding: 5px 10px;
-            margin: auto;
-
-            display: block;
-            position: relative;
-            
-            cursor: pointer;
+    @media only screen and (max-width:600px){
+        .divSideBar{
+            display: none;
         }
     }
 
-    .divBotaoVoltar{
-        display: none;
+    @media only screen and (min-width:600px){
+        .divBotaoVoltar{
+            display: none;
+        }
     }
 
     .divSideBar{
-        position: fixed;
-        top: 7px;
-        left: 30px;
-        color: $colorBranca;
-        padding: 0px;
-        margin: 0px;
         height: 100%;
-        z-index: -1;
-    }
+        top: 9px;
+        margin-left: 30px;
+
+        position: absolute;
+        
         & img{
-            height: 35px;
-            width: 40px;
-            color: $colorBranca
+            height: 25px;
+            width: 35px;
+            margin-bottom: 7px;
         }
 
-        &ul {
+        & ul {
             list-style: none;
         }
 
         & a{
             font-weight: bold;
             color: $colorAzulEscuro;
-            font-size: 30px;
             text-decoration: none;
             display: block;
-            padding: 35px;
+            padding: 20px 35px;
             border-bottom: 1px solid $colorCinza;
         }
 
@@ -178,26 +134,22 @@ window.onscroll = function(){
             color: $colorBranca;
         }
 
-        & input[type="checkbox"]
-        {
+        & input{
             display: none;
         }
 
-        & input[type="checkbox"]:checked ~ nav
-        {
+        & input:checked ~ nav{
             transform: translateX(305px);
             transition: 1s;
-        }
+        }  
 
-        &nav[class="SideBar"]{
+        & nav{
             background-color: $colorBranca;
             height: 100%;
             border-right: 1px solid $colorCinza;
             width: 305px;
-            position:absolute;
-            left: -340px           
+            position:fixed;
+            left: -310px;           
         }
-
-    }
-    
+    }   
 </style>
