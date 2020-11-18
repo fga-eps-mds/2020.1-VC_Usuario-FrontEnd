@@ -58,7 +58,7 @@
 
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MenuBarComponent from '@/components/MenuBarComponent.vue'
-import Postagem from '@/services/postagens.js'
+import Postagem from '@/services/postagensServices.js'
 import { ref } from 'vue'
 /* eslint-disable */
 

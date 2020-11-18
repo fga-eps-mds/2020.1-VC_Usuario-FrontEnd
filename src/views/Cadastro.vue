@@ -37,7 +37,7 @@
 
 <script>
 
-import Usuarios from '@/services/usuarios.js'
+import Usuarios from '@/services/usuariosServices.js'
 
 export default{
     name: 'Cadastro',

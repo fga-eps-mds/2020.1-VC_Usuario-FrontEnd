@@ -1,6 +1,6 @@
 import { createStore, createLogger } from 'vuex';
 import createPersistedState from "vuex-persistedstate";
-import Usuarios from '@/services/usuarios.js'
+import Usuarios from '@/services/usuariosServices.js'
 /* eslint-disable */
 
 const store = createStore({

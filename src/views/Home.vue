@@ -36,7 +36,7 @@ import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import PostagemComponent from '@/components/PostagemComponent.vue'
 
 /* Import dos services */
-import PostagemService from '@/services/postagens.js'
+import PostagemService from '@/services/postagensServices.js'
 /* eslint-disable */
 
 export default {

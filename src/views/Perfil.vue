@@ -32,7 +32,7 @@
     import HeaderComponent from '@/components/HeaderComponent.vue'
     import MenuBarComponent from '@/components/MenuBarComponent.vue'
     import PostagemComponent from '@/components/PostagemComponent.vue'
-    import UserService from '@/services/usuarios.js'
+    import UserService from '@/services/usuariosServices.js'
     /* eslint-disable */
 
     import { useStore } from 'vuex'
