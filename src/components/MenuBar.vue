@@ -1,10 +1,10 @@
 <template>
     <nav>
         <div class="divMenuOpcoes">
-            <div><router-link to="/"><img src="../assets/homeIcon.png"></router-link></div>
-            <div><router-link to="/criarpostagem"><img src="../assets/addIcon.png"></router-link></div>
-            <div><img src="../assets/newsIcon.png"></div>
-            <div><img src="../assets/userIcon.png" v-on:click="redirectPerfilLogin"></div>
+            <div><router-link to="/"><img id="home" src="../assets/homeIcon.png"></router-link></div>
+            <div><router-link to="/criarpostagem"><img id="criarPost" src="../assets/addIcon.png" v-on:click="getURL()"></router-link></div>
+            <div><img src="../assets/newsIcon.png" v-on:click="getURL()"></div>
+            <div><img id="perfil" src="../assets/userIcon.png" v-on:click="redirectPerfilLogin"></div>
         </div>
     </nav>
 </template>
@@ -29,6 +29,33 @@ export default {
             }
         }
         return {redirectPerfilLogin}
+    },
+    methods: {
+        getURL(){
+            console.log(window.location.href)
+        },
+        altera(){
+            if(window.location.href === 'http://localhost:8080/'){
+                document.getElementById("home").src = "img/homeIcon2.0d80039d.png"
+            }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
+                document.getElementById("criarPost").src = "../img/addIcon2.e766826e.png"
+            }else if(window.location.href === 'http://localhost:8080/perfil'){
+                document.getElementById("perfil").src = "../img/userIcon2.90dd1654.png"
+            }
+            /* if(window.location.href === 'http://localhost:8080/'){
+                document.getElementById("home").src = "../assets/homeIcon2.png"
+            }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
+                document.getElementById("criarPost").src = "../assets/addIcon2.png"
+            } */
+        },
+        /* changeHome(){
+            document.getElementById('home').src="/img/addIcon.c9c76183.png"
+        } */
+    },
+    mounted(){
+        //this.changeHome(),
+        this.altera(),
+        this.getURL()
     }
 }
 
