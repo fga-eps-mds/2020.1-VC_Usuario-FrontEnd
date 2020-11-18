@@ -35,25 +35,23 @@ export default {
             console.log(window.location.href)
         },
         altera(){
-            if(window.location.href === 'http://localhost:8080/'){
+   /*          if(window.location.href === 'http://localhost:8080/'){
                 document.getElementById("home").src = "img/homeIcon2.0d80039d.png"
             }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
                 document.getElementById("criarPost").src = "../img/addIcon2.e766826e.png"
             }else if(window.location.href === 'http://localhost:8080/perfil'){
                 document.getElementById("perfil").src = "../img/userIcon2.90dd1654.png"
-            }
-            /* if(window.location.href === 'http://localhost:8080/'){
-                document.getElementById("home").src = "../assets/homeIcon2.png"
-            }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
-                document.getElementById("criarPost").src = "../assets/addIcon2.png"
             } */
+            if(window.location.href === 'http://localhost:8080/'){
+                document.getElementById("home").src=require("../assets/homeIcon2.png");
+            }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
+                document.getElementById("criarPost").src = require("../assets/addIcon2.png")
+            }else if(window.location.href === 'http://localhost:8080/perfil'){
+                document.getElementById("perfil").src = require("../assets/userIcon2.png")
+            }
         },
-        /* changeHome(){
-            document.getElementById('home').src="/img/addIcon.c9c76183.png"
-        } */
     },
     mounted(){
-        //this.changeHome(),
         this.altera(),
         this.getURL()
     }
