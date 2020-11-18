@@ -1,6 +1,6 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
 
     <section>           
         <form @submit.prevent="checkCampos">
@@ -80,13 +80,13 @@
         </form>
     </div>
 
-    <MenuBar/>
+    <MenuBarComponent/>
     
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 
@@ -94,8 +94,8 @@ export default {
 
     name: 'Editar',
     components:{
-        Header,
-        MenuBar
+        HeaderComponent,
+        MenuBarComponent
     },
 
     setup() {

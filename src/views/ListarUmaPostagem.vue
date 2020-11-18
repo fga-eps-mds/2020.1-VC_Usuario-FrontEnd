@@ -1,6 +1,6 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
 
     <section>
         <div class="divListarPostagem">
@@ -48,7 +48,7 @@
         </div>
     </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template> 
 
@@ -56,8 +56,8 @@
 
 //import { useStore } from 'vuex'
 
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import Postagem from '@/services/postagens.js'
 import { ref } from 'vue'
 /* eslint-disable */
@@ -66,8 +66,8 @@ export default {
     name: 'listarUmaPostagem',
 
     components: {
-        Header,
-        MenuBar,
+        HeaderComponent,
+        MenuBarComponent,
     },
 
     setup() {

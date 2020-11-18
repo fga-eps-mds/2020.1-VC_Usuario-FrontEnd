@@ -1,6 +1,6 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
 
     <section>
         <div class="divPerfil">
@@ -24,13 +24,13 @@
         </div>
     </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template>
 
 <script>
-    import Header from '@/components/Header.vue'
-    import MenuBar from '@/components/MenuBar.vue'
+    import HeaderComponent from '@/components/HeaderComponent.vue'
+    import MenuBarComponent from '@/components/MenuBarComponent.vue'
     import PostagemComponent from '@/components/PostagemComponent.vue'
     import UserService from '@/services/usuarios.js'
     /* eslint-disable */
@@ -42,8 +42,8 @@ export default {
     name:'Perfil',
 
     components: {
-        Header,
-        MenuBar,
+        HeaderComponent,
+        MenuBarComponent,
         PostagemComponent
     },
 

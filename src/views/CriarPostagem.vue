@@ -1,6 +1,6 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
     
     <section>
         <form @submit.prevent="criarPostagem" enctype="multipart/form-data">
@@ -65,14 +65,14 @@
         </form>
     </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template> 
 
 <script>
 
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import Postagem from '@/services/postagens.js'
 /* eslint-disable */
 
@@ -80,8 +80,8 @@ export default {
     name: 'CriarPostagem',
 
     components: {
-        Header,
-        MenuBar
+        HeaderComponent,
+        MenuBarComponent
     },
 
     data(){

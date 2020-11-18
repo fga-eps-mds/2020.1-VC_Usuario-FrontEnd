@@ -1,6 +1,6 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
 
     <section>
         <div class="divHome">
@@ -25,14 +25,14 @@
         </div>
     </section>
     
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template>
 
 <script>
 /* Import dos components */
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import PostagemComponent from '@/components/PostagemComponent.vue'
 
 /* Import dos services */
@@ -43,8 +43,8 @@ export default {
     name: 'Home',
 
     components: {
-        Header,
-        MenuBar,
+        HeaderComponent,
+        MenuBarComponent,
         PostagemComponent,
     },
     
