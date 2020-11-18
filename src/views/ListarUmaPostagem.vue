@@ -39,12 +39,16 @@
 
             <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
+                <textarea class="Comentario" rows="5" cols="40"></textarea>
+                    
+
             </div>
 
             <div class="divPostagemBotoes">
                 <button type="submit">Comentar</button>
                 <button type="submit">Reportar</button>
             </div>
+
         </div>
     </section>
 
@@ -226,6 +230,13 @@ export default {
         & legend{
             font-weight: bold;
         };
+        .Comentario {
+            height: 80px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid $colorCinza;  
+        }
     }
 
     .divPostagemBotoes{
