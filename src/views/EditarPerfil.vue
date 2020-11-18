@@ -211,6 +211,7 @@ export default {
     section{
         width: 100%;
         display: flex;
+        padding-bottom: 100px;
     }
 
     form{
