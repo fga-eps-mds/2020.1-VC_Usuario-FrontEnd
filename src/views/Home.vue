@@ -96,16 +96,6 @@ export default {
             }
         },
 
-        statusColor(post_supporting){
-            var auxApoio = 0
-
-            if(post_supporting == true){
-                auxApoio = 1
-            } 
-            
-            return auxApoio
-        },
-
         listarPostagemPorCategoria(categoria){
             if(categoria == 'Todas'){
                 this.listarPostagens();
@@ -175,19 +165,19 @@ export default {
         }
 
         & button{
-            padding: 0 10px;
             height: 30px;
-            min-width: 80px;
+            min-width: 100px;
+            margin-right: 5px;
+            padding: 0 10px;
             
             text-align: center;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
 
-            margin-right: 5px;
-
             cursor: pointer;
             border-radius: 25px;
+            border: none;
             color: $colorAzulEscuro;
             background-color: $colorBranca;
         }
