@@ -310,6 +310,7 @@ export default {
     // Radio
     .divPermissao {
         margin-bottom: 20px;
+        z-index: 0;
 
         & .switch {
             position: relative;
@@ -334,6 +335,7 @@ export default {
             background-color: $colorCinza;
             -webkit-transition: .4s;
             transition: .4s;
+            z-index: -1;
         }
 
         & .slider:before {
