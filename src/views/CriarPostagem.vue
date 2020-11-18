@@ -174,12 +174,11 @@ export default {
         outline: 0;
         display: block;
 
-        padding: 0;
-
         height: 50px;
-        margin-top: 20px 0 20px;
         width: 100%;
-
+        padding: 0;
+        margin: 20px 0;
+        
         font-size: 18px;
         border-bottom: 1px solid $colorCinza; 
     }
