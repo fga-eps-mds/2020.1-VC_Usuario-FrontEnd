@@ -22,6 +22,10 @@ export default {
         return http.put(`/ups/support_postage`, upsAtributos)
     },
 
+    comentarUmaPostagem:(upcAtributos) => {
+        return http.post(`/upc/comment_postage`, upcAtributos)
+    },
+
     listarPostagensUsuarioLogado:(idDoUsuario) => {
         return http.get(`postage/list_all_with_UPS/${idDoUsuario}`)
     },
