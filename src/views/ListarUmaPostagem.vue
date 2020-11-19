@@ -39,7 +39,7 @@
 
             <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
-                <textarea rows="5" cols="40" placeholder="Faça um comentário sobre a postagem" v-model="upcAtributos.comment_descripton"></textarea>
+                <textarea placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
             </div>
 
             <div class="divPostagemBotoes">
@@ -92,7 +92,7 @@ export default {
             upcAtributos: {
                 user_id: '',
                 postage_id: '',
-                comment_descripton: ''
+                comment_descripton: null
             }
         }
     },
@@ -138,16 +138,21 @@ export default {
                         console.log("Usuário não logado")
                     }
                     else{
-                        this.upcAtributos.user_id = this.$store.getters.getId
-                        this.upcAtributos.postage_id = this.postagem._id
-                        console.log(this.upcAtributos)
+                        if(this.upcAtributos.comment_descripton == null){
+                            alert("Comentário vazio")
+                        }
+                        else{
+                            this.upcAtributos.user_id = this.$store.getters.getId
+                            this.upcAtributos.postage_id = this.postagem._id
+                            console.log(this.upcAtributos)
 
-                        Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
-                            console.log('Comentário feito com sucesso!')
-                            console.log(resposta)
-                            
-                            window.location.href = `http://localhost:8080/post/${this.postagem._id}`
-                        })
+                            Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
+                                console.log(resposta)
+                                alert("Comentário feito com sucesso!")
+                                
+                                window.location.href = `http://localhost:8080/post/${this.postagem._id}`
+                            })
+                        }
                     }
                 }
                 else{
