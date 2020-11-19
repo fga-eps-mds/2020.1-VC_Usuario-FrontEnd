@@ -39,13 +39,11 @@
 
             <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
-                <textarea class="Comentario" rows="5" cols="40"></textarea>
-                    
-
+                <textarea rows="5" cols="40" placeholder="Faça um comentário sobre a postagem" v-model="upcAtributos.comment_descripton"></textarea>
             </div>
 
             <div class="divPostagemBotoes">
-                <button type="submit">Comentar</button>
+                <button @click="comentarPostagemMetodo()">Comentar</button>
                 <button type="submit">Reportar</button>
             </div>
 
@@ -89,6 +87,12 @@ export default {
             upsAtributos: {
                 user_id: '',
                 postage_id: ''
+            },
+
+            upcAtributos: {
+                user_id: '',
+                postage_id: '',
+                comment_descripton: ''
             }
         }
     },
@@ -116,6 +120,38 @@ export default {
                             console.log(resposta)
                         })
                     }
+                }
+                else{
+                    console.log("Usuário não logado")
+                }
+            }
+            catch(err){
+                console.log({err})
+            }
+        },
+
+        comentarPostagemMetodo(){
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        console.log("Usuário não logado")
+                    }
+                    else{
+                        this.upcAtributos.user_id = this.$store.getters.getId
+                        this.upcAtributos.postage_id = this.postagem._id
+                        console.log(this.upcAtributos)
+
+                        Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
+                            console.log('Comentário feito com sucesso!')
+                            console.log(resposta)
+                            
+                            window.location.href = `http://localhost:8080/post/${this.postagem._id}`
+                        })
+                    }
+                }
+                else{
+                    console.log("Usuário não logado")
                 }
             }
             catch(err){
@@ -229,9 +265,10 @@ export default {
 
         & legend{
             font-weight: bold;
-        };
-        .Comentario {
-            height: 80px;
+        }
+
+        & textarea{
+            height: 50px;
             width: 100%;
             font-size: 16px;
             border-radius: 10px;
