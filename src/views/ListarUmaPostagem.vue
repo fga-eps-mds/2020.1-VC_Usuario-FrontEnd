@@ -39,10 +39,13 @@
 
             <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
+                <div id="teste" class="divFazerComentario">
+                    <textarea id="textAreaComentario" v-on:keyup="ajusteRowsTextAreaComentario()" rows="2" placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
+                    <button @click="comentarPostagemMetodo()">Comentar</button>
+                </div>
             </div>
 
             <div class="divBotoes">
-                <button type="submit">Comentar</button>
                 <button type="submit">Reportar</button>
             </div>
         </div>
@@ -86,7 +89,15 @@ export default {
             upsAtributos: {
                 user_id: '',
                 postage_id: ''
-            }
+            },
+
+            upcAtributos: {
+                user_id: '',
+                postage_id: '',
+                comment_descripton: null
+            },
+
+            auxCaracteresTextArea: 50
         }
     },
     
@@ -114,9 +125,65 @@ export default {
                         })
                     }
                 }
+                else{
+                    console.log("Usuário não logado")
+                }
             }
             catch(err){
                 console.log({err})
+            }
+        },
+
+        comentarPostagemMetodo(){
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        console.log("Usuário não logado")
+                    }
+                    else{
+                        if(this.upcAtributos.comment_descripton == null){
+                            alert("Comentário vazio")
+                        }
+                        else{
+                            this.upcAtributos.user_id = this.$store.getters.getId
+                            this.upcAtributos.postage_id = this.postagem._id
+                            console.log(this.upcAtributos)
+
+                            Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
+                                console.log(resposta)
+                                alert("Comentário feito com sucesso!")
+                                
+                                window.location.href = `/postagem/${this.postagem._id}`
+                            })
+                        }
+                    }
+                }
+                else{
+                    console.log("Usuário não logado")
+                }
+            }
+            catch(err){
+                console.log({err})
+            }
+        },
+
+        ajusteRowsTextAreaComentario() {
+            
+            const objetotextAreaComentario = document.getElementById('textAreaComentario');
+
+            if(this.auxCaracteresTextArea == 0){
+                this.auxCaracteresTextArea = 50;
+            }
+            else{
+                if (this.upcAtributos.comment_descripton.length > this.auxCaracteresTextArea) {
+                    objetotextAreaComentario.rows += 1;
+                    this.auxCaracteresTextArea += 50;
+                }
+                while (this.upcAtributos.comment_descripton.length + 50 < this.auxCaracteresTextArea) {
+                    objetotextAreaComentario.rows -= 1;
+                    this.auxCaracteresTextArea -= 50;
+                }
             }
         }
     }
@@ -225,6 +292,59 @@ export default {
 
     .divPostagemComentario{
         margin-bottom: 20px;
+
+        & legend{
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    }
+
+    .divFazerComentario{
+        align-items: center;
+        display: flex;
+
+        & textarea{
+            flex: 1;
+
+            font-size: 16px;
+            border: none;
+            resize: none;
+            border-bottom: 1px solid $colorCinza;  
+        }
+
+        & button{
+            height: 30px;
+            width: 280px;
+            margin-left: 20px;
+
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 25px;
+            color: #000000;
+            background-color: $colorBranca;
+            border: 1px solid $colorVerde;
+        }
+
+        & button:hover{
+            color: $colorBranca;
+            background-color: $colorVerde;
+        }
+    }
+
+    @media only screen and (max-width:600px){
+        .divFazerComentario{
+            flex-direction: column;
+            align-items: initial;
+
+            & textarea{
+                flex: none;
+            }
+            & button{
+                width: 100%;
+                flex: none;
+                margin: 10px 0px 0px;
+            }
+        }
     }
 
     .divBotoes{
@@ -239,16 +359,6 @@ export default {
             height: 50px;
 
             cursor: pointer;
-        }
-
-        button:first-child{
-            margin-right: 20px;
-            color: $colorBranca;
-            background-color: $colorAzul;
-        }
-
-        button:first-child:hover{
-            background-color: $colorAzulEscuro;
         }
 
         button:last-child{
