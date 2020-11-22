@@ -88,6 +88,8 @@ window.onscroll = function(){
             height: 25px;
             padding: 10px 10px 10px 0;
             margin-left: 30px;
+
+            cursor: pointer;
         }
     }
 
@@ -105,7 +107,7 @@ window.onscroll = function(){
 
     .divSideBar{
         height: 100%;
-        top: 9px;
+        top: 5px;
         margin-left: 30px;
 
         position: absolute;
@@ -113,7 +115,10 @@ window.onscroll = function(){
         & img{
             height: 25px;
             width: 35px;
-            margin-bottom: 7px;
+            margin-bottom: 1px;
+            padding: 5px;
+
+            cursor: pointer;
         }
 
         & ul {
@@ -126,7 +131,6 @@ window.onscroll = function(){
             text-decoration: none;
             display: block;
             padding: 20px 35px;
-            border-bottom: 1px solid $colorCinza;
         }
 
         & a:hover{
@@ -140,13 +144,14 @@ window.onscroll = function(){
 
         & input:checked ~ nav{
             transform: translateX(305px);
-            transition: 1s;
+            transition: 0.3s;
         }  
 
         & nav{
             background-color: $colorBranca;
-            height: 100%;
-            border-right: 1px solid $colorCinza;
+            height: auto;
+            border-right: 1px solid $colorAzul;
+            border-bottom: 1px solid $colorAzul;
             width: 305px;
             position:fixed;
             left: -310px;           
