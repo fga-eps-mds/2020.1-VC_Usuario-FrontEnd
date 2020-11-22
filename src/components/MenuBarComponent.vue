@@ -32,13 +32,6 @@ export default {
     },
     methods: {
         altera(){
-   /*          if(window.location.href === 'http://localhost:8080/'){
-                document.getElementById("home").src = "img/homeIcon2.0d80039d.png"
-            }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
-                document.getElementById("criarPost").src = "../img/addIcon2.e766826e.png"
-            }else if(window.location.href === 'http://localhost:8080/perfil'){
-                document.getElementById("perfil").src = "../img/userIcon2.90dd1654.png"
-            } */
             if(window.location.href === 'http://localhost:8080/'){
                 document.getElementById("home").src=require("../assets/homeIcon2.png");
             }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
