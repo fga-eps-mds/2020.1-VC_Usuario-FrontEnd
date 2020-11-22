@@ -19,7 +19,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
   },
   {
     path: '/cadastro',
@@ -34,22 +34,22 @@ const routes = [
   {
     path: '/editarperfil',
     name: 'EditarPerfil',
-    component: () => import(/* webpackChunkName: "Editar" */ '../views/EditarPerfil.vue'),
+    component: () => import(/* webpackChunkName: "EditarPerfil" */ '../views/EditarPerfil.vue'),
   },
   {
     path: '/editarpostagem',
     name: 'EditarPostagem',
-    component: () => import(/* webpackChunkName: "Editar" */ '../views/EditarPostagem.vue'),
+    component: () => import(/* webpackChunkName: "EditarPostagem" */ '../views/EditarPostagem.vue'),
   },
   {
-    path: '/noticias/:id',
-    name: 'VizualizarNoticia',
-    component: () => import(/* webpackChunkName: "about" */ '../views/VizualizarNoticia.vue'),
+    path: '/noticia/:id',
+    name: 'VisualizarNoticia',
+    component: () => import(/* webpackChunkName: "VisualizarNoticia" */ '../views/VisualizarNoticia.vue'),
   },
   {
     path: '/noticias',
     name: 'FeedDeNoticias',
-    component: () => import(/* webpackChunkName: "about" */ '../views/FeedDeNoticias.vue'),
+    component: () => import(/* webpackChunkName: "FeedDeNoticias" */ '../views/FeedDeNoticias.vue'),
   },
 ]
 
