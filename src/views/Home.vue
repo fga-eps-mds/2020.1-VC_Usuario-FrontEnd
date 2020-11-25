@@ -20,7 +20,7 @@
             </div>
 
             <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting"/>
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:category="postagem.post_category" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting"/>
             </div>
         </div>
     </section>
@@ -195,7 +195,7 @@ export default {
         .divPostagem{
             height: auto;
             margin: 0 30px 20px;
-            flex: 1 1 300px;
+            flex: 1 1 280px;
         }
     }
 </style>
