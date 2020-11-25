@@ -115,7 +115,7 @@ export default {
         const fazerLogout = () => {
             store.commit('CLEAR_USUARIO')
             store.commit('CLEAR_TOKEN')
-            window.location.href=''  
+            window.location.href='/'  
         }
 
         const checkCampos = () => {
@@ -358,15 +358,13 @@ export default {
     }
     
     .buttonExcluir{
-        color: $colorVermelho;
-        background-color: $colorBranca;
+        color: $colorBranca;
+        background-color: $colorVermelho;
         border: 1px solid $colorCinza;
     }
 
     .buttonExcluir:hover{
-        border: none;
-        color: $colorBranca;
-        background-color: $colorVermelho;
+        background-color: $colorVermelhoEscuro;
     }
 
     .buttonAcao{

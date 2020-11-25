@@ -39,7 +39,6 @@
                 <input type="file" ref="file" id="file" accept="image/png, image/jpeg" @change="imagemSelecionada">  
             </div>
 
-
             <div class="divDescricao">
                 <legend>Descrição</legend>
                 <textarea class="inputDescricao" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
@@ -165,9 +164,12 @@ export default {
         & h1, legend{
             color: $colorAzulEscuro;
         }
+
+        & legend{
+            margin-bottom: 5px;
+        }
     }
 
-    // TÍTULO
     .inputTitulo{
         box-shadow: 0 0 0 0;
         border: 0 none;
@@ -188,7 +190,6 @@ export default {
         color: $colorPreta;
     }
 
-    // CATEGORIA E LOCAL
     .divCategoriaLocal{
         display: flex;
 
@@ -209,7 +210,6 @@ export default {
         }
     }
 
-    // SELECIONAR IMAGEM
     .divImagem{
         height: 40px;
         margin-bottom: 20px;
@@ -247,12 +247,6 @@ export default {
         }
     }
 
-    legend{
-        margin-bottom: 2px;
-        font-size: 16px;
-    }
-
-    // DESCRIÇÃO
     .divDescricao {
         margin-bottom: 20px;
         height: 120px;
@@ -271,7 +265,6 @@ export default {
         }
     }
 
-    // BOTÕES
     .divBotoes{
         display: flex;
         flex-direction: column;

@@ -16,9 +16,9 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li class="botaoCriar"><a href="/criarpostagem">Criar Postagem</a></li>
-                    <li><a href="">Notícias</a></li>
-                    <li><a href="/Perfil">Perfil</a></li>
+                    <li><a href="/criarpostagem">Criar Postagem</a></li>
+                    <li><a href="/noticias">Notícias</a></li>
+                    <li><a href="/perfil">Perfil</a></li>
                 </ul>
             </nav>
         </div>
@@ -116,7 +116,7 @@ window.onscroll = function(){
             height: 25px;
             width: 35px;
             margin-bottom: 1px;
-            padding: 5px;
+            padding: 5px 5px 5px 0px;
 
             cursor: pointer;
         }

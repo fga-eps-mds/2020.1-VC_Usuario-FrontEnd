@@ -113,7 +113,7 @@ export default {
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
-                        console.log("Usuário não logado")
+                        alert("Usuário não logado")
                     }
                     else{
                         this.upsAtributos.user_id = this.$store.getters.getId

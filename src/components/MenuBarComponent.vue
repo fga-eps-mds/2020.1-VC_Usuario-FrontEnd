@@ -3,7 +3,7 @@
         <div class="divMenuOpcoes">
             <div><router-link to="/"><img id="home" src="../assets/homeIcon.png"></router-link></div>
             <div><router-link to="/criarpostagem"><img id="criarPost" src="../assets/addIcon.png"></router-link></div>
-            <div><img src="../assets/newsIcon.png"></div>
+            <div><router-link to="/noticias"><img id="noticias" src="../assets/newsIcon.png"></router-link></div>
             <div><img id="perfil" src="../assets/userIcon.png" v-on:click="redirectPerfilLogin"></div>
         </div>
     </nav>
@@ -33,9 +33,11 @@ export default {
     methods: {
         altera(){
             if(window.location.href === 'http://localhost:8080/'){
-                document.getElementById("home").src=require("../assets/homeIcon2.png");
+                document.getElementById("home").src = require("../assets/homeIcon2.png");
             }else if(window.location.href === 'http://localhost:8080/criarpostagem'){
                 document.getElementById("criarPost").src = require("../assets/addIcon2.png")
+            }else if(window.location.href === 'http://localhost:8080/noticias'){
+                document.getElementById("noticias").src = require("../assets/newsIcon2.png")
             }else if(window.location.href === 'http://localhost:8080/perfil'){
                 document.getElementById("perfil").src = require("../assets/userIcon2.png")
             }
