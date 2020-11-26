@@ -5,48 +5,50 @@
     <section>
         <div class="divListarPostagem">
             <div class="divPostagemTituloEStatus">
+
                 <h1>{{postagem.post_title}}</h1>
-                <h1 id="postagemStatus0" v-if="statusColor(this.postagem.post_status) === 0">{{postagem.post_status}}</h1>
-                <h1 id="postagemStatus1" v-if="statusColor(this.postagem.post_status) === 1">{{postagem.post_status}}</h1>
-                <h1 id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2">{{postagem.post_status}}</h1>            
+
+                <div class="divStatusEBotoes">
+                    <span id="postagemStatus0" v-if="statusColor(this.postagem.post_status) === 0"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
+                    <span id="postagemStatus1" v-if="statusColor(this.postagem.post_status) === 1"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
+                    <span id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
+                    
+                    <div class="divBotoes">
+                        <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">
+                            <!-- <img src="../assets/like.png" class="iconeLike"> -->
+                            Apoiar
+                        </button>
+
+                        <!-- <button type="submit">Reportar</button> -->
+                    </div>
+                </div>          
             </div>
 
-            <div class="divPostagemNome">
-                <h2>{{postagem.post_author}}</h2>
+            <div class="divPostagemInformacoes">
+                
+                <!-- <h2>Informações</h2> -->
+
+                <p><span>Autor: </span>{{postagem.post_author}}</p>
+                <p><span>Campus: </span>{{postagem.post_place}}</p>
+                <p><span>Data: </span>{{postagem.post_created_at}}</p>
+                <p><span>Categoria: </span>{{postagem.post_category}}</p>
             </div>
 
-            <div class="divPostagemCaracteristicas">
-                <h2>{{postagem.post_place}}</h2>
-                <h2>{{postagem.post_created_at}}</h2>
-                <h2>{{postagem.post_category}}</h2>
+            <div class="divPostagemDescricao">
+                <legend>Descrição:</legend>
+                <p>{{postagem.post_description}}</p>
             </div>
 
             <div class="divPostagemImagem">
                 <img v-bind:src="postagem.post_midia"/>
             </div>
 
-            <div class="divPostagemDescricao">
-                <legend>Descrição:</legend>
-                <p align = "justify">{{postagem.post_description}}</p>
-            </div>
-
-            <button v-on:click="apoiarPostagemMetodo" class="divApoiarBotao">
-                <div class="divTextoImagemApoiarBotao">
-                    <img src="../assets/like.png" class="iconeLike">
-                    Apoiar
-                </div>
-            </button>
-
             <div class="divPostagemComentario">
                 <legend>Comentários:</legend>
-                <div id="teste" class="divFazerComentario">
-                    <textarea id="textAreaComentario" v-on:keyup="ajusteRowsTextAreaComentario()" rows="2" placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
+                <div class="divFazerComentario">
+                    <textarea id="idtextAreaComentario" v-on:keyup="ajusteRowsTextAreaComentario()" rows="2" placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
                     <button @click="comentarPostagemMetodo()">Comentar</button>
                 </div>
-            </div>
-
-            <div class="divBotoes">
-                <button type="submit">Reportar</button>
             </div>
         </div>
     </section>
@@ -97,14 +99,42 @@ export default {
                 comment_descripton: null
             },
 
+            statusBotaoApoio: false,
+
             auxCaracteresTextArea: 50
         }
     },
     
     created(){
-        Postagem.listarUmaPostagem(this.$route.params.id).then(res => {
+        if( !this.$store.getters.getSwap ){
+            const token = this.$store.getters.getToken
+            if(!token){
+                console.log("Usuário não logado")
+
+                Postagem.listarUmaPostagem(this.$route.params.id).then(res => {
+                    this.postagem = res.data;
+                    console.log(this.postagem.post_supporting)
+                    this.setupStatusBotaoApoio(this.postagem.post_supporting);
+                })
+            }
+            else{
+                console.log("Usuário logado")
+                console.log(this.$route.params.id)
+                console.log(this.$store.getters.getId)
+
+                Postagem.listarUmaPostagemLogado(this.$route.params.id, this.$store.getters.getId).then(res => {
+                    this.postagem = res.data;
+                    console.log(this.postagem.post_supporting)
+                    this.setupStatusBotaoApoio(this.postagem.post_supporting);
+                })
+            }
+        }
+
+        /* Postagem.listarUmaPostagem(this.$route.params.id).then(res => {
             this.postagem = res.data;
-        })
+            console.log(this.postagem.post_supporting)
+            this.setupStatusBotaoApoio(this.postagem.post_supporting);
+        }) */
     },
     methods: {
 
@@ -113,6 +143,8 @@ export default {
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
+                        this.statusBotaoApoio = true
+
                         alert("Usuário não logado")
                     }
                     else{
@@ -120,7 +152,6 @@ export default {
                         this.upsAtributos.postage_id = this.postagem._id
 
                         Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
-                            console.log('Apoio feito com sucesso!')
                             console.log(resposta)
                         })
                     }
@@ -170,7 +201,7 @@ export default {
 
         ajusteRowsTextAreaComentario() {
             
-            const objetotextAreaComentario = document.getElementById('textAreaComentario');
+            const objetotextAreaComentario = document.getElementById('idtextAreaComentario');
 
             if(this.auxCaracteresTextArea == 0){
                 this.auxCaracteresTextArea = 50;
@@ -185,6 +216,10 @@ export default {
                     this.auxCaracteresTextArea -= 50;
                 }
             }
+        },
+
+        setupStatusBotaoApoio(post_supporting){
+            this.statusBotaoApoio = post_supporting
         }
     }
 }
@@ -205,97 +240,197 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
-
-        & legend{
-            color: $colorAzulEscuro;
-            font-weight: bold;
-        }
     }
 
     .divPostagemTituloEStatus{
         width: 100%;
-        font-size: 15px;
-        color: $colorAzul;
+        padding-bottom: 20px;
+        
         display: flex;
-        flex: 1;
-        justify-content: space-between;
+        flex-direction: column;
+
+        border-bottom: 1px solid $colorCinza;
+
+        & h1{
+            width: 100%;
+            margin-bottom: 20px;
+
+            color: $colorAzulEscuro;
+        }
+        
+        #postagemStatus0{
+            color: $colorVermelho;
+        }
+
+        #postagemStatus1{
+            color: $colorAzul;
+        }
+
+        #postagemStatus2{
+            color: $colorVerde;
+        }
     }
 
-    .divPostagemNome{
-        margin-top: 20px;
+    .divStatusEBotoes{
+        height: auto;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: space-between;
+        align-items: center;
+
+        & span{
+            flex: 1;
+
+            font-size: 18px;
+            color: $colorAzulEscuro;
+        }
+    }
+
+    .divBotoes{
+        height: auto;
+        
+        display: flex;
+
+        & button{
+            width: 280px;
+            height: 50px;
+
+            font-size: 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        /* button:first-child{
+            color: $colorBranca;
+            background-color: $colorVerde;
+
+            & img{
+                height: 20px;
+            }
+        }
+
+        button:first-child:hover{
+           background-color: #060449;
+        } */
+
+        .botaoApoio{
+            background-color: $colorBranca;
+            border: 1px solid $colorVerde;
+        }
+
+        /* .botaoApoio:hover{
+            color: $colorBranca;
+            background-color: $colorVerde;
+        } */
+
+        .apoio{
+            background-color: $colorVerde;
+            color: $colorBranca; 
+        }
+
+        /* .apoio:hover{
+            color: $colorPreta;
+            background-color: $colorBranca;
+            border: 1px solid $colorVerde;
+        } */
+
+        /* button:last-child{
+            background-color: $colorBranca;
+            border: 1px solid $colorCinza;
+        }
+
+        button:last-child:hover{
+            background-color: $colorCinza;
+        } */
+    }
+
+    @media only screen and (max-width:800px){
+        .divStatusEBotoes{
+            flex-direction: column;
+
+            align-items: initial;
+
+            & span{
+                margin-bottom: 20px;
+            }
+        }
+
+        .divBotoes{
+            & button{
+                width: 100%;
+            }
+        }
+    }
+
+    .divPostagemInformacoes{
+        width: 100%;
+        max-width: 620px;
         margin-bottom: 10px;
+        padding-top: 20px;
 
-        font-size: 10px;
+        display: flex;
+        flex-wrap: wrap;
+
+        & h2{
+            width: 100%;
+            margin: 20px 0px;
+
+            color: $colorAzulEscuro;
+        }
+
+        & span{
+            font-size: 18px;
+            color: $colorAzulEscuro;
+        }
+
+        & p{
+            padding: 10px 20px 10px 0px;
+
+            color: $colorCinzaEscuro;
+        }
     }
 
-    .divPostagemCaracteristicas{
-        flex: 1;
-        display: flex;
-        font-size: 10px;
-        justify-content: space-between;
-        margin-bottom: 40px; 
+    .divPostagemDescricao{
+        margin-bottom: 20px;
+
+        & legend{
+            margin-bottom: 5px;
+
+            font-size: 18px;
+            color: $colorAzulEscuro;
+        }
+
+        & p{
+            text-align: justify;
+            font-style: oblique;
+            color: $colorCinzaEscuro;
+        }
     }
 
     .divPostagemImagem{
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+
+        border-bottom: 1px solid $colorCinza;
 
         & img {
             max-width:100%;
             max-height:150px;
         }
     }
-
-    #postagemStatus0{
-        color: $colorVermelho;
-    }
-
-    #postagemStatus1{
-        color: $colorAzul;
-    }
-
-    #postagemStatus2{
-        color: $colorVerde;
-    }
-
-    .divPostagemDescricao{
-        margin-bottom: 20px;
-    }
-
-    .divApoiarBotao{
-        color: $colorBranca;
-        background-color: $colorAzul;
-        font-size: 20px;
-        border: none;
-        border-radius: 25px;
-        width: 100%;
-        height: 50px;
-        margin-bottom: 20px;
-
-        cursor: pointer;
-    }
     
-    .divApoiarBotao:hover{
-        background-color: #060449;
-    }
-
-    .divTextoImagemApoiarBotao{
-        display: inline-flex;
-        height: 40px;
-        align-items: center;
-    }
-
-    .iconeLike{
-        height: 30px;
-        margin: auto;
-    }
-
     .divPostagemComentario{
         margin-bottom: 20px;
 
         & legend{
             margin-bottom: 20px;
-            font-weight: bold;
+
+            font-size: 18px;
+            color: $colorAzulEscuro;
         }
     }
 
@@ -344,30 +479,6 @@ export default {
                 flex: none;
                 margin: 10px 0px 0px;
             }
-        }
-    }
-
-    .divBotoes{
-        display: flex;
-        margin-bottom: 100px;
-
-        & button{
-            flex: 1;
-            font-size: 20px;
-            border: none;
-            border-radius: 25px;
-            height: 50px;
-
-            cursor: pointer;
-        }
-
-        button:last-child{
-            background-color: $colorBranca;
-            border: 1px solid $colorCinza;
-        }
-
-        button:last-child:hover{
-            background-color: $colorCinza;
         }
     }
 </style>
