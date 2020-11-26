@@ -94,6 +94,11 @@ export default {
                         })
                     }
                 }
+                else{
+                    this.statusBotaoApoio = true
+
+                    alert("Usuário não logado")
+                }
             }catch(err){
                 console.log({err})
             }
