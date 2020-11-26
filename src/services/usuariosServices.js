@@ -1,4 +1,4 @@
-import http from './config.js'
+import http from './configServices.js'
 
 export default {
 

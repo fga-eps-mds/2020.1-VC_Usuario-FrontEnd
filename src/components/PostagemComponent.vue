@@ -1,5 +1,5 @@
 <template>
-    <div class="postagem">
+    <div class="divComponentPostagem">
         <div class="tituloEStatus">
             <span>{{title}}</span>
             <span>{{status}}</span>
@@ -9,8 +9,9 @@
             <p>{{author}}</p>
         </div>
 
-        <div class="localEData">
+        <div class="localCategoriaEData">
             <p>{{local}}</p>
+            <p>{{category}}</p>
             <p>{{date}}</p>
         </div>
 
@@ -23,13 +24,12 @@
             <div v-if="$route.name === 'Perfil'" class="divBotaoEditar">
                 <img src="../assets/edit.png" @click="editar(id)">
             </div>
-
         </div>
     </div>
 </template>
 
 <script>  
-import Postagem from '@/services/postagens.js'
+import Postagem from '@/services/postagensServices.js'
 /* eslint-disable */
 
 export default {
@@ -37,7 +37,7 @@ export default {
     setup() {
       const verMais = (post_id) => {
         console.log()
-        window.location.href = `/post/${post_id}`
+        window.location.href = `/postagem/${post_id}`
       }
       return { verMais }
     },
@@ -49,6 +49,7 @@ export default {
         author: String,
         local: String,
         date: String,
+        category: String,
         id: String,
         supporting: Boolean
     },
@@ -82,7 +83,7 @@ export default {
                     if(!token){
                         this.statusBotaoApoio = true
                         
-                        console.log("Usuário não logado")
+                        alert("Usuário não logado")
                     }
                     else{
                         this.upsAtributos.user_id = this.$store.getters.getId
@@ -109,71 +110,89 @@ export default {
 <style scoped lang="scss">
 @import "../assets/stylesheets/pallete.scss";
 
-.postagem {
-  height: auto;
-  border-radius: 15px;
-  height: 150px;
-  padding: 10px;
+.divComponentPostagem {
+    height: auto;
+    min-width: 200px;
+    max-width: 620px;
+    padding: 10px;
 
-  border: solid 1px $colorCinza;
+    border-radius: 15px;
+    border: solid 1px $colorCinza;
 }
 
 .autor {
-  margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .tituloEStatus {
-  height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 20px;
-
-  & span:first-child {
-    padding-right: 30px;
-    font-size: 20px;
-    font-weight: bold;
-    color: $colorAzul;
-  }
-
-  & span:last-child {
-    color: $colorVermelho;
-  }
-}
-
-.localEData {
-  display: flex;
-  justify-content: space-between;
-
-  margin-bottom: 20px;
-}
-
-/* BOTÕES */
-.divBotoes{
     display: flex;
-    width: 100%;
-    margin-bottom: 10px;
-    justify-content: space-between;
-    & img {
-        height: 20px;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+
+    & span:first-child {
+        margin-bottom: 20px;
+
+        font-weight: bold;
+        color: $colorAzulEscuro;
     }
+
+    & span:last-child {
+        color: $colorVermelho;
+    }
+}
+
+.localCategoriaEData {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+    margin-bottom: 20px;
+
+    & p{       
+        font-size: 14px;
+        color: $colorCinzaEscuro;
+    }
+
+    & p:first-child{
+        margin-right: 20px;
+    }
+
+    & p:nth-child(even){
+        margin-right: 20px;
+    }
+}
+
+.divBotoes{
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
     .divBotaoVerMaisApoiar {
-        display: flex;
         width: 80%;
+        min-width: 200px;
         max-width: 300px;
+        
+        display: flex;
         justify-content: space-between;
+
         & button{
             flex: 1;
             height: 30px;
+            
             cursor: pointer;
             border: none;
             border-radius: 25px; 
         }
+
         & button:first-child{
             margin-right: 20px;
+            
             color: $colorBranca;
             background-color: $colorAzul;
         }
+
         & button:first-child:hover{
             background-color: $colorAzulEscuro;
         }
@@ -183,17 +202,28 @@ export default {
             border: 1px solid $colorVerde;
         }
 
+        .botaoApoio:hover{
+            color: $colorBranca;
+            background-color: $colorVerde;
+        }
+
         .apoio{
             background-color: $colorVerde;
             color: $colorBranca; 
         }
-        /* & button:last-child:hover{
-            color: $colorBranca;
-            background-color: $colorVerde;
-        } */
+
+        .apoio:hover{
+            color: $colorPreta;
+            background-color: $colorBranca;
+            border: 1px solid $colorVerde;
+        }
     }
+    
     .divBotaoEditar{
         & img{
+            height: 20px;
+            margin-left: 20px;
+
             cursor: pointer;
         }
     }

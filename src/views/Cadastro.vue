@@ -12,8 +12,8 @@
             <form @submit.prevent="registrarUsuario">
                 <div class="divInputs">
                     <div class="divUser">
-                        <input style ="padrao" type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name">
-                        <input style ="padrao" type="text" name="" placeholder="Email" v-model="this.cadastro.user_email">
+                        <input type="text" name="" placeholder="Nome" v-model="this.cadastro.user_name" required="true">
+                        <input type="text" name="" placeholder="Email" v-model="this.cadastro.user_email" required="true">
                     </div>
 
                     <div class="divSenha">
@@ -37,7 +37,7 @@
 
 <script>
 
-import Usuarios from '@/services/usuarios.js'
+import Usuarios from '@/services/usuariosServices.js'
 
 export default{
     name: 'Cadastro',
@@ -178,7 +178,6 @@ export default{
                 & img{
                     float: right;
                     height: 10%;
-                    position: relative;
                     top: 20%;
                     transform: translateY(-150%);
                 }

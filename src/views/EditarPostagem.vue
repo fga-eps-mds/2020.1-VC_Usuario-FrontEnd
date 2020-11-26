@@ -1,9 +1,12 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
     
     <section>
         <form @submit.prevent="" enctype="multipart/form-data">
+
+            <h1>Editar Postagem</h1>
+
             <input class= "inputTitulo" type="text" placeholder="Título" v-model="editarPostagemObjeto.post_title">
 
             <div class="divCategoriaLocal">
@@ -42,29 +45,51 @@
             </div>
             
             <div class="divBotoes">
-                <button @click="editarPostagem">Atualizar</button>
-                <button onclick='history.go(-1)'>Cancelar</button>
-                <button @click="excluirPostagem">Excluir</button>
+                <button class="buttonAcao" @click="mostrarModalEditar">Salvar</button>
+                <button class="buttonBasico" onclick='history.go(-1)'>Cancelar</button>
+                <button class="buttonExcluir" @click="mostrarModalExcluir">Excluir</button>
             </div>
         </form>
     </section>
 
-    <MenuBar/>
+    <div class="divModal" v-if="modalConfirmacaoEditar">
+        <div class="divConteudoModal">
+                <p>Tem certeza que deseja Salvar?</p>
+
+            <div class="divBotoesModal">
+                <button type="button" class="buttonBasico" @click="modalConfirmacaoEditar = false">Cancelar</button>
+                <button type="button" class="buttonAcao" @click="metodoEditarPostagem">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="divModal" v-if="modalConfirmacaoExcluir">
+        <div class="divConteudoModal">
+                <p>Tem certeza que deseja Excluir?</p>
+
+            <div class="divBotoesModal">
+                <button type="button" class="buttonBasico" @click="modalConfirmacaoExcluir = false">Cancelar</button>
+                <button type="button" class="buttonExcluir" @click="metodoExcluirPostagem">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <MenuBarComponent/>
     
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
-import Postagem from '@/services/postagens.js'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import Postagem from '@/services/postagensServices.js'
 /* eslint-disable */
 
 export default {
 
     name: 'EditarPostagem',
     components:{
-        Header,
-        MenuBar
+        HeaderComponent,
+        MenuBarComponent
     },
 
     data(){
@@ -81,7 +106,10 @@ export default {
             excluirPostagemObjeto: {
                 user_id: '',
                 postage_id: ''
-            }
+            },
+
+            modalConfirmacaoEditar: false,
+            modalConfirmacaoExcluir: false
         }
     },
 
@@ -101,44 +129,51 @@ export default {
     },
 
     methods:{
-        editarPostagem() {
+
+        mostrarModalEditar(){
+            this.modalConfirmacaoEditar = true
+        },
+
+        mostrarModalExcluir(){
+            this.modalConfirmacaoExcluir = true
+        },
+        
+        metodoEditarPostagem(){
             Postagem.editarUmaPostagem(this.editarPostagemObjeto).then(res => {
                 console.log(res.data)
                 window.location.href='/perfil'  
             })
         },
 
-        excluirPostagem(){
+        metodoExcluirPostagem(){
             Postagem.excluirUmaPostagem(this.excluirPostagemObjeto).then(res => {
                 console.log(res.data)
                 window.location.href='/perfil'  
             })
         }
     }
-
 }
 </script>
 
 <style lang="scss" scoped>
     @import "../assets/stylesheets/pallete.scss";
 
-
     section{
         width: 100%;
         display: flex;
-    }
-
-    header{
-        margin-bottom: 20px;
+        padding-bottom: 100px;
     }
 
     form{
         height: auto;
+        width: 100%;
         margin: 0 30px;
         min-width: 200px;
-        width: 100%;
         margin-top: 65px;
-        min-height: 620px;
+
+        & h1{
+            color: $colorAzulEscuro;
+        }
     }
 
     .inputTitulo{
@@ -150,15 +185,15 @@ export default {
         padding: 0;
 
         height: 50px;
-        margin-bottom: 20px;
+        margin: 20px 0 20px;
         width: 100%;
 
-        font-size: 20px;
+        font-size: 18px;
         border-bottom: 1px solid $colorCinza; 
     }
 
     .inputTitulo::placeholder {
-        font-size: 20px;
+        font-size: 18px;
         color: $colorPreta;
     }
 
@@ -188,6 +223,7 @@ export default {
 
         .inputDescricao{
             width: 100%;
+
             font-size: 16px;
             border-radius: 10px;
             border: 1px solid $colorCinza;
@@ -200,8 +236,8 @@ export default {
     }
 
     .divBotoes{
-        width: 100%;
-        height: 50px;
+        display: flex;
+        flex-direction: column;
 
         & button{
             height: 50px;
@@ -210,37 +246,95 @@ export default {
 
             cursor: pointer;
             font-size: 20px;
-            border-radius: 15px;
+            border-radius: 25px;
+        }
+
+        & button:last-child{
+            margin-bottom: 0px;
+        }
+    }
+    
+    .divModal{
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        
+        background-color: rgba(0,0,0,.7);
+        
+        & p{
+            font-size: 20px;
+            color:  $colorAzulEscuro;
+            margin-bottom: 20px;
+        }
+    }
+
+    .divConteudoModal{
+        width: 80%;
+        height: auto;
+        margin: auto;
+        padding: 20px;
+
+        text-align: center;
+
+        border-radius: 15px;
+        background-color: $colorBranca;
+    }
+
+    .divBotoesModal{
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        & button{
+            height: 50px;
+            width: 100%;
+
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 25px;   
         }
 
         & button:first-child{
-            border: none;
-            background-color: $colorAzul;
-            color: #ffffff;
+            margin-bottom: 20px;
         }
+    }
 
-        & button:first-child:hover{
-            background-color:$colorAzulEscuro;
-        }
+    .buttonBasico{
+        color: #000000;
+        background-color: $colorBranca;
+        border: 1px solid $colorCinza;
+    }
 
-        & button:nth-child(even){
-            background-color: #ffffff;
-            border: 1px solid $colorCinza;
-        }
+    .buttonBasico:hover{
+        background-color:$colorCinza;
+    }
+    
+    .buttonExcluir{
+        color: $colorBranca;
+        background-color: $colorVermelho;
+        border: 1px solid $colorCinza;
+    }
 
-        & button:nth-child(even):hover{
-            background-color:$colorCinza;
-        }
+    .buttonExcluir:hover{
+        background-color: $colorVermelhoEscuro;
+    }
 
-        & button:last-child{            
-            color: $colorVermelho;
-            background-color: #ffffff;
-            border: 1px solid $colorCinza;
-        }
+    .buttonAcao{
+        color: $colorBranca;
+        background-color: $colorAzul;
+    }
 
-        & button:last-child:hover{
-            color: #ffffff;
-            background-color: $colorVermelho;
-        }
+    .buttonAcao:hover{
+        border: none;
+        color: $colorBranca;
+        background-color: $colorAzulEscuro;
     }
 </style>

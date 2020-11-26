@@ -1,6 +1,6 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
 
     <section>
         <div class="divVisualizarNoticia">
@@ -19,22 +19,22 @@
         </div>
     </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template>
 
 <script>
 
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import NoticiaService from '@/services/noticiaService.js'
 
 export default {
-    name: 'vizualizarNoticia',
+    name: 'visualizarNoticia',
 
     components: {
-        Header,
-        MenuBar,
+        HeaderComponent,
+        MenuBarComponent,
     },
 
     data(){
@@ -65,6 +65,7 @@ export default {
     section{
         width: 100%;
         display: flex;
+        padding-bottom: 100px;
     }
 
     .titulo{

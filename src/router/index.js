@@ -7,14 +7,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue')
   },
   {
+    path: '/postagem/:id',
+    name: 'ListarUmaPostagem',
+    component: () => import(/* webpackChunkName: "ListarUmaPostagem" */ '../views/ListarUmaPostagem.vue'),
+  },
+  {
     path: '/criarpostagem',
-    name: 'criarPostagem',
+    name: 'CriarPostagem',
     component: () => import(/* webpackChunkName: "CriarPostagem" */ '../views/CriarPostagem.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
   },
   {
     path: '/cadastro',
@@ -22,34 +27,29 @@ const routes = [
     component: () => import(/* webpackChunkName: "Cadastro" */ '../views/Cadastro.vue')
   },
   {
-    path: '/post/:id',
-    name: 'listarUmaPostagem',
-    component: () => import(/* webpackChunkName: "ListarUmaPostagem" */ '../views/ListarUmaPostagem.vue'),
-  },
-  {
     path: '/perfil',
     name: 'Perfil',
     component: () => import(/* webpackChunkName: "Perfil" */ '../views/Perfil.vue'),
   },
   {
-    path: '/editar',
-    name: 'Editar',
-    component: () => import(/* webpackChunkName: "Editar" */ '../views/Editar.vue'),
+    path: '/editarperfil',
+    name: 'EditarPerfil',
+    component: () => import(/* webpackChunkName: "EditarPerfil" */ '../views/EditarPerfil.vue'),
   },
   {
-    path: '/noticias/:id',
-    name: 'VizualizarNoticia',
-    component: () => import(/* webpackChunkName: "about" */ '../views/VizualizarNoticia.vue'),
+    path: '/editarpostagem',
+    name: 'EditarPostagem',
+    component: () => import(/* webpackChunkName: "EditarPostagem" */ '../views/EditarPostagem.vue'),
+  },
+  {
+    path: '/noticia/:id',
+    name: 'VisualizarNoticia',
+    component: () => import(/* webpackChunkName: "VisualizarNoticia" */ '../views/VisualizarNoticia.vue'),
   },
   {
     path: '/noticias',
     name: 'FeedDeNoticias',
-    component: () => import(/* webpackChunkName: "about" */ '../views/FeedDeNoticias.vue'),
-  },
-  {
-    path: '/editarPostagem',
-    name: 'editarUmaPostagem',
-    component: () => import(/* webpackChunkName: "Editar" */ '../views/EditarPostagem.vue'),
+    component: () => import(/* webpackChunkName: "FeedDeNoticias" */ '../views/FeedDeNoticias.vue'),
   },
 ]
 

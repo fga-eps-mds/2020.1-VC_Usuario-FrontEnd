@@ -1,6 +1,6 @@
 <template>
     
-    <Header/>
+    <HeaderComponent/>
 
     <section>
         <div class="divFeedDeNoticia">
@@ -14,23 +14,24 @@
         </div>
     </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template>
 
 <script>
-
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
+/* Import dos components */
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import NoticiaComponent from '@/components/NoticiaComponent.vue'
+
 import Noticia from '@/services/noticiaService.js'
 
 export default {
     name: 'FeedDeNoticias',
 
     components: {
-        Header,
-        MenuBar,
+        HeaderComponent,
+        MenuBarComponent,
         NoticiaComponent
     },
 
@@ -59,7 +60,7 @@ export default {
 
     section{
         width: 100%;
-        padding-bottom: 120px;
+        padding-bottom: 100px;
         display: flex;
         
         /* border: 1px solid red; */

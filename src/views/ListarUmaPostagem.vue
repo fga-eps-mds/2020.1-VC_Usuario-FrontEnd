@@ -1,8 +1,8 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
 
-    <section class="divPostagemView">
+    <section>
         <div class="divListarPostagem">
             <div class="divPostagemTituloEStatus">
                 <h1>{{postagem.post_title}}</h1>
@@ -45,13 +45,13 @@
                 </div>
             </div>
 
-            <div class="divPostagemBotoes">
+            <div class="divBotoes">
                 <button type="submit">Reportar</button>
             </div>
         </div>
     </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template> 
 
@@ -59,9 +59,9 @@
 
 //import { useStore } from 'vuex'
 
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
-import Postagem from '@/services/postagens.js'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import Postagem from '@/services/postagensServices.js'
 import { ref } from 'vue'
 /* eslint-disable */
 
@@ -69,8 +69,8 @@ export default {
     name: 'listarUmaPostagem',
 
     components: {
-        Header,
-        MenuBar,
+        HeaderComponent,
+        MenuBarComponent,
     },
 
     setup() {
@@ -113,7 +113,7 @@ export default {
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
-                        console.log("Usuário não logado")
+                        alert("Usuário não logado")
                     }
                     else{
                         this.upsAtributos.user_id = this.$store.getters.getId
@@ -154,7 +154,7 @@ export default {
                                 console.log(resposta)
                                 alert("Comentário feito com sucesso!")
                                 
-                                window.location.href = `http://localhost:8080/post/${this.postagem._id}`
+                                window.location.href = `/postagem/${this.postagem._id}`
                             })
                         }
                     }
@@ -196,6 +196,7 @@ export default {
     section{
         width: 100%;
         display: flex;
+        padding-bottom: 100px;
     }
 
     .divListarPostagem{
@@ -204,6 +205,11 @@ export default {
         width: 100%;
         margin-top: 65px;
         min-height: 620px;
+
+        & legend{
+            color: $colorAzulEscuro;
+            font-weight: bold;
+        }
     }
 
     .divPostagemTituloEStatus{
@@ -254,10 +260,6 @@ export default {
 
     .divPostagemDescricao{
         margin-bottom: 20px;
-
-        & legend{
-            font-weight: bold;
-        };
     }
 
     .divApoiarBotao{
@@ -345,7 +347,7 @@ export default {
         }
     }
 
-    .divPostagemBotoes{
+    .divBotoes{
         display: flex;
         margin-bottom: 100px;
 

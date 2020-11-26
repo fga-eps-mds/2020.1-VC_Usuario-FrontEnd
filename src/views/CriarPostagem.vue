@@ -1,9 +1,12 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
     
     <section>
         <form @submit.prevent="criarPostagem" enctype="multipart/form-data">
+
+            <h1>Criar Postagem</h1>
+
             <input class= "inputTitulo" type="text" placeholder="Título" v-model="postagem.post_title" required>
 
             <div class="divCategoriaLocal">
@@ -36,7 +39,6 @@
                 <input type="file" ref="file" id="file" accept="image/png, image/jpeg" @change="imagemSelecionada">  
             </div>
 
-
             <div class="divDescricao">
                 <legend>Descrição</legend>
                 <textarea class="inputDescricao" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
@@ -48,6 +50,7 @@
                     <input type="checkbox" id="postagem.post_type">
                     <span class="slider round"></span>
                 </label>
+
                 <label v-else class="switch" onclick="window.location.href='/Login'">
                     <input type="checkbox" id="postagem.post_type" checked>
                     <span class="slider round"></span>
@@ -61,23 +64,23 @@
         </form>
     </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template> 
 
 <script>
 
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
-import Postagem from '@/services/postagens.js'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import Postagem from '@/services/postagensServices.js'
 /* eslint-disable */
 
 export default {
     name: 'CriarPostagem',
 
     components: {
-        Header,
-        MenuBar
+        HeaderComponent,
+        MenuBarComponent
     },
 
     data(){
@@ -147,45 +150,46 @@ export default {
 
     section{
         width: 100%;
+        padding-bottom: 100px;
         display: flex;
-    }
-
-    header{
-        margin-bottom: 20px;
     }
 
     form{
         height: auto;
+        width: 100%;
         margin: 0 30px;
         min-width: 200px;
-        width: 100%;
         margin-top: 65px;
-        min-height: 620px;
+
+        & h1, legend{
+            color: $colorAzulEscuro;
+        }
+
+        & legend{
+            margin-bottom: 5px;
+        }
     }
 
-    // TÍTULO
     .inputTitulo{
         box-shadow: 0 0 0 0;
         border: 0 none;
         outline: 0;
         display: block;
 
-        padding: 0;
-
         height: 50px;
-        margin-bottom: 20px;
         width: 100%;
-
-        font-size: 20px;
+        padding: 0;
+        margin: 20px 0;
+        
+        font-size: 18px;
         border-bottom: 1px solid $colorCinza; 
     }
 
     .inputTitulo::placeholder {
-        font-size: 20px;
+        font-size: 18px;
         color: $colorPreta;
     }
 
-    // CATEGORIA E LOCAL
     .divCategoriaLocal{
         display: flex;
 
@@ -206,12 +210,12 @@ export default {
         }
     }
 
-    // SELECIONAR IMAGEM
     .divImagem{
         height: 40px;
         margin-bottom: 20px;
         justify-items: center;
         position: relative;
+        z-index: -1;
 
 
         input[type=file]{
@@ -243,18 +247,13 @@ export default {
         }
     }
 
-    legend{
-        margin-bottom: 2px;
-        font-size: 16px;
-    }
-
-    // DESCRIÇÃO
     .divDescricao {
         margin-bottom: 20px;
         height: 120px;
 
         .inputDescricao{
             width: 100%;
+
             font-size: 16px;
             border-radius: 10px;
             border: 1px solid $colorCinza;
@@ -266,26 +265,22 @@ export default {
         }
     }
 
-    .divPermissao {
-        margin-bottom: 20px;
-    }
-
-    // BOTÕES
     .divBotoes{
         display: flex;
+        flex-direction: column;
 
         & button{
-            flex: 1;
-            font-size: 20px;
+            height: 50px;
+            width: 100%;
+            
             border: none;
             border-radius: 25px;
-            height: 50px;
-
+            font-size: 20px;
             cursor: pointer;
         }
 
         button:first-child{
-            margin-right: 20px;
+            margin-bottom: 20px;
             color: $colorBranca;
             background-color: $colorAzul;
         }
@@ -304,63 +299,65 @@ export default {
         }
     }
 
-    // //Configuração Radio Postagem Anonima
+    // Radio
+    .divPermissao {
+        margin-bottom: 20px;
+        z-index: 0;
 
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
+        & .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-    /* Hide default HTML checkbox */
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+        & .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-    /* The slider */
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: $colorCinza;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+        & .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $colorCinza;
+            -webkit-transition: .4s;
+            transition: .4s;
+            z-index: -1;
+        }
 
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: $colorBranca;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+        & .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: $colorBranca;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-    input:checked + .slider {
-        background-color: $colorAzul;
-    }
+        & input:checked + .slider {
+            background-color: $colorAzul;
+        }
 
-    input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
+        & input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
 
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 25px;
-    }
+        & .slider.round {
+            border-radius: 25px;
+        }
 
-    .slider.round:before {
-        border-radius: 50%;
+        & .slider.round:before {
+            border-radius: 50%;
+        }
     }
 </style>
