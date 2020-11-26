@@ -18,6 +18,12 @@ export default {
         return http.get(`postage/list_one/${id}`)
     },
 
+    listarUmaPostagemLogado:(postage_id, user_id) => {
+        console.log(postage_id)
+        console.log(user_id)
+        return http.get(`postage/list_one_logged/${postage_id}/${user_id}`)
+    },
+
     apoiarUmaPostagem:(upsAtributos) => {
         return http.put(`/ups/support_postage`, upsAtributos)
     },
