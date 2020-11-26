@@ -109,32 +109,25 @@ export default {
         if( !this.$store.getters.getSwap ){
             const token = this.$store.getters.getToken
             if(!token){
-                console.log("Usuário não logado")
-
                 Postagem.listarUmaPostagem(this.$route.params.id).then(res => {
                     this.postagem = res.data;
-                    console.log(this.postagem.post_supporting)
+
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
                 })
             }
             else{
-                console.log("Usuário logado")
-                console.log(this.$route.params.id)
-                console.log(this.$store.getters.getId)
-
                 Postagem.listarUmaPostagemLogado(this.$route.params.id, this.$store.getters.getId).then(res => {
                     this.postagem = res.data;
-                    console.log(this.postagem.post_supporting)
+
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
                 })
             }
         }
-
-        /* Postagem.listarUmaPostagem(this.$route.params.id).then(res => {
-            this.postagem = res.data;
-            console.log(this.postagem.post_supporting)
-            this.setupStatusBotaoApoio(this.postagem.post_supporting);
-        }) */
+        else{
+            Postagem.listarUmaPostagem(this.$route.params.id).then(res => {
+                this.postagem = res.data;
+            })
+        }
     },
     methods: {
 
@@ -157,7 +150,9 @@ export default {
                     }
                 }
                 else{
-                    console.log("Usuário não logado")
+                    this.statusBotaoApoio = true
+
+                    alert("Usuário não logado")
                 }
             }
             catch(err){
