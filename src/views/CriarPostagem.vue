@@ -47,12 +47,12 @@
             <div class="divPermissao">
                 <legend>Postagem Anônima?</legend>
                 <label v-if='$store.getters.getId != null' class="switch">
-                    <input type="checkbox" id="postagem.post_type">
+                    <input type="checkbox" id="checkboxSelecao">
                     <span class="slider round"></span>
                 </label>
 
                 <label v-else class="switch" onclick="window.location.href='/Login'">
-                    <input type="checkbox" id="postagem.post_type" checked>
+                    <input type="checkbox" id="checkboxSelecao" checked>
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -91,8 +91,6 @@ export default {
                 post_place: '',
                 post_category: '',
                 post_description: '',
-                post_permission: 'true',
-                post_type: 'false',
                 file: '',
                 post_author: ''
             }
@@ -121,11 +119,10 @@ export default {
             formData.append('post_place', this.postagem.post_place,)
             formData.append('post_category', this.postagem.post_category,)
             formData.append('post_description', this.postagem.post_description,)
-            formData.append('post_permission', this.postagem.post_permission,)
             formData.append('file', this.postagem.file,)
             formData.append('post_author', this.$store.getters.getNome)
             
-            let checkbox = document.getElementById('postagem.post_type');
+            let checkbox = document.getElementById('checkboxSelecao');
             if (checkbox.checked){  
                 Postagem.criarPostagemAnonima(formData).then(resposta => {
                     console.log('Salvo com sucesso!')
@@ -138,7 +135,7 @@ export default {
                 })
             }
 
-            window.location.href = "/";
+            /* window.location.href = "/"; */
         }
     }
 }
