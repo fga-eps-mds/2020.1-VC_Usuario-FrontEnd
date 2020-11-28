@@ -14,20 +14,13 @@
                     <span id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
                     
                     <div class="divBotoes">
-                        <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">
-                            <!-- <img src="../assets/like.png" class="iconeLike"> -->
-                            Apoiar
-                        </button>
-
-                        <!-- <button type="submit">Reportar</button> -->
+                        <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">Apoiar</button>
                     </div>
                 </div>          
             </div>
 
             <div class="divPostagemInformacoes">
                 
-                <!-- <h2>Informações</h2> -->
-
                 <p><span>Autor: </span>{{postagem.post_author}}</p>
                 <p><span>Campus: </span>{{postagem.post_place}}</p>
                 <p><span>Data: </span>{{postagem.post_created_at}}</p>
@@ -50,6 +43,8 @@
                     <button @click="comentarPostagemMetodo()">Comentar</button>
                 </div>
             </div>
+
+             <!-- <button type="submit">Reportar</button> -->
         </div>
     </section>
 
@@ -60,9 +55,9 @@
 <script>
 
 //import { useStore } from 'vuex'
-
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MenuBarComponent from '@/components/MenuBarComponent.vue'
+
 import Postagem from '@/services/postagensServices.js'
 import { ref } from 'vue'
 /* eslint-disable */
@@ -165,7 +160,7 @@ export default {
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
-                        console.log("Usuário não logado")
+                        alert("Usuário não logado")
                     }
                     else{
                         if(this.upcAtributos.comment_descripton == null){
@@ -174,7 +169,6 @@ export default {
                         else{
                             this.upcAtributos.user_id = this.$store.getters.getId
                             this.upcAtributos.postage_id = this.postagem._id
-                            console.log(this.upcAtributos)
 
                             Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
                                 console.log(resposta)
@@ -186,7 +180,7 @@ export default {
                     }
                 }
                 else{
-                    console.log("Usuário não logado")
+                    alert("Usuário não logado")
                 }
             }
             catch(err){
@@ -298,48 +292,15 @@ export default {
             cursor: pointer;
         }
 
-        /* button:first-child{
-            color: $colorBranca;
-            background-color: $colorVerde;
-
-            & img{
-                height: 20px;
-            }
-        }
-
-        button:first-child:hover{
-           background-color: #060449;
-        } */
-
         .botaoApoio{
             background-color: $colorBranca;
             border: 1px solid $colorVerde;
         }
 
-        /* .botaoApoio:hover{
-            color: $colorBranca;
-            background-color: $colorVerde;
-        } */
-
         .apoio{
             background-color: $colorVerde;
             color: $colorBranca; 
         }
-
-        /* .apoio:hover{
-            color: $colorPreta;
-            background-color: $colorBranca;
-            border: 1px solid $colorVerde;
-        } */
-
-        /* button:last-child{
-            background-color: $colorBranca;
-            border: 1px solid $colorCinza;
-        }
-
-        button:last-child:hover{
-            background-color: $colorCinza;
-        } */
     }
 
     @media only screen and (max-width:800px){
