@@ -215,8 +215,6 @@ export default {
         margin-bottom: 20px;
         justify-items: center;
         position: relative;
-        z-index: -1;
-
 
         input[type=file]{
             display: none;
