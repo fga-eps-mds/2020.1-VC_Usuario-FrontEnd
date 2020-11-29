@@ -61,7 +61,6 @@ export default {
     },
 
     created: function() {
-        this.listarPostagens();
         this.listarPostagemPorCategoria('Todas');
     },
         

@@ -18,7 +18,7 @@
 
                     <div class="divSenha">
                         <span>
-                            <input style="senha" type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password">
+                            <input style="senha" type="password" id="senha" name="" placeholder="Senha" v-model="this.cadastro.user_password" required="true">
                         </span>
 
                         <span>
@@ -159,7 +159,7 @@ export default{
             
             & .divSenha{
 
-                height: 100%;
+                height: auto;
 
                 input{
                     box-shadow: 0 0 0 0;
@@ -177,9 +177,10 @@ export default{
 
                 & img{
                     float: right;
-                    height: 10%;
-                    top: 20%;
-                    transform: translateY(-150%);
+                    height: 20px;
+                    transform: translateY(-180%);
+
+                    cursor: pointer;
                 }
             }
         }
