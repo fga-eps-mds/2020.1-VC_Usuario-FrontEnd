@@ -73,6 +73,8 @@
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MenuBarComponent from '@/components/MenuBarComponent.vue'
 import Postagem from '@/services/postagensServices.js'
+
+import { useStore } from 'vuex'
 /* eslint-disable */
 
 export default {
@@ -95,6 +97,17 @@ export default {
                 post_type: 'false',
                 file: '',
                 post_author: ''
+            }
+        }
+    },
+
+    created: function() {
+        if( !useStore().getters.getSwap ){
+
+            const token = useStore().getters.getToken
+            if(!token){}
+            else {
+                useStore().dispatch('validateSessionAction', token)
             }
         }
     },
