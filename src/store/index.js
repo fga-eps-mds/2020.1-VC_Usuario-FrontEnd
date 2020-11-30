@@ -78,7 +78,7 @@ const store = createStore({
             return aux
         },
 
-        async validateSessionAction({commit}, payload){
+        async validateSessionActionPerfil({commit}, payload){
             await Usuarios.Validar(payload).then(response => {
                 commit('SET_USUARIO', response.data.refreshed_user)
                 commit('SET_TOKEN', response.data.new_token)
@@ -88,6 +88,19 @@ const store = createStore({
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
                 window.location.href='/login'
+            }) 
+        },
+
+        async validateSessionAction({commit}, payload){
+            await Usuarios.Validar(payload).then(response => {
+                commit('SET_USUARIO', response.data.refreshed_user)
+                commit('SET_TOKEN', response.data.new_token)
+            }, erro => {
+                console.log('com err')
+                console.log(erro.response.data.msg)
+                commit('CLEAR_USUARIO')
+                commit('CLEAR_TOKEN')
+                window.location.reload(); 
             }) 
         },
 
