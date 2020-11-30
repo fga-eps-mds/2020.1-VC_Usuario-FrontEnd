@@ -17,12 +17,11 @@
                         <span>
                             <input type="password" id="senha" placeholder="Senha" v-model="login.password" required="true">
                         </span>
+                        
                         <span>
                             <img src="../assets/visibilidade.png" class="iconeVisibilidade" v-on:click=alterna()> 
                         </span>
                     </div>
-                    
-                    <a href="#">Esqueceu sua senha?</a>
                 </div>
 
                 <div class="divBotoes">
@@ -159,10 +158,6 @@ export default {
                 margin-bottom: 10px;
             }
 
-            input::placeholder {
-                color: $colorPreta;
-            }
-
             a{  
                 height: 15px;
 
@@ -194,9 +189,10 @@ export default {
 
                 & img{
                     float: right;
-                    height: 25%;
-                    //position: relative;
+                    height: 20px;
                     transform: translateY(-220%);
+
+                    cursor: pointer;
                 }
             }
         }
