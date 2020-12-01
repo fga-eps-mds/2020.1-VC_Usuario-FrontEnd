@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.75f223a2585ac6cebf247f6c2ed4f441.js"
+  "/precache-manifest.45942389c8710c819494bef675e512d4.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "teste-docker_front"});
