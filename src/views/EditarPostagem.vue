@@ -96,7 +96,7 @@ export default {
         return{
             editarPostagemObjeto: {
                 fk_user_id: '',
-                postage_id: '',
+                fk_postage_id: '',
                 post_title: '',
                 post_place: '',
                 post_category: '',
@@ -105,7 +105,7 @@ export default {
 
             excluirPostagemObjeto: {
                 fk_user_id: '',
-                postage_id: ''
+                fk_postage_id: ''
             },
 
             modalConfirmacaoEditar: false,
@@ -117,14 +117,14 @@ export default {
         
         Postagem.listarUmaPostagem(this.$route.params.post_id).then(res => {
             this.editarPostagemObjeto.fk_user_id = this.$store.getters.getId
-            this.editarPostagemObjeto.postage_id = res.data._id
+            this.editarPostagemObjeto.fk_postage_id = res.data._id
             this.editarPostagemObjeto.post_title = res.data.post_title
             this.editarPostagemObjeto.post_place = res.data.post_place
             this.editarPostagemObjeto.post_category = res.data.post_category
             this.editarPostagemObjeto.post_description = res.data.post_description
 
             this.excluirPostagemObjeto.fk_user_id = this.$store.getters.getId
-            this.excluirPostagemObjeto.postage_id = res.data._id
+            this.excluirPostagemObjeto.fk_postage_id = res.data._id
         })
     },
 
