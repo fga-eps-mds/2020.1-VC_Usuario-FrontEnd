@@ -96,7 +96,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/vamosCuidarIcon.41620d3e.png"
   },
   {
-    "revision": "92641529780a400b8ded3b67889030fe",
+    "revision": "188df05b0a1973f2ad9b8c2190012259",
     "url": "/index.html"
   },
   {
@@ -160,7 +160,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/robots.txt"
   },
   {
-    "revision": "3ba7a5acaa015d5cfd9eac63aa4132bb",
+    "revision": "d3856b3b649d0ad8f2f53706cecd81d3",
     "url": "/sw.js"
   }
 ]);
