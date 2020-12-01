@@ -127,13 +127,11 @@ export default {
             console.log(this.postagem)
             const formData = new FormData();
 
-            formData.append('fk_user_id', this.$store.getters.getId,)
             formData.append('post_title', this.postagem.post_title,)
             formData.append('post_place', this.postagem.post_place,)
             formData.append('post_category', this.postagem.post_category,)
             formData.append('post_description', this.postagem.post_description,)
             formData.append('file', this.postagem.file,)
-            formData.append('post_author', this.$store.getters.getNome)
             
             let checkbox = document.getElementById('checkboxSelecao');
             if (checkbox.checked){  
@@ -142,6 +140,9 @@ export default {
                     console.log(resposta)
                 })
             }else{
+                formData.append('fk_user_id', this.$store.getters.getId,)
+                formData.append('post_author', this.$store.getters.getNome)
+
                 Postagem.criarPostagem(formData).then(resposta => {
                     console.log('Salvo com sucesso!')
                     console.log(resposta)
