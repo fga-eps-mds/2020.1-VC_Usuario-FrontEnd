@@ -42,6 +42,10 @@
                     <textarea id="idtextAreaComentario" v-on:keyup="ajusteRowsTextAreaComentario()" rows="2" placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
                     <button @click="comentarPostagemMetodo()">Comentar</button>
                 </div>
+
+                <div class="divListaDeComentarios" v-for="comentario in this.comentarioData" :key="comentario.id">
+                    <ComentarioComponent v-bind:id="comentario._id"  v-bind:UPC_description="comentario.UPC_description"/>
+                </div>
             </div>
 
              <!-- <button type="submit">Reportar</button> -->
@@ -57,6 +61,7 @@
 //import { useStore } from 'vuex'
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import ComentarioComponent from '../components/ComentarioComponent.vue'
 
 import Postagem from '@/services/postagensServices.js'
 import { ref } from 'vue'
@@ -68,6 +73,7 @@ export default {
     components: {
         HeaderComponent,
         MenuBarComponent,
+        ComentarioComponent,
     },
 
     setup() {
@@ -81,8 +87,14 @@ export default {
         return{ postagem, statusColor}
     },
 
+    created: function() {
+        this.listarComentariosMetodo();
+    },
+
     data() {
-        return{            
+        return{      
+            comentarioData: {},
+
             upsAtributos: {
                 fk_user_id: '',
                 fk_postage_id: ''
@@ -92,6 +104,10 @@ export default {
                 fk_user_id: '',
                 fk_postage_id: '',
                 comment_descripton: null
+            },
+
+            upcList: {
+                fk_postage_id: '',
             },
 
             statusBotaoApoio: false,
@@ -189,6 +205,15 @@ export default {
             catch(err){
                 console.log({err})
             }
+        },
+
+        listarComentariosMetodo(){
+
+            this.upcList.fk_postage_id = this.postagem._id
+
+            Postagem.listarComentarios(this.upcList).then(resposta => {
+                this.comentarioData = resposta.data;
+            })
         },
 
         ajusteRowsTextAreaComentario() {
