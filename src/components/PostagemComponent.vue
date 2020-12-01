@@ -93,7 +93,7 @@ export default {
                             console.log(resposta.data)
                         }, erro => {
                             this.statusBotaoApoio = false
-                            alert("Erro no apoio. Tente novamente mais tarde.")
+                            alert("Erro em Apoio Postagem. Tente novamente mais tarde.")
                         })
                     }
                 }

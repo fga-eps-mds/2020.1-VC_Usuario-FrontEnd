@@ -95,7 +95,7 @@ export default {
     data(){
         return{
             editarPostagemObjeto: {
-                user_id: '',
+                fk_user_id: '',
                 postage_id: '',
                 post_title: '',
                 post_place: '',
@@ -104,7 +104,7 @@ export default {
             },
 
             excluirPostagemObjeto: {
-                user_id: '',
+                fk_user_id: '',
                 postage_id: ''
             },
 
@@ -116,14 +116,14 @@ export default {
     created: function(){
         
         Postagem.listarUmaPostagem(this.$route.params.post_id).then(res => {
-            this.editarPostagemObjeto.user_id = this.$store.getters.getId
+            this.editarPostagemObjeto.fk_user_id = this.$store.getters.getId
             this.editarPostagemObjeto.postage_id = res.data._id
             this.editarPostagemObjeto.post_title = res.data.post_title
             this.editarPostagemObjeto.post_place = res.data.post_place
             this.editarPostagemObjeto.post_category = res.data.post_category
             this.editarPostagemObjeto.post_description = res.data.post_description
 
-            this.excluirPostagemObjeto.user_id = this.$store.getters.getId
+            this.excluirPostagemObjeto.fk_user_id = this.$store.getters.getId
             this.excluirPostagemObjeto.postage_id = res.data._id
         })
     },
@@ -141,15 +141,23 @@ export default {
         metodoEditarPostagem(){
             Postagem.editarUmaPostagem(this.editarPostagemObjeto).then(res => {
                 console.log(res.data)
-                window.location.href='/perfil'  
+                alert("Postagem Editada com Sucesso!") 
+            }, erro => {
+                alert("Erro em Editar Postagem. Tente novamente mais tarde.")
             })
+
+            window.location.href='/perfil'
         },
 
         metodoExcluirPostagem(){
             Postagem.excluirUmaPostagem(this.excluirPostagemObjeto).then(res => {
                 console.log(res.data)
-                window.location.href='/perfil'  
+                alert("Postagem Excluida com Sucesso!")  
+            }, erro => {
+                alert("Erro em Excluir a Postagem. Tente novamente mais tarde.")
             })
+
+            window.location.href='/perfil'
         }
     }
 }
