@@ -12,14 +12,6 @@ var urlsToCache = [
   '/img/icons/vamosCuidarIcon-384x384.png',
   '/img/icons/vamosCuidarIcon-512x512.png',
   '/img/icons/maskable_icon.png'
-  // 'http://localhost:8080/perfil',
-  // 'http://localhost:8080/criarpostagem',
-  // 'http://localhost:8080/login',
-  // 'src/assets/example.html',
-  // 'src/components/Header.vue',
-  // 'src/assets/stylesheets/font.scss',
-  // 'src/assets/stylesheets/pallete.scss',
-  // 'src/views/Home.vue'
 ];
 
 self.addEventListener('install', function(event) {
@@ -28,19 +20,19 @@ self.addEventListener('install', function(event) {
       .then(function(cache) {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
-      })
+    })
   );
 });
 
 self.addEventListener('fetch', function(event) {
-    event.respondWith(
-      caches.match(event.request)
-        .then(function(response) {
-          if (response) {
-            return response;
-          }
-          return fetch(event.request);
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        if (response) {
+          return response;
         }
-      )
-    );
-  });
+        return fetch(event.request);
+      }
+    )
+  );
+});
