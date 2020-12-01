@@ -1,17 +1,17 @@
 var CACHE_NAME = 'vamos-cuidar-cache-v1';
 var urlsToCache = [
-  '/',
-  '/manifest.json',
-  '/index.html',
-  '/img/icons/vamosCuidarIcon-72x72.png',
-  '/img/icons/vamosCuidarIcon-96x96.png',
-  '/img/icons/vamosCuidarIcon-128x128.png',
-  '/img/icons/vamosCuidarIcon-144x144.png',
-  '/img/icons/vamosCuidarIcon-152x152.png',
-  '/img/icons/vamosCuidarIcon-192x192.png',
-  '/img/icons/vamosCuidarIcon-384x384.png',
-  '/img/icons/vamosCuidarIcon-512x512.png',
-  '/img/icons/maskable_icon.png'
+  './',
+  './manifest.json',
+  './index.html',
+  './img/icons/vamosCuidarIcon-72x72.png',
+  './img/icons/vamosCuidarIcon-96x96.png',
+  './img/icons/vamosCuidarIcon-128x128.png',
+  './img/icons/vamosCuidarIcon-144x144.png',
+  './img/icons/vamosCuidarIcon-152x152.png',
+  './img/icons/vamosCuidarIcon-192x192.png',
+  './img/icons/vamosCuidarIcon-384x384.png',
+  './img/icons/vamosCuidarIcon-512x512.png',
+  './img/icons/maskable_icon.png'
 ];
 
 self.addEventListener('install', function(event) {
