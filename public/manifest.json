@@ -50,7 +50,7 @@
         "type": "image/png",
         "purpose": "maskable"
     }
-  ],
+],
   "display": "standalone",
   "start_url": "/",
 }
