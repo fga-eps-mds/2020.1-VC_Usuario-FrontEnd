@@ -43,8 +43,9 @@
                     <button @click="comentarPostagemMetodo()">Comentar</button>
                 </div>
             </div>
-
-             <!-- <button type="submit">Reportar</button> -->
+            <div class="divReportar">
+                <button type="submit">Reportar</button>
+            </div>           
         </div>
     </section>
 
@@ -422,6 +423,8 @@ export default {
         }
     }
 
+
+
     @media only screen and (max-width:600px){
         .divFazerComentario{
             flex-direction: column;
@@ -437,4 +440,27 @@ export default {
             }
         }
     }
+
+    .divReportar{
+        height: auto;
+        
+        display: flex;
+
+        & button{
+            width: 100%;
+            height: 50px;
+            background-color: $colorCinza;
+            font-size: 20px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        & button:hover{
+            background-color: $colorVermelho;
+            color: $colorBranca;
+        }
+
+    }
+
+    
 </style>
