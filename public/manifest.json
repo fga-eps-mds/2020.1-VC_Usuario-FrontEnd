@@ -3,8 +3,6 @@
   "short_name": "VamosCuidar",
   "theme_color": "#090673",
   "background_color": "#ffffff",
-  "display": "standalone",
-  "start_url": "/",
   "icons": [
     {
         "src": "img/icons/vamosCuidarIcon-72x72.png",
@@ -52,5 +50,7 @@
         "type": "image/png",
         "purpose": "maskable"
     }
-  ]
+  ],
+  "display": "standalone",
+  "start_url": "/",
 }
