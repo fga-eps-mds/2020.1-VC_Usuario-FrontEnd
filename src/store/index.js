@@ -67,9 +67,7 @@ const store = createStore({
             await Usuarios.Login(login).then(response => {
                 commit('SET_USUARIO', response.data.user)
                 commit('SET_TOKEN', response.data.token)
-                if(window.location.pathname == '/login'){
-                    window.location.href='/perfil'
-                }
+                window.location.href='/perfil'
             }, erro => {
                 alert(erro.response.data.msg)
                 aux = false
