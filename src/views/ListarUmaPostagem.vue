@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="divReportar">
-                <button type="submit">Reportar</button>
+                <button @click="reportarPostagemMetodo()">Reportar</button>
             </div>           
         </div>
     </section>
@@ -84,7 +84,7 @@ export default {
 
     data() {
         return{            
-            upsAtributos: {
+            upsEReportAtributos: {
                 user_id: '',
                 postage_id: ''
             },
@@ -137,10 +137,10 @@ export default {
                         alert("Usuário não logado")
                     }
                     else{
-                        this.upsAtributos.user_id = this.$store.getters.getId
-                        this.upsAtributos.postage_id = this.postagem._id
+                        this.upsEReportAtributos.user_id = this.$store.getters.getId
+                        this.upsEReportAtributos.postage_id = this.postagem._id
 
-                        Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                        Postagem.apoiarUmaPostagem(this.upsEReportAtributos).then(resposta => {
                             console.log(resposta)
                         })
                     }
@@ -152,6 +152,30 @@ export default {
                 }
             }
             catch(err){
+                console.log({err})
+            }
+        },
+
+        reportarPostagemMetodo(){
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        alert("Usuário não logado")
+                    }
+                    else{
+                        this.upsEReportAtributos.user_id = this.$store.getters.getId
+                        this.upsEReportAtributos.postage_id = this.postagem._id
+
+                        Postagem.denunciarPostagem(this.upsEReportAtributos).then(resposta => {
+                            console.log(resposta)
+                            alert("Denúncia feita com sucesso!")
+                        })                       
+                    }
+                }else{
+                    alert("Usuário não logado")
+                }
+            }catch(err){
                 console.log({err})
             }
         },
