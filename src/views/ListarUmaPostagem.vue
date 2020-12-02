@@ -44,7 +44,7 @@
 
                 <legend>Comentários:</legend>
                 <div class="divComentario" v-for="comentario in comentarioData" :key="comentario.id">
-                    <ComentarioComponent v-bind:id="comentario._id" v-bind:fk_user_id="comentario.fk_user_id" v-bind:fk_postage_id="comentario.fk_postage_id" v-bind:UPC_description="comentario.UPC_description"/>
+                    <ComentarioComponent v-bind:id="comentario._id" v-bind:fk_user_id="comentario.fk_user_id" v-bind:fk_postage_id="comentario.fk_postage_id" v-bind:UPC_description="comentario.UPC_description" v-bind:UPC_author="comentario.UPC_author"/>
                 </div>
             </div>
 
@@ -384,8 +384,10 @@ export default {
 
     .divPostagemImagem{
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         padding-bottom: 20px;
+
+        border-bottom: solid 1px $colorCinza;
 
         & img {
             max-width:100%;
@@ -398,7 +400,7 @@ export default {
         width:100%;
 
         & legend{
-            margin-bottom: 5px;
+            margin-bottom: 20px;
 
             font-size: 18px;
             color: $colorAzulEscuro;

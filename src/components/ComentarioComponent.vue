@@ -1,6 +1,6 @@
 <template>
     <div class="divComponentComentario">
-        <p>"{{UPC_description}}"</p>
+        <p><span>{{UPC_author}}: </span>"{{UPC_description}}"</p>
     </div>
 </template>
 
@@ -13,6 +13,7 @@ export default {
         fk_user_id: String,
         fk_postage_id: String,
         UPC_description: String,
+        UPC_author: String
     },
 }
 </script>
@@ -23,6 +24,10 @@ export default {
     .divComponentComentario {
         height: auto;
         width: 100%;
+
+        & span{
+            color: $colorPreta;
+        }
 
         & p {
             font-style: oblique;
