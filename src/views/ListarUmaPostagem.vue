@@ -37,14 +37,14 @@
             </div>
 
             <div class="divPostagemComentario">
-                <legend>Comentários:</legend>
                 <div class="divFazerComentario">
                     <textarea id="idtextAreaComentario" v-on:keyup="ajusteRowsTextAreaComentario()" rows="2" placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
                     <button @click="comentarPostagemMetodo()">Comentar</button>
                 </div>
 
-                <div class="divListaDeComentarios" v-for="comentario in this.comentarioData" :key="comentario.id">
-                    <ComentarioComponent v-bind:id="comentario._id"  v-bind:UPC_description="comentario.UPC_description"/>
+                <legend>Comentários:</legend>
+                <div class="divComentario" v-for="comentario in comentarioData" :key="comentario.id">
+                    <ComentarioComponent v-bind:id="comentario._id" v-bind:fk_user_id="comentario.fk_user_id" v-bind:fk_postage_id="comentario.fk_postage_id" v-bind:UPC_description="comentario.UPC_description"/>
                 </div>
             </div>
 
@@ -87,10 +87,6 @@ export default {
         return{ postagem, statusColor}
     },
 
-    created: function() {
-        this.listarComentariosMetodo();
-    },
-
     data() {
         return{      
             comentarioData: {},
@@ -104,10 +100,6 @@ export default {
                 fk_user_id: '',
                 fk_postage_id: '',
                 comment_descripton: null
-            },
-
-            upcList: {
-                fk_postage_id: '',
             },
 
             statusBotaoApoio: false,
@@ -139,7 +131,12 @@ export default {
                 this.postagem = res.data;
             })
         }
+
+        Postagem.listarComentarios(this.$route.params.id).then(res => {
+            this.comentarioData = res.data;
+        })
     },
+
     methods: {
 
         apoiarPostagemMetodo(){
@@ -205,15 +202,6 @@ export default {
             catch(err){
                 console.log({err})
             }
-        },
-
-        listarComentariosMetodo(){
-
-            this.upcList.fk_postage_id = this.postagem._id
-
-            Postagem.listarComentarios(this.upcList).then(resposta => {
-                this.comentarioData = resposta.data;
-            })
         },
 
         ajusteRowsTextAreaComentario() {
@@ -399,8 +387,6 @@ export default {
         margin-bottom: 20px;
         padding-bottom: 20px;
 
-        border-bottom: 1px solid $colorCinza;
-
         & img {
             max-width:100%;
             max-height:150px;
@@ -408,10 +394,11 @@ export default {
     }
     
     .divPostagemComentario{
-        margin-bottom: 20px;
+        height: auto;
+        width:100%;
 
         & legend{
-            margin-bottom: 20px;
+            margin-bottom: 5px;
 
             font-size: 18px;
             color: $colorAzulEscuro;
@@ -421,6 +408,7 @@ export default {
     .divFazerComentario{
         align-items: center;
         display: flex;
+        margin-bottom: 20px;
 
         & textarea{
             flex: 1;
@@ -464,5 +452,11 @@ export default {
                 margin: 10px 0px 0px;
             }
         }
+    }
+
+    .divComentario{
+        height: auto;
+        width: 100%;
+        margin-bottom: 20px;
     }
 </style>
