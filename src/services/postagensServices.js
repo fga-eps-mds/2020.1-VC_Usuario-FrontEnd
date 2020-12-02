@@ -44,5 +44,9 @@ export default {
 
     listarPorCategoria:(categoria) => {
         return http.get('postage/list_by_category', {params: {categoria: categoria}})
+    },
+
+    denunciarPostagem:(postagem) => {
+        return http.post('upr/report_postage', postagem)
     }
 }
