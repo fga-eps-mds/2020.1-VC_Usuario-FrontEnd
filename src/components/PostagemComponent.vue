@@ -57,8 +57,8 @@ export default {
     data: function () {
         return{
             upsAtributos: {
-                user_id: '',
-                postage_id: ''
+                fk_user_id: '',
+                fk_postage_id: ''
             },
 
             statusBotaoApoio: false
@@ -86,11 +86,14 @@ export default {
                         alert("Usuário não logado")
                     }
                     else{
-                        this.upsAtributos.user_id = this.$store.getters.getId
-                        this.upsAtributos.postage_id = post_id
+                        this.upsAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsAtributos.fk_postage_id = post_id
 
                         Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
-                            console.log(resposta)
+                            console.log(resposta.data)
+                        }, erro => {
+                            this.statusBotaoApoio = false
+                            alert("Erro em Apoio Postagem. Tente novamente mais tarde.")
                         })
                     }
                 }

@@ -23,7 +23,7 @@ export default {
     },
 
     apoiarUmaPostagem:(upsAtributos) => {
-        return http.put(`/ups/support_postage`, upsAtributos)
+        return http.post(`/ups/support_postage`, upsAtributos)
     },
 
     comentarUmaPostagem:(upcAtributos) => {

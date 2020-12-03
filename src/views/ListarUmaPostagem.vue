@@ -84,13 +84,13 @@ export default {
     data() {
         return{            
             upsAtributos: {
-                user_id: '',
-                postage_id: ''
+                fk_user_id: '',
+                fk_postage_id: ''
             },
 
             upcAtributos: {
-                user_id: '',
-                postage_id: '',
+                fk_user_id: '',
+                fk_postage_id: '',
                 comment_descripton: null
             },
 
@@ -136,11 +136,14 @@ export default {
                         alert("Usuário não logado")
                     }
                     else{
-                        this.upsAtributos.user_id = this.$store.getters.getId
-                        this.upsAtributos.postage_id = this.postagem._id
+                        this.upsAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsAtributos.fk_postage_id = this.postagem._id
 
                         Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
-                            console.log(resposta)
+                            console.log(resposta.data)
+                        }, erro => {
+                            this.statusBotaoApoio = false
+                            alert("Erro no apoio. Tente novamente mais tarde.")
                         })
                     }
                 }
@@ -167,8 +170,8 @@ export default {
                             alert("Comentário vazio")
                         }
                         else{
-                            this.upcAtributos.user_id = this.$store.getters.getId
-                            this.upcAtributos.postage_id = this.postagem._id
+                            this.upcAtributos.fk_user_id = this.$store.getters.getId
+                            this.upcAtributos.fk_postage_id = this.postagem._id
 
                             Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
                                 console.log(resposta)
