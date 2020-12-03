@@ -185,6 +185,7 @@ export default {
         & button{
             flex: 1;
             height: 30px;
+            margin-top: 0px;
             
             cursor: pointer;
             border: none;
