@@ -30,6 +30,10 @@ export default {
         return http.post(`/upc/comment_postage`, upcAtributos)
     },
 
+    listarComentarios:(id) => {
+        return http.get(`/postage/list_UPC/${id}`)
+    },
+
     listarPostagensUsuarioLogado:(idDoUsuario) => {
         return http.get(`postage/list_all_with_UPS/${idDoUsuario}`)
     },

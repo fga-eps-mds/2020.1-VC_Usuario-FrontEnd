@@ -37,10 +37,14 @@
             </div>
 
             <div class="divPostagemComentario">
-                <legend>Comentários:</legend>
                 <div class="divFazerComentario">
                     <textarea id="idtextAreaComentario" v-on:keyup="ajusteRowsTextAreaComentario()" rows="2" placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
                     <button @click="comentarPostagemMetodo()">Comentar</button>
+                </div>
+
+                <legend>Comentários:</legend>
+                <div class="divComentario" v-for="comentario in comentarioData" :key="comentario.id">
+                    <ComentarioComponent v-bind:id="comentario._id" v-bind:fk_user_id="comentario.fk_user_id" v-bind:fk_postage_id="comentario.fk_postage_id" v-bind:UPC_description="comentario.UPC_description" v-bind:UPC_author="comentario.UPC_author"/>
                 </div>
             </div>
 
@@ -57,6 +61,7 @@
 //import { useStore } from 'vuex'
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import ComentarioComponent from '../components/ComentarioComponent.vue'
 
 import Postagem from '@/services/postagensServices.js'
 import { ref } from 'vue'
@@ -68,6 +73,7 @@ export default {
     components: {
         HeaderComponent,
         MenuBarComponent,
+        ComentarioComponent,
     },
 
     setup() {
@@ -82,7 +88,9 @@ export default {
     },
 
     data() {
-        return{            
+        return{      
+            comentarioData: {},
+
             upsAtributos: {
                 fk_user_id: '',
                 fk_postage_id: ''
@@ -123,7 +131,12 @@ export default {
                 this.postagem = res.data;
             })
         }
+
+        Postagem.listarComentarios(this.$route.params.id).then(res => {
+            this.comentarioData = res.data;
+        })
     },
+
     methods: {
 
         apoiarPostagemMetodo(){
@@ -371,10 +384,10 @@ export default {
 
     .divPostagemImagem{
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         padding-bottom: 20px;
 
-        border-bottom: 1px solid $colorCinza;
+        border-bottom: solid 1px $colorCinza;
 
         & img {
             max-width:100%;
@@ -383,7 +396,8 @@ export default {
     }
     
     .divPostagemComentario{
-        margin-bottom: 20px;
+        height: auto;
+        width:100%;
 
         & legend{
             margin-bottom: 20px;
@@ -396,6 +410,7 @@ export default {
     .divFazerComentario{
         align-items: center;
         display: flex;
+        margin-bottom: 20px;
 
         & textarea{
             flex: 1;
@@ -439,5 +454,11 @@ export default {
                 margin: 10px 0px 0px;
             }
         }
+    }
+
+    .divComentario{
+        height: auto;
+        width: 100%;
+        margin-bottom: 20px;
     }
 </style>
