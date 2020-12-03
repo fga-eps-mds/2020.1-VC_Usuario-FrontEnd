@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="divReportar">
-                <button @click="reportarPostagemMetodo()">Reportar</button>
+                <button v-on:click="reportarPostagemMetodo" class ="botaoReport" :class="{'report': statusBotaoReport}">Reportar</button>
             </div>           
         </div>
     </section>
@@ -96,6 +96,7 @@ export default {
             },
 
             statusBotaoApoio: false,
+            statusBotaoReport: false,
 
             auxCaracteresTextArea: 50
         }
@@ -109,6 +110,7 @@ export default {
                     this.postagem = res.data;
 
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
+                    this.setupStatusBotaoReport(this.postagem.post_reporting);
                 })
             }
             else{
@@ -116,6 +118,7 @@ export default {
                     this.postagem = res.data;
 
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
+                    this.setupStatusBotaoReport(this.postagem.post_reporting);
                 })
             }
         }
@@ -158,22 +161,38 @@ export default {
 
         reportarPostagemMetodo(){
             try{
-                if( !this.$store.getters.getSwap ){
-                    const token = this.$store.getters.getToken
-                    if(!token){
-                        alert("Usuário não logado")
+                if(this.postagem.post_reporting == false){
+                    if( !this.$store.getters.getSwap ){
+                        const token = this.$store.getters.getToken
+                        if(!token){
+
+                            this.statusBotaoReport = false
+
+                            alert("Usuário não logado")
+                        }
+                                            
+                        else{
+                            this.upsEReportAtributos.user_id = this.$store.getters.getId
+                            this.upsEReportAtributos.postage_id = this.postagem._id
+                            
+                            this.statusBotaoReport = true
+
+                            Postagem.denunciarPostagem(this.upsEReportAtributos).then(resposta => {
+                                console.log(resposta)
+                                alert("Denúncia feita com sucesso!")
+                            })
+                            
+                            
+                        }
                     }
                     else{
-                        this.upsEReportAtributos.user_id = this.$store.getters.getId
-                        this.upsEReportAtributos.postage_id = this.postagem._id
+                        this.statusBotaoReport = true
 
-                        Postagem.denunciarPostagem(this.upsEReportAtributos).then(resposta => {
-                            console.log(resposta)
-                            alert("Denúncia feita com sucesso!")
-                        })                       
+                        alert("Usuário não logado")
                     }
-                }else{
-                    alert("Usuário não logado")
+                }
+                else{
+                    alert("Postagem já reportada")
                 }
             }catch(err){
                 console.log({err})
@@ -234,6 +253,10 @@ export default {
 
         setupStatusBotaoApoio(post_supporting){
             this.statusBotaoApoio = post_supporting
+        },
+
+        setupStatusBotaoReport(post_reporting){
+            this.statusBotaoReport = post_reporting
         }
     }
 }
@@ -406,6 +429,9 @@ export default {
     
     .divPostagemComentario{
         margin-bottom: 20px;
+        padding-bottom: 30px;
+
+        border-bottom: 1px solid $colorCinza;
 
         & legend{
             margin-bottom: 20px;
@@ -467,21 +493,41 @@ export default {
 
     .divReportar{
         height: auto;
-        
+        width: 100%;
+
         display: flex;
 
         & button{
             width: 100%;
             height: 50px;
-            background-color: $colorCinza;
+            //background-color: $colorVerde;
             font-size: 20px;
             border-radius: 25px;
             cursor: pointer;
         }
 
-        & button:hover{
+        /* & button:hover{
             background-color: $colorVermelho;
             color: $colorBranca;
+        } */
+
+        .botaoReport{
+            background-color: $colorCinza;
+        } 
+
+        .report{
+            background-color: $colorVermelho;
+            color: $colorBranca;
+        }
+
+    }
+
+    @media only screen and (min-width:600px){
+        .divReportar{
+
+            & button{
+                width: 280px;     
+            }
         }
 
     }
