@@ -208,21 +208,15 @@ export default {
             border: 1px solid $colorVerde;
         }
 
-        /* .botaoApoio:hover{
+        .botaoApoio:hover{
             color: $colorBranca;
             background-color: $colorVerde;
-        } */
+        }
 
         .apoio{
             background-color: $colorVerde;
             color: $colorBranca; 
         }
-
-        /* .apoio:hover{
-            color: $colorPreta;
-            background-color: $colorBranca;
-            border: 1px solid $colorVerde;
-        } */
     }
     
     .divBotaoEditar{

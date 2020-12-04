@@ -181,8 +181,6 @@ export default {
                                 console.log(resposta)
                                 alert("Denúncia feita com sucesso!")
                             })
-                            
-                            
                         }
                     }
                     else{
@@ -345,6 +343,11 @@ export default {
             border: 1px solid $colorVerde;
         }
 
+        .botaoApoio:hover{
+            color: $colorBranca;
+            background-color: $colorVerde;
+        }
+
         .apoio{
             background-color: $colorVerde;
             color: $colorBranca; 
@@ -460,7 +463,7 @@ export default {
             margin-left: 20px;
 
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
             border-radius: 25px;
             color: #000000;
             background-color: $colorBranca;
@@ -483,6 +486,7 @@ export default {
             & textarea{
                 flex: none;
             }
+            
             & button{
                 width: 100%;
                 flex: none;
@@ -499,38 +503,25 @@ export default {
 
         & button{
             width: 100%;
-            height: 50px;
-            //background-color: $colorVerde;
-            font-size: 20px;
+            height: 30px;
+            font-size: 16px;
             border-radius: 25px;
             cursor: pointer;
         }
 
-        /* & button:hover{
+        & .botaoReport:hover{
             background-color: $colorVermelho;
             color: $colorBranca;
-        } */
+        }
 
         .botaoReport{
-            background-color: $colorCinza;
+            border: 1px solid $colorVermelho;
+            background-color: $colorBranca;
         } 
 
         .report{
             background-color: $colorVermelho;
             color: $colorBranca;
         }
-
     }
-
-    @media only screen and (min-width:600px){
-        .divReportar{
-
-            & button{
-                width: 280px;     
-            }
-        }
-
-    }
-
-    
 </style>
