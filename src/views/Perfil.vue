@@ -65,7 +65,7 @@ export default {
             if(!token){
                 window.location.href='/login'
             }else {
-                useStore().dispatch('validateSessionAction', token)
+                useStore().dispatch('validateSessionActionPerfil', token)
             }
         }else{
             useStore().commit('SET_SWAP', false)

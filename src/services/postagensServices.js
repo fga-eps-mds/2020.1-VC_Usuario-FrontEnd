@@ -23,11 +23,19 @@ export default {
     },
 
     apoiarUmaPostagem:(upsAtributos) => {
-        return http.put(`/ups/support_postage`, upsAtributos)
+        return http.post(`/ups/support_postage`, upsAtributos)
     },
 
     comentarUmaPostagem:(upcAtributos) => {
         return http.post(`/upc/comment_postage`, upcAtributos)
+    },
+
+    denunciarUmaPostagem:(reportAtributos) => {
+        return http.post('upr/report_postage', reportAtributos)
+    },
+
+    listarComentarios:(id) => {
+        return http.get(`/postage/list_UPC/${id}`)
     },
 
     listarPostagensUsuarioLogado:(idDoUsuario) => {
@@ -45,8 +53,4 @@ export default {
     listarPorCategoria:(categoria) => {
         return http.get('postage/list_by_category', {params: {categoria: categoria}})
     },
-
-    denunciarPostagem:(postagem) => {
-        return http.post('upr/report_postage', postagem)
-    }
 }

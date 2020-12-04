@@ -37,7 +37,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "EditarPerfil" */ '../views/EditarPerfil.vue'),
   },
   {
-    path: '/editarpostagem',
+    path: '/editarpostagem/:post_id',
     name: 'EditarPostagem',
     component: () => import(/* webpackChunkName: "EditarPostagem" */ '../views/EditarPostagem.vue'),
   },

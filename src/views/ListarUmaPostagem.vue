@@ -37,14 +37,18 @@
             </div>
 
             <div class="divPostagemComentario">
-                <legend>Comentários:</legend>
                 <div class="divFazerComentario">
                     <textarea id="idtextAreaComentario" v-on:keyup="ajusteRowsTextAreaComentario()" rows="2" placeholder="Adicione um comentário..." v-model="upcAtributos.comment_descripton"></textarea>
                     <button @click="comentarPostagemMetodo()">Comentar</button>
                 </div>
+
+                <legend>Comentários:</legend>
+                <div class="divComentario" v-for="comentario in comentarioData" :key="comentario.id">
+                    <ComentarioComponent v-bind:id="comentario._id" v-bind:fk_user_id="comentario.fk_user_id" v-bind:fk_postage_id="comentario.fk_postage_id" v-bind:UPC_description="comentario.UPC_description" v-bind:UPC_author="comentario.UPC_author"/>
+                </div>
             </div>
             <div class="divReportar">
-                <button v-on:click="reportarPostagemMetodo" class ="botaoReport" :class="{'report': statusBotaoReport}">Reportar</button>
+                <button v-on:click="reportarPostagemMetodo" class="botaoReport" :class="{'report': statusBotaoReport}">Reportar</button>
             </div>           
         </div>
     </section>
@@ -58,6 +62,7 @@
 //import { useStore } from 'vuex'
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import ComentarioComponent from '../components/ComentarioComponent.vue'
 
 import Postagem from '@/services/postagensServices.js'
 import { ref } from 'vue'
@@ -69,6 +74,7 @@ export default {
     components: {
         HeaderComponent,
         MenuBarComponent,
+        ComentarioComponent,
     },
 
     setup() {
@@ -84,14 +90,16 @@ export default {
 
     data() {
         return{            
+            comentarioData: {},
+
             upsEReportAtributos: {
-                user_id: '',
-                postage_id: ''
+                fk_user_id: '',
+                fk_postage_id: ''
             },
 
             upcAtributos: {
-                user_id: '',
-                postage_id: '',
+                fk_user_id: '',
+                fk_postage_id: '',
                 comment_descripton: null
             },
 
@@ -127,7 +135,12 @@ export default {
                 this.postagem = res.data;
             })
         }
+
+        Postagem.listarComentarios(this.$route.params.id).then(res => {
+            this.comentarioData = res.data;
+        })
     },
+
     methods: {
 
         apoiarPostagemMetodo(){
@@ -136,22 +149,58 @@ export default {
                     const token = this.$store.getters.getToken
                     if(!token){
                         this.statusBotaoApoio = true
-
-                        alert("Usuário não logado")
+                        alert("Usuário não Logado")
                     }
                     else{
-                        this.upsEReportAtributos.user_id = this.$store.getters.getId
-                        this.upsEReportAtributos.postage_id = this.postagem._id
+                        this.upsEReportAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsEReportAtributos.fk_postage_id = this.postagem._id
 
                         Postagem.apoiarUmaPostagem(this.upsEReportAtributos).then(resposta => {
                             console.log(resposta)
+                        }, erro => {
+                            this.statusBotaoApoio = false
+                            alert("Erro no Apoio. Tente novamente mais tarde.")
                         })
                     }
                 }
                 else{
                     this.statusBotaoApoio = true
+                    alert("Usuário não Logado")
+                }
+            }
+            catch(err){
+                console.log({err})
+            }
+        },
 
-                    alert("Usuário não logado")
+        comentarPostagemMetodo(){
+            try{
+                if( !this.$store.getters.getSwap ){
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        alert("Usuário não Logado")
+                    }
+                    else{
+                        if(this.upcAtributos.comment_descripton == null){
+                            alert("Comentário vazio")
+                        }
+                        else{
+                            this.upcAtributos.fk_user_id = this.$store.getters.getId
+                            this.upcAtributos.fk_postage_id = this.postagem._id
+
+                            Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
+                                console.log(resposta)
+                                alert("Comentário feito com sucesso!")
+                                
+                                window.location.href = `/postagem/${this.postagem._id}`
+                            }, erro => {
+                                alert("Erro na Cometário. Tente novamente mais tarde.")
+                            })
+                        }
+                    }
+                }
+                else{
+                    alert("Usuário não Logado")
                 }
             }
             catch(err){
@@ -165,67 +214,37 @@ export default {
                     if( !this.$store.getters.getSwap ){
                         const token = this.$store.getters.getToken
                         if(!token){
-
                             this.statusBotaoReport = false
-
-                            alert("Usuário não logado")
+                            alert("Usuário não Logado")
                         }
                                             
                         else{
-                            this.upsEReportAtributos.user_id = this.$store.getters.getId
-                            this.upsEReportAtributos.postage_id = this.postagem._id
-                            
-                            this.statusBotaoReport = true
+                            this.upsEReportAtributos.fk_user_id = this.$store.getters.getId
+                            this.upsEReportAtributos.fk_postage_id = this.postagem._id
 
-                            Postagem.denunciarPostagem(this.upsEReportAtributos).then(resposta => {
+                            Postagem.denunciarUmaPostagem(this.upsEReportAtributos).then(resposta => {
                                 console.log(resposta)
-                                alert("Denúncia feita com sucesso!")
+
+                                if(resposta.status == 200){
+                                    this.postagem.post_reporting = true
+                                    this.statusBotaoReport = true
+                                    alert("Denúncia feita com sucesso!")
+                                }
+                            }, erro => {
+                                this.statusBotaoReport = false
+                                alert("Erro na Denúncia. Tente novamente mais tarde.")
                             })
                         }
                     }
                     else{
-                        this.statusBotaoReport = true
-
-                        alert("Usuário não logado")
+                        this.statusBotaoReport = false
+                        alert("Usuário não Logado")
                     }
                 }
                 else{
-                    alert("Postagem já reportada")
+                    alert("Postagem já Reportada!")
                 }
             }catch(err){
-                console.log({err})
-            }
-        },
-
-        comentarPostagemMetodo(){
-            try{
-                if( !this.$store.getters.getSwap ){
-                    const token = this.$store.getters.getToken
-                    if(!token){
-                        alert("Usuário não logado")
-                    }
-                    else{
-                        if(this.upcAtributos.comment_descripton == null){
-                            alert("Comentário vazio")
-                        }
-                        else{
-                            this.upcAtributos.user_id = this.$store.getters.getId
-                            this.upcAtributos.postage_id = this.postagem._id
-
-                            Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
-                                console.log(resposta)
-                                alert("Comentário feito com sucesso!")
-                                
-                                window.location.href = `/postagem/${this.postagem._id}`
-                            })
-                        }
-                    }
-                }
-                else{
-                    alert("Usuário não logado")
-                }
-            }
-            catch(err){
                 console.log({err})
             }
         },
@@ -343,11 +362,6 @@ export default {
             border: 1px solid $colorVerde;
         }
 
-        .botaoApoio:hover{
-            color: $colorBranca;
-            background-color: $colorVerde;
-        }
-
         .apoio{
             background-color: $colorVerde;
             color: $colorBranca; 
@@ -419,10 +433,10 @@ export default {
 
     .divPostagemImagem{
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         padding-bottom: 20px;
 
-        border-bottom: 1px solid $colorCinza;
+        border-bottom: solid 1px $colorCinza;
 
         & img {
             max-width:100%;
@@ -431,6 +445,8 @@ export default {
     }
     
     .divPostagemComentario{
+        height: auto;
+        width:100%;
         margin-bottom: 20px;
         padding-bottom: 30px;
 
@@ -447,6 +463,7 @@ export default {
     .divFazerComentario{
         align-items: center;
         display: flex;
+        margin-bottom: 20px;
 
         & textarea{
             flex: 1;
@@ -476,8 +493,6 @@ export default {
         }
     }
 
-
-
     @media only screen and (max-width:800px){
         .divFazerComentario{
             flex-direction: column;
@@ -495,6 +510,12 @@ export default {
         }
     }
 
+    .divComentario{
+        height: auto;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
     .divReportar{
         height: auto;
         width: 100%;
@@ -509,11 +530,6 @@ export default {
             cursor: pointer;
         }
 
-        & .botaoReport:hover{
-            background-color: $colorVermelho;
-            color: $colorBranca;
-        }
-
         .botaoReport{
             border: 1px solid $colorVermelho;
             background-color: $colorBranca;
@@ -523,5 +539,6 @@ export default {
             background-color: $colorVermelho;
             color: $colorBranca;
         }
+
     }
 </style>
