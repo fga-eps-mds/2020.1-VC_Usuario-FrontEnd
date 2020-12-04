@@ -13,7 +13,7 @@
                     <span id="postagemStatus1" v-if="statusColor(this.postagem.post_status) === 1"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
                     <span id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
                     
-                    <div class="divBotoes">
+                    <div class="divBotaoApoio">
                         <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">Apoiar</button>
                     </div>
                 </div>          
@@ -323,7 +323,7 @@ export default {
         }
     }
 
-    .divBotoes{
+    .divBotaoApoio{
         height: auto;
         
         display: flex;
@@ -365,7 +365,7 @@ export default {
             }
         }
 
-        .divBotoes{
+        .divBotaoApoio{
             & button{
                 width: 100%;
             }
@@ -478,7 +478,7 @@ export default {
 
 
 
-    @media only screen and (max-width:600px){
+    @media only screen and (max-width:800px){
         .divFazerComentario{
             flex-direction: column;
             align-items: initial;
