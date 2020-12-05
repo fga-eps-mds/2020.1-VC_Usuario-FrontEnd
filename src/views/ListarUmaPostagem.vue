@@ -13,7 +13,7 @@
                     <span id="postagemStatus1" v-if="statusColor(this.postagem.post_status) === 1"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
                     <span id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
                     
-                    <div class="divBotoes">
+                    <div class="divBotaoApoio">
                         <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">Apoiar</button>
                     </div>
                 </div>          
@@ -47,8 +47,9 @@
                     <ComentarioComponent v-bind:id="comentario._id" v-bind:fk_user_id="comentario.fk_user_id" v-bind:fk_postage_id="comentario.fk_postage_id" v-bind:UPC_description="comentario.UPC_description" v-bind:UPC_author="comentario.UPC_author"/>
                 </div>
             </div>
-
-             <!-- <button type="submit">Reportar</button> -->
+            <div class="divReportar">
+                <button v-on:click="reportarPostagemMetodo" class="botaoReport" :class="{'report': statusBotaoReport}">Reportar</button>
+            </div>           
         </div>
     </section>
 
@@ -88,10 +89,10 @@ export default {
     },
 
     data() {
-        return{      
+        return{            
             comentarioData: {},
 
-            upsAtributos: {
+            upsEReportAtributos: {
                 fk_user_id: '',
                 fk_postage_id: ''
             },
@@ -103,6 +104,7 @@ export default {
             },
 
             statusBotaoApoio: false,
+            statusBotaoReport: false,
 
             auxCaracteresTextArea: 50
         }
@@ -116,6 +118,7 @@ export default {
                     this.postagem = res.data;
 
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
+                    this.setupStatusBotaoReport(this.postagem.post_reporting);
                 })
             }
             else{
@@ -123,6 +126,7 @@ export default {
                     this.postagem = res.data;
 
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
+                    this.setupStatusBotaoReport(this.postagem.post_reporting);
                 })
             }
         }
@@ -145,25 +149,23 @@ export default {
                     const token = this.$store.getters.getToken
                     if(!token){
                         this.statusBotaoApoio = true
-
-                        alert("Usuário não logado")
+                        alert("Usuário não Logado")
                     }
                     else{
-                        this.upsAtributos.fk_user_id = this.$store.getters.getId
-                        this.upsAtributos.fk_postage_id = this.postagem._id
+                        this.upsEReportAtributos.fk_user_id = this.$store.getters.getId
+                        this.upsEReportAtributos.fk_postage_id = this.postagem._id
 
-                        Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
-                            console.log(resposta.data)
+                        Postagem.apoiarUmaPostagem(this.upsEReportAtributos).then(resposta => {
+                            console.log(resposta)
                         }, erro => {
                             this.statusBotaoApoio = false
-                            alert("Erro no apoio. Tente novamente mais tarde.")
+                            alert("Erro no Apoio. Tente novamente mais tarde.")
                         })
                     }
                 }
                 else{
                     this.statusBotaoApoio = true
-
-                    alert("Usuário não logado")
+                    alert("Usuário não Logado")
                 }
             }
             catch(err){
@@ -176,7 +178,7 @@ export default {
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
-                        alert("Usuário não logado")
+                        alert("Usuário não Logado")
                     }
                     else{
                         if(this.upcAtributos.comment_descripton == null){
@@ -191,15 +193,58 @@ export default {
                                 alert("Comentário feito com sucesso!")
                                 
                                 window.location.href = `/postagem/${this.postagem._id}`
+                            }, erro => {
+                                alert("Erro na Cometário. Tente novamente mais tarde.")
                             })
                         }
                     }
                 }
                 else{
-                    alert("Usuário não logado")
+                    alert("Usuário não Logado")
                 }
             }
             catch(err){
+                console.log({err})
+            }
+        },
+
+        reportarPostagemMetodo(){
+            try{
+                if(this.postagem.post_reporting == false){
+                    if( !this.$store.getters.getSwap ){
+                        const token = this.$store.getters.getToken
+                        if(!token){
+                            this.statusBotaoReport = false
+                            alert("Usuário não Logado")
+                        }
+                                            
+                        else{
+                            this.upsEReportAtributos.fk_user_id = this.$store.getters.getId
+                            this.upsEReportAtributos.fk_postage_id = this.postagem._id
+
+                            Postagem.denunciarUmaPostagem(this.upsEReportAtributos).then(resposta => {
+                                console.log(resposta)
+
+                                if(resposta.status == 200){
+                                    this.postagem.post_reporting = true
+                                    this.statusBotaoReport = true
+                                    alert("Denúncia feita com sucesso!")
+                                }
+                            }, erro => {
+                                this.statusBotaoReport = false
+                                alert("Erro na Denúncia. Tente novamente mais tarde.")
+                            })
+                        }
+                    }
+                    else{
+                        this.statusBotaoReport = false
+                        alert("Usuário não Logado")
+                    }
+                }
+                else{
+                    alert("Postagem já Reportada!")
+                }
+            }catch(err){
                 console.log({err})
             }
         },
@@ -225,6 +270,10 @@ export default {
 
         setupStatusBotaoApoio(post_supporting){
             this.statusBotaoApoio = post_supporting
+        },
+
+        setupStatusBotaoReport(post_reporting){
+            this.statusBotaoReport = post_reporting
         }
     }
 }
@@ -293,7 +342,7 @@ export default {
         }
     }
 
-    .divBotoes{
+    .divBotaoApoio{
         height: auto;
         
         display: flex;
@@ -330,7 +379,7 @@ export default {
             }
         }
 
-        .divBotoes{
+        .divBotaoApoio{
             & button{
                 width: 100%;
             }
@@ -398,6 +447,10 @@ export default {
     .divPostagemComentario{
         height: auto;
         width:100%;
+        margin-bottom: 20px;
+        padding-bottom: 30px;
+
+        border-bottom: 1px solid $colorCinza;
 
         & legend{
             margin-bottom: 20px;
@@ -427,7 +480,7 @@ export default {
             margin-left: 20px;
 
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
             border-radius: 25px;
             color: #000000;
             background-color: $colorBranca;
@@ -440,7 +493,7 @@ export default {
         }
     }
 
-    @media only screen and (max-width:600px){
+    @media only screen and (max-width:800px){
         .divFazerComentario{
             flex-direction: column;
             align-items: initial;
@@ -448,6 +501,7 @@ export default {
             & textarea{
                 flex: none;
             }
+            
             & button{
                 width: 100%;
                 flex: none;
@@ -460,5 +514,31 @@ export default {
         height: auto;
         width: 100%;
         margin-bottom: 20px;
+    }
+
+    .divReportar{
+        height: auto;
+        width: 100%;
+
+        display: flex;
+
+        & button{
+            width: 100%;
+            height: 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .botaoReport{
+            border: 1px solid $colorVermelho;
+            background-color: $colorBranca;
+        } 
+
+        .report{
+            background-color: $colorVermelho;
+            color: $colorBranca;
+        }
+
     }
 </style>

@@ -188,6 +188,7 @@ export default {
         & button{
             flex: 1;
             height: 30px;
+            margin-top: 0px;
             
             cursor: pointer;
             border: none;
@@ -210,21 +211,15 @@ export default {
             border: 1px solid $colorVerde;
         }
 
-        /* .botaoApoio:hover{
+        .botaoApoio:hover{
             color: $colorBranca;
             background-color: $colorVerde;
-        } */
+        }
 
         .apoio{
             background-color: $colorVerde;
             color: $colorBranca; 
         }
-
-        /* .apoio:hover{
-            color: $colorPreta;
-            background-color: $colorBranca;
-            border: 1px solid $colorVerde;
-        } */
     }
     
     .divBotaoEditar{
