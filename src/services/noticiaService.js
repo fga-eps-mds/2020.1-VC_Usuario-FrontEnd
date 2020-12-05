@@ -3,10 +3,10 @@ import httpNews from './configNews.js'
 export default{
 
     listarNoticias:() => {
-        return httpNews.get('/posts/2')
+        return httpNews.get('/news')
     },
 
-    // listarUmaNoticia:(id) => {
-    //     return httpNews.get(`/news/${id}`)
-    // }
+    listarUmaNoticia:(id) => {
+        return httpNews.get(`/news/${id}`)
+    }
 }
