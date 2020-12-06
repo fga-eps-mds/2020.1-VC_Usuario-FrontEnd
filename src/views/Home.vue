@@ -37,6 +37,8 @@ import PostagemComponent from '@/components/PostagemComponent.vue'
 
 /* Import dos services */
 import PostagemService from '@/services/postagensServices.js'
+
+import { useStore } from 'vuex'
 /* eslint-disable */
 
 export default {
@@ -61,6 +63,15 @@ export default {
     },
 
     created: function() {
+        if( !useStore().getters.getSwap ){
+
+            const token = useStore().getters.getToken
+            if(!token){}
+            else {
+                useStore().dispatch('validateSessionAction', token)
+            }
+        }
+
         this.listarPostagemPorCategoria('Todas');
     },
         

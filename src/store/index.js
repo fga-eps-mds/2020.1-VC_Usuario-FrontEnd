@@ -67,15 +67,26 @@ const store = createStore({
             await Usuarios.Login(login).then(response => {
                 commit('SET_USUARIO', response.data.user)
                 commit('SET_TOKEN', response.data.token)
-                if(window.location.pathname == '/login'){
-                    window.location.href='/perfil'
-                }
+                window.location.href='/perfil'
             }, erro => {
                 alert(erro.response.data.msg)
                 aux = false
             })
 
             return aux
+        },
+
+        async validateSessionActionPerfil({commit}, payload){
+            await Usuarios.Validar(payload).then(response => {
+                commit('SET_USUARIO', response.data.refreshed_user)
+                commit('SET_TOKEN', response.data.new_token)
+            }, erro => {
+                console.log('com err')
+                console.log(erro.response.data.msg)
+                commit('CLEAR_USUARIO')
+                commit('CLEAR_TOKEN')
+                window.location.href='/login'
+            }) 
         },
 
         async validateSessionAction({commit}, payload){
@@ -87,7 +98,7 @@ const store = createStore({
                 console.log(erro.response.data.msg)
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
-                window.location.href='/login'
+                window.location.reload(); 
             }) 
         },
 
