@@ -1,1 +1,68 @@
-<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><!--[if IE]><link rel="icon" href="/favicon.ico"><![endif]--><title>Vamos Cuidar</title><link href="/css/Cadastro.bc1755dd.css" rel="prefetch"><link href="/css/CriarPostagem.f71da785.css" rel="prefetch"><link href="/css/Editar.1f0e0bc6.css" rel="prefetch"><link href="/css/Home.6b2aadfe.css" rel="prefetch"><link href="/css/ListarUmaPostagem.b53b31ad.css" rel="prefetch"><link href="/css/Perfil.e28a645b.css" rel="prefetch"><link href="/css/about.66d03d53.css" rel="prefetch"><link href="/js/Cadastro.1d555afe.js" rel="prefetch"><link href="/js/CriarPostagem.1bccc6ea.js" rel="prefetch"><link href="/js/Editar.8601d77f.js" rel="prefetch"><link href="/js/Home.8163a9b8.js" rel="prefetch"><link href="/js/ListarUmaPostagem.476391df.js" rel="prefetch"><link href="/js/Perfil.df18c917.js" rel="prefetch"><link href="/js/about.9379dfad.js" rel="prefetch"><link href="/css/app.0dd80b0f.css" rel="preload" as="style"><link href="/js/app.98800587.js" rel="preload" as="script"><link href="/js/chunk-vendors.65fe6e8b.js" rel="preload" as="script"><link href="/css/app.0dd80b0f.css" rel="stylesheet"><link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#4DBA87"><meta name="apple-mobile-web-app-capable" content="no"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="teste-docker_front"><link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-152x152.png"><link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#4DBA87"><meta name="msapplication-TileImage" content="/img/icons/msapplication-icon-144x144.png"><meta name="msapplication-TileColor" content="#000000"></head><body><div id="app"></div><script src="/js/chunk-vendors.65fe6e8b.js"></script><script src="/js/app.98800587.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vamos Cuidar</title>
+    <link href="/css/Cadastro.5a2a5f86.css" rel="prefetch">
+    <link href="/css/CriarPostagem.110fdf63.css" rel="prefetch">
+    <link href="/css/EditarPerfil.192aa67e.css" rel="prefetch">
+    <link href="/css/EditarPostagem.a5a686a7.css" rel="prefetch">
+    <link href="/css/FeedDeNoticias.db4bd73e.css" rel="prefetch">
+    <link href="/css/Home.baeefce7.css" rel="prefetch">
+    <link href="/css/Home~Perfil.4e46cff5.css" rel="prefetch">
+    <link href="/css/ListarUmaPostagem.2368acf9.css" rel="prefetch">
+    <link href="/css/Login.2955cfe5.css" rel="prefetch">
+    <link href="/css/Perfil.27bd5555.css" rel="prefetch">
+    <link href="/css/VisualizarNoticia.9c9a55a6.css" rel="prefetch">
+    <link href="/js/Cadastro.85207d5f.js" rel="prefetch">
+    <link href="/js/CriarPostagem.a116def1.js" rel="prefetch">
+    <link href="/js/EditarPerfil.1e4bc357.js" rel="prefetch">
+    <link href="/js/EditarPostagem.20ef1b47.js" rel="prefetch">
+    <link href="/js/FeedDeNoticias.56f5662c.js" rel="prefetch">
+    <link href="/js/Home.ad307ee4.js" rel="prefetch">
+    <link href="/js/Home~Perfil.4b079643.js" rel="prefetch">
+    <link href="/js/ListarUmaPostagem.55bd5451.js" rel="prefetch">
+    <link href="/js/Login.d66d6dd3.js" rel="prefetch">
+    <link href="/js/Perfil.a24066d9.js" rel="prefetch">
+    <link href="/js/VisualizarNoticia.12a7af77.js" rel="prefetch">
+    <link href="/css/app.0dd80b0f.css" rel="preload" as="style">
+    <link href="/js/app.25bde493.js" rel="preload" as="script">
+    <link href="/js/chunk-vendors.f6809a2e.js" rel="preload" as="script">
+    <link href="/css/app.0dd80b0f.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#4DBA87">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="teste-docker_front">
+    <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#4DBA87">
+    <meta name="msapplication-TileImage" content="/img/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker
+                    .register('sw.js')
+                    .then(function (registration) {
+                        // Registrado com sucesso
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope)
+                    }, function (err) {
+                        // Registro falhou
+                        console.log('ServiceWorker registration failed: ', err)
+                    });
+            });
+        }</script>
+    <script src="/js/chunk-vendors.f6809a2e.js"></script>
+    <script src="/js/app.25bde493.js"></script>
+</body>
+
+</html>

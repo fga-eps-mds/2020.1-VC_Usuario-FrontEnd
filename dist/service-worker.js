@@ -11,16 +11,19 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
-
+// eslint-disable-next-line no-undef
 importScripts(
-  "/precache-manifest.75f223a2585ac6cebf247f6c2ed4f441.js"
+  "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "teste-docker_front"});
+// eslint-disable-next-line no-undef
+importScripts("/precache-manifest.91c03e5a49183196228ba895b4d16d13.js");
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
+// eslint-disable-next-line no-undef
+workbox.core.setCacheNameDetails({ prefix: "teste-docker_front" });
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });
@@ -31,4 +34,5 @@ self.addEventListener('message', (event) => {
  * See https://goo.gl/S9QRab
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
+// eslint-disable-next-line no-undef
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
