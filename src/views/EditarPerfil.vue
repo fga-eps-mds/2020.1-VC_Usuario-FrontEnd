@@ -157,7 +157,7 @@ export default {
                     },
                     id: dados.id
                 }
-                store.dispatch('atualizarUsuarioAction', usuario)
+                await store.dispatch('atualizarUsuarioAction', usuario)
             }
         }
 
