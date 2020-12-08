@@ -141,7 +141,7 @@ export default {
                 })
             }
 
-            alert('Postegem feita com sucesso!')
+            alert('Postagem feita com sucesso!')
             window.location.href = "/";
         }
     }
