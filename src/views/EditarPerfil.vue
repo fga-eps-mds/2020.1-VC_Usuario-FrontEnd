@@ -109,7 +109,7 @@ export default {
         }
 
         const cancelarEdicao = () => {
-            window.location.href='perfil'  
+            window.location.href='/perfil'  
         }
 
         const fazerLogout = () => {
@@ -197,7 +197,7 @@ export default {
     created() {
         const token = useStore().getters.getToken
         if(!token){
-            window.location.href='login'
+            window.location.href='/login'
         }else {
             useStore().dispatch('validateSessionAction', token)
         }

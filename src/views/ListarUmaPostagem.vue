@@ -14,7 +14,7 @@
                     <span id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
                     
                     <div class="divBotaoApoio">
-                        <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">Apoiar</button>
+                        <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}"><p v-if="!statusBotaoApoio">Apoiar</p><p v-if="statusBotaoApoio">Apoiado</p></button>
                     </div>
                 </div>          
             </div>
@@ -124,7 +124,7 @@ export default {
             else{
                 Postagem.listarUmaPostagemLogado(this.$route.params.id, this.$store.getters.getId).then(res => {
                     this.postagem = res.data;
-
+                    console.log(res.data.post_supporting)
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
                     this.setupStatusBotaoReport(this.postagem.post_reporting);
                 })
@@ -156,7 +156,7 @@ export default {
                         this.upsEReportAtributos.fk_postage_id = this.postagem._id
 
                         Postagem.apoiarUmaPostagem(this.upsEReportAtributos).then(resposta => {
-                            console.log(resposta)
+                            console.log(resposta, ' ' + this.statusBotaoApoio)
                         }, erro => {
                             this.statusBotaoApoio = false
                             alert("Erro no Apoio. Tente novamente mais tarde.")

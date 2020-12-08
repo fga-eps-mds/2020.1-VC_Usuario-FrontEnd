@@ -18,7 +18,7 @@
         <div class="divBotoes">
             <div class="divBotaoVerMaisApoiar">
                 <button @click="verMais(id)">Ver mais</button>
-                <button v-on:click="apoiarPostagemMetodo(id)" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}">Apoiar</button>
+                <button v-on:click="apoiarPostagemMetodo(id, n)" class="botaoApoio" :class="{'apoio': statusBotaoApoio}"> <p v-if="!statusBotaoApoio">Apoiar</p><p v-if="statusBotaoApoio">Apoiado</p></button>
             </div>
 
             <div v-if="$route.name === 'Perfil'" class="divBotaoEditar">
@@ -35,15 +35,15 @@ import Postagem from '@/services/postagensServices.js'
 export default {
     name: 'postBlock',
     setup() {
-      const verMais = (post_id) => {
+        const verMais = (post_id) => {
         console.log()
         window.location.href = `/postagem/${post_id}`
-      }
-      return { verMais }
+    }
+        return { verMais }
     },
     
     props: {
-        _id: String,
+        n: Number,
         title: String,
         status: String,
         author: String,
@@ -65,8 +65,8 @@ export default {
         }
     },
 
-    created: function() {
-        this.setupStatusBotaoApoio(this.supporting);
+    created: async function() {
+        await this.setupStatusBotaoApoio(this.supporting);
     },
 
     methods: {
@@ -75,7 +75,7 @@ export default {
             this.$emit('editar-postagem', post_id)
         },
 
-        apoiarPostagemMetodo(post_id){
+        async apoiarPostagemMetodo(post_id, i){
 
             try{
                 if( !this.$store.getters.getSwap ){
@@ -86,10 +86,13 @@ export default {
                         alert("Usuário não logado")
                     }
                     else{
+                        
                         this.upsAtributos.fk_user_id = this.$store.getters.getId
                         this.upsAtributos.fk_postage_id = post_id
 
-                        Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                        await Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
+                            this.statusBotaoApoio = !this.statusBotaoApoio
+                            this.$emit('updatePost', i)
                             console.log(resposta.data)
                         }, erro => {
                             this.statusBotaoApoio = false
