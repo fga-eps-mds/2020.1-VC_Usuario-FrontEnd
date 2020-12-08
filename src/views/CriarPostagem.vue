@@ -117,14 +117,8 @@ export default {
             this.postagem.file = this.$refs.file.files[0];
         },
 
-        visualizarObjetoFormCriado(){
-            
-            console.log(this.postagem)
-        },
-
         criarPostagem(){
 
-            console.log(this.postagem)
             const formData = new FormData();
 
             formData.append('post_title', this.postagem.post_title,)
@@ -135,20 +129,19 @@ export default {
             
             let checkbox = document.getElementById('checkboxSelecao');
             if (checkbox.checked){  
-                Postagem.criarPostagemAnonima(formData).then(resposta => {
-                    console.log('Salvo com sucesso!')
-                    console.log(resposta)
+                Postagem.criarPostagemAnonima(formData).catch(err => {
+                    alert(err)
                 })
             }else{
                 formData.append('fk_user_id', this.$store.getters.getId,)
                 formData.append('post_author', this.$store.getters.getNome)
 
-                Postagem.criarPostagem(formData).then(resposta => {
-                    console.log('Salvo com sucesso!')
-                    console.log(resposta)
+                Postagem.criarPostagem(formData).catch(err => {
+                    alert(err)
                 })
             }
 
+            alert('Postagem feita com sucesso!')
             window.location.href = "/";
         }
     }

@@ -140,7 +140,6 @@ export default {
         
         metodoEditarPostagem(){
             Postagem.editarUmaPostagem(this.editarPostagemObjeto).then(res => {
-                console.log(res.data)
                 alert("Postagem Editada com Sucesso!") 
             }, erro => {
                 alert("Erro em Editar Postagem. Tente novamente mais tarde.")
@@ -151,7 +150,6 @@ export default {
 
         metodoExcluirPostagem(){
             Postagem.excluirUmaPostagem(this.excluirPostagemObjeto).then(res => {
-                console.log(res.data)
                 alert("Postagem Excluida com Sucesso!")  
             }, erro => {
                 alert("Erro em Excluir a Postagem. Tente novamente mais tarde.")

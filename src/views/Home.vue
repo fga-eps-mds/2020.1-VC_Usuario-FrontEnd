@@ -19,8 +19,8 @@
                 <button id="Outros" v-on:click="select('Outros')">Outros</button>
             </div>
 
-            <div class="divPostagem" v-for="postagem in this.postagemData" :key="postagem.id">
-                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:category="postagem.post_category" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting"/>
+            <div class="divPostagem" v-for="(postagem, index) in this.postagemData" :key="postagem.id">
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:category="postagem.post_category" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" v-bind:n="index" @updatePost="updatePost" />
             </div>
         </div>
     </section>
@@ -62,41 +62,48 @@ export default {
         }
     },
 
-    created: function() {
+    async created () {
+        
+        if (document.referrer.substring(21, 30) == '/postagem'){location.reload()}
+        
         if( !useStore().getters.getSwap ){
 
             const token = useStore().getters.getToken
             if(!token){}
             else {
-                useStore().dispatch('validateSessionAction', token)
+                await useStore().dispatch('validateSessionAction', token)
+                
             }
         }
 
-        this.listarPostagemPorCategoria('Todas');
+        await this.listarPostagemPorCategoria('Todas');
     },
         
     methods: {
 
-        listarPostagens() {
+        async listarPostagens() {
             try{
                 if( !this.$store.getters.getSwap ){
 
                     const token = this.$store.getters.getToken
                     if(!token){
-                        PostagemService.listarPostagem().then(Response => {
+                        await PostagemService.listarPostagem().then(Response => {
                             
                             this.postagemData = Response.data.posts;
+                            
                         })
                     }else {
+
+                        await this.$store.dispatch('validateSessionAction', token)
                         this.user.fk_user_id = this.$store.getters.getId
 
-                        PostagemService.listarPostagensUsuarioLogado(this.user.fk_user_id).then(Response => {
-
+                        await PostagemService.listarPostagensUsuarioLogado(this.user.fk_user_id).then(Response => {
+                            
                             this.postagemData = Response.data;
                         })
                     }
                 }else{
-                    PostagemService.listarPostagem().then(Response => {
+                    await PostagemService.listarPostagem().then(Response => {
                         
                         this.postagemData = Response.data.posts;
                     })
@@ -106,11 +113,11 @@ export default {
             }
         },
 
-        listarPostagemPorCategoria(categoria){
+        async listarPostagemPorCategoria(categoria){
             if(categoria == 'Todas'){
                 this.listarPostagens();
             }else{
-                PostagemService.listarPorCategoria(categoria).then(Response => {
+                await PostagemService.listarPorCategoria(categoria).then(Response => {
                     this.postagemData = Response.data.posts;
                 })
             }
@@ -139,6 +146,10 @@ export default {
             document.getElementById(this.filtragemAntiga).style.backgroundColor = "#060449";
             document.getElementById(this.filtragemAntiga).style.color = '#ffffff';
         },
+
+        updatePost(i){
+            this.postagemData[i].post_supporting = !this.postagemData[i].post_supporting
+        }
     },
 
     mounted(){
@@ -146,7 +157,6 @@ export default {
     },
 }
 
- 
 </script>
 
 <style scoped lang="scss">

@@ -1,6 +1,7 @@
 <template>
     <div class="divComponentComentario">
-        <p><span>{{UPC_author}}: </span>"{{UPC_description}}"</p>
+        <span>{{UPC_author}}: </span>
+        <p>"{{UPC_description}}"</p>
     </div>
 </template>
 
@@ -30,6 +31,8 @@ export default {
         }
 
         & p {
+            margin-top: 5px;
+            
             font-style: oblique;
             text-align: justify;
             color: $colorCinzaEscuro;

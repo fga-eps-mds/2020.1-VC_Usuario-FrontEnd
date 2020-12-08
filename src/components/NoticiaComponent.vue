@@ -26,10 +26,10 @@ export default {
     name: 'noticia',
 
     setup() {
-      const verMais = (noticia_id) => {
-        window.location.href = `/noticias/${noticia_id}`
-      }
-      return { verMais }
+        const verMais = (noticia_id) => {
+            window.location.href = `/noticias/${noticia_id}`
+        }
+        return { verMais }
     },
 
     data() {

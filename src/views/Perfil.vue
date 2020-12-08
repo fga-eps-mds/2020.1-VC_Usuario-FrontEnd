@@ -59,27 +59,34 @@ export default {
         return { nome, pontos }
     },
     
-    created() {
+    async created() {
         if( !useStore().getters.getSwap ){
             const token = useStore().getters.getToken
             if(!token){
                 window.location.href='/login'
             }else {
-                useStore().dispatch('validateSessionActionPerfil', token)
+                await useStore().dispatch('validateSessionActionPerfil', token)
+                
             }
         }else{
             useStore().commit('SET_SWAP', false)
-        }
+        };
 
-        this.listarPostagemUsuario();
+        await this.listarPostagemUsuario()
     },
 
     methods: {
-        listarPostagemUsuario() {
-            UserService.listarPostagemUsuario(this.$store.getters.getId).then(Response => {
-                this.postagemData = Response.data;
-                console.log(this.postagemData);
-            })
+        async listarPostagemUsuario() {
+            const token = this.$store.getters.getToken
+            if(!token){
+                window.location.href='/login'
+            }else {
+                await this.$store.dispatch('validateSessionActionPerfil', token)
+                await UserService.listarPostagemUsuario(this.$store.getters.getId).then(Response => {
+                    this.postagemData = Response.data;
+                })
+            }
+            
         },
 
         verMais(post_id){
