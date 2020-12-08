@@ -124,7 +124,6 @@ export default {
             else{
                 Postagem.listarUmaPostagemLogado(this.$route.params.id, this.$store.getters.getId).then(res => {
                     this.postagem = res.data;
-                    console.log(res.data.post_supporting)
                     this.setupStatusBotaoApoio(this.postagem.post_supporting);
                     this.setupStatusBotaoReport(this.postagem.post_reporting);
                 })
@@ -149,14 +148,14 @@ export default {
                     const token = this.$store.getters.getToken
                     if(!token){
                         this.statusBotaoApoio = true
-                        alert("Usuário não Logado")
+                        this.statusBotaoApoio = false
+                        alert("Acesse sua conta para apoiar essa postagem.")
                     }
                     else{
                         this.upsEReportAtributos.fk_user_id = this.$store.getters.getId
                         this.upsEReportAtributos.fk_postage_id = this.postagem._id
 
                         Postagem.apoiarUmaPostagem(this.upsEReportAtributos).then(resposta => {
-                            console.log(resposta, ' ' + this.statusBotaoApoio)
                         }, erro => {
                             this.statusBotaoApoio = false
                             alert("Erro no Apoio. Tente novamente mais tarde.")
@@ -165,7 +164,7 @@ export default {
                 }
                 else{
                     this.statusBotaoApoio = true
-                    alert("Usuário não Logado")
+                    alert("Acesse sua conta para apoiar essa postagem.")
                 }
             }
             catch(err){
@@ -173,26 +172,26 @@ export default {
             }
         },
 
-        comentarPostagemMetodo(){
+        async comentarPostagemMetodo(){
             try{
                 if( !this.$store.getters.getSwap ){
                     const token = this.$store.getters.getToken
                     if(!token){
-                        alert("Usuário não Logado")
+                        alert("Acesse sua conta para comentar essa postagem.")
                     }
                     else{
-                        if(this.upcAtributos.comment_descripton == null){
+                        this.upcAtributos.comment_descripton = this.upcAtributos.comment_descripton.trim()
+                        if(this.upcAtributos.comment_descripton == null || this.upcAtributos.comment_descripton == ''){
                             alert("Comentário vazio")
                         }
                         else{
                             this.upcAtributos.fk_user_id = this.$store.getters.getId
                             this.upcAtributos.fk_postage_id = this.postagem._id
 
-                            Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
-                                console.log(resposta)
+                            await Postagem.comentarUmaPostagem(this.upcAtributos).then(resposta => {
                                 alert("Comentário feito com sucesso!")
                                 
-                                window.location.href = `/postagem/${this.postagem._id}`
+                                location.reload()
                             }, erro => {
                                 alert("Erro na Cometário. Tente novamente mais tarde.")
                             })
@@ -200,7 +199,7 @@ export default {
                     }
                 }
                 else{
-                    alert("Usuário não Logado")
+                    alert("Acesse sua conta para comentar essa postagem.")
                 }
             }
             catch(err){
@@ -215,7 +214,7 @@ export default {
                         const token = this.$store.getters.getToken
                         if(!token){
                             this.statusBotaoReport = false
-                            alert("Usuário não Logado")
+                            alert("Viu algo indevido? Acesse sua conta e reporte essa postagem.")
                         }
                                             
                         else{
@@ -223,7 +222,6 @@ export default {
                             this.upsEReportAtributos.fk_postage_id = this.postagem._id
 
                             Postagem.denunciarUmaPostagem(this.upsEReportAtributos).then(resposta => {
-                                console.log(resposta)
 
                                 if(resposta.status == 200){
                                     this.postagem.post_reporting = true
@@ -238,7 +236,7 @@ export default {
                     }
                     else{
                         this.statusBotaoReport = false
-                        alert("Usuário não Logado")
+                        alert("Viu algo indevido? Acesse sua conta e reporte essa postagem.")
                     }
                 }
                 else{

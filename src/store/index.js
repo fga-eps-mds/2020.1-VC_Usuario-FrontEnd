@@ -1,11 +1,11 @@
-import { createStore, createLogger } from 'vuex';
+import { createStore, /*createLogger*/ } from 'vuex';
 import createPersistedState from "vuex-persistedstate";
 import Usuarios from '@/services/usuariosServices.js'
 /* eslint-disable */
 
 const store = createStore({
-    debug: true,
-    plugins: [createLogger(), createPersistedState()],
+    debug: false,
+    plugins: [/*createLogger()*/, createPersistedState()],
     state(){
         return {
             usuario: {},
@@ -81,7 +81,6 @@ const store = createStore({
                 commit('SET_USUARIO', response.data.refreshed_user)
                 commit('SET_TOKEN', response.data.new_token)
             }, erro => {
-                console.log('com err')
                 console.log(erro.response.data.msg)
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
@@ -94,7 +93,6 @@ const store = createStore({
                 commit('SET_USUARIO', response.data.refreshed_user)
                 commit('SET_TOKEN', response.data.new_token)
             }, erro => {
-                console.log('com err')
                 console.log(erro.response.data.msg)
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
@@ -106,7 +104,6 @@ const store = createStore({
             await Usuarios.DeletarContaUsuario(payload).then(response => {
                 commit('CLEAR_USUARIO')
                 commit('CLEAR_TOKEN')
-                console.log(response.data.msg)
                 window.location.href='/'
             }, erro => {
                 console.log(erro.response.data.msg)

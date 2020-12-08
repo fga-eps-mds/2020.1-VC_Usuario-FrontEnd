@@ -84,7 +84,6 @@ export default {
                 await this.$store.dispatch('validateSessionActionPerfil', token)
                 await UserService.listarPostagemUsuario(this.$store.getters.getId).then(Response => {
                     this.postagemData = Response.data;
-                    console.log(this.postagemData);
                 })
             }
             

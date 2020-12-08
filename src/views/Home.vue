@@ -148,7 +148,6 @@ export default {
         },
 
         updatePost(i){
-            console.log(this.postagemData[i])
             this.postagemData[i].post_supporting = !this.postagemData[i].post_supporting
         }
     },

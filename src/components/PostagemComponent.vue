@@ -36,7 +36,6 @@ export default {
     name: 'postBlock',
     setup() {
         const verMais = (post_id) => {
-        console.log()
         window.location.href = `/postagem/${post_id}`
     }
         return { verMais }
@@ -82,8 +81,8 @@ export default {
                     const token = this.$store.getters.getToken
                     if(!token){
                         this.statusBotaoApoio = true
-                        
-                        alert("Usuário não logado")
+                        this.statusBotaoApoio = false
+                        alert("Acesse sua conta para apoiar essa postagem.")
                     }
                     else{
                         
@@ -93,7 +92,6 @@ export default {
                         await Postagem.apoiarUmaPostagem(this.upsAtributos).then(resposta => {
                             this.statusBotaoApoio = !this.statusBotaoApoio
                             this.$emit('updatePost', i)
-                            console.log(resposta.data)
                         }, erro => {
                             this.statusBotaoApoio = false
                             alert("Erro em Apoio Postagem. Tente novamente mais tarde.")
@@ -103,7 +101,7 @@ export default {
                 else{
                     this.statusBotaoApoio = true
 
-                    alert("Usuário não logado")
+                    alert("Acesse sua conta para apoiar essa postagem.")
                 }
             }catch(err){
                 console.log({err})
