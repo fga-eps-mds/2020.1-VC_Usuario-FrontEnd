@@ -42,7 +42,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "EditarPostagem" */ '../views/EditarPostagem.vue'),
   },
   {
-    path: '/noticia/:id',
+    path: '/noticias/:id',
     name: 'VisualizarNoticia',
     component: () => import(/* webpackChunkName: "VisualizarNoticia" */ '../views/VisualizarNoticia.vue'),
   },
