@@ -9,9 +9,9 @@
                 <h1>{{postagem.post_title}}</h1>
 
                 <div class="divStatusEBotoes">
-                    <span id="postagemStatus0" v-if="statusColor(this.postagem.post_status) === 0"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
-                    <span id="postagemStatus1" v-if="statusColor(this.postagem.post_status) === 1"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
-                    <span id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2"><p><span>Estágio de Solução: </span>{{postagem.post_status}}</p></span>
+                    <span id="postagemStatus0" v-if="statusColor(this.postagem.post_status) === 0"><p><span>Estágio de Solução: </span><strong>{{postagem.post_status}}</strong></p></span>
+                    <span id="postagemStatus1" v-if="statusColor(this.postagem.post_status) === 1"><p><span>Estágio de Solução: </span><strong>{{postagem.post_status}}</strong></p></span>
+                    <span id="postagemStatus2" v-if="statusColor(this.postagem.post_status) === 2"><p><span>Estágio de Solução: </span><strong>{{postagem.post_status}}</strong></p></span>
                     
                     <div class="divBotaoApoio">
                         <button v-on:click="apoiarPostagemMetodo" @click="statusBotaoApoio = !statusBotaoApoio" class="botaoApoio" :class="{'apoio': statusBotaoApoio}"><p v-if="!statusBotaoApoio">Apoiar</p><p v-if="statusBotaoApoio">Apoiado</p></button>
@@ -82,7 +82,7 @@ export default {
         const statusColor = (status) => {
             var i = 0
             if(status === "Em andamento") i = 1
-            else if (status === "Concluido") i = 2
+            else if (status === "Resolvido") i = 2
             return i
         }
         return{ postagem, statusColor}

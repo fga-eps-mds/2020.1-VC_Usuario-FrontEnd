@@ -1,8 +1,12 @@
 <template>
     <div class="divComponentPostagem">
         <div class="tituloEStatus">
+            
             <span>{{title}}</span>
-            <span>{{status}}</span>
+
+            <span id="postagemStatus0" v-if="statusColor(status) === 0"><p><span></span><strong>{{status}}</strong></p></span>
+            <span id="postagemStatus1" v-if="statusColor(status) === 1"><p><span></span><strong>{{status}}</strong></p></span>
+            <span id="postagemStatus2" v-if="statusColor(status) === 2"><p><span></span><strong>{{status}}</strong></p></span>
         </div>
 
         <div class="autor">
@@ -36,9 +40,16 @@ export default {
     name: 'postBlock',
     setup() {
         const verMais = (post_id) => {
-        window.location.href = `/postagem/${post_id}`
-    }
-        return { verMais }
+            window.location.href = `/postagem/${post_id}`
+        }
+
+        const statusColor = (status) => {
+            var i = 0
+            if(status === "Em andamento") i = 1
+            else if (status === "Resolvido") i = 2
+            return i
+        }
+        return { verMais, statusColor }
     },
     
     props: {
@@ -148,6 +159,18 @@ export default {
 
     & span:last-child {
         color: $colorVermelho;
+    }
+
+    #postagemStatus0{
+        color: $colorVermelho;
+    }
+
+    #postagemStatus1{
+        color: $colorAzul;
+    }
+
+    #postagemStatus2{
+        color: $colorVerde;
     }
 }
 
