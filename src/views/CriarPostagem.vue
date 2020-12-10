@@ -1,13 +1,15 @@
 <template>
 
-    <Header/>
+    <HeaderComponent/>
+    
+    <section>
+        <form @submit.prevent="criarPostagem" enctype="multipart/form-data">
 
-    <div class="divFormCriarPostagem">
-        <form @submit.prevent="criarPostagemAnonima" enctype="multipart/form-data"> 
-            <input class= "baseElemento inputText" type="text" placeholder="Título" v-model="postagem.post_title" required>
-            <br><br><br>
+            <h1>Criar Postagem</h1>
 
-            <div class="baseElemento divSelectFields">
+            <input class= "inputTitulo" type="text" placeholder="Título" v-model="postagem.post_title" required>
+
+            <div class="divCategoriaLocal">
                 <select v-model="postagem.post_category" required>
                     <option disabled value="">Categoria</option>
                     <option>Limpeza</option>
@@ -31,80 +33,79 @@
                     <option>FUP</option>
                 </select>
             </div>
-            <br><br>
 
-            <div class="baseElemento divImageFields">
-                <input type="file" ref="file" accept="image/png, image/jpeg" @change="imagemSelecionada">
-
-                <!-- <progress class="baseElemento elementoProgress" value="70" max="100">Progress: 0%</progress> -->
+            <div class="divImagem">
+                <label for="file">Escolha sua imagem</label>                               
+                <input type="file" ref="file" id="file" accept="image/png, image/jpeg" @change="imagemSelecionada">  
             </div>
-            <br><br>
 
-            <legend>Descrição</legend>
-            <textarea class="baseElemento inputText inputTextArea" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
-            <br>
+            <div class="divDescricao">
+                <legend>Descrição</legend>
+                <textarea class="inputDescricao" rows="5" cols="50" v-model="postagem.post_description" required></textarea>
+            </div>
 
-            <div class="permissao">
-                <fieldset>
-                    <legend>Postagem anônima?</legend>
-                    <div class="toggle">
-                        <input type="radio" value="false" id="idPostNaoAnonimo" v-model="postagem.post_type"/>
-                        <label for="idPostNaoAnonimo">Não</label>
+            <div class="divPermissao">
+                <legend>Postagem Anônima?</legend>
+                <label v-if='$store.getters.getId != null' class="switch">
+                    <input type="checkbox" id="checkboxSelecao">
+                    <span class="slider round"></span>
+                </label>
 
-                        <input type="radio" value="true" id="idPostSimAnonimo" v-model="postagem.post_type"/>
-                        <label for="idPostSimAnonimo">Sim</label>   
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Apresentar no Feed?</legend>
-                    <div class="toggle">
-                        <input type="radio" value=false id="idPostNaoFeed" v-model="postagem.post_permission"/>
-                        <label for="idPostNaoFeed">Não</label>
-
-                        <input type="radio" value=true id="idPostSimFeed" v-model="postagem.post_permission"/>
-                        <label for="idPostSimFeed">Sim</label>   
-                    </div>
-                </fieldset>
+                <label v-else class="switch" onclick="window.location.href='/Login'">
+                    <input type="checkbox" id="checkboxSelecao" checked>
+                    <span class="slider round"></span>
+                </label>
             </div>
             
-            <br><br><br>
-
-            <div class="baseElemento divBotoes">
+            <div class="divBotoes">
                 <button type="submit">Criar</button>
                 <button onclick='history.go(-1)'>Voltar</button>
             </div>
         </form>
-    </div>
+    </section>
 
-    <MenuBar/>
+    <MenuBarComponent/>
 
 </template> 
 
 <script>
 
-import Header from '@/components/Header.vue'
-import MenuBar from '@/components/MenuBar.vue'
-import Postagem from '@/services/postagens.js'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import Postagem from '@/services/postagensServices.js'
+
+import { useStore } from 'vuex'
+/* eslint-disable */
 
 export default {
     name: 'CriarPostagem',
 
     components: {
-        Header,
-        MenuBar
+        HeaderComponent,
+        MenuBarComponent
     },
 
     data(){
         return{
             postagem: {
-                fk_user_id: '5f72b06dd02a450038c286f0',
+                fk_user_id: '',
                 post_title: '',
                 post_place: '',
                 post_category: '',
                 post_description: '',
-                post_permission: 'true',
-                post_type: 'false',
-                file: ''
+                file: '',
+                post_author: ''
+            }
+        }
+    },
+
+    created: function() {
+        if( !useStore().getters.getSwap ){
+
+            const token = useStore().getters.getToken
+            if(!token){}
+            else {
+                useStore().dispatch('validateSessionAction', token)
             }
         }
     },
@@ -116,100 +117,96 @@ export default {
             this.postagem.file = this.$refs.file.files[0];
         },
 
-        visualizarObjetoFormCriado(){
-            
-            console.log(this.postagem)
-        },
+        criarPostagem(){
 
-        criarPostagemAnonima(){
-
-            console.log(this.postagem)
             const formData = new FormData();
 
-            formData.append('fk_user_id', this.postagem.fk_user_id,)
             formData.append('post_title', this.postagem.post_title,)
             formData.append('post_place', this.postagem.post_place,)
             formData.append('post_category', this.postagem.post_category,)
             formData.append('post_description', this.postagem.post_description,)
-            formData.append('post_permission', this.postagem.post_permission,)
-            formData.append('file', this.postagem.file)
-
-            if (this.postagem.post_type === "true"){  
-                Postagem.criarPostagemAnonima(formData).then(resposta => {
-                    console.log('Salvo com sucesso!')
-                    console.log(resposta)
+            formData.append('file', this.postagem.file,)
+            
+            let checkbox = document.getElementById('checkboxSelecao');
+            if (checkbox.checked){  
+                Postagem.criarPostagemAnonima(formData).catch(err => {
+                    alert(err)
                 })
             }else{
-                Postagem.criarPostagem(formData).then(resposta => {
-                    console.log('Salvo com sucesso!')
-                    console.log(resposta)
+                formData.append('fk_user_id', this.$store.getters.getId,)
+                formData.append('post_author', this.$store.getters.getNome)
+
+                Postagem.criarPostagem(formData).catch(err => {
+                    alert(err)
                 })
             }
 
-            window.location.href = "http://localhost:8080";
+            alert('Postagem feita com sucesso!')
+            window.location.href = "/";
         }
     }
 }
 </script>
 
 <style scoped lang="scss">
+    @import "../assets/stylesheets/pallete.scss";
+    @import "../assets/stylesheets/font.scss";
 
-    .baseElemento{
-        height: 50px;
+    section{
         width: 100%;
+        padding-bottom: 100px;
+        display: flex;
     }
-    
-    .divFormCriarPostagem{
-        margin-top: 45px;
-        max-width: 900px;
 
-        & form{
-            padding: 30px 20px 120px;
+    form{
+        height: auto;
+        width: 100%;
+        margin: 0 30px;
+        min-width: 200px;
+        margin-top: 65px;
+
+        & h1, legend{
+            color: $colorAzulEscuro;
+        }
+
+        & legend{
+            margin-bottom: 5px;
         }
     }
 
-    .inputText{
+    .inputTitulo{
         box-shadow: 0 0 0 0;
         border: 0 none;
         outline: 0;
         display: block;
 
+        height: 50px;
+        width: 100%;
         padding: 0;
-
-        font-size: 20px;
-        border-bottom: 1px solid #DADDE0; 
+        margin: 20px 0;
+        
+        font-size: 18px;
+        border-bottom: 1px solid $colorCinza; 
     }
 
-    .inputText::placeholder {
-        font-size: 20px;
-        color: #000000;
+    .inputTitulo::placeholder {
+        font-size: 18px;
+        color: $colorPreta;
     }
 
-    .inputTextArea{
-        height: 150px;
-        margin-top: 5px;
-
-        font-size: 16px;
-        border-radius: 10px;
-        border: 1px solid #DADDE0;
-    }
-
-    .inputTextArea::placeholder {
-        font-size: 16px;
-        color: #000000;
-    }
-
-    .divSelectFields{
+    .divCategoriaLocal{
         display: flex;
 
         height: 40px;
+        margin-bottom: 20px;
 
         & select{
             width: 50%;
 
+            cursor: pointer;
             border-radius: 10px;
-            background-color: #ffffff;
-            border: 1px solid #DADDE0;
+            background-color: $colorBranca;
+            border: 1px solid $colorCinza;
         }
 
         select:first-child{
@@ -217,117 +214,152 @@ export default {
         }
     }
 
-    .divImageFields{
-        height: 35px;
+    .divImagem{
+        height: 40px;
+        margin-bottom: 20px;
         justify-items: center;
+        position: relative;
 
-        /* border-radius: 10px;
-        border: 1px solid #DADDE0; */
+        input[type=file]{
+            display: none;
+        }
 
-        /* & input{
-            width: 0; height: 0; position: absolute; left: -9999px;
-        } */
-        
-        /* & progress::-webkit-progress-value{
-            display: block;
+        label{
+            display: flex;
+            background-color: $colorAzul;
+            align-items: center;
+            justify-content: center;
+            
+            border-radius: 25px;
+            height: 100%;
+            width: 70%;
+            position: absolute;
+            
+            transform: translate(21.5%, 0%);
+            transition: .2s;
+
+            color:white;
+            text-align: center;
+            font-family: $font-pattern;
+            cursor: pointer;
+        }
+        label:hover{
+            color: white;
+            background: $colorAzulEscuro;
+        }
+    }
+
+    .divDescricao {
+        margin-bottom: 20px;
+        height: 120px;
+
+        .inputDescricao{
+            width: 100%;
+
+            font-size: 16px;
             border-radius: 10px;
-        } */
+            border: 1px solid $colorCinza;
+        }
+
+        .inputDescricao::placeholder {
+            font-size: 16px;
+            color: $colorPreta;
+        }
     }
 
     .divBotoes{
         display: flex;
-        
-        /* border: 1px solid blue; */
+        flex-direction: column;
 
         & button{
-            flex: 1;
-            height: 100%;
-            font-size: 20px;
+            height: 50px;
+            width: 100%;
+            
             border: none;
-            border-radius: 10px;
+            border-radius: 25px;
+            font-size: 20px;
+            cursor: pointer;
         }
 
         button:first-child{
-            margin-right: 20px;
-            
-            color: #ffffff;
-            background-color: #090673;
+            margin-bottom: 20px;
+            color: $colorBranca;
+            background-color: $colorAzul;
+        }
+        
+        button:first-child:hover{
+            background-color: $colorAzulEscuro;
         }
 
         button:last-child{
-            background-color: #ffffff;
-            border: 1px solid #DADDE0;
+            background-color: $colorBranca;
+            border: 1px solid $colorCinza;
+        }
+        
+        button:last-child:hover{
+            background-color: $colorCinza;
         }
     }
 
-    //Configuração Radio Postagem Anonima
+    // Radio
+    .divPermissao {
+        margin-bottom: 20px;
+        z-index: 0;
 
-    /* MIXINS */
-    @mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
-    @mixin breakpoint($point) {
-        @if $point == 5000 {
-            @media (max-width: 5000px) { @content ; }
-        }
-    }
-
-    .permissao {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    fieldset {
-        display: block;
-
-        border: none;
-    }
-
-    legend {
-            width: 100%; float: left; display: table;
-            font-size: 15px; line-height: 140%; font-weight: 400; color: #000000;	
-            + * {clear: both;}
-    }
-
-    body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
-
-    .toggle {
-        width: 180px;
-        height: 40px;
-        margin: 0; box-sizing: border-box;
-        font-size: 0;
-        display: flex; flex-flow: row nowrap;
-        justify-content: flex-start; align-items: stretch;
-
-        input {@include hideInput;}
-
-        input + label {
-            margin: 0; padding: .75rem 2rem; box-sizing: border-box;
-            position: relative; display: inline-block;
-            border: solid 1px #DADDE0; background-color: #FFF;
-            font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
-            box-shadow: 0 0 0 rgba(255,255,255,0);
-            transition: border-color .15s ease-out, 
-                        color .25s ease-out, 
-                        background-color .15s ease-out,
-                        box-shadow .15s ease-out;
-            
-            &:first-of-type {border-radius: 10px 0 0 10px; border-right: none;}
-            &:last-of-type {border-radius: 0 10px 10px 0; border-left: none;}
+        & .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
         }
 
-        input:hover + label {border-color:  #213140;}
-
-        input:checked + label {
-            background-color:  #090673;
-            color: #FFF;
-            border-color:  #090673;
+        & .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
 
-        @include breakpoint(5000) {
-            input + label {
-                padding: .75rem .25rem;
-                flex: 0 0 50%;
-                display: flex; justify-content: center; align-items: center;
-            }
+        & .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $colorCinza;
+            -webkit-transition: .4s;
+            transition: .4s;
+            z-index: -1;
+        }
+
+        & .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: $colorBranca;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        & input:checked + .slider {
+            background-color: $colorAzul;
+        }
+
+        & input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        & .slider.round {
+            border-radius: 25px;
+        }
+
+        & .slider.round:before {
+            border-radius: 50%;
         }
     }
 </style>

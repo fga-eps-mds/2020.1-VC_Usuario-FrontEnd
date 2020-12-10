@@ -1,74 +1,221 @@
 <template>
-  <Header/>
-    <form class="feedPostagens">
-      <!-- <h1>{{post.post_title}}</h1> -->
-      <div class="col" v-for="post in this.commonPosts" :key="post.id">
-        <PostBlock v-bind:title="post.post_title"  v-bind:status="post.post_status" author="Daniel Porto" v-bind:local="post.post_place" v-bind:date="post.post_created_at" v-bind:id="post._id" @ver-mais="verMais" />
-      </div>
-      
-    </form>
+
+    <HeaderComponent/>
+
+    <section>
+        <div class="divHome">
+            <div class="divCategorias">
+                <button id="Todas" v-on:click="select('Todas')">Todas</button>
+                <button id="Limpeza" v-on:click="select('Limpeza')">Limpeza</button>
+                <button id="Segurança" v-on:click="select('Segurança')">Segurança</button>
+                <button id="Infraestrutura" v-on:click="select('Infraestrutura')">Infraestrutura</button>
+                <button id="Transportes" v-on:click="select('Transportes')">Transportes</button>
+                <button id="Serviços Terceirizados" v-on:click="select('Serviços Terceirizados')">Serviços Terceirizados</button>
+                <button id="Meio Ambiente" v-on:click="select('Meio Ambiente')">Meio Ambiente</button>
+                <button id="Jardinagem" v-on:click="select('Jardinagem')">Jardinagem</button>
+                <button id="Alimentação nos campi" v-on:click="select('Alimentação nos campi')">Alimentação nos campi</button>
+                <button id="Saúde e seguridade" v-on:click="select('Saúde e seguridade')">Saúde e seguridade</button>
+                <button id="Abuso de Assédio" v-on:click="select('Abuso de Assédio')">Abuso de Assédio</button>
+                <button id="Outros" v-on:click="select('Outros')">Outros</button>
+            </div>
+
+            <div class="divPostagem" v-for="(postagem, index) in this.postagemData" :key="postagem.id">
+                <PostagemComponent v-bind:title="postagem.post_title"  v-bind:status="postagem.post_status" v-bind:author="postagem.post_author" v-bind:local="postagem.post_place" v-bind:category="postagem.post_category" v-bind:date="postagem.post_created_at" v-bind:id="postagem._id" v-bind:supporting="postagem.post_supporting" v-bind:n="index" @updatePost="updatePost" />
+            </div>
+        </div>
+    </section>
     
-    <MenuBar/>
+    <MenuBarComponent/>
+
 </template>
 
 <script>
 /* Import dos components */
-import Header from '@/components/Header.vue'
-import PostBlock from '@/components/PostBlock.vue'
-import MenuBar from '@/components/MenuBar.vue'
-import Postage from '@/services/postagens.js'
-//import router from 'vue-router'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import MenuBarComponent from '@/components/MenuBarComponent.vue'
+import PostagemComponent from '@/components/PostagemComponent.vue'
+
+/* Import dos services */
+import PostagemService from '@/services/postagensServices.js'
+
+import { useStore } from 'vuex'
+/* eslint-disable */
 
 export default {
     name: 'Home',
 
-    data (){
-      return {
-        commonPosts: { }
-      }
-    },
-
-    created: function(){
-      this.listPosts();
-    },
-
     components: {
-      Header,
-      PostBlock,
-      MenuBar
+        HeaderComponent,
+        MenuBarComponent,
+        PostagemComponent,
+    },
+    
+    data(){
+        return {
+            postagemData: {},
+
+            user: {
+                fk_user_id: '',
+            },
+
+            filtragemAntiga: "Todas"
+        }
     },
 
+    async created () {
+        
+        if (document.referrer.substring(21, 30) == '/postagem'){location.reload()}
+        
+        if( !useStore().getters.getSwap ){
+
+            const token = useStore().getters.getToken
+            if(!token){}
+            else {
+                await useStore().dispatch('validateSessionAction', token)
+                
+            }
+        }
+
+        await this.listarPostagemPorCategoria('Todas');
+    },
+        
     methods: {
 
-      listPosts(){
-        Postage.listarPostagem().then(Response => {
-          console.log(Response);
-          this.commonPosts = Response.data.posts;
-          console.log(this.commonPosts);
-        })
-      },
+        async listarPostagens() {
+            try{
+                if( !this.$store.getters.getSwap ){
 
-      verMais(post_id){
-        this.$router.push({ name: 'listarUmaPostagem', params: { post_id: post_id }})
-      }
+                    const token = this.$store.getters.getToken
+                    if(!token){
+                        await PostagemService.listarPostagem().then(Response => {
+                            
+                            this.postagemData = Response.data.posts;
+                            
+                        })
+                    }else {
+
+                        await this.$store.dispatch('validateSessionAction', token)
+                        this.user.fk_user_id = this.$store.getters.getId
+
+                        await PostagemService.listarPostagensUsuarioLogado(this.user.fk_user_id).then(Response => {
+                            
+                            this.postagemData = Response.data;
+                        })
+                    }
+                }else{
+                    await PostagemService.listarPostagem().then(Response => {
+                        
+                        this.postagemData = Response.data.posts;
+                    })
+                }
+            }catch(err){
+                console.log({error: err.message});
+            }
+        },
+
+        async listarPostagemPorCategoria(categoria){
+            if(categoria == 'Todas'){
+                this.listarPostagens();
+            }else{
+                await PostagemService.listarPorCategoria(categoria).then(Response => {
+                    this.postagemData = Response.data.posts;
+                })
+            }
+        },
+
+        select(categoria){
+            this.mudarCorFiltrageAntiga(this.filtragemAntiga)
+            this.mudarCorFiltrageAtual(categoria)
+            
+            this.listarPostagemPorCategoria(categoria)
+        },
+
+        mudarCorFiltrageAntiga(filtragemAntiga){
+            document.getElementById(filtragemAntiga).style.backgroundColor = '#ffffff';
+            document.getElementById(filtragemAntiga).style.color = '#060449';
+        },
+
+        mudarCorFiltrageAtual(categoria){
+            document.getElementById(categoria).style.backgroundColor = "#060449";
+            document.getElementById(categoria).style.color = '#ffffff';
+
+            this.filtragemAntiga = categoria
+        },
+
+        focarTodas() {
+            document.getElementById(this.filtragemAntiga).style.backgroundColor = "#060449";
+            document.getElementById(this.filtragemAntiga).style.color = '#ffffff';
+        },
+
+        updatePost(i){
+            this.postagemData[i].post_supporting = !this.postagemData[i].post_supporting
+        }
+    },
+
+    mounted(){
+        this.focarTodas()
     },
 }
 
 </script>
 
 <style scoped lang="scss">
+    @import "../assets/stylesheets/pallete.scss";
 
-    .feedPostagens{
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 60px;
+    section{
+        width: 100%;
+        padding-bottom: 100px;
+        display: flex;
     }
 
-    .col {
-      margin: 0 auto;
-      margin-bottom: 20px;
+    .divCategorias{
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 5px 0px 5px 30px;
+       
+        display: flex;
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        border-bottom: 1px solid $colorCinza;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        & button{
+            height: 30px;
+            min-width: 100px;
+            margin-right: 5px;
+            padding: 0 10px;
+            
+            text-align: center;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
+            cursor: pointer;
+            border-radius: 25px;
+            border: none;
+            color: $colorAzulEscuro;
+            background-color: $colorBranca;
+        }
+    }
+
+    .divHome{
+        height: auto;
+        width: 100%;
+        margin-top: 45px;
+        min-width: 250px;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        .divPostagem{
+            height: auto;
+            margin: 0 30px 20px;
+            flex: 1 1 280px;
+        }
     }
 </style>

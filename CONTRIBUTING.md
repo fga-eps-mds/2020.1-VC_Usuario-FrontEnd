@@ -1,33 +1,35 @@
-# Como contribuir?
+# O que fazer antes de Contribuir?
+
+* Acesse os repositórios do projeto no GitHub:
+    * [Repositório Vamos Cuidar Usuário - Back-end](https://github.com/fga-eps-mds/2020.1-VC_Usuario);
+    * [Repositório Vamos Cuidar Usuário - Front-end](https://github.com/fga-eps-mds/2020.1-VC_Usuario-FrontEnd).
+* Acesse a [GitHub Page](https://fga-eps-mds.github.io/2020.1-VC_Usuario/#/) do projeto para saber mais sobre seus fundamentos
+ e propósitos.
+
+
+# Como Contribuir?
+
+* Leia o [Código de Conduta](/CODE_OF_CONDUCT.md) do projeto;
+* Veja as [Políticas](https://fga-eps-mds.github.io/2020.1-VC_Usuario/#/docs/Policies) do projeto.
 
 ## Reportando um Bug
 
-* Siga o padrão de [_Issues_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/blob/develop/.github/ISSUE_TEMPLATE/bug_report.md) do projeto.
-
-* Caso o bug não esteja em nenhuma das _Issues_, abra uma [Nova _Issue_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/issues/new/choose).
-
-## Adicionando e/ou alterando alguma funcionalidade
-
 * Verifique se não há nenhuma [_Issue_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/issues) relacionada a essa modificação.
 
-* Caso não haja, crie uma [Nova _Issue_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/issues/new/choose).
+* Caso o bug não esteja em nenhuma das _Issues_, abra uma [Nova _Issue_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/issues/new/choose) seguindo o padrão de [_Issues_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/blob/develop/.github/ISSUE_TEMPLATE/bug_report.md) do projeto;;
 
-* Submeta um [Pull Request](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/compare) seguindo o padrão do projeto.
+* Submeta um [_Pull Request_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/compare) seguindo o padrão do projeto;
 
-* Aguarde até que o seu Pull Request seja aceito.
+* Seu Pull Request será revisado e agregará muito à aplicação!
 
-# Padrão de _Commits_
+## Adicionando e/ou alterando alguma Funcionalidade
 
-* Seja coeso e conciso.
-* Relacione o commit com o número da issue.
-* Digite em língua portuguesa utilizando o gerúndio.
-* Verifique se sua alteração está sendo feita na branch correta, seguindo o design de fluxo do Gitflow.
+* Verifique se não há nenhuma [_Issue_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/issues) relacionada a essa modificação;
 
-# Política de Branches
+* Caso a funcionalidade não esteja em nenhuma das _Issues_, abra uma [Nova _Issue_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/issues/new/choose) seguindo o padrão de [_Issues_](https://github.com/fga-eps-mds/2020.1-VC_Usuario/blob/develop/.github/ISSUE_TEMPLATE/general-issue-template.md) do projeto;
 
-* master: representa uma versão estável do produto contendo código já testado e versionado. Essa branch parte da branch develop através de pull requests aprovados no fim de cada release.
-* develop: contém a versão mais atualizada do código que está sendo desenvolvido, está sempre sincronizada com a master e é base para as branches feature.
-* feature/*: são branches para o desenvolvimento de uma funcionalidade específica, por convenção elas tem o nome iniciado por feature/, por exemplo: feature/cadastro-usuarios. Importante ressaltar que essas branches são criadas sempre à partir da branch develop.
-* bugfix/: branch utilizada para corrigir bugs de baixa ou média urgências e não estão presentes na master. O nome deve ser a descrição do bug. Ex: "bugfix/ descricao"
-* hotfix/*: são branches responsáveis pela realização de alguma correção crítica encontrada em produção e por isso são criadas à partir da master. Importante ressaltar que essa branch deve ser juntada tanto com a master quanto com a develop. O nome deve ser a descrição do bug. Ex: "hotfix/ descricao"
-* release/*: onde será feito os ajustes finais antes da entrega de uma versão do produto de software. Por convenção, essas branches tem o nome começando com release/ e terminando com o número da próxima versão do software.
+* Submeta um [_Pull Request_](https://github.com/fga-eps-mds/2020.1-Vamos_Cuidar/compare) seguindo o padrão do projeto;
+
+* Seu Pull Request será revisado e agregará muito à aplicação!
+
+## Obrigado pela Contribuição! 😊
